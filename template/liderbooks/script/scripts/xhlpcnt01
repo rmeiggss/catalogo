@@ -1,0 +1,104 @@
+#Autor: Ing. Erick Fernando Vizcardo Fernandez
+#Parametros: Fecha Inicial y Fecha Final
+#Fecha: 2006-01-03
+fi=$1
+ff=$2
+a=$fi
+while [ a -le ff ] ; do
+   cd /home1/sigma/pre_unif
+   cd /home1/sigma/pre_unif/$a
+   uncompress *
+   b=$fi
+   c=`expr $a + 1`
+   while [ b -le c ] ; do
+      for file in * ; do
+         r=`grep $b $file | wc -l`
+         t=`cat $file | wc -l`
+         if [ $r -gt 0 ]
+         then
+            echo $file'|'$t'|'$r'|'$b >> /home1/sigma/pre_unif/cuenta.$1.$2 
+         fi ;
+         done
+      b=`expr $b + 1` ;
+      done
+   compress *
+   a=`expr $a + 1` ;
+   done
+echo $fi > hlp01
+mes=`cut -c5-6 hlp01`
+rm hlp01
+if [ $mes -eq 12 ] ; then
+   ff=`expr $fi + 8900`
+   cd /home1/sigma/pre_unif
+   cd /home1/sigma/pre_unif/$ff
+   uncompress *
+   b=$fi
+   c=`expr $a + 1`
+   while [ b -le c ] ; do
+      for file in * ; do
+         r=`grep $b $file | wc -l`
+         t=`cat $file | wc -l`
+         if [ $r -gt 0 ]
+            then
+            echo $file'|'$t'|'$r'|'$b >> /home1/sigma/pre_unif/cuenta.$1.$2
+         fi ;
+         done
+      b=`expr $b + 1` ;
+      done
+   compress *
+   ff=`expr $fi + 8901`
+   cd /home1/sigma/pre_unif
+   cd /home1/sigma/pre_unif/$ff
+   uncompress *
+   b=$fi
+   c=`expr $a + 1`
+   while [ b -le c ] ; do
+      for file in * ; do
+         r=`grep $b $file | wc -l`
+         t=`cat $file | wc -l`
+         if [ $r -gt 0 ]
+            then
+            echo $file'|'$t'|'$r'|'$b >> /home1/sigma/pre_unif/cuenta.$1.$2
+         fi ;
+         done
+      b=`expr $b + 1` ;
+      done
+   compress * ;
+else
+   ff=`expr $fi + 100`
+   cd /home1/sigma/pre_unif
+   cd /home1/sigma/pre_unif/$ff
+   uncompress *
+   b=$fi
+   c=`expr $a + 1`
+   while [ b -le c ] ; do
+      for file in * ; do
+         r=`grep $b $file | wc -l`
+         t=`cat $file | wc -l`
+         if [ $r -gt 0 ]
+            then
+            echo $file'|'$t'|'$r'|'$b >> /home1/sigma/pre_unif/cuenta.$1.$2
+         fi ;
+         done
+      b=`expr $b + 1` ;
+      done
+   compress *
+   ff=`expr $fi + 101`
+   cd /home1/sigma/pre_unif
+   cd /home1/sigma/pre_unif/$ff
+   uncompress *
+   b=$fi
+   c=`expr $a + 1`
+   while [ b -le c ] ; do
+      for file in * ; do
+         r=`grep $b $file | wc -l`
+         t=`cat $file | wc -l`
+         if [ $r -gt 0 ]
+            then
+            echo $file'|'$t'|'$r'|'$b >> /home1/sigma/pre_unif/cuenta.$1.$2
+         fi ;
+         done
+      b=`expr $b + 1` ;
+      done
+   compress * ;
+   fi

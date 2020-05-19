@@ -1,0 +1,281 @@
+Instalación de MailScanner
+--------------------------
+
+tar -xzvf MailScanner-4.56.8-1.rpm.tar.gz
+
+cd M*
+./install.sh
+
+service  sendmail stop
+chkconfig  sendmail off
+chkconfig --level 35 MailScanner on
+service MailScanner start
+
+Configuración de MailScanner
+----------------------------
+vi  /etc/MailScanner/MailScanner.conf
+
+a) Identificación de la Organización
+   ---------------------------------
+     58 %org-name% = Infosistemas
+
+     65 %org-long-name% = Infosistemas S.A.
+
+     72 %web-site% = www.infosistemas.net
+
+b) Lenguaje de los mensajes del sistema
+   ------------------------------------
+
+     78 %report-dir% = /etc/MailScanner/reports/es
+
+c) Adjuntos en formato de texto enriquecido
+   ----------------------------------------
+
+    347 Deliver Unparsable TNEF = no
+
+	vi /etc/MailScanner/filename.rules.conf
+
+d) Definir antivirus a utilizar
+   ----------------------------
+
+    526 Virus Scanners = clamav
+
+e) Configurar Cuarentena
+   ---------------------
+
+    975 Quarantine Infections = yes
+
+f) Permitir mensajes con etiqueta Iframe, Form y Script
+   ----------------------------------------------------
+
+    783 Allow IFrame Tags = disarm
+
+			  = yes
+			  = no
+
+    793 Allow Form Tags = disarm
+
+    803 Allow Script Tags = disarm
+
+g) Control de Spam
+   ---------------
+
+   1514 Spam Checks = yes
+
+   1593 Ignore Spam Whitelist If Recipients Exceed = 20
+
+h) Control de Spam a traves de Listas Negras
+   -----------------------------------------
+
+   1520 Spam List = ORDB-RBL SBL+XBL NJABL # You can un-comment this to enable them
+
+		vi /etc/MailScanner/spam.lists.conf
+
+
+i) Control de Spam a traves SpamAssassin
+  --------------------------------------
+
+   1602 Use SpamAssassin = yes
+
+   1637 Required SpamAssassin Score = 6
+
+   1643 High SpamAssassin Score = 10
+
+   1795 Spam Actions = deliver header "Este Mensaje esta considerado como correo SPAM"
+
+   1825 High Scoring Spam Actions = delete notify
+
+deliver  --> Entegar el mensaje
+delete   --> Eliminar mensaje
+store    --> Almacenar el mensaje en directorio de cuarentena
+bounce   -->Envia un mensaje de rechazo al remitente
+forward usuario@dominio  --> Reenvia copia del mensaje a usuario@dominio
+striphtml  --> Convierte el contenido HTML a texto simple
+attachment  --> Convierte un mensaje en archivo adjunto 
+notify      --> Se envia una breve notificaciòn al usuario que le indica que no le fue entregado
+                el mensaje por haber sido considerado com SPAM
+header  "          " -->Añade una cabecera al mensaje 
+
+j) Listas Blancas
+   --------------
+
+	vi /etc/MailScanner/rules/spam.whitelist.rules
+
+Instalación  de Clamav
+----------------------
+rpm -Uvh clamav-0.90.1-0.i386.rpm
+rpm -Uvh clamav-0.90.1-0.src.rpm
+rpm -Uvh clamav-db-0.90.1-0.i386.rpm
+rpm -Uvh clamav-devel-0.90.1-0.i386.rpm
+rpm -Uvh clamav-server-0.90.1-0.i386.rpm
+rpm -Uvh clamav-milter-0.90.1-0.i386.rpm
+
+Iniciar servicios
+-----------------
+chkconfig clamd on
+chkconfig freshclam on
+service clamd start
+service freshclam start
+
+service MailScanner restart
+
+Servicio OpenLDAP
+-----------------
+
+1) Instalación de OpenLdap
+   -----------------------
+
+rpm -Uvh authconfig-5.2.2-1.i386.rpm
+rpm -Uvh authconfig-gtk-5.2.2-1.i386.rpm
+rpm -Uvh openldap-2.3.19-4.i386.rpm
+rpm -Uvh openldap-clients-2.3.19-4.i386.rpm
+rpm -Uvh openldap-devel-2.3.19-4.i386.rpm
+rpm -Uvh openldap-servers-2.3.19-4.i386.rpm
+
+mkdir /etc/ldap
+cd /etc/ldap
+chmod 700 /etc/ldap
+chown ldap.ldap /etc/ldap
+
+2) Crear Clave de Acceso para el administrador de la BDD de directorio LDAP
+   ------------------------------------------------------------------------
+
+	slappasswd
+
+	{SSHA}OCsxlXaU0lTa1DyRfvQYSoA44sd4msYj
+
+3) Modificar el archivo slapd.conf
+   -------------------------------
+	vi /etc/openldap/slapd.conf
+
+     69 suffix          "dc=infosistemas,dc=net"
+     70 rootdn          "cn=root,dc=infosistemas,dc=net"
+     75 rootpw          {SSHA}OCsxlXaU0lTa1DyRfvQYSoA44sd4msYj
+     80 directory       /etc/ldap
+
+4) Iniciar Servicios
+   -----------------
+	service  ldap start
+	chkconfig ldap on
+
+5) Editar migrate_common.ph
+   ------------------------
+	vi /usr/share/openldap/migration/migrate_common.ph
+
+     71 $DEFAULT_MAIL_DOMAIN = "infosistemas.net";
+
+     74 $DEFAULT_BASE = "dc=infosistemas,dc=net";
+
+6) Generar el archivo base.ldif
+   ----------------------------
+	/usr/share/openldap/migration/migrate_base.pl>base.ldif
+
+7) Insertar la cuenta administrativa  al archivo base.ldif
+   -------------------------------------------------------
+
+ldapadd -x -W -D 'cn=root,dc=infosistemas,dc=net' -h 127.0.0.1 -f base.ldif
+
+8) Importar los Grupos y Usuarios del Sistema
+   ------------------------------------------
+/usr/share/openldap/migration/migrate_group.pl   /etc/group    group.ldif
+/usr/share/openldap/migration/migrate_passwd.pl  /etc/passwd   passwd.ldif
+
+ldapadd -x -W -D 'cn=root,dc=infosistemas,dc=net' -h  127.0.0.1 -f group.ldif
+ldapadd -x -W -D 'cn=root,dc=infosistemas,dc=net' -h  127.0.0.1 -f passwd.ldif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

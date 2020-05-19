@@ -1,0 +1,544 @@
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Fri Oct 5 10:51:17 2007
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 05/10/2007 10:51:17
+Fin de proceso Carga Valorizado Variación Tráfico: 05/10/2007 11:23:50
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 05/10/2007 11:23:50
+Fecha hace 2 meses: 200706
+Fecha hace 1 mes: 200707
+Fecha actual: 200708
+Fin de proceso Variación Tráfico: 05/10/2007 12:07:08
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Sat Oct 13 14:04:43 2007
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 13/10/2007 14:04:44
+Fin de proceso Carga Valorizado Variación Tráfico: 13/10/2007 14:51:40
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 13/10/2007 14:51:41
+Fecha hace 2 meses: 200707
+Fecha hace 1 mes: 200708
+Fecha actual: 200709
+Fin de proceso Variación Tráfico: 13/10/2007 16:00:19
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Tue Nov 13 10:25:59 2007
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 13/11/2007 10:26:00
+Fin de proceso Carga Valorizado Variación Tráfico: 13/11/2007 11:01:44
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 13/11/2007 11:01:44
+Fecha hace 2 meses: 200708
+Fecha hace 1 mes: 200709
+Fecha actual: 200710
+Fin de proceso Variación Tráfico: 13/11/2007 11:53:20
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Dec 10 12:58:04 2007
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 10/12/2007 12:58:05
+Fin de proceso Carga Valorizado Variación Tráfico: 10/12/2007 13:31:11
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 10/12/2007 13:31:11
+Fecha hace 2 meses: 200709
+Fecha hace 1 mes: 200710
+Fecha actual: 200711
+Fin de proceso Variación Tráfico: 10/12/2007 14:25:19
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Jan 14 13:26:44 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 14/01/2008 13:26:45
+BEGIN X_CARGA_VARIACION_TRAFICO_PRE('01-DIC-2007','31-DIC-2007'); END;
+
+*
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+ORA-06512: at "TDP_DS_CIN.X_CARGA_VARIACION_TRAFICO_PRE", line 34
+ORA-06512: at line 1
+
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 14/01/2008 13:26:46
+Fecha hace 2 meses: 200710
+Fecha hace 1 mes: 200711
+Fecha actual: 200712
+Fin de proceso Variación Tráfico: 14/01/2008 14:32:33
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Tue Jan 22 12:27:35 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 22/01/2008 12:27:35
+BEGIN X_CARGA_VARIACION_TRAFICO_PRE('01-DIC-2007','31-DIC-2007'); END;
+
+*
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+ORA-06512: at "TDP_DS_CIN.X_CARGA_VARIACION_TRAFICO_PRE", line 34
+ORA-06512: at line 1
+
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Tue Jan 22 12:28:56 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 22/01/2008 12:28:57
+Fin de proceso Carga Valorizado Variación Tráfico: 22/01/2008 13:00:03
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Feb 11 17:47:21 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 11/02/2008 17:47:22
+Fin de proceso Carga Valorizado Variación Tráfico: 11/02/2008 18:21:49
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Wed Mar 12 18:13:39 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 12/03/2008 18:13:40
+Fin de proceso Carga Valorizado Variación Tráfico: 12/03/2008 18:49:23
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Wed Mar 12 19:11:28 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 12/03/2008 19:11:29
+Fecha hace 2 meses: 200712
+Fecha hace 1 mes: 200801
+Fecha actual: 200802
+Fin de proceso Variación Tráfico: 12/03/2008 20:15:14
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Wed Apr 9 11:29:04 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 09/04/2008 11:29:05
+Fin de proceso Carga Valorizado Variación Tráfico: 09/04/2008 11:57:04
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 09/04/2008 11:57:04
+Fecha hace 2 meses: 200801
+Fecha hace 1 mes: 200802
+Fecha actual: 200803
+Fin de proceso Variación Tráfico: 09/04/2008 13:00:38
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Fri May 9 14:55:53 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 09/05/2008 14:55:54
+Fin de proceso Carga Valorizado Variación Tráfico: 09/05/2008 15:27:37
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 09/05/2008 15:27:37
+Fecha hace 2 meses: 200802
+Fecha hace 1 mes: 200803
+Fecha actual: 200804
+Fin de proceso Variación Tráfico: 09/05/2008 16:28:58
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Tue Jun 10 18:51:12 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 10/06/2008 18:51:12
+Fin de proceso Carga Valorizado Variación Tráfico: 10/06/2008 19:30:05
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 10/06/2008 19:30:06
+Fecha hace 2 meses: 200803
+Fecha hace 1 mes: 200804
+Fecha actual: 200805
+Fin de proceso Variación Tráfico: 10/06/2008 20:41:00
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Jul 14 10:01:35 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 14/07/2008 10:01:35
+Fin de proceso Carga Valorizado Variación Tráfico: 14/07/2008 10:46:55
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 14/07/2008 10:46:55
+Fecha hace 2 meses: 200804
+Fecha hace 1 mes: 200805
+Fecha actual: 200806
+Fin de proceso Variación Tráfico: 14/07/2008 12:23:11
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Tue Aug 12 13:45:12 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 12/08/2008 13:45:14
+Fin de proceso Carga Valorizado Variación Tráfico: 12/08/2008 14:39:51
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 12/08/2008 14:39:52
+Fecha hace 2 meses: 200805
+Fecha hace 1 mes: 200806
+Fecha actual: 200807
+Fin de proceso Variación Tráfico: 12/08/2008 16:25:46
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Tue Sep 9 10:50:26 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 09/09/2008 10:50:27
+Fin de proceso Carga Valorizado Variación Tráfico: 09/09/2008 11:27:51
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 09/09/2008 11:27:51
+Fecha hace 2 meses: 200806
+Fecha hace 1 mes: 200807
+Fecha actual: 200808
+Fin de proceso Variación Tráfico: 09/09/2008 12:55:49
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Thu Oct 9 11:03:39 2008
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Carga Valorizado Variación Tráfico: 09/10/2008 11:03:40
+Fin de proceso Carga Valorizado Variación Tráfico: 09/10/2008 11:04:26
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+[H[J===========================================================================
+===========================================================================
+Inicio de proceso Variación Tráfico: 09/10/2008 11:04:26
+Fecha hace 2 meses: 200807
+Fecha hace 1 mes: 200808
+Fecha actual: 200809
+Fin de proceso Variación Tráfico: 09/10/2008 11:19:51
+===========================================================================
+===========================================================================
+
+PL/SQL procedure successfully completed.
+
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production

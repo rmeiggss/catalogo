@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="cgscorm.js" type="text/javascript" language="JavaScript"></script><title>UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS</title>
+<script type="text/javascript" language="JavaScript">
+					
+var g_nSCO_ScoreMin = 0;
+var g_nSCO_ScoreMax = 0;
+var g_SCO_MasteryScore = 0; // may be set to null
+
+var znNavigablePages=17;
+var znThisPage=0;
+var zaSuspendStatus="suspend";
+var znSuspendLocation="";
+var zaSuspendData="";
+var zaVisitedPages = new Array(znNavigablePages + 1);
+var znStartPage=0;
+
+var znQuestionCount=0;
+var znQuestionScores = new Array(znQuestionCount + 1);
+initArray(znQuestionScores,0);
+
+</script>
+</head>
+<frameset rows="100%,*" onload="SCOInitialize()" onunload="SCOFinish()" onbeforeunload="SCOFinish()">
+<frame name="cg_stage" src="loader.htm">
+<frame src="dummypage.htm">
+</frameset>
+</html>

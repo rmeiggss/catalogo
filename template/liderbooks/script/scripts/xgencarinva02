@@ -1,0 +1,48 @@
+#Autor: Ing. Erick Fernando Vizcardo Fernandez
+#Parametros: Fecha Inicial y Fecha Final
+#Fecha: 2006-07-04
+fi=$1
+ff=$2
+a=$fi
+while [ a -le ff ] ; do
+   echo $a > hlp01
+   diaini=`cut -c7-8 hlp01`
+   mesini=`cut -c5-6 hlp01`
+   anoini=`cut -c1-4 hlp01`
+   diaini=`expr $diaini + 0`
+   mesini=`expr $mesini + 0`
+   rm hlp01
+   case $mesini in
+      1) mes='Jan' ;;
+      2) mes='Feb' ;;
+      3) mes='Mar' ;;
+      4) mes='Apr' ;;
+      5) mes='May' ;;
+      6) mes='Jun' ;;
+      7) mes='Jul' ;;
+      8) mes='Aug' ;;
+      9) mes='Sep' ;;
+      10) mes='Oct' ;;
+      11) mes='Nov' ;;
+      12) mes='Dec' ;;
+      esac
+   if [ $diaini -lt 10 ] ; then
+      cad=$mes"  "$diaini;
+   else
+      cad=$mes' '$diaini;
+      fi
+   rm ver_dir
+   rm inva01
+   ls -ltd INVA* | grep "$cad" > ver_dir
+   cut -c55-100 ver_dir > ver_dir.1
+   cant=`cat ver_dir | wc -l`
+   cont=1
+   while [ $cont -le $cant ] ; do
+      arch=`head -$cont ver_dir.1 | tail -1`
+      cat $arch >> inva01
+      cont=`expr $cont + 1`;
+      done
+   rm ver_dir
+   rm ver_dir.1
+   a=`expr $a + 1` ;
+   done

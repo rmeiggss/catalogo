@@ -1,0 +1,253 @@
+#Autor : Walter William Reyes Lora
+#Asunto: Programa que carga la información del Total Facturado en SIGMA
+#Fecha : 2008/06/26
+#-----------------------------------------------------------------------
+
+ORACLE_SID=SIGMA
+ORACLE_HOME=/home1/ora920/app/oracle/product/9.2.0
+ORACLE_BASE=/home1/ora920/app/oracle
+ORACLE_PATH=/home1/ora920/app/oracle/product/9.2.0/bin
+ORACLE_TERM=vt100
+TERM=vt100
+ORA_NLS33=$ORACLE_HOME/ocommon/nls/admin/data
+LD_LIBRARY_PATH=$ORACLE_HOME/lib:$ORACLE_HOME/jdbc/lib
+CLASSPATH=$ORACLE_HOME/jdbc/lib/classes111.zip
+TMPDIR=/var/tmp
+PATH=$ORACLE_HOME/bin:/bin:/usr/bin:/usr/ccs/bin:/usr/lbin
+export LD_LIBRARY_PATH ORA_NLS33 TMPDIR
+export PATH ORACLE_SID ORACLE_HOME ORACLE_BASE ORACLE_TERM ORACLE_PATH
+
+#---------------------------------------------------------------------
+cd /home1/sigma/pre_unif/wwrl/bin/carga_sia_traficos/
+
+#echo $(date '+%Y%m%d') > hlp01
+echo '20080305' > hlp01
+diaini=`cut -c7-8 hlp01`
+mesini=`cut -c5-6 hlp01`
+mes_orig=`cut -c5-6 hlp01`
+ano=`cut -c1-4 hlp01`
+diaini=`expr $diaini + 0`
+mesini=`expr $mesini + 0`
+
+cat hlp01
+rm hlp01
+
+# Defino el mes en letras
+#------------------------
+case $mesini in
+   1) mes='JAN' ;;
+   2) mes='FEB' ;;
+   3) mes='MAR' ;;
+   4) mes='APR' ;;
+   5) mes='MAY' ;;
+   6) mes='JUN' ;;
+   7) mes='JUL' ;;
+   8) mes='AUG' ;;
+   9) mes='SEP' ;;
+   10) mes='OCT' ;;
+   11) mes='NOV' ;;
+   12) mes='DEC' ;;
+esac
+
+echo 'Mes:' $mes
+
+# Defino el mes anterior en letras
+#---------------------------------
+case $mesini in
+   1) mes_ant='DEC' ;;
+   2) mes_ant='JAN' ;;
+   3) mes_ant='FEB' ;;
+   4) mes_ant='MAR' ;;
+   5) mes_ant='APR' ;;
+   6) mes_ant='MAY' ;;
+   7) mes_ant='JUN' ;;
+   8) mes_ant='JUL' ;;
+   9) mes_ant='AUG' ;;
+   10) mes_ant='SEP' ;;
+   11) mes_ant='OCT' ;;
+   12) mes_ant='NOV' ;;
+esac
+
+echo 'Mes Anterior:' $mes_ant
+
+# Defino la cantidad de días del mes anterior
+#--------------------------------------------
+case $mesini in
+   1) dia_ant='31' ;;
+   2) dia_ant='31' ;;
+   3) dia_ant='28' ;;
+   4) dia_ant='31' ;;
+   5) dia_ant='30' ;;
+   6) dia_ant='31' ;;
+   7) dia_ant='30' ;;
+   8) dia_ant='31' ;;
+   9) dia_ant='31' ;;
+   10) dia_ant='30' ;;
+   11) dia_ant='31' ;;
+   12) dia_ant='30' ;;
+esac
+
+#echo 'Cantidad días del mes anterior:' $dia_ant
+
+# Defino la cantidad de días del mes anterior para Marzo
+#-------------------------------------------------------
+if [ $mes_orig -eq 03 ]
+then
+     ano4=$(($ano/4))
+         ano_new=$(($ano4*4))
+         dif_ano=$(($ano - $ano_new))
+         if [ $dif_ano -eq 0 ]
+         then
+dia_ant=29
+else
+dia_ant=28
+fi ;
+echo 'Cantidad días del mes si es Febrero:' $dia_ant
+fi ;
+
+# Cambio de Año si el mes es Enero y el día es menor o igual a 5
+#---------------------------------------------------------------
+
+if [ $mesini -eq 01 ]
+then
+   if [ $diaini -lt 6 ]
+   then
+     ano=$(($ano-1))
+     echo 'Nuevo Año es: ' $ano
+   fi;
+fi ;
+
+
+#Defino el día a procesar
+#------------------------
+case $diaini in
+   1) dia=$(($dia_ant-4)) ; mes=$mes_ant ;;
+   2) dia=$(($dia_ant-3)) ; mes=$mes_ant ;;
+   3) dia=$(($dia_ant-2)) ; mes=$mes_ant ;;
+   4) dia=$(($dia_ant-1)) ; mes=$mes_ant ;;
+   5) dia=$dia_ant ; mes=$mes_ant ;;
+   6) dia='01' ;;
+   7) dia='02' ;;
+   8) dia='03' ;;
+   9) dia='04' ;;
+   10) dia='05' ;;
+   11) dia='06' ;;
+   12) dia='07' ;;
+   13) dia='08' ;;
+   14) dia='09' ;;
+   15) dia='10' ;;
+   16) dia='11' ;;
+   17) dia='12' ;;
+   18) dia='13' ;;
+   19) dia='14' ;;
+   20) dia='15' ;;
+   21) dia='16' ;;
+   22) dia='17' ;;
+   23) dia='18' ;;
+   24) dia='19' ;;
+   25) dia='20' ;;
+   26) dia='21' ;;
+   27) dia='22' ;;
+   28) dia='23' ;;
+   29) dia='24' ;;
+   30) dia='25' ;;
+   31) dia='26' ;;
+esac
+
+echo 'Dia a procesar:' $dia
+
+fecha_log=$dia'_'$mes'_'$ano
+
+fecha=$dia'-'$mes'-'$ano
+fecha_ini_mes='01-'$mes'-'$ano
+
+echo 'Fecha Proceso: ' $fecha
+echo 'Fecha Inicio:  ' $fecha_ini_mes
+
+#Escribe la sql para cargar la data
+#-----------------------------------
+
+echo "set linesize 200" > query_tottraf.sql
+echo "set pagesize 0" >> query_tottraf.sql
+echo "  " >> query_tottraf.sql
+echo "spool sigma_carga_data_sia_trafico_$fecha_log.log" >> query_tottraf.sql
+echo "  " >> query_tottraf.sql
+echo "set serveroutput on size 900000" >> query_tottraf.sql
+echo "  " >> query_tottraf.sql
+echo "exec X_SIA_TRAFICOS_EJEC('$fecha','$fecha');" >> query_tottraf.sql
+echo "  " >> query_tottraf.sql
+echo "spool off;" >> query_tottraf.sql
+echo "exit;" >> query_tottraf.sql
+echo "exit;" >> query_tottraf.sql
+
+sqlplus soporte/soporte@sigma @query_tottraf.sql
+
+#Escribe la sql para generar la data
+#-----------------------------------
+echo "set linesize 300" > query_repo_tottraf.sql
+echo "set pagesize 0" >> query_repo_tottraf.sql
+echo "set newpage  0" >> query_repo_tottraf.sql
+echo "set space    0" >> query_repo_tottraf.sql
+echo "set heading  off" >> query_repo_tottraf.sql
+echo "set feedback off" >> query_repo_tottraf.sql
+echo "set echo     off" >> query_repo_tottraf.sql
+echo "  " >> query_repo_tottraf.sql
+echo "spool reporte_total_trafico_sigma_especial_$fecha_log.txt" >> query_repo_tottraf.sql
+echo "  " >> query_repo_tottraf.sql
+echo "select" >> query_repo_tottraf.sql
+echo "to_char(fecha_inicio,'yyyymmdd')||'|'||" >> query_repo_tottraf.sql
+echo "a.SENTIDO_SIO||'|'||" >> query_repo_tottraf.sql
+echo "a.INTERCONECTANTE||'|'||" >> query_repo_tottraf.sql
+echo "a.GRUPO_ESC_DESCRI||'|'||" >> query_repo_tottraf.sql
+echo "a.ESCENARIO_TRAFICO||'|'||" >> query_repo_tottraf.sql
+echo "a.participacion_op||'|'||" >> query_repo_tottraf.sql
+echo "a.alcance||'|'||" >> query_repo_tottraf.sql
+echo "a.SENTIDO_SIGMA||'|'||" >> query_repo_tottraf.sql
+echo "a.VALORIZADO||'|'||" >> query_repo_tottraf.sql
+echo "a.AREA_LOCAL||'|'||" >> query_repo_tottraf.sql
+echo "b.AREA_LOCAL_DESCRI||'|'||" >> query_repo_tottraf.sql
+echo "a.CENTRAL||'|'||" >> query_repo_tottraf.sql
+echo "c.central_descri||'|'||" >> query_repo_tottraf.sql
+echo "OPERADOR_ORIGEN||'|'||" >> query_repo_tottraf.sql
+echo "SERVICIO_ORIGEN||'|'||" >> query_repo_tottraf.sql
+echo "OPERADOR_DESTINO||'|'||" >> query_repo_tottraf.sql
+echo "SERVICIO_DESTINO||'|'||" >> query_repo_tottraf.sql
+echo "sum(a.CANTIDAD)||'|'||" >> query_repo_tottraf.sql
+echo "sum(a.MINUTOS_REALES)||'|'||" >> query_repo_tottraf.sql
+echo "sum(a.MINUTOS_REDONDEADOS)||'|'" >> query_repo_tottraf.sql
+echo "from x_reporte_cascada_total_traf a, SIA_AREAS_LOCAL b, sia_centrales c" >> query_repo_tottraf.sql
+echo "where a.AREA_LOCAL = b.AREA_LOCAL_ID and" >> query_repo_tottraf.sql
+echo "a.CENTRAL = c.central(+) and" >> query_repo_tottraf.sql
+echo "a.fecha_inicio>='$fecha_ini_mes'" >> query_repo_tottraf.sql
+echo "AND a.fecha_fin<='$fecha'" >> query_repo_tottraf.sql
+echo "and ((b.AREA_LOCAL_ID>=25 and b.AREA_LOCAL_ID<=48) or b.AREA_LOCAL_ID=30246)" >> query_repo_tottraf.sql
+echo "and a.CENTRAL <> 'MV'" >> query_repo_tottraf.sql
+echo "group by" >> query_repo_tottraf.sql
+echo "to_char(fecha_inicio,'yyyymmdd')," >> query_repo_tottraf.sql
+echo "a.SENTIDO_SIO," >> query_repo_tottraf.sql
+echo "a.INTERCONECTANTE," >> query_repo_tottraf.sql
+echo "a.GRUPO_ESC_DESCRI," >> query_repo_tottraf.sql
+echo "a.ESCENARIO_TRAFICO," >> query_repo_tottraf.sql
+echo "a.participacion_op," >> query_repo_tottraf.sql
+echo "a.alcance," >> query_repo_tottraf.sql
+echo "a.SENTIDO_SIGMA," >> query_repo_tottraf.sql
+echo "a.VALORIZADO," >> query_repo_tottraf.sql
+echo "a.AREA_LOCAL," >> query_repo_tottraf.sql
+echo "b.AREA_LOCAL_DESCRI," >> query_repo_tottraf.sql
+echo "a.CENTRAL," >> query_repo_tottraf.sql
+echo "c.central_descri," >> query_repo_tottraf.sql
+echo "OPERADOR_ORIGEN," >> query_repo_tottraf.sql
+echo "SERVICIO_ORIGEN," >> query_repo_tottraf.sql
+echo "OPERADOR_DESTINO," >> query_repo_tottraf.sql
+echo "SERVICIO_DESTINO;" >> query_repo_tottraf.sql
+echo "  " >> query_repo_tottraf.sql
+echo "spool off;" >> query_repo_tottraf.sql
+echo "  " >> query_repo_tottraf.sql
+echo "exit;" >> query_repo_tottraf.sql
+echo "exit;" >> query_repo_tottraf.sql
+
+
+sqlplus soporte/soporte@sigma @query_repo_tottraf.sql
+
+exit;
+exit;

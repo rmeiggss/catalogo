@@ -1,0 +1,60 @@
+# Autor : Ing. Erick Fernando Vizcardo Fernandez
+# Parametros : fecha_cargo (AAAAMMDD)
+# Fecha : 2006-01-03
+echo $1 > hlp01
+diaini=`cut -c7-8 hlp01`
+mesini=`cut -c5-6 hlp01`
+anoini=`cut -c1-4 hlp01`
+diaini=`expr $diaini + 0`
+mesini=`expr $mesini + 0`
+rm hlp01
+mv SIGMA_$1.TXT /home1/sigma/pre_unif/bmp/SIGMA_$1.TXT
+case $mesini in
+   1) mes='Jan' ;;
+   2) mes='Feb' ;;
+   3) mes='Mar' ;;
+   4) mes='Apr' ;;
+   5) mes='May' ;;
+   6) mes='Jun' ;;
+   7) mes='Jul' ;;
+   8) mes='Aug' ;;
+   9) mes='Sep' ;;
+   10) mes='Oct' ;;
+   11) mes='Nov' ;;
+   12) mes='Dec' ;;
+   esac
+if [ $diaini -lt 10 ] ; then
+   cad=$mes"  "$diaini;
+else
+   cad=$mes' '$diaini;
+   fi
+rm ver_dir
+ls -ltd 0* | grep "$cad" >> ver_dir
+ls -ltd 1* | grep "$cad" >> ver_dir
+ls -ltd 2* | grep "$cad" >> ver_dir
+ls -ltd 3* | grep "$cad" >> ver_dir
+ls -ltd 4* | grep "$cad" >> ver_dir
+ls -ltd 5* | grep "$cad" >> ver_dir
+ls -ltd 6* | grep "$cad" >> ver_dir
+ls -ltd 7* | grep "$cad" >> ver_dir
+ls -ltd 8* | grep "$cad" >> ver_dir
+ls -ltd 9* | grep "$cad" >> ver_dir
+ls -ltd SI.* | grep "$cad" >> ver_dir
+ls -ltd WA.* | grep "$cad" >> ver_dir
+cut -c55-100 ver_dir > ver_dir.1
+cant=`cat ver_dir | wc -l`
+cont=1
+while [ $cont -le $cant ] ; do
+   arch=`head -$cont ver_dir.1 | tail -1`
+   hora=`head -1 $arch | cut -b55-56`
+   minu=`head -1 $arch | cut -b57-58`
+   segu=`head -1 $arch | cut -b59-60`
+   s=`echo $arch | wc -c`
+   r=`cat $arch | wc -l`
+   if [ $s -gt 9 ] ; then
+      echo ' '$hora':'$minu':'$segu' '$arch'. distributed to /home1/sigma/pre_unif that contains'$r' registers ' >> SIGMA_$1.TXT ;
+      fi
+   cont=`expr $cont + 1`;
+   done
+rm ver_dir
+rm ver_dir.1

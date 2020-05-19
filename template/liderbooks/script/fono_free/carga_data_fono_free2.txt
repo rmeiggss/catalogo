@@ -1,0 +1,11 @@
+load data
+infile 'DATA2.TXT'
+append into table x_data_fono_free
+(seg1 char terminated by ';',
+fecha char terminated by ';',
+hora char terminated by ';',
+tlf_a char terminated by ';',
+tlf_b char terminated by ';',
+flag2 char terminated by ';',
+seg2 char terminated by ';',
+min_real char terminated by ';')

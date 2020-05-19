@@ -1,0 +1,25 @@
+--Este proceso se ejecuta con la fecha en inglés
+
+set linesize 200
+set pagesize 0
+clear screen
+
+spool d:\muestras\carga_variacion_tabla_precios_200809.txt
+
+set serveroutput on size 900000
+execute X_CARGA_VARIACION_TRAFICO_PRE('01-SEP-2008','30-SEP-2008');
+
+spool off;
+
+set linesize 200
+set pagesize 0
+clear screen
+
+spool d:\muestras\carga_variacion_trafico_200809.txt
+
+set serveroutput on size 900000
+execute x_carga_variacion_trafico('200809','0','0','0');
+
+spool off;
+
+exit;

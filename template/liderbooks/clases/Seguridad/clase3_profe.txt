@@ -1,0 +1,539 @@
+# Ejemplo 1: Proteger el equipo Local
+# -----------------------------------
+# 1) Eliminando Reglas de Firewall
+#    -----------------------------
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# 2) Estableciendo Reglas Predeterminadas
+#    ------------------------------------
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -t nat -P PREROUTING ACCEPT
+iptables -t nat -P POSTROUTING ACCEPT
+
+# 3) Aplicando Reglas de Filtrado
+#    ----------------------------
+
+# Permitimos realizar cualquier configuración al Localhost
+
+iptables -A INPUT -i lo -j ACCEPT
+
+# Al IP 195.65.34.234 se le permite realizar cualquier configuración
+
+iptables -A INPUT -s 195.65.34.234 -j ACCEPT
+
+# AL IP 231.45.134.23 se le permite realizar mantenimiento de la BDD de Mysql
+
+iptables -A INPUT -s 231.45.134.23 -p tcp --dport 3306 -j ACCEPT
+
+# Al IP 80.37.45.194 se le permite acceso al firewall a traves de FTP
+
+iptables -A INPUT -s 80.37.45.194 -p tcp --dport 20:21 -j ACCEPT
+
+# Permitir el acceso a todo el mundo al servidor web
+
+iptables -A INPUT  -p tcp --dport 80 -j ACCEPT
+
+# 4) Cerrar Puertos Privilegiados
+#    ----------------------------
+
+iptables -A INPUT -p tcp --dport 1:1024 -j DROP
+iptables -A INPUT -p udp --dport 1:1024 -j DROP
+iptables -A INPUT -p tcp --dport 3306 -j DROP
+iptables -A INPUT -p tcp --dport 10000 -j DROP
+iptables -A INPUT -p udp --dport 10000 -j DROP
+
+# Ejemplo 2: Firewall de una LAN con salida a Internet
+# ----------------------------------------------------
+# 1) Eliminando Reglas de Firewall
+#    -----------------------------
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# 2) Estableciendo Reglas Predeterminadas
+#    ------------------------------------
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -t nat -P PREROUTING ACCEPT
+iptables -t nat -P POSTROUTING ACCEPT
+
+# 3) Aplicando Reglas de Filtrado
+#    ----------------------------
+
+# Al localhost se le permite cualquier configuración
+
+iptables -A INPUT -i lo -j ACCEPT
+
+# Permitimos el acceso de la LAN al Firewall
+
+iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT
+
+# Publicar Servidor de Correo
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 25 -j ACCEPT
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 110 -j ACCEPT
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 143 -j ACCEPT
+
+# Permitimos al IP 211.45.176.24 establecer comunicación con la LAN via VPN
+
+iptables -A INPUT -s 211.45.176.24 -p tcp --dport 1723 -j ACCEPT
+
+# Permitir a la LAN el acceso a internet
+
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 443 -j ACCEPT
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 53 -j ACCEPT
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p udp --dport 53 -j ACCEPT
+
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -j DROP
+
+# Realizar Enmascaramiento de la LAN
+
+iptables -t nat -A POSTROUTING  -s 192.168.10.0/24 -o eth0 -j MASQUERADE
+
+# 4) Cerrar Rangos de Puertos Privilegiados
+#    --------------------------------------
+
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1:1024 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p udp --dport 1:1024 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1723 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 10000 -j DROP
+
+
+# Ejemplo 3: Firewall de una LAN con salida a Internet y con servicio Web en la LAN
+# ---------------------------------------------------------------------------------
+# 1) Eliminando Reglas de Firewall
+#    -----------------------------
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# 2) Estableciendo Reglas Predeterminadas
+#    ------------------------------------
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -t nat -P PREROUTING ACCEPT
+iptables -t nat -P POSTROUTING ACCEPT
+
+# 3) Aplicando Reglas de Filtrado
+#    ----------------------------
+
+# Publicar el servidor web
+
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to 192.168.10.12:80
+
+# Permitir la administración del servidor web via Terminal Server (3389)
+
+iptables -t nat -A PREROUTING -s 221.23.124.181 -i eth0 -p tcp --dport 3389 -j DNAT --to 192.168.10.12:3389
+
+# Al localhost se le permite cualquier configuración
+
+iptables -A INPUT -i lo -j ACCEPT
+
+# Permitir a la LAN el acceso al Firewall
+
+iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT
+
+# Publicar el servidor de Correo
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 25 -j ACCEPT
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 110 -j ACCEPT
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 143 -j ACCEPT
+
+# Al IP 211.45.176.24 se le permite establecer comunicación con la LAN via VPN
+
+iptables -A INPUT -s 211.45.176.24 -p tcp --dport 1723 -j ACCEPT
+
+# Permitir a la LAN el acceso a Internet
+
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 443 -j ACCEPT
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p tcp --dport 53 -j ACCEPT
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -p udp --dport 53 -j ACCEPT
+
+iptables -A FORWARD -s 192.168.10.0/24 -i eth1 -j DROP
+
+# Realizar Enmascaramiento de la LAN
+
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE
+
+# 4) Cerrar Puertos Privilegiados
+#    ----------------------------
+
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1:1024 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p udp --dport 1:1024 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1723 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 10000 -j DROP
+
+# Ejemplo 4: Firewall de una LAN con salida a Internet y con DMZ
+# --------------------------------------------------------------
+
+# 1) Eliminando Reglas de Firewall
+#    -----------------------------
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# 2) Estableciendo Reglas Predeterminadas
+#    ------------------------------------
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -t nat -P PREROUTING ACCEPT
+iptables -t nat -P POSTROUTING ACCEPT
+
+# 3) Aplicando Reglas de Filtrado
+#    ----------------------------
+
+# Publicar el servidor Web
+
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to 192.168.3.2:80
+
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j DNAT --to 192.168.3.2:443
+
+# Al localhost se le permite realizar cualquier configuración
+
+iptables -A INPUT -i lo -j ACCEPT
+
+# Permitir el acceso de la LAN al Firewall
+
+iptables -A INPUT -s 192.168.10.0/24 -i eth1 -j ACCEPT
+
+# Realizar Enmascaramiento de la LAN y la DMZ
+
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s 192.168.3.0/24 -o eth0 -j MASQUERADE
+
+# Permitir al servidor web conectarse al servidor de BDD de la LAN
+
+iptables -A FORWARD -s 192.168.3.2 -d 192.168.10.5 -p tcp --dport 5432 -j ACCEPT
+
+iptables -A FORWARD -s 192.168.10.5 -d 192.168.3.2 -p tcp --sport 5432 -j ACCEPT
+
+# Permitir a la LAN la administración del servidor  web via Terminal Server
+
+iptables -A FORWARD -s 192.168.10.0/24 -d 192.168.3.2 -p tcp --dport 3389 -j ACCEPT
+
+iptables -A FORWARD -s 192.168.3.2 -d 192.168.10.0/24 -p tcp --sport 3389 -j ACCEPT 
+
+# 4) Cerrar puertos privilegiados
+#    ----------------------------
+
+iptables -A FORWARD -s 192.168.3.0/24 -d 192.168.10.0/24 -j DROP
+
+iptables -A INPUT -s 192.168.3.0/24 -i eth2 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 1:1024 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -p udp --dport 1:1024 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 3389 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 5432 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -p tcp --dport 10000 -j DROP
+
+# Ejemplo 5: Firewall con servicios publicados en la DMZ
+# ------------------------------------------------------
+
+# 1) Eliminando Reglas de Firewall
+#    -----------------------------
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# 2) Estableciendo Reglas Predeterminadas
+#    ------------------------------------
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+
+# 3) Aplicando Reglas de Filtrado
+#    ----------------------------
+
+# Permitir acceso total al firewall al IP 210.195.55.15
+
+iptables -A INPUT -s 210.195.55.15 -j ACCEPT
+
+iptables -A INPUT -s 0.0.0.0/0 -j DROP
+
+# Publicar el servidor web
+
+iptables -A FORWARD -d 211.34.149.2 -p tcp --dport 80 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.2 -p tcp --dport 22 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.2  -j DROP
+
+# Publicar el servidor de Correo
+
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 25 -j ACCEPT
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 110 -j ACCEPT
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 143 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.3 -p tcp --dport 22 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.3  -j DROP
+
+# Publicar el servidor IRC
+
+iptables -A FORWARD -d 211.34.149.4 -p tcp --dport 6666:6668 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.4 -p tcp --dport 22 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.4  -j DROP
+
+# Publicar el servidor de noticias
+
+iptables -A FORWARD -d 211.34.149.5 -p tcp --dport news -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.5 -p tcp --dport 22 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.5  -j DROP
+
+# Publicar servidor web seguro
+
+iptables -A FORWARD -d 211.34.149.6 -p tcp --dport 443 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.6 -p tcp --dport 3389 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.6  -j DROP
+
+# Ejemplo 6: Firewall con politica predeterminada DROP
+# ----------------------------------------------------
+
+# 1) Eliminando Reglas de Firewall
+#    -----------------------------
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# 2) Estableciendo Reglas Predeterminadas
+#    ------------------------------------
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# 3) Aplicando Reglas de Filtrado
+#    ----------------------------
+
+# Permitir acceso total al firewall al IP 210.195.55.15
+
+iptables -A INPUT -s 210.195.55.15 -j ACCEPT
+
+iptables -A OUTPUT -d 210.195.55.15 -j ACCEPT
+
+# Publicar el servidor web
+
+iptables -A FORWARD -d 211.34.149.2 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.2 -p tcp --sport 80 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.2 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.2 -d 210.195.55.15 -p tcp --sport 22 -j ACCEPT
+
+# Publicar el servidor de Correo
+
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 25 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -p tcp --sport 25 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 110 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -p tcp --sport 110 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 143 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -p tcp --sport 143 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.3 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -d 210.195.55.15 -p tcp --sport 22 -j ACCEPT
+
+# Publicar el servidor IRC
+
+iptables -A FORWARD -d 211.34.149.4 -p tcp --dport 6666:6668 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.4 -p tcp --sport 6666:6668 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.4 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.4 -d 210.195.55.15 -p tcp --sport 22 -j ACCEPT
+
+# Publicar el servidor de noticias
+
+iptables -A FORWARD -d 211.34.149.5 -p tcp --dport news -j ACCEPT
+iptables -A FORWARD -s 211.34.149.5 -p tcp --sport news -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.5 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.5 -d 210.195.55.15 -p tcp --sport 22 -j ACCEPT
+
+# Publicar servidor web seguro
+
+iptables -A FORWARD -d 211.34.149.6 -p tcp --dport 443 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.6 -p tcp --sport 443 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.6 -p tcp --dport 3389 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.6 -d 210.195.55.15 -p tcp --sport 3389 -j ACCEPT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

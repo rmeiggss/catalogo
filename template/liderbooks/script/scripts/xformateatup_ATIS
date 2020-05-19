@@ -1,0 +1,6 @@
+#Autor: Ing. WALTER REYES
+#Fecha: 2007-07-10
+
+grep '^....................................................000000002' TB_OEMAEABO_SIGMA_F$1.DAT.TXT > MAEABOX_TPI_SERTEL_$1.DAT
+grep '^....................................................000000003' TB_OEMAEABO_SIGMA_F$1.DAT.TXT >> MAEABOX_TPI_SERTEL_$1.DAT
+grep '^....................................................000000011' TB_OEMAEABO_SIGMA_F$1.DAT.TXT >> MAEABOX_TPI_SERTEL_$1.DAT

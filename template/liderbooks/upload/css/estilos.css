@@ -1,0 +1,26 @@
+a.button{
+	background:url(images/button.gif);
+	display:block;
+	color:#555555;
+	font-weight:bold;
+	height:30px;
+	line-height:29px;
+	margin-bottom:14px;
+	text-decoration:none;
+	width:191px;
+}
+a:hover.button{
+	color:#0066CC;
+}
+.add{
+	background:url(images/add.gif) no-repeat 10px 8px;
+	text-indent:30px;
+	display:block;
+}
+.m1{
+	font-size:11px;
+	font-family:Verdana;
+	font-weight:bold;
+	color:#8181F7;
+	text-decoration:none;
+}

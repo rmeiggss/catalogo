@@ -1,0 +1,44 @@
+#Eliminar Reglas del Firewall
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+#2) Estableciento reglas predeterminadas
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -t nat -P PREROUTING ACCEPT
+iptables -t nat -P POSTROUTING ACCEPT
+
+#3)Aplicando reglas de filtrado
+#a) A localhost se le premite cualquier configuracion
+iptables -A INPUT -i lo -j ACCEPT
+#B) pERMITIMOS EL ACCESO DE LA LAN AL FIREVWALL
+
+ 
+#Permitimos al IP 211.45.176.24 establecer comunicacion con la LAN via VPN.
+iptables -A -INPUT -s 211.45.176.24 -p tcp --dport 1723 -j ACCEPT
+
+#Permitir a la LAN el acceso a la LAN(Tam,bien DNS)
+iptables -A FORWARD -s 192.168.0.0/24 -i eth1 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 192.168.0.0/24 -i eth1 -p tcp --dport 443 -j ACCEPT
+iptables -A FORWARD -s 192.168.0.0/24 -i eth1 -p tcp --dport 53 -j ACCEPT
+iptables -A FORWARD -s 192.168.0.0/24 -i eth1 -p udp --dport 53 -j ACCEPT
+
+iptables -A FORWARD -s 192.168.0.0/24 -i eth1 -j ACCEPT
+
+#Realizar enmascaramiento de la LAN
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE
+
+#4) cERRAR Rngo de puertos privilegiados.
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1:1024 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p udp --dport 1:1024 -j DROP
+
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 1723 -j DROP
+iptables -A INPUT -s 0.0.0.0/0 -i eth0 -p tcp --dport 10000 -j DROP
+
+
+
+
+

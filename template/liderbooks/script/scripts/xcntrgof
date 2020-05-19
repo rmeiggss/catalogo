@@ -1,0 +1,17 @@
+#Autor: Ing. Erick Fernando Vizcardo Fernandez
+#Parametros: Fecha Inicial y Fecha Final
+#Fecha: 2006-07-18
+fi=$1
+ff=$2
+a=$fi
+while [ a -le ff ] ; do
+   cd /home1/sigma/pre_unif
+   cd /home1/sigma/pre_unif/$a
+   uncompress *
+   regsig=`cat SIGMA* | wc -l`
+   regtot=`cat * | wc -l`
+   regtot=`expr $regtot - $regsig`
+   echo $a' '$regtot >> /home1/sigma/pre_unif/cuenta_rango.$1.$2
+   compress *
+   a=`expr $a + 1` ;
+   done

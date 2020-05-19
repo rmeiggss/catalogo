@@ -1,0 +1,7 @@
+===============================================================================                                                                                                                         
+Parámetros: Fecha Formato1: 03-JUL-2007 Fecha Formato2: 20070703                                                                                                                                        
+Se ha procesado la sgte cantidad de cdrs: 27                                                                                                                                                            
+===============================================================================                                                                                                                         
+
+PL/SQL procedure successfully completed.
+

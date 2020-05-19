@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:date="http://exslt.org/dates-and-times" identifier="COURSEGENIECG2006326131412-MANIFEST01" version="1.2" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2  imscp_rootv1p1p2.xsd  http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd  http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <lom xmlns="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1">
+      <general>
+        <catalogentry>
+          <catalog>courseGenie Catalog</catalog>
+          <entry>
+            <langstring>UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS</langstring>
+          </entry>
+        </catalogentry>
+        <title>
+          <langstring>UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS</langstring>
+        </title>
+        <description>
+          <langstring>CURSO DE FRANCES - NIVEL BASICO</langstring>
+        </description>
+        <keyword>
+          <langstring>language, france, chirac</langstring>
+        </keyword>
+        <keyword>
+          <langstring>SCO</langstring>
+        </keyword>
+      </general>
+      <lifecycle>
+        <version>
+          <langstring></langstring>
+        </version>
+        <status>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">final</langstring>
+          </value>
+        </status>
+        <contribute>
+          <role>
+            <source>
+              <langstring xml:lang="x-none">LOMv1.0</langstring>
+            </source>
+            <value>
+              <langstring xml:lang="x-none">TRUJILLO</langstring>
+            </value>
+          </role>
+          <centity>
+            <vcard>
+BEGIN:vCard
+FN:TRUJILLO
+ORG:ANTARKI
+END:vCard
+						</vcard>
+          </centity>
+          <date>
+            <datetime></datetime>
+          </date>
+        </contribute>
+      </lifecycle>
+      <metametadata>
+        <metadatascheme>ADL SCORM 1.2</metadatascheme>
+        <language>en-US</language>
+      </metametadata>
+      <technical>
+        <format>text/html</format>
+        <location type="URI">.</location>
+        <requirement>
+          <type>
+            <source>
+              <langstring xml:lang="x-none">LOMv1.0</langstring>
+            </source>
+            <value>
+              <langstring xml:lang="x-none">Browser</langstring>
+            </value>
+          </type>
+          <name>
+            <source>
+              <langstring xml:lang="x-none">LOMv1.0</langstring>
+            </source>
+            <value>
+              <langstring xml:lang="x-none">Microsoft Internet Explorer</langstring>
+            </value>
+          </name>
+          <minimumversion>4.01</minimumversion>
+        </requirement>
+      </technical>
+      <rights>
+        <cost>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">No</langstring>
+          </value>
+        </cost>
+        <copyrightandotherrestrictions>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">Yes</langstring>
+          </value>
+        </copyrightandotherrestrictions>
+        <description>
+          <langstring></langstring>
+        </description>
+      </rights>
+      <classification>
+        <purpose>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">Educational Objective</langstring>
+          </value>
+        </purpose>
+        <description>
+          <langstring></langstring>
+        </description>
+      </classification>
+    </lom>
+  </metadata>
+  <organizations default="COURSEGENIECG2006326131412-ORG-1">
+    <organization identifier="COURSEGENIECG2006326131412-ORG-1">
+      <title>UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS</title>
+      <item identifier="COURSEGENIECG2006326131412-ITEM-1" identifierref="COURSEGENIECG2006326131412-RES-1" isvisible="true">
+        <title>UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="COURSEGENIECG2006326131412-RES-1" type="webcontent" adlcp:scormtype="sco" href="cgstage.htm">
+      <file href="cgstage.htm"/>
+      <file href="dummypage.htm"/>
+      <file href="index.htm"/>
+      <file href="cgscorm.js"/>
+      <file href="page_01.htm"/>
+      <file href="page_02.htm"/>
+      <file href="page_03.htm"/>
+      <file href="page_04.htm"/>
+      <file href="page_05.htm"/>
+      <file href="page_06.htm"/>
+      <file href="page_07.htm"/>
+      <file href="page_08.htm"/>
+      <file href="page_09.htm"/>
+      <file href="page_10.htm"/>
+      <file href="page_11.htm"/>
+      <file href="page_12.htm"/>
+      <file href="page_13.htm"/>
+      <file href="page_14.htm"/>
+      <file href="page_15.htm"/>
+      <file href="page_16.htm"/>
+      <file href="page_17.htm"/>
+    </resource>
+  </resources>
+</manifest>

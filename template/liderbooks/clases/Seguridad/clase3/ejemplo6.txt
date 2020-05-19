@@ -1,0 +1,50 @@
+# Ejemplo6 : Lo anterior(Firewall con politica predeterminada DROP)
+# -----------------------------------------------------------------
+#1) 
+
+#2) EStableciendo reglas predetermimadas
+# --------------------------------------
+iptables -F INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+#3) Aplicando reglas de filtrado
+#  ------------------------------
+# Permitir el acceso totoal al firewall al ip 210.196.195.55.15
+iptables -A INPUT -s 210.195.55.15 -j ACCEPT
+iptables -A OUTPUT -d 210.195.55.15 -j ACCEPT
+
+# Publicar servidor web
+iptables -A FORWARD -d 211.34.149.2 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.2 -p tcp --sport 80 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.315 -d 211.34149.2 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 210.195.55.315 -d 211.34149.2 -p tcp --sport 22 -j ACCEPT
+
+# Publicar servidor de correo
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 25 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -p tcp --dport 25 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 110 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -p tcp --dport 110 -j ACCEPT
+
+iptables -A FORWARD -d 211.34.149.3 -p tcp --dport 143 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -p tcp --dport 143 -j ACCEPT
+
+iptables -A FORRWARD -s 210.195.55.15 -d 211.34.149.3 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.3 -d 210.195.55.15 -p tcp --sport 22 -j ACCEPT
+
+#Publicar servidor IRC
+iptables -A FORWARD -d 211.34.149.4 -p tcp --dport 6666:6668 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.4 -p tcp --sport 6666:6668 -j ACCEPT
+
+iptables -A FORWARD -s 210.195.55.15 -d 211.34.149.4 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -s 211.34.149.4 -d 210.195.55.15 -p tcp --dport 22 -j ACCEPT
+
+# Publicar el servidor de noticias
+
+
+
+
+
+

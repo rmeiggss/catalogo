@@ -1,0 +1,22 @@
+- Revizar error del sistemachips y resolucionarlo
+- Cambiar clave del asterisk
+- Arreglar eso para callshops
+- Arreglar eso para resellers
+- Hacer sistema de backups.
+- Destino de pagina web vendida, hacerle seguimiento.
+- Revisar estadisticas por reseller
+
+
+**Llamar a Hernan.
+
+
+11:15
+anexos:2] Goto("SIP/anexo15-09eb6b00", "12|1") in new stack
+    -- Goto (anexos,12,1)
+    -- Executing [12@anexos:1] Dial("SIP/anexo15-09eb6b00", "SIP/12|30|Ttm") in new stack
+[Jul 29 11:59:44] WARNING[5842]: app_dial.c:1272 dial_exec_full: Unable to create channel of type 'SIP' (cause 20 - Unknown)
+  == Everyone is busy/congested at this time (1:0/0/1)
+    -- Executing [12@anexos:2] Goto("SIP/anexo15-09eb6b00", "13|1") in new stack
+    -- Goto (anexos,13,1)
+    -- Executing [13@anexos:1] Dial("SIP/anexo15-09eb6b00", "SIP/13|30|Ttm") in new stack
+[Jul 29 11:59:44] WARNING[5842]: app_dial.c:1272 dial_exec_full: Unable to cre
