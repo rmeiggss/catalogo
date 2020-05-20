@@ -1,3 +1,0 @@
-sqlplus soporte/soporte@sigma @query_ejecuta_variacion_trafico.txt
-exit
-exit

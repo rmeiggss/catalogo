@@ -1,8 +1,0 @@
-<?php
-$host="localhost";
-$user="root";
-$password="123456";
-$bd="eltumi";
-$cn=mysql_connect($host,$user,$password);
-mysql_select_db($bd);
-?>

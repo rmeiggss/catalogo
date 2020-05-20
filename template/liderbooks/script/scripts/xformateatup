@@ -1,6 +1,0 @@
-#Autor: Ing. Erick Fernando Vizcardo Fernandez
-#Fecha: 2006-11-10
-
-grep '^.......................................3' MAEABOX_LD_$1.DAT > MAEABOX_PUBLICOS_$1.DAT
-grep '^.......................................91' MAEABOX_LD_$1.DAT >> MAEABOX_PUBLICOS_$1.DAT
-grep '^.......................................96' MAEABOX_LD_$1.DAT >> MAEABOX_PUBLICOS_$1.DAT

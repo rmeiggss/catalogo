@@ -1,3 +1,0 @@
-#Ejemplo 4. Firewall de una LAN con salida a Internet y acon DMZ
-#---------------------------------------------------------------
-#

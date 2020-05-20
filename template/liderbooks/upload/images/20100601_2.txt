@@ -1,7 +1,0 @@
-Avances
-=========
-- Graba foto
-- Graba en dxpersona par cada valor que se modifica.
-- Agregar nuevas personas.
-- Validar busqueda por dni, busqueda por personas.
-- Graba comentarios.
