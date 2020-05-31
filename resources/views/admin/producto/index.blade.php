@@ -40,7 +40,8 @@
                   <td>{{$prod->titulo}}</td>
                   <td>{{$prod->precio}}</td>
                   <td>{{$prod->categoria}}</td>
-                  <td>{!!link_to_route('producto.edit', $title = 'Editar', $parameters = $prod->id, $attributes = ['class'=>'btn btn-success'])!!}</td>
+                  <td>Editar</td>
+                  <!--td></td-->
                   <td>
                     <form action="/producto/{{ $prod->id }}" method="POST">
                         {{ csrf_field() }}
