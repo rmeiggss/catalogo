@@ -16,7 +16,7 @@ class Conexion
 		$host="localhost";
 		$db="encuesta";
 		$user="root";
-		$pass="";
+		$pass="123456";
 
 		try {
 			$con = new PDO("mysql:host=".$host."; dbname=".$db,$user,$pass);
