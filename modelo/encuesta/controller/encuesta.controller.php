@@ -1,7 +1,4 @@
 <?php 
-/**
-* 
-*/
 require_once 'model/CLEncuesta.php';
 require_once 'libs/fpdf.php';
 
@@ -21,11 +18,14 @@ class EncuestaController
 		include_once 'views/Encuesta.php';
 	}
 
+	public function ListarEncuestas(){
+		$modelencuesta = $this->modelresultado;
+		include_once 'views/resultado.php';
+	}	
+
 	public function salida(){
 		include_once 'views/Salida.php';
 	}
-
-
 
 	public function RegistrarEncuesta(){
 		
@@ -97,9 +97,10 @@ class EncuestaController
 		$pdf->Output();
 	}
 
-	public function ListarEncuestas(){
-		$modelencuesta = $this->modelresultado;
-		include_once 'views/resultado.php';
+	public function ObtenerEncuesta(){
+		$dataencuesta = new Encuesta();
+		$dataencuesta->ID_Encuesta = $_POST["id_encuesta"];
+		echo $this->modelresultado->ObtenerEncuesta($dataencuesta);
 	}
 }
  ?>
