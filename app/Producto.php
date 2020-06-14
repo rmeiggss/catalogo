@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $table = 'producto';
+    protected $primaryKey = 'CURSOP_Codigo';
+
+    protected $table = 'curso';
     
-    protected $fillable = ['titulo','precio','categoria'];
+    protected $fillable = ['CURSOC_Nombre','CURSOC_Costo','CURSOC_Descripcion'];
     
     public $timestamps = false;
 }

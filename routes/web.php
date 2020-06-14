@@ -27,6 +27,7 @@ Route::get('reviews','FrontController@reviews');
 
 Route::post('usuario','UsuarioController@');
 
-Route::get('producto/index','Admin\ProductoController@index');
-Route::resource('producto','Admin\ProductoController');
+Route::get('curso/index','Admin\CursoController@index');
+Route::resource('curso','Admin\CursoController');
+
 Route::resource('categoria','Admin\CategoriaController');

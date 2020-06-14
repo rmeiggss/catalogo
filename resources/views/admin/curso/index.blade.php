@@ -16,9 +16,9 @@
     <!---->
     <div class="horz-grid">
         <div class="grid-hor">
-            <h3 id="grid-example-basic" class="col-sm-8">Listado de libros</h3>
+            <h3 id="grid-example-basic" class="col-sm-8">Listado de Cursos</h3>
             <div class="col-sm-4 text-right">
-                <a class="btn btn-info" href="{{ url('/producto/create') }}">Agregar Libro</a>    
+                <a class="btn btn-info" href="{{ url('/curso/create') }}">Agregar Curso</a>    
             </div>
         </div>
         <!----> 
@@ -27,9 +27,9 @@
               <thead>
                 <tr>
                   <th scope="col">Codigo</th>
-                  <th scope="col">Titulo</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Categoria</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Costo</th>
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
               </thead>
@@ -37,17 +37,17 @@
                 @foreach($productos as $item=>$prod)
                 <tr>
                   <th scope="row">{{$item+1}}</th>
-                  <td>{{$prod->titulo}}</td>
-                  <td>{{$prod->precio}}</td>
-                  <td>{{$prod->categoria}}</td>
-                  <td>Editar</td>
+                  <td>{{$prod->CURSOC_Nombre}}</td>
+                  <td>{{$prod->CURSOC_Descripcion}}</td>
+                  <td>{{$prod->CURSOC_Costo}}</td>
+                  <td><button class="btn btn-info">Editar</button></td>
                   <!--td></td-->
                   <td>
-                    <form action="/producto/{{ $prod->id }}" method="POST">
+                    {!!Form::open(['route'=>['curso.destroy',$prod->CURSOP_Codigo],'method'=>'DELETE'])!!}
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button class="btn btn-danger">Eliminar</button>
-                    </form>
+                        {!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+                    {!!Form::close()!!}
                    </td>
                 </tr>
                 @endforeach

@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Producto;
 use Redirect;
 
-class ProductoController extends Controller
+class CursoController extends Controller
 {
     public function index()
     {
         $productos = Producto::all();
-        return view('admin.producto.index', compact('productos'));
+        return view('admin.curso.index', compact('productos'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view("admin.producto.create");
+        return view("admin.curso.create");
     }
 
     /**
@@ -33,11 +33,11 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         Producto::create([
-            "titulo"=>$_REQUEST["titulo"],
-            "precio"=>$_REQUEST["precio"],
-            "categoria"=>$_REQUEST["categoria"]
+            "CURSOC_Nombre"=>$_REQUEST["nombre"],
+            "CURSOC_Descripcion"=>$_REQUEST["descripcion"],
+            "CURSOC_Costo"=>$_REQUEST["costo"]
         ]);
-        return redirect("/producto");
+        return redirect("/curso");
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $producto = Producto::find($id);
-        return view("admin.producto.edit",["producto"=>$producto]);
+        return view("admin.curso.edit",["producto"=>$producto]);
     }
 
     /**
@@ -75,7 +75,7 @@ class ProductoController extends Controller
         $producto = Producto::find($id);
         $producto->fill($request->all());
         $producto->save();
-        return Redirect::to("/producto");
+        return Redirect::to("/curso");
     }
 
     /**
@@ -87,6 +87,6 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         Producto::destroy($id);
-        return Redirect::to("/producto");
+        return Redirect::to("/curso");
     }
 }
