@@ -1,22 +1,20 @@
-@extends('layouts.admin')
+@extends('layouts.admin2')
 
 @section('content')
-<!--banner-->	
-<div class="banner">
-   <h2>
-        <a href="index.html">Libros</a>
-        <i class="fa fa-angle-right"></i>
-        <span>Listar</span>
-    </h2>
-</div>
-<!--//banner-->
 <!--grid-->
-<div class="grid-system">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Nuevo Curso</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>    
     <!---->
-    <div class="horz-grid">
-        <div class="grid-hor">
-            <h3 id="grid-example-basic">Nuevo Curso</h3></div>
-        <!----> 
+    <section class="content">
         <div class="grid-hor">
             {!!Form::open(['route'=>'curso.store','method'=>'POST','class'=>'col-sm-10'])!!}
                 <div class="form-group">
@@ -34,6 +32,6 @@
                 {!!Form::submit('Grabar',['class'=>'btn btn-success'])!!}
             {!!Form::close()!!}
         </div>
-    </div>
+    </section>
 </div>
 @endsection

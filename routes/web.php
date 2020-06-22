@@ -21,7 +21,8 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);
 
 Route::resource('movie','MovieController');*/
 
-Route::get('/','UsuarioController@inicio');
+//Route::get('/','UsuarioController@inicio');
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('contactenos','FrontController@contactenos');
 Route::get('reviews','FrontController@reviews');
 
@@ -31,3 +32,16 @@ Route::get('curso/index','Admin\CursoController@index');
 Route::resource('curso','Admin\CursoController');
 
 Route::resource('categoria','Admin\CategoriaController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+
+Route::get('cotizacion/index','Admin\CotizacionController@index');
+Route::resource('cotizacion', 'Admin\CotizacionController');
