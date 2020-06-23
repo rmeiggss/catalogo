@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Cursos</h1>
+            <h1>Listado de Cursos (Actualizado por edward)</h1>
           </div>
           <div class="col-sm-6 text-right">
             <a class="btn btn-info" href="{{ url('/curso/create') }}">Agregar Curso</a> 
