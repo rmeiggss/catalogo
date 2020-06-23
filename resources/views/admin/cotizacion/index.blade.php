@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Cotizaciones</h1>
+            <h1>Listado de Cotizaciones (actualizado por Martin)</h1>
           </div>
           <div class="col-sm-6 text-right">
             <a class="btn btn-info" href="{{ url('/cotizacion/create') }}">Agregar Curso</a> 
