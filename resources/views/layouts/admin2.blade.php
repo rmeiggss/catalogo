@@ -161,8 +161,130 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library --> 
 			  <!-- Sidebar user panel (optional) -->
-
+        <!-- INICIO DEL MENU  -->
 			  <!-- Sidebar Menu -->	 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                COTIZACIONES
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>  
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Ensayos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Calibraciones</p>
+                </a>
+              </li>    
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Capacitaciones</p>
+                </a>
+              </li>          
+            </ul> 
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                SERVICIOS EXTRAS
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>  
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Asesorias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Servicio Academico</p>
+                </a>
+              </li>              
+            </ul> 
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                CAPACITACION
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>  
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Curso</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Instructor</p>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Horario del Curso</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Descuentos del Curso</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Horario del Instructor</p>
+                </a>
+              </li>             
+            </ul> 
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                PERSONAL LAB.
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>  
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Cotizaciones</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Llenador de Datos</p>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Administrador</p>
+                </a>
+              </li>             
+            </ul> 
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>

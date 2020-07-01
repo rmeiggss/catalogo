@@ -16,7 +16,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
     <div class="login">
-        <h1><a href="index.html">Catalogo de productos </a></h1>
+        <h1><a href="index.html">Catalogo de productos</a></h1>
         <div class="login-bottom">
             <h2>Inicio de sesion</h2>
             {{ Form::open(array('url' => 'curso/index','method'=>'get')) }}
