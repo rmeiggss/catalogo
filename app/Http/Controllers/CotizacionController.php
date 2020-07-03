@@ -1,8 +1,7 @@
 <?php
-namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 
-use App\Cotizacion;
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
 class CotizacionController extends Controller
@@ -14,8 +13,7 @@ class CotizacionController extends Controller
      */
     public function index()
     {
-        $cotizaciones = Cotizacion::all();        
-        return view('admin.cotizacion.index', compact('cotizaciones'));
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class CotizacionController extends Controller
      */
     public function create()
     {
-        return view("admin.cotizacion.create");
+        //
     }
 
     /**
@@ -42,10 +40,10 @@ class CotizacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cotizacion  $cotizacion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cotizacion $cotizacion)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class CotizacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cotizacion  $cotizacion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cotizacion $cotizacion)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +63,10 @@ class CotizacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cotizacion  $cotizacion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cotizacion $cotizacion)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class CotizacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cotizacion  $cotizacion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cotizacion $cotizacion)
+    public function destroy($id)
     {
         //
     }
