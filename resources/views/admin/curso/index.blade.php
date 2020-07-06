@@ -1,5 +1,5 @@
 @extends('layouts.admin2')
- 
+
 @section('content')
 
 <div class="content-wrapper">
@@ -8,22 +8,24 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Cursos (Actualizado por edward)</h1>
+            <h1>Listado de Cursos</h1>
+            <!--<h1>Listado de Cursos (Actualizado por edward)</h1>-->
           </div>
           <div class="col-sm-6 text-right">
-            <a class="btn btn-info" href="{{ url('/curso/create') }}">Agregar Curso</a> 
+            <!-- actualizado por marck, usando ELOQUENT -->
+            <a class="btn btn-info" href="{{ route('curso.create') }}">Agregar Curso</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    
+
     <!-- Main Content-->
     <section class="content">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <h3 class="card-title"></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -38,23 +40,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($productos as $item=>$prod)
+                  @forelse($productos as $item=>$prod)
                   <tr>
+                    <!--actualizado por marck -->
                     <th scope="row">{{$item+1}}</th>
                     <td>{{$prod->CURSOC_Nombre}}</td>
                     <td>{{$prod->CURSOC_Descripcion}}</td>
                     <td>{{$prod->CURSOC_Costo}}</td>
-                    <td><button class="btn btn-info">Editar</button></td>
+                    <td><button class="btn btn-info"><a class="text-light" href="{{ route('curso.edit', $prod->id) }}">Editar</a></button></td>
                     <!--td></td-->
                     <td>
-                      {!!Form::open(['route'=>['curso.destroy',$prod->CURSOP_Codigo],'method'=>'DELETE'])!!}
+                      <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
+                      {!!Form::open(['route'=>['curso.destroy',$prod->id],'method'=>'DELETE'])!!}
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
                           {!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
                       {!!Form::close()!!}
                      </td>
                   </tr>
-                  @endforeach
+                  @empty
+                    <p><i>No se han encontrado elementos en la base de datos ...</i></p>
+                  @endforelse
+                    <!-- -------------------- -->
                 </tbody>
               </table>
             </div>
@@ -67,8 +74,8 @@
       </div>
       <!-- /.row -->
     </section>
-    
-    
+
+
 </div>
 
 @endsection

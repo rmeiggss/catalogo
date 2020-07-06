@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">   
+<div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -54,14 +54,14 @@
                          document.getElementById('logout-form').submit();">
             {{ __('Salir') }}
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>          
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
 <!--        <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
           <span class="badge badge-danger navbar-badge">3</span>
         </a>-->
 <!--        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
-             Message Start 
+             Message Start
             <div class="media">
               <img src="{{ asset('dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
@@ -73,11 +73,11 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-             Message End 
+             Message End
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-             Message Start 
+             Message Start
             <div class="media">
               <img src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
@@ -89,11 +89,11 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-             Message End 
+             Message End
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-             Message Start 
+             Message Start
             <div class="media">
               <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
@@ -105,7 +105,7 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-             Message End 
+             Message End
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
@@ -143,8 +143,8 @@
             class="fas fa-th-large"></i></a>
       </li>
     </ul>
-  </nav>    
-  
+  </nav>
+
    <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -159,10 +159,10 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library --> 
+               with font-awesome or any other icon font library -->
 			  <!-- Sidebar user panel (optional) -->
         <!-- INICIO DEL MENU  -->
-			  <!-- Sidebar Menu -->	 
+			  <!-- Sidebar Menu -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -170,7 +170,7 @@
                 COTIZACIONES
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>  
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ asset('cotizacion/index') }}" class="nav-link">
@@ -183,14 +183,14 @@
                   <i class="far nav-icon"></i>
                   <p>Calibraciones</p>
                 </a>
-              </li>    
+              </li>
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Capacitaciones</p>
                 </a>
-              </li>          
-            </ul> 
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -199,7 +199,7 @@
                 SERVICIOS EXTRAS
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>  
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
@@ -212,8 +212,8 @@
                   <i class="far nav-icon"></i>
                   <p>Servicio Academico</p>
                 </a>
-              </li>              
-            </ul> 
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -222,12 +222,13 @@
                 CAPACITACION
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>  
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <!-- actualizado por marck, usando ELOQUENT -->
+                <a href="{{ route('curso.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Curso</p>
+                  <p>Cursos</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -235,7 +236,7 @@
                   <i class="far nav-icon"></i>
                   <p>Instructor</p>
                 </a>
-              </li> 
+              </li>
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -253,8 +254,8 @@
                   <i class="far nav-icon"></i>
                   <p>Horario del Instructor</p>
                 </a>
-              </li>             
-            </ul> 
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -263,7 +264,7 @@
                 PERSONAL LAB.
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>  
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
@@ -276,14 +277,14 @@
                   <i class="far nav-icon"></i>
                   <p>Llenador de Datos</p>
                 </a>
-              </li> 
+              </li>
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Administrador</p>
                 </a>
-              </li>             
-            </ul> 
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -292,7 +293,7 @@
                 RECURSOS HUMANOS
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>	
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
@@ -305,8 +306,8 @@
                   <i class="far nav-icon"></i>
                   <p>Areas</p>
                 </a>
-              </li>              
-            </ul>	
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -322,7 +323,7 @@
                   <i class="far nav-icon"></i>
                   <p>Productos</p>
                 </a>
-              </li>                
+              </li>
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -346,7 +347,7 @@
                   <i class="far nav-icon"></i>
                   <p>Kardex de productos</p>
                 </a>
-              </li>              
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -363,7 +364,7 @@
                   <i class="far nav-icon"></i>
                   <p>Proveedores</p>
                 </a>
-              </li>                
+              </li>
               <li class="nav-item">
                 <a href="pages/examples/profile.html" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -386,7 +387,7 @@
                   <i class="far nav-icon"></i>
                   <p>Clientes</p>
                 </a>
-              </li>                
+              </li>
               <li class="nav-item">
                 <a href="pages/examples/login.html" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -398,13 +399,13 @@
                   <i class="far nav-icon"></i>
                   <p>Cotizacion</p>
                 </a>
-              </li> 
+              </li>
               <li class="nav-item">
                 <a href="pages/examples/login.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Orden de trabajo</p>
                 </a>
-              </li>              
+              </li>
               <li class="nav-item">
                 <a href="pages/examples/login.html" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -427,9 +428,9 @@
                   <i class="far nav-icon"></i>
                   <p>Comprobantes</p>
                 </a>
-              </li>                
+              </li>
             </ul>
-          </li>  
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -444,15 +445,15 @@
                   <i class="far nav-icon"></i>
                   <p>Centros de costo</p>
                 </a>
-              </li>                   
+              </li>
               <li class="nav-item">
                 <a href="pages/examples/login.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Balance general</p>
                 </a>
-              </li>              
+              </li>
             </ul>
-          </li>    
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -461,7 +462,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-          </li>            
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -476,18 +477,18 @@
                   <i class="far nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
-              </li>                
+              </li>
             </ul>
-          </li>            
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-  </aside>  
-  
+  </aside>
+
    @yield('content')
-   
+
   <!-- Main Footer -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2020 <a href="#">Catalogo</a>.</strong>
@@ -495,9 +496,9 @@
     <!--div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.4
     </div-->
-  </footer>  
-    
-</div>    
+  </footer>
+
+</div>
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -522,6 +523,6 @@
 <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
 
 <!-- PAGE SCRIPTS -->
-<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>    
+<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>
 </body>
 </html>

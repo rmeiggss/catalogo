@@ -12,7 +12,7 @@
           </div>
         </div>
       </div><!-- /.container-fluid -->
-    </section>    
+    </section>
     <!---->
     <section class="content">
         <div class="grid-hor">
@@ -28,9 +28,12 @@
                 <div class="form-group">
                 {!!Form::label('costo','Costo')!!}
                     {!!Form::text('costo',null,['class'=>'form-control','placeholder'=>'Ingrese el costo','id'=>'costo'])!!}
-                </div> 
-                {!!Form::submit('Grabar',['class'=>'btn btn-success'])!!}
+                </div>
+                {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
+                <!-- Agregar boton de cancelar -->
+                <a class="btn btn-danger" href="{{ route('curso.index') }}">Cancelar</a>
             {!!Form::close()!!}
+
         </div>
     </section>
 </div>

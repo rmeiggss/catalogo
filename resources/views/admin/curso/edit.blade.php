@@ -1,46 +1,54 @@
-@extends('layouts.admin')
+@extends('layouts.admin2')
 
 @section('content')
-<!--banner-->	
-<div class="banner">
-   <h2>
-        <a href="index.html">Libros</a>
-        <i class="fa fa-angle-right"></i>
-        <span>Listar</span>
-    </h2>
-</div>
-<!--//banner-->
 <!--grid-->
-<div class="grid-system">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Editar Curso</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
     <!---->
-    <div class="horz-grid">
+    <section class="content">
         <div class="grid-hor">
-            <h3 id="grid-example-basic">Editar Libro</h3></div>
-        <!----> 
-        <div class="grid-hor">
-            {!!Form::model($producto,['route'=>['producto.update',$producto],'method'=>'PUT','class'=>'col-sm-10'])!!}
+
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            {!!Form::open(
+                    ['route'=>['curso.update',$producto->id],
+                    'method'=>'PATCH',
+                    'class'=>'col-sm-10'
+            ])!!}
+
                 <div class="form-group">
-                    {!!Form::label('id','Codigo:')!!}
-                    {!!Form::text('id',null,['class'=>'form-control','placeholder'=>'Ingrese el codigo','id'=>'id'])!!}
+                    {!!Form::label('nombre','Nombre:')!!}
+                    {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Nuevo nombre ...','id'=>'nombre'])!!}
                 </div>
                 <div class="form-group">
-                    {!!Form::label('titulo','Titulo:')!!}
-                    {!!Form::text('titulo',null,['class'=>'form-control','placeholder'=>'Ingrese el titulo','id'=>'titulo'])!!}
+                    {!!Form::label('descripcion','Descripcion')!!}
+                    {!!Form::text('descripcion',null,['class'=>'form-control','placeholder'=>'Nueva descripcion ...','id'=>'descripcion'])!!}
                 </div>
                 <div class="form-group">
-                    {!!Form::label('precio','Precio')!!}
-                    {!!Form::text('precio',null,['class'=>'form-control','placeholder'=>'Ingrese el precio','id'=>'precio'])!!}
+                {!!Form::label('costo','Costo')!!}
+                    {!!Form::text('costo',null,['class'=>'form-control','placeholder'=>'Nuevo costo','id'=>'costo'])!!}
                 </div>
-                <div class="form-group">
-                    {!!Form::label('categoria','Categoria')!!}
-                    <select class="form-control" name='categoria' id="categoria">
-                        <option value="0">::Seleccione::</option>
-                        <option value="000001">Categ2</option>
-                    </select>
-                </div> 
-                {!!Form::submit('Grabar',['class'=>'btn btn-success'])!!}
+
+            {!!Form::submit('Editar',['class'=>'btn btn-success'])!!}
+            <a class="btn btn-danger" href="{{ route('curso.index') }}">Cancelar</a>
+
             {!!Form::close()!!}
         </div>
-    </div>
+    </section>
 </div>
 @endsection
