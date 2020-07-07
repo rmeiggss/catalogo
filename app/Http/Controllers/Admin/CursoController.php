@@ -5,12 +5,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Producto;
 use Redirect;
+use App\Http\Requests\SaveCursoRequest;
 
 class CursoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::all();
+        $productos = Producto::latest()->paginate(8);
         return view('admin.curso.index', compact('productos'));
     }
 
@@ -57,11 +58,14 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        $producto = Producto::find($id);
+        $producto = Producto::findOrFail($id);
+
         return view("admin.curso.edit",["producto"=>$producto]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -70,13 +74,36 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update($id, Request $request)
     {
+        /*$producto = Producto::findOrFail($id);
+        //$producto->update($request->all());
+        $this->validate($request, [
+            'CURSOC_Nombre' => 'required',
+            'CURSOC_Costo' => 'required',
+            'CURSOC_Descripcion' => 'required',
+        ]);
+        $input = $request->all();
+        $product->fill($input)->save();
+        return Redirect::to("/curso"); */
+
         $producto = Producto::find($id);
-        $producto->fill($request->all());
+        $producto->update($request->all());
         $producto->save();
+
         return Redirect::to("/curso");
+        //return redirect()->route('admin.curso.index', $producto);
     }
+
+    /*
+    public function update(Producto $producto, SaveCursoRequest $request)
+    {
+        $producto->update( $request->validated() );
+
+        return redirect()->route('admin.curso.index', $producto);
+    }
+    */
 
     /**
      * Remove the specified resource from storage.

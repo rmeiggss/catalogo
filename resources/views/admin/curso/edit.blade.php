@@ -17,14 +17,6 @@
     <section class="content">
         <div class="grid-hor">
 
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    @foreach($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                </div>
-            @endif
-
             {!!Form::open(
                     ['route'=>['curso.update',$producto->id],
                     'method'=>'PATCH',
