@@ -33,11 +33,14 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        Producto::create([
-            "CURSOC_Nombre"=>$_REQUEST["nombre"],
-            "CURSOC_Descripcion"=>$_REQUEST["descripcion"],
-            "CURSOC_Costo"=>$_REQUEST["costo"]
+        $request->validate([
+            'CURSOC_Nombre' => 'required',
+            'CURSOC_Costo' => 'required',
+            'CURSOC_Descripcion' => 'required',
         ]);
+
+        Producto::create($request->all());
+
         return redirect("/curso");
     }
 
@@ -63,47 +66,39 @@ class CursoController extends Controller
     {
         $producto = Producto::findOrFail($id);
 
-        return view("admin.curso.edit",["producto"=>$producto]);
+        return view("admin.curso.edit")->withProducto($producto);
     }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function update($id, Request $request)
+    /*
+    public function edit(Producto $producto)
     {
-        /*$producto = Producto::findOrFail($id);
-        //$producto->update($request->all());
-        $this->validate($request, [
+        return view("admin.curso.edit", ['producto' => $producto]);
+    }*/
+
+    public function update(Request $request, $id)
+    //public function update(Producto $producto)
+    {
+        /*
+        $request->validate([
             'CURSOC_Nombre' => 'required',
-            'CURSOC_Costo' => 'required',
             'CURSOC_Descripcion' => 'required',
+            'CURSOC_Costo' => 'required',
         ]);
-        $input = $request->all();
-        $product->fill($input)->save();
         return Redirect::to("/curso"); */
 
-        $producto = Producto::find($id);
+        $producto = Producto::findOrFail($id);
         $producto->update($request->all());
         $producto->save();
 
-        return Redirect::to("/curso");
-        //return redirect()->route('admin.curso.index', $producto);
-    }
+        return \Redirect::to("/curso");
 
-    /*
-    public function update(Producto $producto, SaveCursoRequest $request)
-    {
-        $producto->update( $request->validated() );
+        /*
+        $producto->CURSOC_Nombre = $request->CURSOC_Nombre;
+        $producto->CURSOC_Descripcion = $request->CURSOC_Descripcion;
+        $producto->CURSOC_Costo = $request->CURSOC_Costo;
+        $producto->save();
 
-        return redirect()->route('admin.curso.index', $producto);
+        return \Redirect::to("/curso");*/
     }
-    */
 
     /**
      * Remove the specified resource from storage.
