@@ -25,7 +25,7 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.instructor.create");
     }
 
     /**

@@ -68,6 +68,7 @@
                     <!-- -------------------- -->
                 </tbody>
               </table>
+              {{ $productos->links() }}
             </div>
             <!-- /.card-body -->
           </div>

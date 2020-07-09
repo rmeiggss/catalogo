@@ -1,7 +1,7 @@
 @extends('layouts.admin2')
 
 @section('content')
- 
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,14 +9,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Hola</h1>
+            <h1 class="m-0 text-dark"></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v2</li>
             </ol>
-              
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -24,9 +24,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
-                </div>              
-              
+                    <h5 class="m-auto text-success"><strong>You are logged in!</strong></h5>
+                </div>
+
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -100,17 +100,17 @@
         </div>
         <!-- /.row -->
 
-        
+
         <!-- /.row -->
 
         <!-- Main row -->
-        
+
         <!-- /.row -->
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
-  </div>  
-    
+  </div>
+
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->

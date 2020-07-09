@@ -1,130 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/css/bootstrap.css') }}">
-	<script src="{{ asset('js/js/jquery-3.3.1.min.js') }}"></script>
-	<script src="{{ asset('js/js/bootstrap.js') }}"></script>
-	<script>
-	$(document).ready(function() {
-  	$("#boton_modal").click(function() {
-    $('#mimodaltema').on('shown.bs.modal', function() {
-      $('#primero').focus();
-    })
-  	});
-	});
-	</script>
-	<title></title>
-</head>
-<body>
-<div class="container">
-<h1>Listado de Horarios para la Capacitacion en los Cursos</h1>
-<a href="{{ route('curso.index') }}">Ventana Principal</a>
-<hr>
-<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#mimodaltema" id="boton_modal">
-Nuevo Horario para la Capacitacion en los Cursos
-</button>
-<br>
-<br>
-<table class="table table-bordered">
-	<tr>
-		<th class="text-center">Identificador</th>
-		<th class="text-center">Nombre del Curso</th>
-		<th class="text-center">Semana del Mes Laborable</th>
-		<th class="text-center">Dia Laborable</th>
-		<th class="text-center">Hora Inicial</th>
-		<th class="text-center">Hora Final</th>
-		<th class="text-center">Acciones</th>
-	</tr>
-	<tr>
-		<td class="text-center">1</td>
-		<td class="text-center">Sistema de Puesta a Tierra</td>
-		<td class="text-center">Semana 1</td>
-		<td class="text-center">Martes</td>
-		<td class="text-center">19</td>
-		<td class="text-center">22</td>
-		<td class="text-center">
-			<a class="btn btn-warning btn-sm" href="">Editar</a>
-			<a class="btn btn-danger btn-sm" href="">Eliminar</a>
-		</td>
-	</tr>
-	<tr>
-		<td class="text-center">2</td>
-		<td class="text-center">Sistemas de Potencia</td>
-		<td class="text-center">Semana 2</td>
-		<td class="text-center">Viernes</td>
-		<td class="text-center">19</td>
-		<td class="text-center">22</td>
-		<td class="text-center">
-			<a class="btn btn-warning btn-sm" href="">Editar</a>
-			<a class="btn btn-danger btn-sm" href="">Eliminar</a>
-		</td>
-	</tr>
-</table>
+@extends('layouts.admin2')
+
+@section('content')
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Listado de Horarios para la Capacitacion en los Cursos</h1>
+          </div>
+          <div class="col-sm-6 text-right">
+            <!-- actualizado por marck, usando ELOQUENT -->
+            <a class="btn btn-info" href="{{ route('horario-curso.create') }}">Agregar Horario</a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main Content-->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th scope="col">Nombre del Curso</th>
+                  <th scope="col">Semana del Mes</th>
+                  <th scope="col">Dia Laborable</th>
+                  <th scope="col">Hora Inicial</th>
+                  <th scope="col">Hora Final</th>
+                  <th scope="col" colspan="2" class="text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+				<!-- Empieza listado de instructores -->
+					@forelse($horariocursos as $item=>$horariocurso)
+	                  <tr>
+	                    <!--actualizado por marck -->
+	                    <th scope="row">{{$item+1}}</th>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td><button class="btn btn-info">
+	                      <a class="text-light" href="{{ route('horario-curso.edit', $horariocurso->id) }}">
+	                        Editar
+	                      </a></button></td>
+	                    <td>
+	                      <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
+	                      {!!Form::open(['route'=>['horario-curso.destroy',$horariocurso->id],'method'=>'DELETE'])!!}
+	                          {{ csrf_field() }}
+	                          {{ method_field('DELETE') }}
+	                          {!!Form::submit('Eliminar',
+	                                ['class'=>'btn btn-danger'])
+	                          !!}
+	                      {!!Form::close()!!}
+	                     </td>
+	                  </tr>
+                  @empty
+                    <p><i>No se han encontrado elementos en la base de datos ...</i></p>
+                  @endforelse
+				<!-- Termina listado -->
+                </tbody>
+              </table>
+
+              {{ $horariocursos->links() }}
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+
 </div>
 
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="mimodaltema" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
-
-		<!-- formulario -->
-		<div class="container">
-		<h1 style="text-align: center">Agregar Mes Laborable</h1>
-		<hr>
-		<form class="form-horizontal form-control" style="width:400px;height:500px;margin:0 auto">
-		Semana del Mes Laborable:
-		<br>
-		<select class="form-control">
-  			<option value="volvo">Semana 1</option>
-  			<option value="saab">Semana 2</option>
-		</select>
-		<br>
-		Nombre del Dia Laborable:
-		<br>
-		<select class="form-control">
-  			<option value="volvo">Lunes</option>
-  			<option value="saab">Martes</option>
-		</select>
-		<br>
-		Nombre del Curso:
-		<br>
-		<select class="form-control">
-  			<option value="volvo">Circuitos Electricos</option>
-  			<option value="saab">Sistema de Potencia</option>
-		</select>
-		<br>
-		Hora Inicial:
-		<br>
-		<input class="form-control" type="text" name="" id="primero" />
-		<br>
-		Hora Final:
-		<br>
-		<input class="form-control" type="text" name="" id="primero" />
-		<br>
-		<input class="btn btn-primary btn-lg" type="submit" name="" value="Guardar" />
-		</form>
-		</div>
-		<!-- formulario -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-</body>
-</html>
+@endsection
