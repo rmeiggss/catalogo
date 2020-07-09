@@ -18,7 +18,7 @@
         <div class="grid-hor">
             {!!Form::open(['route'=>'curso.store','method'=>'POST','class'=>'col-sm-10'])!!}
                 <div class="form-group">
-                    {!!Form::label('nombre','Nombre:')!!}
+                    {!!Form::label('nombre','Nombre')!!}
                     {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'nombre'])!!}
                 </div>
                 <div class="form-group">
