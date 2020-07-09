@@ -47,14 +47,18 @@
                     <td>{{$prod->CURSOC_Nombre}}</td>
                     <td>{{$prod->CURSOC_Descripcion}}</td>
                     <td>{{$prod->CURSOC_Costo}}</td>
-                    <td><button class="btn btn-info"><a class="text-light" href="{{ route('curso.edit', $prod->id) }}">Editar</a></button></td>
-                    <!--td></td-->
+                    <td><button class="btn btn-info">
+                      <a class="text-light" href="{{ route('curso.edit', $prod->id) }}">
+                        Editar
+                      </a></button></td>
                     <td>
                       <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
                       {!!Form::open(['route'=>['curso.destroy',$prod->id],'method'=>'DELETE'])!!}
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
-                          {!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+                          {!!Form::submit('Eliminar',
+                                ['class'=>'btn btn-danger'])
+                          !!}
                       {!!Form::close()!!}
                      </td>
                   </tr>

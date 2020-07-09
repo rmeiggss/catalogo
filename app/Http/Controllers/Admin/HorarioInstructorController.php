@@ -1,11 +1,12 @@
 <?php
-namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use App\Producto;
-use Illuminate\Http\Request;
-use Redirect;
 
-class CursoController extends Controller
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\HorarioInstructor;
+use Illuminate\Http\Request;
+
+class HorarioInstructorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,9 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::latest()->paginate(8);
-        return view('admin.curso.index', compact('productos'));
+        $horarioinstructors = HorarioInstructor::latest()->paginate(8);
+
+        return view('admin.horario-instructor.index', compact('horarioinstructors'));
     }
 
     /**
@@ -25,7 +27,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view("admin.curso.create");
+        //
     }
 
     /**
@@ -36,25 +38,29 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        Producto::create([
-            'CURSOC_Nombre' => request('nombre'),
-            'CURSOC_Descripcion' => request('descripcion'),
-            'CURSOC_Costo' => request('costo'),
-        ]);
-
-        return Redirect::to("/curso");
+        //
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         //
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $producto = Producto::findOrFail($id);
-
-        return view("admin.curso.edit", ['producto' => $producto]);
+        //
     }
 
     /**
@@ -64,24 +70,19 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, $id)
     {
-        $producto = Producto::findOrFail($id);
-
-        $producto->CURSOC_Nombre = $request->nombre;
-        $producto->CURSOC_Descripcion = $request->descripcion;
-        $producto->CURSOC_Costo = $request->costo;
-
-        $producto->save();
-
-        return Redirect::to("/curso");
+        //
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        Producto::destroy($id);
-        return Redirect::to("/curso");
+        //
     }
 }

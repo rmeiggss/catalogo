@@ -232,25 +232,25 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{ route('instructor.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Instructor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{ route('horario-curso.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Horario del Curso</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{ route('descuento.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Descuentos del Curso</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{ route('horario-instructor.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Horario del Instructor</p>
                 </a>

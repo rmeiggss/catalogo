@@ -28,8 +28,19 @@ Route::get('reviews','FrontController@reviews');
 
 Route::post('usuario','UsuarioController@');
 
-Route::get('curso/index','Admin\CursoController@index');
+
+
+// -------- Rutas de marck --------------------
 Route::resource('curso','Admin\CursoController');
+
+Route::resource('instructor','Admin\InstructorController');
+
+Route::resource('horario-curso','Admin\HorarioCursoController');
+
+Route::resource('horario-instructor','Admin\HorarioInstructorController');
+
+Route::resource('descuento','Admin\DescuentoController');
+// --------------------------------------------
 
 Route::resource('categoria','Admin\CategoriaController');
 Route::resource('solicitante','Admin\solicitanteController');

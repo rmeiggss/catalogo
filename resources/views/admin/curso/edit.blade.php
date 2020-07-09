@@ -17,23 +17,19 @@
     <section class="content">
         <div class="grid-hor">
 
-            {!!Form::open(
-                    ['route'=>['curso.update',$producto->id],
-                    'method'=>'PATCH',
-                    'class'=>'col-sm-10'
-            ])!!}
+            {!!Form::model($producto, ['route'=>['curso.update', $producto->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
                 <div class="form-group">
-                    {!!Form::label('nombre','Nombre:')!!}
-                    {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Nuevo nombre ...','id'=>'nombre'])!!}
+                    {!!Form::label('nombre','Nombre')!!}
+                    {!!Form::text('nombre', $producto->CURSOC_Nombre,['class'=>'form-control','id'=>'nombre'])!!}
                 </div>
                 <div class="form-group">
                     {!!Form::label('descripcion','Descripcion')!!}
-                    {!!Form::text('descripcion',null,['class'=>'form-control','placeholder'=>'Nueva descripcion ...','id'=>'descripcion'])!!}
+                    {!!Form::textarea('descripcion', $producto->CURSOC_Descripcion,['class'=>'form-control','id'=>'descripcion'])!!}
                 </div>
                 <div class="form-group">
                 {!!Form::label('costo','Costo')!!}
-                    {!!Form::text('costo',null,['class'=>'form-control','placeholder'=>'Nuevo costo','id'=>'costo'])!!}
+                    {!!Form::text('costo', $producto->CURSOC_Costo,['class'=>'form-control','id'=>'costo'])!!}
                 </div>
 
             {!!Form::submit('Editar',['class'=>'btn btn-success'])!!}
