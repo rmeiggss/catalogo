@@ -170,22 +170,34 @@
                 COTIZACIONES
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>
+            </a>               
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ asset('cotizacion/index') }}" class="nav-link">
+                <a href="{{ asset('solicitante') }}" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Solicitante</p>
+                </a>
+              </li>  
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Contacto</p>
+                </a>
+              </li>  
+              <li class="nav-item">
+                <a href="{{ asset('cotizacion') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Ensayos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Calibraciones</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Capacitaciones</p>
                 </a>
@@ -286,7 +298,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <!--li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
@@ -462,7 +474,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-          </li>
+          </li-->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -473,7 +485,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/login.html" class="nav-link">
+                <a href="{{ asset('usuario') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Usuarios</p>
                 </a>

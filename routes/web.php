@@ -21,14 +21,14 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);
 
 Route::resource('movie','MovieController');*/
 
-//Route::get('/','UsuarioController@inicio');
+
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('contactenos','FrontController@contactenos');
 Route::get('reviews','FrontController@reviews');
-
-Route::post('usuario','UsuarioController@');
-
-
+Route::resource('usuario','Admin\UsuarioController');
+Route::resource('cotizacion', 'Admin\CotizacionController');
+Route::resource('categoria','Admin\CategoriaController');
+Route::resource('solicitante','Admin\SolicitanteController');
 
 // -------- Rutas de marck --------------------
 Route::resource('curso','Admin\CursoController');
@@ -42,18 +42,11 @@ Route::resource('horario-instructor','Admin\HorarioInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
 // --------------------------------------------
 
-Route::resource('categoria','Admin\CategoriaController');
-Route::resource('solicitante','Admin\solicitanteController');
-
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 
-Route::get('cotizacion/index','Admin\CotizacionController@index');
-Route::resource('cotizacion', 'Admin\CotizacionController');
+

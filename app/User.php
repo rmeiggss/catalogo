@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function roles(){
+   /* public function roles(){
         return $this->belongsToMany('App\Role');
     }
 
@@ -36,13 +36,16 @@ class User extends Authenticatable
         }
         return false;
     }
-
+    * 
     public function hasRole($role){
         if($this->roles()->where('name',$role)->first()){
             return true;
         }
         return false;
     }
+    
+*/
+
 
     /**
      * The attributes that are mass assignable.
@@ -50,7 +53,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','ROL_Codigo'
     ];
 
     /**

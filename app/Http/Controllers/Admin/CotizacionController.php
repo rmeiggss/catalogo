@@ -7,14 +7,8 @@ use Illuminate\Http\Request;
 
 class CotizacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function index()
     {
-
 
         /*if($request->user()->authorizeRoles(['admin'])){
             echo "hola";
@@ -42,7 +36,13 @@ class CotizacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*Cotizacion::create([
+            'CURSOC_Nombre' => request('nombre'),
+            'CURSOC_Descripcion' => request('descripcion'),
+            'CURSOC_Costo' => request('costo'),
+        ]);*/
+
+        return Redirect::to("/cotizacion");
     }
 
     /**
@@ -51,7 +51,7 @@ class CotizacionController extends Controller
      * @param  \App\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Cotizacion $cotizacion)
+    public function show($id)
     {
         //
     }
@@ -62,9 +62,10 @@ class CotizacionController extends Controller
      * @param  \App\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cotizacion $cotizacion)
+    public function edit($id)
     {
-        //
+        $cotizacion = Cotizacion::findOrFail($id);
+        return view("admin.cotizacion.edit", ['cotizacion' => $cotizacion]);
     }
 
     /**
@@ -74,9 +75,14 @@ class CotizacionController extends Controller
      * @param  \App\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cotizacion $cotizacion)
+    public function update(Request $request, $id)
     {
-        //
+        $cotizacion = Cotizacion::findOrFail($id);
+        $cotizacion->COTIC_Numero = $request->numero;
+        $cotizacion->COTIC_SubTotal = $request->subtotal;
+        $cotizacion->COTIC_Total = $request->total;
+        $cotizacion->save();
+        return Redirect::to("/cotizacion");
     }
 
     /**
@@ -85,8 +91,9 @@ class CotizacionController extends Controller
      * @param  \App\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cotizacion $cotizacion)
+    public function destroy($id)
     {
-        //
+        Cotizacion::destroy($id);
+        return Redirect::to("/cotizacion");
     }
 }

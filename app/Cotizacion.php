@@ -9,4 +9,6 @@ class Cotizacion extends Model
     protected $primaryKey = 'COTIP_Codigo';
     
     protected $table = 'cotizacion';
+    
+    
 }
