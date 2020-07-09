@@ -32,6 +32,7 @@ Route::get('curso/index','Admin\CursoController@index');
 Route::resource('curso','Admin\CursoController');
 
 Route::resource('categoria','Admin\CategoriaController');
+Route::resource('solicitante','Admin\solicitanteController');
 
 Auth::routes();
 

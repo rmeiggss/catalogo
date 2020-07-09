@@ -12,8 +12,16 @@ class CotizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        print("<pre>");
+        print_r($request->user());
+        print("</pre>");
+
+        if($request->user()->authorizeRoles(['admin'])){
+            echo "hola";
+        }
+
         $cotizaciones = Cotizacion::all();        
         return view('admin.cotizacion.index', compact('cotizaciones'));
     }
