@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Cursos</h1>
+            <h1>Listado de Usuarios</h1>
             <!--<h1>Listado de Cursos (Actualizado por edward)</h1>-->
           </div>
           <div class="col-sm-6 text-right">
             <!-- actualizado por marck, usando ELOQUENT -->
-            <a class="btn btn-info" href="{{ route('usuario.create') }}">Agregar Usuario</a>
+            <a class="btn btn-info" href="#">Agregar Usuario</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -46,9 +46,9 @@
                     <th scope="row">{{$item+1}}</th>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->ROL_Codigo}}</td>
+                    <td>{{$user->ROL_Descripcion}}</td>
                     <td><button class="btn btn-info">
-                      <a class="text-light" href="{{ route('usuario.edit', $user->id) }}">
+                      <a class="text-light" href="#">
                         Editar
                       </a></button></td>
                     <td>

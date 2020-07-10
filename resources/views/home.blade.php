@@ -5,14 +5,14 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <!--div class="content-header mt-0">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"></h1>
-          </div><!-- /.col -->
+            <h1 class="m-0 text-dark">yy</h1>
+          </div><!-- /.col>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!--ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v2</li>
             </ol>
@@ -24,18 +24,18 @@
                         </div>
                     @endif
 
-                    <h5 class="m-auto text-success"><strong>You are logged in!</strong></h5>
+                   
                 </div>
 
           </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+        <!--/div--><!-- /.row -->
+      <!--/div><!-- /.container-fluid -->
+    <!--/div-->
     <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
+      <div class="container-fluid pt-4">
         <!-- Info boxes -->
         <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
@@ -43,10 +43,10 @@
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
+                <span class="info-box-text">Ensayos</span>
                 <span class="info-box-number">
-                  10
-                  <small>%</small>
+                  150
+                  <small></small>
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -59,8 +59,8 @@
               <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Calibraciones</span>
+                <span class="info-box-number">30</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -76,8 +76,8 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-text">Capacitaciones</span>
+                <span class="info-box-number">24</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -89,8 +89,8 @@
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-text">Asesorias</span>
+                <span class="info-box-number">18</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -108,6 +108,7 @@
         <!-- /.row -->
       </div><!--/. container-fluid -->
     </section>
+     <h5 class="m-auto text-success text-center"><strong>Usted esta logueado</strong></h5>
     <!-- /.content -->
   </div>
 

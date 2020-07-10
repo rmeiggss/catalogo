@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class UsuarioController extends Controller
 {
     public function index(){
-        $usuarios = User::all();
+        //$usuarios = User::all();
+        $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get();
         return view('admin.usuario.index',compact('usuarios'));
     }
     
