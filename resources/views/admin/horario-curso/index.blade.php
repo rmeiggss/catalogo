@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Horarios para la Capacitacion en los Cursos</h1>
+            <h1>Horarios para Capacitacion de Cursos</h1>
           </div>
           <div class="col-sm-6 text-right">
             <!-- actualizado por marck, usando ELOQUENT -->
@@ -30,6 +30,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th scope="col">Codigo</th>
                   <th scope="col">Nombre del Curso</th>
                   <th scope="col">Semana del Mes</th>
                   <th scope="col">Dia Laborable</th>
@@ -39,20 +40,21 @@
                 </tr>
                 </thead>
                 <tbody>
-				<!-- Empieza listado de instructores -->
-					@forelse($horariocursos as $item=>$horariocurso)
+					        @forelse($horariocursos as $item=>$horariocurso)
 	                  <tr>
 	                    <!--actualizado por marck -->
 	                    <th scope="row">{{$item+1}}</th>
-	                    <td></td>
-	                    <td></td>
-	                    <td></td>
+	                    <td>{{$horariocurso->nombre_curso}}</td>
+                      <td>{{$horariocurso->semana_labor}}</td>
+                      <td>{{$horariocurso->dia_labor}}</td>
+                      <td>{{$horariocurso->hora_inicial}}</td>
+                      <td>{{$horariocurso->hora_final}}</td>
 	                    <td><button class="btn btn-info">
 	                      <a class="text-light" href="{{ route('horario-curso.edit', $horariocurso->id) }}">
 	                        Editar
 	                      </a></button></td>
 	                    <td>
-	                      <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
+	                      <!--- fijado por marck -->
 	                      {!!Form::open(['route'=>['horario-curso.destroy',$horariocurso->id],'method'=>'DELETE'])!!}
 	                          {{ csrf_field() }}
 	                          {{ method_field('DELETE') }}

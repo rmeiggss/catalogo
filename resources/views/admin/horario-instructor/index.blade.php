@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Horarios de Capacitacion del Instructor</h1>
+            <h1>Horarios de Capacitacion del Instructor</h1>
           </div>
           <div class="col-sm-6 text-right">
             <!-- actualizado por marck, usando ELOQUENT -->
@@ -31,11 +31,11 @@
                 <thead>
                 <tr>
                   <th scope="col">Código</th>
-                  <th scope="col">Día Laborable</th>
                   <th scope="col">Instructor</th>
+                  <th scope="col">Semana Laborable</th>
+                  <th scope="col">Día Laborable</th>
                   <th scope="col">Hora Inicial</th>
                   <th scope="col">Hora Final</th>
-                  <th scope="col">Semana Laborable</th>
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
                 </thead>
@@ -45,16 +45,18 @@
 	                  <tr>
 	                    <!--actualizado por marck -->
 	                    <th scope="row">{{$item+1}}</th>
-	                    <td></td>
-	                    <td></td>
-	                    <td></td>
+                      <td>{{$horarioinstructor->nombre_instructor}}</td>
+                      <td>{{$horarioinstructor->semana_labor}}</td>
+                      <td>{{$horarioinstructor->dia_labor}}</td>
+                      <td>{{$horarioinstructor->hora_inicial}}</td>
+                      <td>{{$horarioinstructor->hora_final}}</td>
 	                    <td><button class="btn btn-info btn-sm">
 	                      <a class="text-light" href="{{ route('horario-instructor.edit', $horarioinstructor->id) }}">
 	                        Editar
 	                      </a></button></td>
 	                    <td>
 	                      <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-	                      {!!Form::open(['route'=>['horarioinstructor.destroy',$horarioinstructor->id],'method'=>'DELETE'])!!}
+	                      {!!Form::open(['route'=>['horario-instructor.destroy',$horarioinstructor->id],'method'=>'DELETE'])!!}
 	                          {{ csrf_field() }}
 	                          {{ method_field('DELETE') }}
 	                          {!!Form::submit('Eliminar',

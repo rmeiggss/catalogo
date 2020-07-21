@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
 				<!-- Empieza listado de instructores -->
-					@forelse($instructors as $item=>$instructor)
+					        @forelse($instructors as $item=>$instructor)
 	                  <tr>
 	                    <!--actualizado por marck -->
 	                    <th scope="row">{{$item+1}}</th>

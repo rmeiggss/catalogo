@@ -15,6 +15,11 @@ class CreateDescuentosTable extends Migration
     {
         Schema::create('descuentos', function (Blueprint $table) {
             $table->id();
+            $table->text('nombre_curso');
+            $table->text('cantidad_min');
+            $table->text('cantidad_max');
+            $table->decimal('costo');
+            $table->decimal('descuento')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Descuentos por Curso</h1>
+            <h1>Descuentos por Curso</h1>
           </div>
           <div class="col-sm-6 text-right">
             <!-- actualizado por marck, usando ELOQUENT -->
@@ -30,23 +30,26 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th scope="col">Código</th>
                   <th scope="col">Nombre del Curso</th>
                   <th scope="col">Cantidad Mínima</th>
                   <th scope="col">Cantidad Máxima</th>
                   <th scope="col">Costo del Curso</th>
-                  <th scope="col">Porcentaje de Descuento</th>
+                  <th scope="col">Descuento (%) </th>
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
 				<!-- Empieza listado de instructores -->
-					@forelse($descuentos as $item=>$descuento)
+					        @forelse($descuentos as $item=>$descuento)
 	                  <tr>
 	                    <!--actualizado por marck -->
 	                    <th scope="row">{{$item+1}}</th>
-	                    <td></td>
-	                    <td></td>
-	                    <td></td>
+	                    <td>{{$descuento->nombre_curso}}</td>
+                      <td>{{$descuento->cantidad_min}}</td>
+                      <td>{{$descuento->cantidad_max}}</td>
+                      <td>{{$descuento->costo}}</td>
+                      <td>{{$descuento->descuento}}</td>
 	                    <td><button class="btn btn-info btn-sm">
 	                      <a class="text-light" href="{{ route('descuento.edit', $descuento->id) }}">
 	                        Editar

@@ -165,7 +165,7 @@
           <a href="#" class="d-block">Edward Figueroa</a>
         </div>
       </div>
-      
+
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -181,20 +181,20 @@
                 COTIZACIONES
                 <i class="fas fa-angle-left right"></i>
               </p>
-            </a>               
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Solicitante</p>
                 </a>
-              </li>  
+              </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Contacto</p>
                 </a>
-              </li>  
+              </li>
               <li class="nav-item">
                 <a href="{{ asset('cotizacion') }}" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -257,25 +257,25 @@
               <li class="nav-item">
                 <a href="{{ route('instructor.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Instructor</p>
+                  <p>Instructores</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('horario-curso.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Horario del Curso</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('descuento.index') }}" class="nav-link">
-                  <i class="far nav-icon"></i>
-                  <p>Descuentos del Curso</p>
+                  <p>Horario de Cursos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('horario-instructor.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Horario del Instructor</p>
+                  <p>Horario de Instructores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('descuento.index') }}" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Descuento de Cursos</p>
                 </a>
               </li>
             </ul>
