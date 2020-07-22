@@ -11,6 +11,7 @@ class CursoController extends Controller
     public function index()
     {
         $productos = Producto::latest()->paginate(8);
+
         return view('admin.curso.index', compact('productos'));
     }
 
@@ -30,6 +31,7 @@ class CursoController extends Controller
         ]);
 
         return Redirect::to("/curso");
+
     }
 
     public function show($id)
