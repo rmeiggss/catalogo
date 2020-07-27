@@ -15,6 +15,11 @@ class CreateHorarioInstructorsTable extends Migration
     {
         Schema::create('horario_instructors', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_instructor');
+            $table->string('semana_labor');
+            $table->string('dia_labor');
+            $table->integer('hora_inicial');
+            $table->integer('hora_final');
             $table->timestamps();
         });
     }

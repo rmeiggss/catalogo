@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     {!!Form::label('celular','Celular')!!}
-                    {!!Form::textarea('celular',null,['class'=>'form-control','placeholder'=>'Ingrese el celular ...','id'=>'celular'])!!}
+                    {!!Form::text('celular',null,['class'=>'form-control','placeholder'=>'Ingrese el celular ...','id'=>'celular'])!!}
                 </div>
                 <div class="form-group">
                 {!!Form::label('email','Email')!!}

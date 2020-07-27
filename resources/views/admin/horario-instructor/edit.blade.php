@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Horario del Curso</h1>
+            <h1>Editar Horario del Instructor</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -16,36 +16,38 @@
     <!---->
     <section class="content">
         <div class="grid-hor">
-            {!!Form::open(['route'=>'horario-curso.store','method'=>'POST','class'=>'col-sm-10'])!!}
+
+            {!!Form::model($horarioinstructor, ['route'=>['horario-instructor.update', $horarioinstructor->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
+
                 <div class="form-group">
                     {!!Form::label('nombre','Nombre del Curso')!!}
-                    {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Nombre del Curso ...','id'=>'nombre'])!!}
+                    {!!Form::text('nombre', $horarioinstructor->nombre_instructor,['class'=>'form-control','id'=>'nombre'])!!}
                 </div>
 
                 <div class="form-group">
                     {!!Form::label('semana','Semana del Mes')!!}
-                    {!!Form::text('semana',null,['class'=>'form-control','placeholder'=>'Semana del Mes ...','id'=>'semana'])!!}
+                    {!!Form::text('semana', $horarioinstructor->semana_labor,['class'=>'form-control','id'=>'semana'])!!}
                 </div>
 
                 <div class="form-group">
                 {!!Form::label('dia','Dia Laborable')!!}
-                    {!!Form::text('dia',null,['class'=>'form-control','placeholder'=>'Dia Laborable ...','id'=>'dia'])!!}
+                    {!!Form::text('dia', $horarioinstructor->dia_labor,['class'=>'form-control','id'=>'dia'])!!}
                 </div>
 
                 <div class="form-group">
                 {!!Form::label('hora_in','Hora Inicial')!!}
-                    {!!Form::text('hora_in',null,['class'=>'form-control','placeholder'=>'Hora Inicial ...','id'=>'hora_in'])!!}
+                    {!!Form::text('hora_in', $horarioinstructor->hora_inicial,['class'=>'form-control','id'=>'hora_in'])!!}
                 </div>
 
                 <div class="form-group">
                 {!!Form::label('hora_fi','Hora Final')!!}
-                    {!!Form::text('hora_fi',null,['class'=>'form-control','placeholder'=>'Hora Final ...','id'=>'hora_fi'])!!}
+                    {!!Form::text('hora_fi', $horarioinstructor->hora_final,['class'=>'form-control','id'=>'hora_fi'])!!}
                 </div>
-            {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
-                <!-- Agregar boton de cancelar -->
-                <a class="btn btn-danger" href="{{ route('horario-curso.index') }}">Cancelar</a>
-            {!!Form::close()!!}
 
+            {!!Form::submit('Editar',['class'=>'btn btn-success'])!!}
+            <a class="btn btn-danger" href="{{ route('horario-instructor.index') }}">Cancelar</a>
+
+            {!!Form::close()!!}
         </div>
     </section>
 </div>

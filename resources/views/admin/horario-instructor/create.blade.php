@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Horario del Curso</h1>
+            <h1>Nuevo Horario del Instructor</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -16,9 +16,9 @@
     <!---->
     <section class="content">
         <div class="grid-hor">
-            {!!Form::open(['route'=>'horario-curso.store','method'=>'POST','class'=>'col-sm-10'])!!}
+            {!!Form::open(['route'=>'horario-instructor.store','method'=>'POST','class'=>'col-sm-10'])!!}
                 <div class="form-group">
-                    {!!Form::label('nombre','Nombre del Curso')!!}
+                    {!!Form::label('nombre','Nombre del Instructor')!!}
                     {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Nombre del Curso ...','id'=>'nombre'])!!}
                 </div>
 
@@ -43,7 +43,7 @@
                 </div>
             {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
                 <!-- Agregar boton de cancelar -->
-                <a class="btn btn-danger" href="{{ route('horario-curso.index') }}">Cancelar</a>
+                <a class="btn btn-danger" href="{{ route('horario-instructor.index') }}">Cancelar</a>
             {!!Form::close()!!}
 
         </div>

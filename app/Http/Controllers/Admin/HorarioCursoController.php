@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\HorarioCurso;
 use Illuminate\Http\Request;
+use Redirect;
 
 class HorarioCursoController extends Controller
 {
@@ -26,7 +27,7 @@ class HorarioCursoController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.horario-curso.create");
     }
 
     /**
@@ -37,7 +38,15 @@ class HorarioCursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        HorarioCurso::create([
+            'nombre_curso' => request('nombre'),
+            'semana_labor' => request('semana'),
+            'dia_labor' => request('dia'),
+            'hora_inicial' => request('hora_in'),
+            'hora_final' => request('hora_fi'),
+        ]);
+
+        return Redirect::to("/horario-curso");
     }
 
     /**
@@ -59,7 +68,9 @@ class HorarioCursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $horariocurso = HorarioCurso::findOrFail($id);
+
+        return view("admin.horario-curso.edit", ['horariocurso' => $horariocurso]);
     }
 
     /**
@@ -71,7 +82,17 @@ class HorarioCursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $horariocurso = HorarioCurso::findOrFail($id);
+
+        $horariocurso->nombre_curso = $request->nombre;
+        $horariocurso->semana_labor = $request->semana;
+        $horariocurso->dia_labor = $request->dia;
+        $horariocurso->hora_inicial = $request->hora_in;
+        $horariocurso->hora_final = $request->hora_fi;
+
+        $horariocurso->save();
+
+        return Redirect::to("/horario-curso");
     }
 
     /**
@@ -82,6 +103,7 @@ class HorarioCursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        HorarioCurso::destroy($id);
+        return Redirect::to("/horario-curso");
     }
 }

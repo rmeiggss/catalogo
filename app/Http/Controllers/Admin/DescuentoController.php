@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Descuento;
 use Illuminate\Http\Request;
+use Redirect;
 
 class DescuentoController extends Controller
 {
@@ -26,7 +27,7 @@ class DescuentoController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.descuento.create");
     }
 
     /**
@@ -37,7 +38,15 @@ class DescuentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Descuento::create([
+            'nombre_curso' => request('nombre'),
+            'cantidad_min' => request('cant_min'),
+            'cantidad_max' => request('cant_max'),
+            'costo' => request('costo'),
+            'descuento' => request('descuento'),
+        ]);
+
+        return Redirect::to("/descuento");
     }
 
     /**
@@ -59,7 +68,9 @@ class DescuentoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $descuento = Descuento::findOrFail($id);
+
+        return view("admin.descuento.edit", ['descuento' => $descuento]);
     }
 
     /**
@@ -71,7 +82,17 @@ class DescuentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $descuento = Descuento::findOrFail($id);
+
+        $descuento->nombre_curso = $request->nombre;
+        $descuento->cantidad_min = $request->cant_min;
+        $descuento->cantidad_max = $request->cant_max;
+        $descuento->costo = $request->costo;
+        $descuento->descuento = $request->descuento;
+
+        $descuento->save();
+
+        return Redirect::to("/descuento");
     }
 
     /**
@@ -82,6 +103,7 @@ class DescuentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Descuento::destroy($id);
+        return Redirect::to("/descuento");
     }
 }
