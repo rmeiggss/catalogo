@@ -24,16 +24,16 @@
                 font-family:Arial, Helvetica, sans-serif;
                 padding-left: 15rem;
             }
-            
+
             ul, ol {
                 list-style:none;
             }
-            
+
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;;
+                padding:1rem 0.5rem;
             }
-            
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -54,16 +54,16 @@
                 z-index: 9999;
 
             }
-            
+
             .nav li:hover > ul {
                 display:block;
                 padding-top: 1rem;
             }
-            
+
             .nav li ul li {
                 position:relative;
             }
-            
+
             .nav li ul li ul {
                 right:-140px;
                 top:0px;
@@ -88,7 +88,7 @@
         <link rel="stylesheet" href="css/animate.css" />
         <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- et line icon --> 
+        <!-- et line icon -->
         <link rel="stylesheet" href="css/et-line-icons.css" />
         <!-- font-awesome icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -114,11 +114,11 @@
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     </head>
-    <body>   
+    <body>
         <!-- start header -->
         <header>
             <!-- start navigation -->
-            <!-- end navigation --> 
+            <!-- end navigation -->
         </header>
         <!-- end header -->
         <div class="row justify-content-center header" style="background-color: #d8980c47">
@@ -157,54 +157,54 @@
                 <ul class="nav">
                     <li><a href="">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.html">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.html">TRABAJADORES</a></li>
-                            <li><a href="imagenes.html">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.html">NUESTROS EQUIPOS</a></li>
+                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
+                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
                     <li><a href="">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.html">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.html">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.html">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.html">SERVICIO ACADEMICO</a></li>
+                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.html">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.html">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.html">VISITAS TÉCNICAS</a></li>
+                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.html">CLIENTES</a></li>
-                    <li><a href="ubicacion.html">UBICACION</a></li>
+                    <li><a href="clientes.blade.php">CLIENTES</a></li>
+                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
                     <li><a href="">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.html">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.html">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.html">CAPACITACIONES</a></li>
+                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
+                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
+                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="">INTRANET</a>
                         <ul>
-                            <li><a href="intranet_ensayos.html">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.html">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.html">INTRANET PARA CAPACITACIONES</a></li>
+                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
 
-        <div class="container" style="margin-top:40px;margin-bottom:40px;"> 
+
+        <div class="container" style="margin-top:40px;margin-bottom:40px;">
         <div class="row align-items-center">
                     <div class="col-12 col-lg-5 text-center md-margin-50px-bottom wow fadeInLeft">
                         <img src="http://placehold.it/900x650" alt="" class="width-100">
-                    </div> 
+                    </div>
                     <div class="col-12 col-lg-7 padding-six-lr md-padding-eight-lr text-center text-lg-left sm-padding-15px-lr wow fadeInRight last-paragraph-no-margin" data-wow-delay="0.2s">
                         <span class="text-deep-pink alt-font margin-10px-bottom md-no-margin-bottom d-inline-block text-medium">
                         Asesorias y servicios IN-HOUSE
@@ -218,11 +218,11 @@
                 </div>
         </div>
 
-        <div class="container" style="margin-top:40px;margin-bottom:40px;"> 
+        <div class="container" style="margin-top:40px;margin-bottom:40px;">
         <div class="row align-items-center">
                     <div class="col-12 col-lg-5 text-center md-margin-50px-bottom wow fadeInLeft">
                         <img src="http://placehold.it/900x650" alt="" class="width-100">
-                    </div> 
+                    </div>
                     <div class="col-12 col-lg-7 padding-six-lr md-padding-eight-lr text-center text-lg-left sm-padding-15px-lr wow fadeInRight last-paragraph-no-margin" data-wow-delay="0.2s">
                         <span class="text-deep-pink alt-font margin-10px-bottom md-no-margin-bottom d-inline-block text-medium">
                         Asesorias y servicios IN-HOUSE
@@ -243,11 +243,11 @@
                     <!-- start contact-form head -->
                     <div class="col-12 col-xl-5 col-md-12 text-center" >
                         <div class="text-small text-medium-gray alt-font text-uppercase margin-5px-bottom">Comuniquese con Nosotros</div>
-                        
+
 <h5 class="text-white-2 font-weight-600" style="width:100%;font-weight: 50;font-size: 20px;line-height: 31px;margin: 5px 5px 20px auto;">
 Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualquier duda sobre las asesorias in house que realizamos en el Laboratorio
 </h5>
-                        
+
                     </div>
                     <!-- end contact-form head -->
                 </div>
@@ -269,7 +269,7 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
                         <div class="col-12 col-lg-6">
                             <input type="text" name="email" id="email" placeholder="Celular del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
-                        
+
                         <div class="col-12 col-lg-6">
                             <div class="select-style medium-select border-color-medium-dark-gray">
                                 <select name="budget" id="budget" class="bg-transparent mb-0">
@@ -291,9 +291,9 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
                 <!-- end contact-form -->
             </div>
         </section>
-        
 
-        <footer class="footer-standard-dark bg-extra-dark-gray"> 
+
+        <footer class="footer-standard-dark bg-extra-dark-gray">
             <div class="footer-widget-area padding-five-tb sm-padding-30px-tb">
                 <div class="container-fluid">
                     <div class="row">
@@ -327,7 +327,7 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">Lunes a Viernes de 8am a 4pm</li> <br>
                                 <li style="text-align: center;text-decoration: underline;">Correo Electrónico para hacer cualquier consulta:</li>
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">labl1fiee@uni.edu.pe</li>
-                            </ul>    
+                            </ul>
                         </div>
                         <!-- end contact information -->
                         <!-- start instagram -->
@@ -345,13 +345,13 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
                         <div class="col-md-8 text-md-left text-small text-center">
                             &copy;2020 FACULTAD DE INGENIERIA ELECTRICA Y ELECTRONICA UNI. TODOS LOS DERECHOS RESERVADOS.
                         </div>
-                        
+
                         <!-- end copyright -->
                     </div>
                 </div>
             </div>
         </footer>
-        <!-- end footer --> 
+        <!-- end footer -->
         <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
@@ -390,7 +390,7 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
         <!-- fit video  -->
         <script type="text/javascript" src="js/jquery.fitvids.js"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script> 
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
         <!-- justified gallery  -->
         <script type="text/javascript" src="js/justified-gallery.min.js"></script>
         <!--pie chart-->

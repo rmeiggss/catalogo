@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="css/animate.css" />
         <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- et line icon --> 
+        <!-- et line icon -->
         <link rel="stylesheet" href="css/et-line-icons.css" />
         <!-- font-awesome icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -47,7 +47,7 @@
             width:  85px;
             border-radius:  100%;
             background-color: #AD005E;
-        } 
+        }
         .btn-dec{
                 margin-left: 270px;
                 margin-top: 110px;
@@ -64,7 +64,7 @@
                 background-color: #F1FFCC !important;
                 border-style: solid;
                 border-width: 2px  !important;
-                border-color: rgb(107, 0, 0); 
+                border-color: rgb(107, 0, 0);
                 border-radius: 10px;
                 font-weight: bold;
             }
@@ -77,16 +77,16 @@
                 font-family:Arial, Helvetica, sans-serif;
                 padding-left: 15rem;
             }
-            
+
             ul, ol {
                 list-style:none;
             }
-            
+
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;;
+                padding:1rem 0.5rem;
             }
-            
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -107,16 +107,16 @@
                 z-index: 9999;
 
             }
-            
+
             .nav li:hover > ul {
                 display:block;
                 padding-top: 1rem;
             }
-            
+
             .nav li ul li {
                 position:relative;
             }
-            
+
             .nav li ul li ul {
                 right:-140px;
                 top:0px;
@@ -130,7 +130,7 @@
         <!-- start header -->
         <header>
             <!-- start navigation -->
-            <!-- end navigation -->  
+            <!-- end navigation -->
         </header>
         <div class="row justify-content-center header" style="background-color: #d8980c47">
             <div class="col-lg-3 col-md-4 col-12 d-none d-lg-flex align-items-center">
@@ -168,49 +168,49 @@
                 <ul class="nav">
                     <li><a href="">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.html">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.html">TRABAJADORES</a></li>
-                            <li><a href="imagenes.html">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.html">NUESTROS EQUIPOS</a></li>
+                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
+                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
                     <li><a href="">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.html">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.html">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.html">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.html">SERVICIO ACADEMICO</a></li>
+                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.html">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.html">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.html">VISITAS TÉCNICAS</a></li>
+                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.html">CLIENTES</a></li>
-                    <li><a href="ubicacion.html">UBICACION</a></li>
+                    <li><a href="clientes.blade.php">CLIENTES</a></li>
+                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
                     <li><a href="">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.html">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.html">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.html">CAPACITACIONES</a></li>
+                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
+                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
+                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="">INTRANET</a>
                         <ul>
-                            <li><a href="intranet_ensayos.html">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.html">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.html">INTRANET PARA CAPACITACIONES</a></li>
+                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
-        
+
+
         <section id="services" class="bg-light-gray wow fadeIn" style="background-color: #F1FFCC;" >
             <div class="container">
                 <div class="row justify-content-center">
@@ -218,16 +218,16 @@
                         <h5 class="font-weight-700 text-extra-dark-gray text-uppercase margin-5px-bottom" style="font-size: 40px; line-height: 3.5rem">Principales Servicios que Brindamos en el Laboratorio N°6 de Electricidad <br> <br> <div style="font-size: 60px">FIEE-UNI</div>  </h5>
                         <p class="mb-0">
                         </p>
-                    </div>  
+                    </div>
                 </div>
 
                 <!-- Menu de Servicios 1 -->
-                <div class="row align-self-stretch">    
+                <div class="row align-self-stretch">
                     <div class="col-12 col-lg-3 col-md-6 md-margin-four-bottom sm-margin-eight-bottom wow fadeInUp last-paragraph-no-margin">
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/1.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -247,13 +247,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/16.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayos eléctricos a todo tipo de materiales eléctricos    
+                            Ensayos eléctricos a todo tipo de materiales eléctricos
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Por ejemplo: canaletas, cemento conductivo, electrodos, escaleras, manguera antiestática, manta dieléctrica, pértiga telescópica, etc.
@@ -267,13 +267,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/2.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Pruebas a transformadores    
+                            Pruebas a transformadores
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Ya sean de medida o distribución, monofásicos o trifásicos; contamos con todos los equipos necesarios.
@@ -287,13 +287,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/3.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayos dieléctricos a aceite de transformadores, resinas y solventes.    
+                            Ensayos dieléctricos a aceite de transformadores, resinas y solventes.
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Realizada con nuestro moderno espinterómetro y en base en la Norma Técnica ASTM D877 / D877M-13.
@@ -304,21 +304,21 @@
                 </div>
 
                     <!-- Menu de Servicios 2 -->
-                    <div class="row">    
+                    <div class="row">
                     <div class="col-12 col-lg-3 col-md-6 md-margin-four-bottom sm-margin-eight-bottom wow fadeInUp last-paragraph-no-margin">
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/4.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Pruebas de medición a sistema de puesta a tierra    
+                            Pruebas de medición a sistema de puesta a tierra
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
-                            Realizamos mantenimiento de SPAT el cual incluye un protocolo de prueba con garantía de 1 año. 
+                            Realizamos mantenimiento de SPAT el cual incluye un protocolo de prueba con garantía de 1 año.
                             </p>
                             <div class="feature-box-overlay bg-deep-pink"></div>
                         </div>
@@ -329,13 +329,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/5.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayos a brazos hidráulicos y canastillas    
+                            Ensayos a brazos hidráulicos y canastillas
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Basados en la Norma Técnica ANSI-SAIA A92.2 para dispositivos de elevación y rotación montados en vehículos.
@@ -349,13 +349,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/6.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Pruebas eléctricas a equipos de protección personal  
+                            Pruebas eléctricas a equipos de protección personal
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Contamos con el material y equipo necesario para probar guantes de trabajo, cascos de seguridad, zapatos dieléctricos, arnés y línea de vida.
@@ -369,13 +369,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/7.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayo a armarios, tableros y gabinetes eléctricos de BT y MT.    
+                            Ensayo a armarios, tableros y gabinetes eléctricos de BT y MT.
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Consiste en el control dimensional y las pruebas de impacto y hermeticidad, IK e IP respectivamente.
@@ -387,12 +387,12 @@
 
 
                     <!-- Menu de Servicios 3 -->
-                    <div class="row">    
+                    <div class="row">
                     <div class="col-12 col-lg-3 col-md-6 md-margin-four-bottom sm-margin-eight-bottom wow fadeInUp last-paragraph-no-margin">
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/8.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -412,13 +412,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/9.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayo a luminarias y lámparas LED    
+                            Ensayo a luminarias y lámparas LED
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Nuestro laboratorio cuenta con una sala especialmente implementada para medir la iluminancia (lux) y flujo luminoso (lm).
@@ -432,7 +432,7 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/10.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -452,13 +452,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/2.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Calificación energética a calentadores    
+                            Calificación energética a calentadores
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Nuestro moderno laboratorio de Eficiencia energética, único en el país, nos permite evaluar calentadores de uso doméstico.
@@ -470,12 +470,12 @@
 
 
                     <!-- Menu de Servicios 4 -->
-                    <div class="row">    
+                    <div class="row">
                     <div class="col-12 col-lg-3 col-md-6 md-margin-four-bottom sm-margin-eight-bottom wow fadeInUp last-paragraph-no-margin">
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/11.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -495,7 +495,7 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/12.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -515,13 +515,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/13.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Prueba a medidores de energía eléctrica    
+                            Prueba a medidores de energía eléctrica
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Para medidores electrónicos y analógicos. Los requisitos se basan en la norma técnica IEC 62052-11 y 62053-24.
@@ -535,13 +535,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/14.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayo de interruptores de diferentes tipos    
+                            Ensayo de interruptores de diferentes tipos
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Consiste en el examinar grado de protección IK e IP. Así como el funcionamiento a condición nominal.
@@ -550,14 +550,14 @@
                         </div>
                     </div>
                     </div>
-                    
+
                     <!-- Menu de Servicios 5 -->
-                    <div class="row">    
+                    <div class="row">
                     <div class="col-12 col-lg-3 col-md-6 md-margin-four-bottom sm-margin-eight-bottom wow fadeInUp last-paragraph-no-margin">
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/19.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -577,7 +577,7 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/18.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
@@ -597,13 +597,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom sm-margin-10px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/17.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Prueba a pértiga telescópica    
+                            Prueba a pértiga telescópica
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             Además de medir la resistencia del aislamiento, hacemos la prueba de tensión aplicada a frecuencia industrial 60Hz.
@@ -617,13 +617,13 @@
                         <div style="height:25rem;" class="bg-white box-shadow-light text-center padding-eighteen-tb feature-box-8 position-relative z-index-5">
                             <div class="d-inline-block margin-20px-bottom">
                                 <div class="icon-ser">
-                                    <center>      
+                                    <center>
                                         <img src="images/servicios/20.png" width="60%" style="padding:1rem 0 " alt="">
                                     </center>
                                 </div>
                             </div>
                             <div class="alt-font text-extra-dark-gray font-weight-600 margin-10px-bottom">
-                            Ensayo a semáforo peatonal led animado    
+                            Ensayo a semáforo peatonal led animado
                             </div>
                             <p class="width-75 lg-width-90 mx-auto" style="text-align:justify;">
                             A estos equipos les realizamos pruebas contra impactos y verificación de hermeticidad, según su grado de protección.
@@ -636,41 +636,41 @@
 
             </div>
         </section>
-        
+
 
         <section class="parallax wow fadeIn" data-stellar-background-ratio="0.4" style="background-color:#5F0000;" >
 
-        
+
             <div class="container">
                 <div class="row">
                     <!-- start feature box item -->
                     <div class="col-12 col-lg-4 last-paragraph-no-margin md-margin-30px-bottom wow fadeInRight">
                         <div class="padding-50px-all lg-padding-40px-all sm-padding-30px-all bg-white box-shadow text-center" style="height: 650px;">
                             <div class="d-inline-block rounded-circle margin-40px-bottom sm-margin-30px-bottom bg-light-gray"><img src="images/Segundo/3.jpg" style="height: 345px;" alt=""/></div>
-                        
+
                             <span class="alt-font text-extra-dark-gray font-weight-600 d-block margin-20px-bottom">PRUEBA DE RESISTENCIA ELÉCTRICA</span>
                             <p>Empleando un Micro Ohmímetro Digital MEGGER DLRO 200.</p>
-                        </div>                    
+                        </div>
                     </div>
                     <!-- end feature box block -->
                     <!-- start feature box item -->
                     <div class="col-12 col-lg-4 last-paragraph-no-margin md-margin-30px-bottom wow fadeInRight" data-wow-delay="0.2s">
                         <div class="padding-50px-all lg-padding-40px-all sm-padding-30px-all bg-white box-shadow text-center" style="height: 650px;">
                             <div class=" d-inline-block rounded-circle margin-40px-bottom sm-margin-30px-bottom bg-light-gray"><img src="images/Segundo/2.jpg" alt=""/></div>
-                            
+
                             <span class="alt-font text-extra-dark-gray font-weight-600 d-block margin-20px-bottom">MEDICIÓN DE LA RESISTENCIA DE AISLAMIENTO</span>
                             <p>Con el conductor sumergido en agua, utilizamos un Insulation tester MEGGER MIT 1025 para aplicar 1kV durante 1minutos, en el caso de conductores de BT..</p>
-                        </div>                    
+                        </div>
                     </div>
                     <!-- end feature box block -->
                     <!-- start feature box item -->
                     <div class="col-12 col-lg-4 last-paragraph-no-margin wow fadeInRight" data-wow-delay="0.4s">
                         <div class="padding-50px-all lg-padding-40px-all sm-padding-30px-all bg-white box-shadow text-center" style="height: 650px;">
                             <div class="d-inline-block rounded-circle margin-40px-bottom sm-margin-30px-bottom bg-light-gray"><img src="images/Segundo/1.jpg" alt=""/></div>
-                            
+
                             <span class="alt-font text-extra-dark-gray font-weight-600 d-block margin-20px-bottom">TENSIÓN APLICADA</span>
                             <p>Utilizando una fuente AC y manteniendo el conductor sumergido en agua, aplicamos tensión durante el tiempo que indica la norma (por ejemplo, 4kV durante 5min en caso de conductores de MT)</p>
-                        </div>                    
+                        </div>
                     </div>
                     <!-- end feature box block -->
                 </div>
@@ -694,7 +694,7 @@
                                 <li class="grid-sizer"></li>
                                 <!-- start portfolio item -->
                                 <li class="grid-item web advertising wow zoomIn">
-                                    
+
                                         <figure>
                                             <div class="portfolio-img"><img src="images/Segundo/1g.jpg" alt=""/></div>
                                             <figcaption>
@@ -713,12 +713,12 @@
                                                 </div>
                                             </figcaption>
                                         </figure>
-                                    
+
                                 </li>
                                 <!-- end portfolio item -->
                                 <!-- start portfolio-item item -->
                                 <li class="grid-item branding grid-item-double wow zoomIn" data-wow-delay="0.2s">
-                                    
+
                                         <figure>
                                             <div class="portfolio-img"><img src="images/Segundo/5g2.jpg" alt=""/></div>
                                             <figcaption>
@@ -736,12 +736,12 @@
                                                 </div>
                                             </figcaption>
                                         </figure>
-                                    
+
                                 </li>
                                 <!-- end portfolio item -->
                                 <!-- start portfolio item -->
                                 <li class="grid-item web design wow zoomIn" data-wow-delay="0.4s">
-                                    
+
                                         <figure>
                                             <div class="portfolio-img"><img src="images/Segundo/3g.jpg" alt=""/></div>
                                             <figcaption>
@@ -760,12 +760,12 @@
                                                 </div>
                                             </figcaption>
                                         </figure>
-                                    
+
                                 </li>
                                 <!-- end portfolio item -->
                                 <!-- start portfolio item -->
                                 <li class="grid-item advertising photography wow zoomIn">
-                                    
+
                                         <figure>
                                             <div class="portfolio-img"><img src="images/Segundo/4g.jpg" alt=""/></div>
                                             <figcaption>
@@ -783,7 +783,7 @@
                                                 </div>
                                             </figcaption>
                                         </figure>
-                                    
+
                                 </li>
                                 <!-- end portfolio item -->
                                 <!-- start portfolio item -->
@@ -791,7 +791,7 @@
                                 <!-- end portfolio item -->
                                 <!-- start portfolio item -->
                                 <li class="grid-item web design wow zoomIn" data-wow-delay="0.2s">
-                                    
+
                                         <figure>
                                             <div class="portfolio-img"><img src="images/Segundo/2g.jpg" alt=""/></div>
                                             <figcaption>
@@ -810,7 +810,7 @@
                                                 </div>
                                             </figcaption>
                                         </figure>
-                                    
+
                                 </li>
                                 <!-- end portfolio item -->
                                 <!-- start portfolio item -->
@@ -824,20 +824,20 @@
             <!-- end filter content -->
 
         <div class="row">
-        
+
                             <div class="">
                                 <a href="#" type="button" class="btn btn-dec" target="blank">
                                     Boton para Cotizaciones de Ensayos y Calibraciones
                                 </a>
                             </div>
-        
-                        </div>    
-         
+
+                        </div>
+
         </section>
 
-                    
 
-        <footer class="footer-standard-dark bg-extra-dark-gray"> 
+
+        <footer class="footer-standard-dark bg-extra-dark-gray">
             <div class="footer-widget-area padding-five-tb sm-padding-30px-tb">
                 <div class="container-fluid">
                     <div class="row">
@@ -871,7 +871,7 @@
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">Lunes a Viernes de 8am a 4pm</li> <br>
                                 <li style="text-align: center;text-decoration: underline;">Correo Electrónico para hacer cualquier consulta:</li>
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">labl1fiee@uni.edu.pe</li>
-                            </ul>    
+                            </ul>
                         </div>
                         <!-- end contact information -->
                         <!-- start instagram -->
@@ -889,13 +889,13 @@
                         <div class="col-md-8 text-md-left text-small text-center">
                             &copy;2020 FACULTAD DE INGENIERIA ELECTRICA Y ELECTRONICA UNI. TODOS LOS DERECHOS RESERVADOS.
                         </div>
-                        
+
                         <!-- end copyright -->
                     </div>
                 </div>
             </div>
         </footer>
-        
+
 
 
         <!-- start scroll to top -->
@@ -936,7 +936,7 @@
         <!-- fit video  -->
         <script type="text/javascript" src="js/jquery.fitvids.js"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script> 
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
         <!-- justified gallery  -->
         <script type="text/javascript" src="js/justified-gallery.min.js"></script>
         <!--pie chart-->

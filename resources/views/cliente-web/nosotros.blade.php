@@ -22,16 +22,16 @@
                 font-family:Arial, Helvetica, sans-serif;
                 padding-left: 15rem;
             }
-            
+
             ul, ol {
                 list-style:none;
             }
-            
+
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;;
+                padding:1rem 0.5rem;
             }
-            
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -52,16 +52,16 @@
                 z-index: 9999;
 
             }
-            
+
             .nav li:hover > ul {
                 display:block;
                 padding-top: 1rem;
             }
-            
+
             .nav li ul li {
                 position:relative;
             }
-            
+
             .nav li ul li ul {
                 right:-140px;
                 top:0px;
@@ -86,7 +86,7 @@
         <link rel="stylesheet" href="css/animate.css" />
         <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- et line icon --> 
+        <!-- et line icon -->
         <link rel="stylesheet" href="css/et-line-icons.css" />
         <!-- font-awesome icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -112,11 +112,11 @@
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     </head>
-    <body>   
+    <body>
         <!-- start header -->
         <header>
             <!-- start navigation -->
-            <!-- end navigation --> 
+            <!-- end navigation -->
         </header>
         <!-- end header -->
         <div class="row justify-content-center header" style="background-color: #d8980c47">
@@ -155,50 +155,50 @@
                 <ul class="nav">
                     <li><a href="">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.html">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.html">TRABAJADORES</a></li>
-                            <li><a href="imagenes.html">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.html">NUESTROS EQUIPOS</a></li>
+                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
+                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
                     <li><a href="">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.html">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.html">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.html">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.html">SERVICIO ACADEMICO</a></li>
+                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.html">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.html">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.html">VISITAS TÉCNICAS</a></li>
+                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.html">CLIENTES</a></li>
-                    <li><a href="ubicacion.html">UBICACION</a></li>
+                    <li><a href="clientes.blade.php">CLIENTES</a></li>
+                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
                     <li><a href="">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.html">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.html">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.html">CAPACITACIONES</a></li>
+                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
+                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
+                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="">INTRANET</a>
                         <ul>
-                            <li><a href="intranet_ensayos.html">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.html">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.html">INTRANET PARA CAPACITACIONES</a></li>
+                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
 
-        
+
+
         <!-- start page title section -->
         <section class="wow fadeIn bg-light-gray padding-35px-tb page-title-small top-space" style="background-color: rgb(241, 255, 204);" >
             <div class="container">
@@ -228,7 +228,7 @@
                         </p>
 
                         <p class="width-95 lg-width-100" style="text-align: justify;font-size: 0.8rem;">
-                        Apoyar en la formación académica y de investigación a los estudiantes en el área de electricidad en aquellas materias que requieran de estos conocimientos para su desarrollo profesional, teniendo como premisa fundamental la observancia de los principios institucionales y contando dentro de su personal con profesionales comprometidos con la labor académica y creadora de la docencia. 
+                        Apoyar en la formación académica y de investigación a los estudiantes en el área de electricidad en aquellas materias que requieran de estos conocimientos para su desarrollo profesional, teniendo como premisa fundamental la observancia de los principios institucionales y contando dentro de su personal con profesionales comprometidos con la labor académica y creadora de la docencia.
                         </p>
 
                         <p class="width-95 lg-width-100" style="text-align: justify;font-size: 0.8rem;">
@@ -267,17 +267,17 @@
                                 </p>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </section>
-        
+
 
         <section class="extra-big-section parallax wow fadeIn" data-stellar-background-ratio="0.5" style="background-color: #6B0000;">
-            <div class="opacity-full-dark "></div>           
+            <div class="opacity-full-dark "></div>
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-lg-7 col-md-11 text-center">                        
+                    <div class="col-12 col-lg-7 col-md-11 text-center">
                         <div class="alt-font text-medium-gray text-uppercase text-small margin-20px-bottom" style="font-size: 40px;">Nuestra Historia</div>
                         <br>
                         <br>
@@ -289,16 +289,16 @@
                             <div class="col-12">
                                 <a href="www.sistemasuni.edu.pe" type="button" class="btn btn-dec btn-block" target="blank">Descargar Brochure del Laboratorio</a>
                             </div>
-                        </div>                   
+                        </div>
 
-                        
-                        
-                    </div>                    
+
+
+                    </div>
                 </div>
             </div>
         </section>
 
-        <footer class="footer-standard-dark bg-extra-dark-gray"> 
+        <footer class="footer-standard-dark bg-extra-dark-gray">
             <div class="footer-widget-area padding-five-tb sm-padding-30px-tb">
                 <div class="container-fluid">
                     <div class="row">
@@ -332,7 +332,7 @@
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">Lunes a Viernes de 8am a 4pm</li> <br>
                                 <li style="text-align: center;text-decoration: underline;">Correo Electrónico para hacer cualquier consulta:</li>
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">labl1fiee@uni.edu.pe</li>
-                            </ul>    
+                            </ul>
                         </div>
                         <!-- end contact information -->
                         <!-- start instagram -->
@@ -350,13 +350,13 @@
                         <div class="col-md-8 text-md-left text-small text-center">
                             &copy;2020 FACULTAD DE INGENIERIA ELECTRICA Y ELECTRONICA UNI. TODOS LOS DERECHOS RESERVADOS.
                         </div>
-                        
+
                         <!-- end copyright -->
                     </div>
                 </div>
             </div>
         </footer>
-        <!-- end footer --> 
+        <!-- end footer -->
         <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
@@ -395,7 +395,7 @@
         <!-- fit video  -->
         <script type="text/javascript" src="js/jquery.fitvids.js"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script> 
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
         <!-- justified gallery  -->
         <script type="text/javascript" src="js/justified-gallery.min.js"></script>
         <!--pie chart-->

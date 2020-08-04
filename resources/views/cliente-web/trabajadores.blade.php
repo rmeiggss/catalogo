@@ -11,16 +11,16 @@
                 font-family:Arial, Helvetica, sans-serif;
                 padding-left: 15rem;
             }
-            
+
             ul, ol {
                 list-style:none;
             }
-            
+
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;;
+                padding:1rem 0.5rem;
             }
-            
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -41,16 +41,16 @@
                 z-index: 9999;
 
             }
-            
+
             .nav li:hover > ul {
                 display:block;
                 padding-top: 1rem;
             }
-            
+
             .nav li ul li {
                 position:relative;
             }
-            
+
             .nav li ul li ul {
                 right:-140px;
                 top:0px;
@@ -75,7 +75,7 @@
         <link rel="stylesheet" href="css/animate.css" />
         <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- et line icon --> 
+        <!-- et line icon -->
         <link rel="stylesheet" href="css/et-line-icons.css" />
         <!-- font-awesome icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -105,8 +105,8 @@
         <!-- start header -->
         <header>
 
-            
-            
+
+
         </header>
         <div class="row justify-content-center header" style="background-color: #d8980c47">
             <div class="col-lg-3 col-md-4 col-12 d-none d-lg-flex align-items-center">
@@ -144,48 +144,48 @@
                 <ul class="nav">
                     <li><a href="">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.html">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.html">TRABAJADORES</a></li>
-                            <li><a href="imagenes.html">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.html">NUESTROS EQUIPOS</a></li>
+                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
+                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
                     <li><a href="">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.html">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.html">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.html">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.html">SERVICIO ACADEMICO</a></li>
+                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.html">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.html">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.html">VISITAS TÉCNICAS</a></li>
+                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.html">CLIENTES</a></li>
-                    <li><a href="ubicacion.html">UBICACION</a></li>
+                    <li><a href="clientes.blade.php">CLIENTES</a></li>
+                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
                     <li><a href="">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.html">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.html">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.html">CAPACITACIONES</a></li>
+                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
+                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
+                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="">INTRANET</a>
                         <ul>
-                            <li><a href="intranet_ensayos.html">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.html">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.html">INTRANET PARA CAPACITACIONES</a></li>
+                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
+
 
         <section style="background-color:rgb(241, 255, 204);padding: 3rem 0 !important; " class="p-0 bg-light-gray wow fadeIn">
             <div class="container " style="padding: 3rem 0">
@@ -194,7 +194,7 @@
                         <img src="images/cuarto/bautista.jpg" style="    height: 440px;margin-bottom: 5px;" alt="">
                     </div>
                     <div class="col-12 col-lg-5 col-md-10 text-center text-lg-left offset-lg-1 mx-auto mr-lg-0 lg-padding-50px-tb">
-                        
+
                         <h5 class="text-extra-dark-gray alt-font text-uppercase font-weight-700">
                         Director del Laboratorio
                         </h5>
@@ -205,7 +205,7 @@
                         <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Juan Pablo Bautista Ríos
                         </span>
                         <span class="d-block">jbautista@uni.edu.pe</span>
-                           
+
                         <span class="d-block">Director del Laboratorio N°6 de Electricidad</span>
                         </div>
                     </div>
@@ -214,16 +214,16 @@
         </section>
         <!-- end section -->
         <!-- start call to action section -->
-        
+
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/jefeadmin.jpg" alt=""/>
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1 text-center text-lg-left wow fadeIn">
                         <h5 class="alt-font text-extra-dark-gray font-weight-600" style="padding-top: 3%">
-                        Coordinador Técnico Administrativo   
+                        Coordinador Técnico Administrativo
                         </h5>
                         <p class="margin-40px-bottom mx-auto mx-lg-0 md-margin-30px-bottom md-width-90 sm-width-100" style="text-align:justify;">
                         Nuestro Coordinador Técnico Administrativo  se encarga de la gestión interna del Laboratorio. Para ello, distribuye las labores del personal de manera oportuna y eficiente. Además, asegura el cumplimiento de la adecuada atención a los alumnos y docentes para las distintas experiencias que se realizan en el laboratorio.
@@ -235,7 +235,7 @@
                         <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">José Luis García Cubas
                         </span>
                         <span class="d-block">jgarciac@uni.pe</span>
-                        <span class="d-block">Celular: 980703905</span>   
+                        <span class="d-block">Celular: 980703905</span>
                         <span class="d-block">Coordinador técnico administrativo</span>
                         </div>
                     </div>
@@ -246,19 +246,19 @@
 
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/secretaria1.jpg" alt=""/>
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1 text-center text-lg-left wow fadeIn">
                         <h5 class="alt-font text-extra-dark-gray font-weight-600" style="margin: 0;">Personal Administrativo</h5>
                         <p class=" mx-auto mx-lg-0 md-margin-30px-bottom md-width-90 sm-width-100" style="text-align:justify;">Gracias a nuestro experimentado equipo de trabajo administrativo, estamos consiguiendo la reingeniería que el Laboratorio de Electricidad tanto necesitaba. Ellos elaboran la documentación necesaria para cumplir con los procesos administrativos que exige la Universidad Nacional de Ingeniería, con lo cual aseguramos un correcto y transparente funcionamiento. Adicionalmente, se encargan programar reuniones de trabajo, brindar la información y atender de manera oportuna las solicitudes de las empresas del sector eléctrico con respecto a las pruebas de rutina que realizamos.</p>
-                        
+
                         <div style="text-align: center">
                         <span class="text-extra-dark-gray text-large d-block alt-font font-weight-600 ">Luz María Cipriano Pujay
                         </span>
                         <span class="d-block">luzcip.18@gmail.com</span>
-                        <span class="d-block">Celular: 980962089</span>   
+                        <span class="d-block">Celular: 980962089</span>
                         <span class="d-block">Personal administrativo</span>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
 
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/secretaria2.jpg" alt=""/>
                     </div>
@@ -284,9 +284,9 @@
                         <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top"> Criselida Lila Llanto Alvarez
                         </span>
                         <span class="d-block">criselidalila@gmail.com</span>
-                        <span class="d-block">Celular: 948662080</span>   
+                        <span class="d-block">Celular: 948662080</span>
                         <span class="d-block">Personal administrativo</span>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -295,7 +295,7 @@
 
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/asistente1.jpg" alt=""/>
                     </div>
@@ -304,14 +304,14 @@
                         <p class="margin-40px-bottom mx-auto mx-lg-0 md-margin-30px-bottom md-width-90 sm-width-100" style="text-align:justify;">
                         Como parte de su misión académica, el Laboratorio N°6 de Electricidad incluye dentro de su equipo de trabajo a un estudiante de pre grado, para que asista al personal técnico y administrativo. Las labores que realiza, le permitirán conocer más acerca de las empresas del sector eléctrico. Además, tendrá la oportunidad de aprender cómo es que se llevan a cabo las pruebas a las que se someten los equipos más usados en la industria y el funcionamiento de los instrumentos de medición que se emplean para ello.
                         </p>
-                        
+
                         <div style="text-align: center">
                         <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Cesar Eduardo Ochoa Lopez
                         </span>
                         <span class="d-block">cochoal@uni.pe</span>
-                        <span class="d-block">Celular: 992687681</span>   
+                        <span class="d-block">Celular: 992687681</span>
                         <span class="d-block">Asistente técnico administrativo</span>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -320,7 +320,7 @@
 
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/asistente2.jpg" alt=""/>
                     </div>
@@ -329,24 +329,24 @@
                         <p class="margin-40px-bottom mx-auto mx-lg-0 md-margin-30px-bottom md-width-90 sm-width-100" style="text-align:justify;">
                         Nuestro personal técnico está debidamente capacitado para asistir a los estudiantes de Ingeniería Eléctrica durante las experiencias de laboratorio que realizan para complementar su formación académica. También realizan mantenimiento constante a los instrumentos, equipos y máquinas eléctricas con las que contamos. Además, ellos son los encargados de brindar asistencia y ejecutar las pruebas requeridas por las empresas de la industria pública y privada.
                         </p>
-                        
+
                         <div style="text-align: center">
                         <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Fernando Fidel Vidal Mamani
                         </span>
                         <span class="d-block">fidel_38@hotmail.com</span>
-                        <span class="d-block">Celular: 913268572</span>   
+                        <span class="d-block">Celular: 913268572</span>
                         <span class="d-block">Técnico Electricista</span>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>    
+        </section>
 
 
 
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/asistente3.jpg" alt=""/>
                     </div>
@@ -355,12 +355,12 @@
                         <p class="margin-40px-bottom mx-auto mx-lg-0 md-margin-30px-bottom md-width-90 sm-width-100" style="text-align:justify;">
                         Las pruebas que se realizan en el Laboratorio N°6 de Electricidad FIEE UNI tienen, además, el sello de garantía de profesionales con amplia experiencia en pruebas a materiales eléctricos como cables de MT y BT; Aisladores, Seccionadores cut out, Elementos de protección personal, Camiones grúas con brazo hidráulico, Transformadores de potencia y calibración de instrumentos de medición.
                         </p>
-                        
+
                         <div style="text-align: center">
-                        <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Cristian Paul Miche Antara 
+                        <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Cristian Paul Miche Antara
                         </span>
                         <span class="d-block">miche_2005_10@hotmail.com</span>
-                        <span class="d-block">Celular: 957608132</span>   
+                        <span class="d-block">Celular: 957608132</span>
                         <span class="d-block">Técnico Electricista</span>
                         </div>
                     </div>
@@ -371,7 +371,7 @@
 
         <section style="background-color:rgb(241, 255, 204); padding: 3rem 0;" class="wow fadeIn bg-light-gray">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12 col-lg-5 md-margin-30px-bottom wow fadeIn">
                         <img src="images/cuarto/asistente4.jpg" alt=""/>
                     </div>
@@ -380,24 +380,24 @@
                         <p class="margin-40px-bottom mx-auto mx-lg-0 md-margin-30px-bottom md-width-90 sm-width-100" style="text-align:justify;">
                         Nuestras instalaciones ubicadas en el Sector S, a la altura de la puerta N° 6 de la UNI, se encuentran correctamente equipadas con instrumentos de alta gama. Estos últimos, permitirán a los estudiantes mejorar su aprendizaje durante las experiencias académicas de laboratorio, y estar debidamente capacitados para trabajar con equipos modernos cuando les corresponda afrontar las exigencias del mercado laboral.
                         </p>
-                        
+
                         <div style="text-align: center">
-                        <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Carlos Minaya Zavaleta 
+                        <span class="text-extra-dark-gray text-large d-block margin-30px-top alt-font font-weight-600 sm-margin-20px-top">Carlos Minaya Zavaleta
                         </span>
                         <span class="d-block">carlosminayaz@hotmail.com</span>
-                        <span class="d-block">Celular: 991342642</span>   
+                        <span class="d-block">Celular: 991342642</span>
                         <span class="d-block">Técnico Electricista</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
 
 
         <!-- end call to action section -->
-        <!-- start footer --> 
-        <footer class="footer-standard-dark bg-extra-dark-gray"> 
+        <!-- start footer -->
+        <footer class="footer-standard-dark bg-extra-dark-gray">
             <div class="footer-widget-area padding-five-tb sm-padding-30px-tb">
                 <div class="container-fluid">
                     <div class="row">
@@ -431,7 +431,7 @@
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">Lunes a Viernes de 8am a 4pm</li> <br>
                                 <li style="text-align: center;text-decoration: underline;">Correo Electrónico para hacer cualquier consulta:</li>
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">labl1fiee@uni.edu.pe</li>
-                            </ul>    
+                            </ul>
                         </div>
                         <!-- end contact information -->
                         <!-- start instagram -->
@@ -449,13 +449,13 @@
                         <div class="col-md-8 text-md-left text-small text-center">
                             &copy;2020 FACULTAD DE INGENIERIA ELECTRICA Y ELECTRONICA UNI. TODOS LOS DERECHOS RESERVADOS.
                         </div>
-                        
+
                         <!-- end copyright -->
                     </div>
                 </div>
             </div>
         </footer>
-        
+
         <!-- end footer -->
         <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
@@ -495,7 +495,7 @@
         <!-- fit video  -->
         <script type="text/javascript" src="js/jquery.fitvids.js"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script> 
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
         <!-- justified gallery  -->
         <script type="text/javascript" src="js/justified-gallery.min.js"></script>
         <!--pie chart-->

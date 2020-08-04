@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/animate.css" />
         <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- et line icon --> 
+        <!-- et line icon -->
         <link rel="stylesheet" href="css/et-line-icons.css" />
         <!-- font-awesome icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -65,7 +65,7 @@
                 background-color: #F1FFCC !important;
                 border-style: solid;
                 border-width: 2px  !important;
-                border-color: rgb(107, 0, 0); 
+                border-color: rgb(107, 0, 0);
                 border-radius: 10px;
                 font-weight: bold;
             }
@@ -78,16 +78,16 @@
                 font-family:Arial, Helvetica, sans-serif;
                 padding-left: 15rem;
             }
-            
+
             ul, ol {
                 list-style:none;
             }
-            
+
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;;
+                padding:1rem 0.5rem;
             }
-            
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -108,16 +108,16 @@
                 z-index: 9999;
 
             }
-            
+
             .nav li:hover > ul {
                 display:block;
                 padding-top: 1rem;
             }
-            
+
             .nav li ul li {
                 position:relative;
             }
-            
+
             .nav li ul li ul {
                 right:-140px;
                 top:0px;
@@ -128,7 +128,7 @@
         <!-- start header -->
         <header>
             <!-- start navigation -->
-            <!-- end navigation -->  
+            <!-- end navigation -->
         </header>
         <div class="row justify-content-center header" style="background-color: #d8980c47">
             <div class="col-lg-3 col-md-4 col-12 d-none d-lg-flex align-items-center">
@@ -160,54 +160,54 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container-fluid men">
             <div id="header">
                 <ul class="nav">
                     <li><a href="">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.html">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.html">TRABAJADORES</a></li>
-                            <li><a href="imagenes.html">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.html">NUESTROS EQUIPOS</a></li>
+                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
+                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
                     <li><a href="">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.html">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.html">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.html">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.html">SERVICIO ACADEMICO</a></li>
+                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.html">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.html">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.html">VISITAS TÉCNICAS</a></li>
+                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.html">CLIENTES</a></li>
-                    <li><a href="ubicacion.html">UBICACION</a></li>
+                    <li><a href="clientes.blade.php">CLIENTES</a></li>
+                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
                     <li><a href="">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.html">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.html">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.html">CAPACITACIONES</a></li>
+                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
+                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
+                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="">INTRANET</a>
                         <ul>
-                            <li><a href="intranet_ensayos.html">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.html">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.html">INTRANET PARA CAPACITACIONES</a></li>
+                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
+
 
         <!-- end header -->
         <!-- start hero section -->
@@ -219,17 +219,17 @@
         <!-- start services section -->
         <!-- end services section -->
         <!-- start counter section -->
-        
+
         <!-- end counter section -->
         <!-- start accordion section -->
-        
+
         <section class="bg-light-gray border-none p-0 wow fadeIn" style="background-color: rgb(241, 255, 204);" >
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-6 padding-seven-lr padding-six-half-tb lg-padding-five-tb lg-padding-six-lr md-padding-six-all sm-padding-50px-tb sm-padding-15px-lr wow fadeInLeft">
                         <h5 class="alt-font text-extra-dark-gray text-center text-lg-left margin-eight-bottom md-margin-40px-bottom sm-margin-30px-bottom font-weight-600">
                         <span class="font-weight-300 d-block sm-margin-15px-bottom" style="color:#610000;font-weight:bold;" >Capacitaciones Tecnicas
-                        </span> 
+                        </span>
                         </h5>
                         <!-- start accordion -->
                         <div class="panel-group accordion-style2" id="accordion-main">
@@ -245,7 +245,7 @@
                                     </a>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse " data-parent="#accordion-main">
-                                    
+
                                 </div>
                             </div>
                             <!-- end tab content -->
@@ -343,28 +343,28 @@
                                 * of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets contai
                             </p>
 
-                            
+
 
                         </div>
                         <!-- end accordion -->
                     </div>
-                    <div class="col-12 col-lg-6 cover-background md-height-500px sm-height-350px wow fadeInRight"> 
-                    <img src="images/quinto/imagen1.jpg" alt="">   
+                    <div class="col-12 col-lg-6 cover-background md-height-500px sm-height-350px wow fadeInRight">
+                    <img src="images/quinto/imagen1.jpg" alt="">
                     </div>
-                    
+
                     <section class="wow fadeIn bg-light-gray padding-35px-tb top-space" style="background-color: #800404;width:100%;padding-top: 15px;padding-bottom: 5px;">
                         <div class="container-fluid">
                         <h3 class="text-uppercase" style="color:white;text-align:center;margin-bottom:10px;">
-                        Nuestros principales Asesores    
+                        Nuestros principales Asesores
                         </h3>
                         </div>
                     </section>
-                    
-                    
-            <!-- aqui poner datos de los asesores -->            
-            
-            <!-- inicio -->            
-            <div class="container" style="margin-top:40px;margin-bottom:40px;width:100%;margin-left:320px;"> 
+
+
+            <!-- aqui poner datos de los asesores -->
+
+            <!-- inicio -->
+            <div class="container" style="margin-top:40px;margin-bottom:40px;width:100%;margin-left:320px;">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl-3 col-md-6 text-center wow fadeIn" data-wow-delay="0.2s">
                         <img src="http://placehold.it/600x909" alt="" class="w-100">
@@ -381,9 +381,9 @@
                 </div>
             </div>
             <!-- fin -->
-            
-            <!-- inicio -->            
-            <div class="container" style="margin-top:40px;margin-bottom:40px;width:100%;margin-left:320px;"> 
+
+            <!-- inicio -->
+            <div class="container" style="margin-top:40px;margin-bottom:40px;width:100%;margin-left:320px;">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl-3 col-md-6 text-center wow fadeIn" data-wow-delay="0.2s">
                         <img src="http://placehold.it/600x909" alt="" class="w-100">
@@ -405,15 +405,15 @@
             </div>
 
                     <div class="row">
-        
+
                             <div class="">
                                 <a href="#" type="button" class="btn btn-dec" target="blank">
                                     Boton para Cotizaciones de Capacitaciones
                                 </a>
                             </div>
-        
-                        </div>  
-            
+
+                        </div>
+
 
         </section>
         <!-- start blog section -->
@@ -426,11 +426,11 @@
         <!-- end contact section -->
         <!-- start features section -->
         <!-- end features section -->
-        <!-- start footer --> 
+        <!-- start footer -->
         <!-- end footer -->
         <!-- start scroll to top -->
 
-        <footer class="footer-standard-dark bg-extra-dark-gray"> 
+        <footer class="footer-standard-dark bg-extra-dark-gray">
             <div class="footer-widget-area padding-five-tb sm-padding-30px-tb">
                 <div class="container-fluid">
                     <div class="row">
@@ -464,7 +464,7 @@
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">Lunes a Viernes de 8am a 4pm</li> <br>
                                 <li style="text-align: center;text-decoration: underline;">Correo Electrónico para hacer cualquier consulta:</li>
                                 <li style="text-align: center;font-weight: bold;font-size: 19px;color:#F5F5F5">labl1fiee@uni.edu.pe</li>
-                            </ul>    
+                            </ul>
                         </div>
                         <!-- end contact information -->
                         <!-- start instagram -->
@@ -482,7 +482,7 @@
                         <div class="col-md-8 text-md-left text-small text-center">
                             &copy;2020 FACULTAD DE INGENIERIA ELECTRICA Y ELECTRONICA UNI. TODOS LOS DERECHOS RESERVADOS.
                         </div>
-                        
+
                         <!-- end copyright -->
                     </div>
                 </div>
@@ -527,7 +527,7 @@
         <!-- fit video  -->
         <script type="text/javascript" src="js/jquery.fitvids.js"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script> 
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
         <!-- justified gallery  -->
         <script type="text/javascript" src="js/justified-gallery.min.js"></script>
         <!--pie chart-->

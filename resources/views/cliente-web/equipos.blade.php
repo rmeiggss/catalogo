@@ -11,16 +11,16 @@
                 font-family:Arial, Helvetica, sans-serif;
                 padding-left: 15rem;
             }
-            
+
             ul, ol {
                 list-style:none;
             }
-            
+
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;;
+                padding:1rem 0.5rem;
             }
-            
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -41,16 +41,16 @@
                 z-index: 9999;
 
             }
-            
+
             .nav li:hover > ul {
                 display:block;
                 padding-top: 1rem;
             }
-            
+
             .nav li ul li {
                 position:relative;
             }
-            
+
             .nav li ul li ul {
                 right:-140px;
                 top:0px;
@@ -75,7 +75,7 @@
         <link rel="stylesheet" href="css/animate.css" />
         <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- et line icon --> 
+        <!-- et line icon -->
         <link rel="stylesheet" href="css/et-line-icons.css" />
         <!-- font-awesome icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -102,58 +102,58 @@
         <![endif]-->
     </head>
     <body class="width-100 overflow-hidden" >
-        
+
         <div class="container-fluid men">
             <div id="header">
                 <ul class="nav">
                     <li><a href="">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.html">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.html">TRABAJADORES</a></li>
-                            <li><a href="imagenes.html">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.html">NUESTROS EQUIPOS</a></li>
+                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
+                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
                     <li><a href="">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.html">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.html">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.html">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.html">SERVICIO ACADEMICO</a></li>
+                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.html">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.html">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.html">VISITAS TÉCNICAS</a></li>
+                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.html">CLIENTES</a></li>
-                    <li><a href="ubicacion.html">UBICACION</a></li>
+                    <li><a href="clientes.blade.php">CLIENTES</a></li>
+                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
                     <li><a href="">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.html">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.html">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.html">CAPACITACIONES</a></li>
+                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
+                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
+                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="">INTRANET</a>
                         <ul>
-                            <li><a href="intranet_ensayos.html">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.html">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.html">INTRANET PARA CAPACITACIONES</a></li>
+                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
-        
+
+
         <section style="padding:0">
         <div class="bg-black position-absolute left-0  width-100 height-100" style="background-color: #d8980c47">
-            
+
             <!-- start slider section -->
             <section class="p-0">
                 <div class="swiper-bottom-scrollbar-full swiper-container">
@@ -163,7 +163,7 @@
                             <div class="position-relative width-90 height-100 d-flex align-items-center padding-ten-all sm-padding-fifteen-all sm-width-100">
                                 <div>
                                     <h4 class="text-medium-gray d-block margin-5px-bottom alt-font" style="color:#610000;font-weight: bold;">Equipos del Laboratorio</h4>
-                                    
+
                                     <p class="text-large d-block float-left font-weight-300 width-90 margin-35px-bottom" style="color: #610000;">
                                     A continuacion se muestran los equipos con los que cuenta el Laboratorio N°6
                                     </p>
@@ -174,15 +174,15 @@
                         <!-- start slider item -->
                         <div class="swiper-slide width-auto sm-height-auto last-paragraph-no-margin">
                             <div class="height-100 d-flex align-items-center">
-                                
+
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MICROHMIMETRO DIGITAL</h3>
                                     <img src="images/tercero/1.jpg"  alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-center" style="color:black; background-color:  #ffffff61;">
-                                    
+
                                     </p>
                                 </div>
-                    
+
                             </div>
                         </div>
                         <!-- end slider item -->
@@ -193,7 +193,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">FUENTE DE CORRIENTE ALTERNA</h3>
                                     <img src="images/tercero/2.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">ESPINTEROMETRO</h3>
                                     <img src="images/tercero/3.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                                     PATRÓN PORTÁTIL TRIFÁSICO ZERA MT3000</h3>
                                     <img src="images/tercero/4.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                                     ANALIZADOR DE CALIDAD DE ENERGÍA</h3>
                                     <img src="images/tercero/5.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -247,7 +247,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MEDIDOR DE AISLAMIENTO</h3>
                                     <img src="images/tercero/6.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -259,19 +259,19 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MEDIDOR DE LA RELACIÓN DE TRANSFORMACIÓN</h3>
                                     <img src="images/tercero/7.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="swiper-slide width-auto sm-height-auto last-paragraph-no-margin">
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">OHMETRO DIGITAL DE BAJA RESISTENCIA</h3>
                                     <img src="images/tercero/8.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000"> MEGOHMETROS</h3>
                                     <img src="images/tercero/9.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">VERNIER</h3>
                                     <img src="images/tercero/10.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -307,7 +307,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MEDIDOR DE NIVEL SONORO</h3>
                                     <img src="images/tercero/11.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -319,7 +319,7 @@
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">VOLTÍMETRO DIGITAL DVM-80 HD ELECTRIC</h3>
                                     <img src="images/tercero/12.jpg" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
-                                    
+
                                     </p>
                                 </div>
                             </div>
@@ -344,7 +344,7 @@
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
 
-        
+
         <!-- javascript libraries -->
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/modernizr.js"></script>
@@ -380,7 +380,7 @@
         <!-- fit video  -->
         <script type="text/javascript" src="js/jquery.fitvids.js"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script> 
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
         <!-- justified gallery  -->
         <script type="text/javascript" src="js/justified-gallery.min.js"></script>
         <!--pie chart-->
