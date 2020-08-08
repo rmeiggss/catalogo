@@ -221,60 +221,62 @@ Universidad Nacional de Ingeniería</title>
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
                 <form class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
-                Nombre del Solicitante:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Tipo de Solicitante:
-                <br>
-                <select class="form-control">
-                <option value="volvo">Persona Juridica</option>
-                <option value="saab">Persona Natural</option>
-                </select>
-                RUC del Solicitante:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Direccion del Solicitante:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Telefono del Solicitante:
-                <input class="form-control" type="text" name="" id="primero" />
-                Email del Solicitante:
-                <input class="form-control" type="text" name="" id="primero" />
-                Nombre del Departamento:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">2020</option>
-                    <option value="saab">2019</option>
-                </select>
-                Nombre de la Provincia:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">2020</option>
-                    <option value="saab">2019</option>
-                </select>
-                Nombre del Distrito:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">2020</option>
-                    <option value="saab">2019</option>
-                </select>
-                <br>
-        </form>
+                    @csrf
+                    Nombre del Solicitante:
+                    <br>
+                    <input class="form-control" type="text" name="nombre_solic" id="nombre_solic" />
+                    Tipo de Solicitante:
+                    <br>
+                    <select class="form-control" name="tipo_solic">
+                        <option value="volvo">Persona Juridica</option>
+                        <option value="saab">Persona Natural</option>
+                    </select>
+                    RUC del Solicitante:
+                    <br>
+                    <input class="form-control" type="text" name="ruc_solic" id="ruc_solic" />
+                    Direccion del Solicitante:
+                    <br>
+                    <input class="form-control" type="text" name="direc_solic" id="direc_solic" />
+                    Telefono del Solicitante:
+                    <input class="form-control" type="text" name="celular_solic" id="celular_solic" />
+                    Email del Solicitante:
+                    <input class="form-control" type="text" name="email_solic" id="email_solic" />
+                    Nombre del Departamento:
+                    <br>
+                    <select class="form-control" name="depart_solic">
+                        <option value="volvo">2020</option>
+                        <option value="saab">2019</option>
+                    </select>
+                    Nombre de la Provincia:
+                    <br>
+                    <select class="form-control" name="prov_solic">
+                        <option value="volvo">2020</option>
+                        <option value="saab">2019</option>
+                    </select>
+                    Nombre del Distrito:
+                    <br>
+                    <select class="form-control" name="dist_solic">
+                        <option value="volvo">2020</option>
+                        <option value="saab">2019</option>
+                    </select>
+                    <br>
+                </form>
             </div>
 
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Representante de la Empresa Solicitante</h4>
                 <form class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
-                Nombre del Contacto:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Correo Electronico del Contacto:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Celular del Contacto:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                <br>
+                    @csrf
+                    Nombre del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto" />
+                    Correo Electronico del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="email_contacto" id="email_contacto" />
+                    Celular del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="celular_contacto" id="celular_contacto" />
+                    <br>
                 </form>
             </div>
         </div>
@@ -364,24 +366,26 @@ Universidad Nacional de Ingeniería</title>
             <div class="col-sm-6" style="padding-bottom: 8px;padding-top:8px;">
 
                 <form class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
-                Correo #1:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Correo #2:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
+                    @csrf
+                    Correo #1:
+                    <br>
+                    <input class="form-control" type="text" name="correo1" id="correo1" />
+                    Correo #2:
+                    <br>
+                    <input class="form-control" type="text" name="correo2" id="correo2" />
                 </form>
             </div>
 
             <div class="col-sm-6" style="padding-bottom: 8px;;padding-top:8px;">
 
                 <form class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
-                Correo #3:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Correo #4:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
+                    @csrf
+                    Correo #3:
+                    <br>
+                    <input class="form-control" type="text" name="correo3" id="correo3" />
+                    Correo #4:
+                    <br>
+                    <input class="form-control" type="text" name="correo4" id="correo4" />
                 </form>
             </div>
 
@@ -390,15 +394,19 @@ Universidad Nacional de Ingeniería</title>
         </div>
 
         <br>
-        <button type="button" class="btn btn-info btn-lg float-left" data-toggle="modal" data-target="#" id="boton_modal" style="margin-left:10px;border-radius:5px;">
-        Vista Preliminar
+        <button type="button" class="btn btn-info btn-lg float-left" data-toggle="modal" data-target="#"
+                id="boton_modal" style="margin-left:10px;border-radius:5px;">
+            Vista Preliminar
         </button>
+
         <br>
         <br>
         <br>
+
         <center>
-        <button type="button" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#" id="boton_modal" style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
-        Solicitar Cotización
+        <button type="button" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#"
+                id="boton_modal" style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
+            Solicitar Cotización
         </button>
         </center>
         </div>
