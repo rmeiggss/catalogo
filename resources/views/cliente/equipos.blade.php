@@ -101,26 +101,27 @@
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     </head>
+
     <body class="width-100 overflow-hidden" >
 
         <div class="container-fluid men">
             <div id="header">
                 <ul class="nav">
-                    <li><a href="">NOSOTROS</a>
+                    <li><a href="#">NOSOTROS</a>
                         <ul>
-                            <li><a href="nosotros.blade.php">MISIÓN Y VISIÓN</a></li>
-                            <li><a href="trabajadores.blade.php">TRABAJADORES</a></li>
-                            <li><a href="imagenes.blade.php">IMAGENES DEL LABORATORIO</a></li>
-                            <li><a href="equipos.blade.php">NUESTROS EQUIPOS</a></li>
+                            <li><a href="{{ route('nosotros') }}">MISIÓN Y VISIÓN</a></li>
+                            <li><a href="{{ route('trabajadores') }}">TRABAJADORES</a></li>
+                            <li><a href="{{ route('imagenes') }}">IMAGENES DEL LABORATORIO</a></li>
+                            <li><a href="{{ route('equipos') }}">NUESTROS EQUIPOS</a></li>
                         </ul>
                     </li>
 
-                    <li><a href="">SERVICIOS</a>
+                    <li><a href="#">SERVICIOS</a>
                         <ul>
-                            <li><a href="servicios.blade.php">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
-                            <li><a href="capacitaciones.blade.php">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="asesorias.blade.php">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="academico.blade.php">SERVICIO ACADEMICO</a></li>
+                            <li><a href="{{ route('servicios') }}">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
+                            <li><a href="{{ route('capacitaciones') }}">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
+                            <li><a href="{{ route('asesorias') }}">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
+                            <li><a href="{{ route('academico') }}">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
                     <li><a href="">EVENTOS</a>
@@ -149,7 +150,7 @@
                 </ul>
             </div>
         </div>
-
+    <!-- END NAVBAR -->
 
         <section style="padding:0">
         <div class="bg-black position-absolute left-0  width-100 height-100" style="background-color: #d8980c47">
@@ -177,7 +178,7 @@
 
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MICROHMIMETRO DIGITAL</h3>
-                                    <img src="images/tercero/1.jpg"  alt=""/>
+                                    <img src="{{ asset('images/images/tercero/1.jpg') }}"  alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-center" style="color:black; background-color:  #ffffff61;">
 
                                     </p>
@@ -191,7 +192,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">FUENTE DE CORRIENTE ALTERNA</h3>
-                                    <img src="images/tercero/2.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/2.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -204,7 +205,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">ESPINTEROMETRO</h3>
-                                    <img src="images/tercero/3.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/3.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -218,7 +219,7 @@
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">
                                     PATRÓN PORTÁTIL TRIFÁSICO ZERA MT3000</h3>
-                                    <img src="images/tercero/4.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/4.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -232,7 +233,7 @@
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">
                                     ANALIZADOR DE CALIDAD DE ENERGÍA</h3>
-                                    <img src="images/tercero/5.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/5.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -245,7 +246,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MEDIDOR DE AISLAMIENTO</h3>
-                                    <img src="images/tercero/6.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/6.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -257,7 +258,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MEDIDOR DE LA RELACIÓN DE TRANSFORMACIÓN</h3>
-                                    <img src="images/tercero/7.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/7.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -269,7 +270,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">OHMETRO DIGITAL DE BAJA RESISTENCIA</h3>
-                                    <img src="images/tercero/8.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/8.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -281,7 +282,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000"> MEGOHMETROS</h3>
-                                    <img src="images/tercero/9.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/9.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -293,7 +294,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">VERNIER</h3>
-                                    <img src="images/tercero/10.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/10.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -305,7 +306,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">MEDIDOR DE NIVEL SONORO</h3>
-                                    <img src="images/tercero/11.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/11.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -317,7 +318,7 @@
                             <div class="height-100 d-flex align-items-center">
                                 <div class="d-block position-relative">
                                     <h3 style="text-align: center;font-size: 1.2rem;color: white; background-color:#610000">VOLTÍMETRO DIGITAL DVM-80 HD ELECTRIC</h3>
-                                    <img src="images/tercero/12.jpg" alt=""/>
+                                    <img src="{{ asset('images/images/tercero/12.jpg') }}" alt=""/>
                                     <p class="bottom-text width-100 text-extra-small text-uppercase text-center" style="color:black;">
 
                                     </p>
@@ -340,58 +341,57 @@
             <!-- end slider section -->
         </div>
         </section>
+
         <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
-
-
         <!-- javascript libraries -->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/modernizr.js"></script>
-        <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-        <script type="text/javascript" src="js/skrollr.min.js"></script>
-        <script type="text/javascript" src="js/smooth-scroll.js"></script>
-        <script type="text/javascript" src="js/jquery.appear.js"></script>
+        <script type="text/javascript" src="{{ asset('js-we/js-web/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/modernizr.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/bootstrap.bundle.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.easing.1.3.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/skrollr.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/smooth-scroll.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.appear.js') }}"></script>
         <!-- menu navigation -->
-        <script type="text/javascript" src="js/bootsnav.js"></script>
-        <script type="text/javascript" src="js/jquery.nav.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/bootsnav.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.nav.js') }}"></script>
         <!-- animation -->
-        <script type="text/javascript" src="js/wow.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/wow.min.js') }}"></script>
         <!-- page scroll -->
-        <script type="text/javascript" src="js/page-scroll.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/page-scroll.js') }}"></script>
         <!-- swiper carousel -->
-        <script type="text/javascript" src="js/swiper.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/swiper.min.js') }}"></script>
         <!-- counter -->
-        <script type="text/javascript" src="js/jquery.count-to.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.count-to.js') }}"></script>
         <!-- parallax -->
-        <script type="text/javascript" src="js/jquery.stellar.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.stellar.js') }}"></script>
         <!-- magnific popup -->
-        <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.magnific-popup.min.js') }}"></script>
         <!-- portfolio with shorting tab -->
-        <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/isotope.pkgd.min.js') }}"></script>
         <!-- images loaded -->
-        <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/imagesloaded.pkgd.min.js') }}"></script>
         <!-- pull menu -->
-        <script type="text/javascript" src="js/classie.js"></script>
-        <script type="text/javascript" src="js/hamburger-menu.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/classie.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/hamburger-menu.js') }}"></script>
         <!-- counter  -->
-        <script type="text/javascript" src="js/counter.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/counter.js') }}"></script>
         <!-- fit video  -->
-        <script type="text/javascript" src="js/jquery.fitvids.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.fitvids.js') }}"></script>
         <!-- skill bars  -->
-        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/skill.bars.jquery.js') }}"></script>
         <!-- justified gallery  -->
-        <script type="text/javascript" src="js/justified-gallery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/justified-gallery.min.js') }}"></script>
         <!--pie chart-->
-        <script type="text/javascript" src="js/jquery.easypiechart.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.easypiechart.min.js') }}"></script>
         <!-- instagram -->
-        <script type="text/javascript" src="js/instafeed.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/instafeed.min.js') }}"></script>
         <!-- retina -->
-        <script type="text/javascript" src="js/retina.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/retina.min.js') }}"></script>
         <!-- revolution -->
-        <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
-        <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
+        <script type="text/javascript" src="{{ asset('css/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('css/revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
         <!-- revolution slider extensions (load below extensions JS files only on local file systems to make the slider work! The following part can be removed on server for on demand loading) -->
         <!--<script type="text/javascript" src="revolution/js/extensions/revolution.extension.actions.min.js"></script>
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.carousel.min.js"></script>
@@ -403,6 +403,6 @@
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
         <!-- setting -->
-        <script type="text/javascript" src="js/main.js"></script>
-    </body>
+        <script type="text/javascript" src="{{ asset('js/js-web/main.js') }}"></script>
+</body>
 </html>
