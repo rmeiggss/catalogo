@@ -11,7 +11,6 @@ class CursoController extends Controller
     public function index()
     {
         $productos = Producto::latest()->paginate(8);
-
         return view('admin.curso.index', compact('productos'));
     }
 
