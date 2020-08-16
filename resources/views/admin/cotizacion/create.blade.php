@@ -19,27 +19,25 @@
                 <div class="col-12">
                     <!--Main content-->
                     <div class="invoice p-3 mb-3">
-
+                     {!!Form::open(['route'=>'cotizacion.store','method'=>'post',])!!}   
                         <!-- info row 1 -->
                         <div class="row invoice-info">
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                                <select class="col-sm-6 form-control-sm">
-                                    <option>::Seleccione::</option>
-                                </select>                                  
+                                {!!Form::select('',['S'=>'Small','L'=>'Large'],'S',['placeholder'=>'Seleccione un solicitante','class'=>'col-sm-6 form-control-sm'])!!}                                
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">                                 
+                                {!!Form::text('numero',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'numero'])!!}  
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
                             <div class="row form-group">
                                 <label class="col-sm-2 col-form-label col-form-label-sm">Fecha</label>
-                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">
+                                {!!Form::text('fecha',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'fecha'])!!}
                             </div>
                           </div>
                         </div>
@@ -50,13 +48,13 @@
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">                                   
+                                {!!Form::text('contacto',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'contacto'])!!}
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Usuario</label>
-                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">                                 
+                                {!!Form::text('usuario',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'usuario'])!!}
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
@@ -131,10 +129,10 @@
                           <div class="row text-center">
                               <div class="col text-center">
                                   <button class="btn btn-danger">Cancelar</button>&nbsp;  
-                                <button class="btn btn-success">Grabar</button>    
+                                  {!!Form::submit('Grabar',['class'=>'btn btn-success'])!!}  
                               </div>
                           </div>
-                          
+                     {!!Form::close()!!}        
                     </div>
                     <!--/Main content-->
                 </div>
