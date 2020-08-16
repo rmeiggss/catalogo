@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
 use App\Cotizacion;
+use App\Solicitante;
 use Illuminate\Http\Request;
+use Redirect;
 
 class CotizacionController extends Controller
 {
@@ -13,9 +14,8 @@ class CotizacionController extends Controller
         /*if($request->user()->authorizeRoles(['admin'])){
             echo "hola";
         }*/
-
-        $cotizaciones = Cotizacion::all();        
-        return view('admin.cotizacion.index', compact('cotizaciones'));
+        $cotizaciones = Cotizacion::all(); 
+        return view('admin.cotizacion.index', compact('solicitantes','cotizaciones'));
     }
 
     /**
@@ -25,7 +25,8 @@ class CotizacionController extends Controller
      */
     public function create()
     {
-        return view("admin.cotizacion.create");
+        $solicitantes = Solicitante::all();
+        return view("admin.cotizacion.create",compact('solicitantes'));
     }
 
     /**
