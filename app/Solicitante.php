@@ -11,4 +11,5 @@ class Solicitante extends Model
     protected $fillable = ['nombre','ruc','direccion', 'telefono', 'email'];
 
     //public $timestamps = false;
+
 }
