@@ -1,6 +1,7 @@
 @extends('layouts.cliente')
 
-@section('title', 'Laboratorio N°6 de Electricidad FIEE-UNI')
+@section('title', 'Laboratorio Nº6 de Electricidad de la Facultad de Ingeniería Eléctrica y Electrónica -
+Universidad Nacional de Ingeniería')
 
 @section('content')
         <style>

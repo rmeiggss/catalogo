@@ -30,8 +30,8 @@ Route::resource('horario-instructor','Admin\HorarioInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
 // --------- Rutas del CLIENTE
 Route::resource('ensayos','Cliente\EnsayoController');
-Route::resource('calibraciones','Cliente\EnsayoController');
-Route::resource('capacitaciones','Cliente\EnsayoController');
+Route::resource('calibraciones','Cliente\CalibracionController');
+Route::resource('capacitaciones','Cliente\CapacitacionController');
 // --------------------------------------------
 
 // ------- RUTAS CLIENTE ---------------------
