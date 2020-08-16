@@ -89,7 +89,8 @@ Universidad Nacional de Ingeniería')
         <div class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
-                <form class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
+                <form class="form-horizontal form-control" method="POST" action="{{ route('cot_ensayos.store') }}"
+                      style="width:500px;height:705px;margin:0 auto">
                     @csrf
                     Nombre del Solicitante:
                     <br>
@@ -128,8 +129,9 @@ Universidad Nacional de Ingeniería')
                         <option value="volvo">2020</option>
                         <option value="saab">2019</option>
                     </select>
-                    <br>
+                    <button type="submit" class="btn btn-primary-outline">Agregar solicitante</button>
                 </form>
+                <br>
             </div>
 
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">

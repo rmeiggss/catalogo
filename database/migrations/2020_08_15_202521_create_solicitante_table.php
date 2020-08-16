@@ -15,12 +15,14 @@ class CreateSolicitanteTable extends Migration
     {
         Schema::create('solicitante', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
-            $table->string('ruc')->nullable();
-            $table->string('direccion')->nullable();
-            $table->string('telefono')->nullable();
-            $table->string('email')->unique();
-            $table->string('flagestado')->default('1');
+            $table->string('SOLIC_Nombre')->nullable();
+            $table->string('SOLIC_Ruc')->nullable();
+            $table->string('SOLIC_Direccion')->nullable();
+            $table->string('SOLIC_Telefono')->nullable();
+            $table->string('SOLIC_Email')->nullable();
+            $table->string('SOLIC_FlagEstado')->nullable();
+            $table->string('UBIGP_Codigo')->nullable();
+            $table->integer('TIPSOLIP_Codigo')->nullable();
             $table->timestamps();
         });
     }

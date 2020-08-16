@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
-        <!-- title -->
         <meta charset="utf-8">
         <title>@yield('title', 'Laboratorio N°6 de Electricidad FIEE-UNI')</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -123,12 +121,13 @@
                             <li><a href="{{ route('cot_capacitaciones') }}">CAPACITACIONES</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">INTRANET</a>
+                    <li><a href="{{ route('login') }}">INTRANET</a>
+                        <!--
                         <ul>
-                            <li><a href="{{ route('intranet_ensayos') }}">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="{{ route('intranet_calibraciones') }}">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="{{ route('intranet_capacitaciones') }}">INTRANET PARA CAPACITACIONES</a></li>
-                        </ul>
+                            <li><a href="">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="">INTRANET PARA CAPACITACIONES</a></li>
+                        </ul> -->
                     </li>
                 </ul>
             </div>

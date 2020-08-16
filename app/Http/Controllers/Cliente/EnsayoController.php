@@ -25,7 +25,7 @@ class EnsayoController extends Controller
      */
     public function create()
     {
-        //
+        return Redirect::to("/cot_ensayos");
     }
 
     /**
@@ -37,12 +37,14 @@ class EnsayoController extends Controller
     public function store(Request $request)
     {
         Ensayo::create([
-            '' => request(''),
-            '' => request(''),
-            '' => request(''),
+            'SOLIC_Nombre' => request('nombre_solic'),
+            'SOLIC_Ruc' => request('ruc_solic'),
+            'SOLIC_Direccion' => request('direc_solic'),
+            'SOLIC_Telefono' => request('celular_solic'),
+            'SOLIC_Email' => request('email_solic'),
         ]);
 
-        return Redirect::to("/");
+        return Redirect::to("/cot_ensayos");
     }
 
     /**
