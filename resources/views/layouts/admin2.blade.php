@@ -190,12 +190,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far nav-icon"></i>
-                  <p>Contacto</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ asset('cotizacion') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Ensayos</p>

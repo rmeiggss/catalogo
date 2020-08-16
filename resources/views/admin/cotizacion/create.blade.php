@@ -19,16 +19,8 @@
                 <div class="col-12">
                     <!--Main content-->
                     <div class="invoice p-3 mb-3">
-                        <!-- title row -->
-                        <div class="row">
-                          <div class="col-12">
-                            <h4>
-                              <small class="float-right">Fecha: 2/10/2014</small>
-                            </h4>
-                          </div>
-                          <!-- /.col -->
-                        </div>
-                        <!-- info row -->
+
+                        <!-- info row 1 -->
                         <div class="row invoice-info">
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
@@ -38,26 +30,44 @@
                                 </select>                                  
                               </div>
                           </div>
-                          <!-- /.col -->
+                          <div class="col-sm-4 invoice-col">
+                              <div class="row form-group">
+                                <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
+                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">                                 
+                              </div>
+                          </div>
+                          <div class="col-sm-4 invoice-col">
+                            <div class="row form-group">
+                                <label class="col-sm-2 col-form-label col-form-label-sm">Fecha</label>
+                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.info row 1 -->
+                        
+                        <!-- info row 2 -->
+                       <div class="row invoice-info">
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                                <select class="col-sm-6 form-control-sm">
-                                    <option>::Seleccione::</option>
-                                </select>                                  
+                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">                                   
                               </div>
                           </div>
-                          <!-- /.col -->
+                          <div class="col-sm-4 invoice-col">
+                              <div class="row form-group">
+                                <label class="col-sm-3 col-form-label col-form-label-sm">Usuario</label>
+                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">                                 
+                              </div>
+                          </div>
                           <div class="col-sm-4 invoice-col">
                             <div class="row form-group">
-                                <label class="col-sm-2 col-form-label col-form-label-sm">Numero</label>
-                                <input type="text" class="col-sm-6 form-control-sm" value="#007612">
+                                <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
                                 <i class="fas fa-plus" class="form-control-sm"></i>
                             </div>
                           </div>
-                          <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
+                        </div>                        
+                        <!-- /.info row 2 -->
+                        
                         <!-- Table row -->
                          <div class="row">
                            <div class="col-12 table-responsive">

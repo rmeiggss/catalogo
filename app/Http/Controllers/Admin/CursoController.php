@@ -49,13 +49,10 @@ class CursoController extends Controller
     public function update(Request $request, $id)
     {
         $producto = Producto::findOrFail($id);
-
         $producto->CURSOC_Nombre = $request->nombre;
         $producto->CURSOC_Descripcion = $request->descripcion;
         $producto->CURSOC_Costo = $request->costo;
-
         $producto->save();
-
         return Redirect::to("/curso");
     }
 

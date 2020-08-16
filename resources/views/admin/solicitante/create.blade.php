@@ -18,38 +18,34 @@
     
     <section class="content">
         <div class="grid-hor">
-            {!!Form::open(['route'=>'solicitante.store','method'=>'POST','class'=>'col-sm-10'])!!}
-               <div class="form-group">
-                    {!!Form::label('codigo','Codigo')!!}
-                    {!!Form::text('codigo',null,['class'=>'form-control','placeholder'=>'Ingrese el codigo','id'=>'codigo'])!!}
-                </div>            
+            {!!Form::open(['route'=>'solicitante.store','method'=>'POST','class'=>'col-sm-10'])!!}           
                 <div class="form-group">
                     {!!Form::label('nombre','Nombres')!!}
                     {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'nombre'])!!}
                 </div>
                 <div class="form-group">
                     {!!Form::label('tipo','Tipo')!!}
-                    {!!Form::text('tipo',null,['class'=>'form-control','placeholder'=>'Ingrese el tipo de Solicitante','id'=>'tipo'])!!}
+                    {!!Form::text('tipo','1',['class'=>'form-control','placeholder'=>'Ingrese el tipo de Solicitante','id'=>'tipo'])!!}
                 </div>            
                 <div class="form-group">
                     {!!Form::label('ruc','R.U.C.')!!}
-                    {!!Form::text('ruc',null,['class'=>'form-control','placeholder'=>'Ingrese el RUC de Solicitante','id'=>'ruc'])!!}
+                    {!!Form::text('ruc',null,['class'=>'form-control','placeholder'=>'Ingrese el RUC de Solicitante','id'=>'ruc','maxlength'=>'11'])!!}
                 </div>
                 <div class="form-group">
                 {!!Form::label('email','Email')!!}
                     {!!Form::text('email',null,['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'email'])!!}
                 </div>
                 <div class="form-group">
-                {!!Form::label('email','Direccion')!!}
+                {!!Form::label('direccion','Direccion')!!}
                     {!!Form::text('direccion',null,['class'=>'form-control','placeholder'=>'Ingrese la dirección','id'=>'direccion'])!!}
                 </div>
                 <div class="form-group">
-                    {!!Form::label('email','Email')!!}
-                    {!!Form::text('email',null,['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'email'])!!}
+                    {!!Form::label('telefono','Telefono')!!}
+                    {!!Form::text('telefono',null,['class'=>'form-control','placeholder'=>'Ingrese el telefono','id'=>'telefono'])!!}
                 </div>  
                 <div class="form-group">
                     {!!Form::label('ubigeo','Ubigeo')!!}
-                    {!!Form::text('ubigeo',null,['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'ubigeo'])!!}
+                    {!!Form::text('ubigeo','010104',['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'ubigeo'])!!}
                 </div>  
             {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
             <!-- Agregar boton de cancelar -->
