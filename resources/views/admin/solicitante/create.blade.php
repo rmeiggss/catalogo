@@ -47,9 +47,8 @@
                     {!!Form::label('ubigeo','Ubigeo')!!}
                     {!!Form::text('ubigeo','010104',['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'ubigeo'])!!}
                 </div>  
-            {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
-            <!-- Agregar boton de cancelar -->
-            <a class="btn btn-danger" href="{{ route('solicitante.index') }}">Cancelar</a>
+                <a class="btn btn-danger" href="{{ route('solicitante.index') }}">Cancelar</a>            
+                {!!Form::submit('Crear',['class'=>'btn btn-info'])!!}
             {!!Form::close()!!}
         </div>
         

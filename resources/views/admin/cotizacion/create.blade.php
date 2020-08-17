@@ -25,7 +25,7 @@
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                                {!!Form::select('',['S'=>'Small','L'=>'Large'],'S',['placeholder'=>'Seleccione un solicitante','class'=>'col-sm-6 form-control-sm'])!!}                                
+                                {!!Form::select('solicitante',Arr::pluck($solicitantes,'SOLIC_Nombre','id'),'S',['placeholder'=>'Seleccione un solicitante','class'=>'col-sm-6 form-control-sm'])!!}                                
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
@@ -128,8 +128,8 @@
                           <!-- /.row -->                         
                           <div class="row text-center">
                               <div class="col text-center">
-                                  <button class="btn btn-danger">Cancelar</button>&nbsp;  
-                                  {!!Form::submit('Grabar',['class'=>'btn btn-success'])!!}  
+                                  <a class="btn btn-danger" href="{{ route('cotizacion.index') }}">Cancelar</a>
+                                  {!!Form::submit('Grabar',['class'=>'btn btn-info'])!!}
                               </div>
                           </div>
                      {!!Form::close()!!}        
