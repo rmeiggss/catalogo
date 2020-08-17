@@ -18,7 +18,7 @@
 
             .nav > li {
                 float:left;
-                padding:1rem 0.5rem;
+                padding:1rem 0.5rem;;
             }
 
             .nav li a {
@@ -68,40 +68,39 @@
         <meta name="keywords" content="creative, modern, clean, bootstrap responsive, html5, css3, portfolio, blog, agency, templates, multipurpose, one page, corporate, start-up, studio, branding, designer, freelancer, carousel, parallax, photography, personal, masonry, grid, coming soon, faq">
         <!-- favicon -->
         <link rel="shortcut icon" href="">
-        <link rel="apple-touch-icon" href="images/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" href="{{ asset('images/images/apple-touch-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/images/apple-touch-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('images/images/apple-touch-icon-114x114.png') }}">
         <!-- animation -->
-        <link rel="stylesheet" href="css/animate.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/animate.css') }}" />
         <!-- bootstrap -->
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/bootstrap.min.css') }}" />
         <!-- et line icon -->
-        <link rel="stylesheet" href="css/et-line-icons.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/et-line-icons.css') }}" />
         <!-- font-awesome icon -->
-        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/font-awesome.min.css') }}" />
         <!-- themify icon -->
-        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="{{ asset('css/css-web/themify-icons.css') }}">
         <!-- swiper carousel -->
-        <link rel="stylesheet" href="css/swiper.min.css">
+        <link rel="stylesheet" href="{{ asset('css/css-web/swiper.min.css') }}">
         <!-- justified gallery  -->
-        <link rel="stylesheet" href="css/justified-gallery.min.css">
+        <link rel="stylesheet" href="{{ asset('css/css-web/justified-gallery.min.css') }}">
         <!-- magnific popup -->
-        <link rel="stylesheet" href="css/magnific-popup.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/magnific-popup.css') }}" />
         <!-- revolution slider -->
-        <link rel="stylesheet" type="text/css" href="revolution/css/settings.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="revolution/css/layers.css">
-        <link rel="stylesheet" type="text/css" href="revolution/css/navigation.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/revolution/css/settings.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/revolution/css/layers.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/revolution/css/navigation.css') }}">
         <!-- bootsnav -->
-        <link rel="stylesheet" href="css/bootsnav.css">
+        <link rel="stylesheet" href="{{ asset('css/css-web/bootsnav.css') }}">
         <!-- style -->
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/style.css') }}" />
         <!-- responsive css -->
-        <link rel="stylesheet" href="css/responsive.css" />
+        <link rel="stylesheet" href="{{ asset('css/css-web/responsive.css') }}" />
         <!--[if IE]>
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     </head>
-
     <body class="width-100 overflow-hidden" >
 
         <div class="container-fluid men">
@@ -124,33 +123,34 @@
                             <li><a href="{{ route('academico') }}">SERVICIO ACADEMICO</a></li>
                         </ul>
                     </li>
-                    <li><a href="">EVENTOS</a>
+                    <li><a href="#">EVENTOS</a>
                         <ul>
-                            <li><a href="eventos.blade.php">FERIA TECNOLÓGICA FIEE </a></li>
-                            <li><a href="responsabilidad.blade.php">RESPONSABILIDAD SOCIAL</a></li>
-                            <li><a href="visitas.blade.php">VISITAS TÉCNICAS</a></li>
+                            <li><a href="{{ route('eventos') }}">FERIA TECNOLÓGICA FIEE </a></li>
+                            <li><a href="{{ route('responsabilidad') }}">RESPONSABILIDAD SOCIAL</a></li>
+                            <li><a href="{{ route('visitas') }}">VISITAS TÉCNICAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="clientes.blade.php">CLIENTES</a></li>
-                    <li><a href="ubicacion.blade.php">UBICACION</a></li>
-                    <li><a href="">COTIZACIONES</a>
+                    <li><a href="{{ route('clientes') }}">CLIENTES</a></li>
+                    <li><a href="{{ route('ubicacion') }}">UBICACION</a></li>
+                    <li><a href="#">COTIZACIONES</a>
                         <ul>
-                            <li><a href="cot_ensayos.blade.php">ENSAYOS</a></li>
-                            <li><a href="cot_calibraciones.blade.php">CALIBRACIONES</a></li>
-                            <li><a href="cot_capacitaciones.blade.php">CAPACITACIONES</a></li>
+                            <li><a href="{{ route('cot_ensayos') }}">ENSAYOS</a></li>
+                            <li><a href="{{ route('cot_calibraciones') }}">CALIBRACIONES</a></li>
+                            <li><a href="{{ route('cot_capacitaciones') }}">CAPACITACIONES</a></li>
                         </ul>
                     </li>
-                    <li><a href="">INTRANET</a>
+                    <li><a href="{{ route('login') }}">INTRANET</a>
+                        <!--
                         <ul>
-                            <li><a href="intranet_ensayos.blade.php">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
-                            <li><a href="intranet_calibraciones.blade.php">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
-                            <li><a href="intranet_capacitaciones.blade.php">INTRANET PARA CAPACITACIONES</a></li>
-                        </ul>
+                            <li><a href="">INTRANET PARA COTIZACIONES DE ENSAYOS</a></li>
+                            <li><a href="">INTRANET PARA COTIZACIONES DE CALIBRACIONES</a></li>
+                            <li><a href="">INTRANET PARA CAPACITACIONES</a></li>
+                        </ul> -->
                     </li>
                 </ul>
             </div>
         </div>
-    <!-- END NAVBAR -->
+
 
         <section style="padding:0">
         <div class="bg-black position-absolute left-0  width-100 height-100" style="background-color: #d8980c47">
@@ -341,12 +341,11 @@
             <!-- end slider section -->
         </div>
         </section>
-
-        <!-- start scroll to top -->
+       <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
         <!-- javascript libraries -->
-        <script type="text/javascript" src="{{ asset('js-we/js-web/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/js-web/modernizr.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/js-web/bootstrap.bundle.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/js-web/jquery.easing.1.3.js') }}"></script>
@@ -404,5 +403,5 @@
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
         <!-- setting -->
         <script type="text/javascript" src="{{ asset('js/js-web/main.js') }}"></script>
-</body>
+    </body>
 </html>

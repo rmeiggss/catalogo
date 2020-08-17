@@ -454,30 +454,31 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
 
                 </div>
                 <!-- start contact-form -->
-                <form id="project-contact-form" action="javascript:void(0)" method="post">
+                <form id="project-contact-form" action="{{ route('servicio_academico.store') }}" method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-12">
                             <div id="success-project-contact-form" class="mx-0"></div>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="name" id="name" placeholder="Universidad de Procedencia *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="nombre" id="nombre" placeholder="Universidad de Procedencia *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="phone" id="phone" placeholder="Nombre del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="nombre_contact" id="nombre_contact" placeholder="Nombre del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
                         <div class="col-12 col-lg-6">
                             <input type="text" name="email" id="email" placeholder="Correo Electronico del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="email" id="email" placeholder="Celular del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="celular" id="celular" placeholder="Celular del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
 
                         <div class="col-12 col-lg-6">
                             <div class="select-style medium-select border-color-medium-dark-gray">
-                                <select name="budget" id="budget" class="bg-transparent mb-0">
+                                <select name="servicio" id="servicio" class="bg-transparent mb-0">
                                     <option value="">Seleccione el Servicio Academico</option>
-                                    <option value="Calidad">Capacitacion en Laboratorio</option>
-                                    <option value="Tableros">Implementacion en Laboratorio</option>
+                                    <option value="Capacitacion en Laboratorio">Capacitacion en Laboratorio</option>
+                                    <option value="Implementacion en Laboratorio">Implementacion en Laboratorio</option>
                                 </select>
                             </div>
                         </div>

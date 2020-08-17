@@ -124,30 +124,31 @@ Llene el siguiente Formulario y nos comunicaremos con usted para absolver cualqu
                     <!-- end contact-form head -->
                 </div>
                 <!-- start contact-form -->
-                <form id="project-contact-form" action="javascript:void(0)" method="post">
+                <form id="project-contact-form" method="post" action="{{ route('asesorias.store') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-12">
                             <div id="success-project-contact-form" class="mx-0"></div>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="name" id="name" placeholder="Nombre de la Empresa *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="nombre_emp" id="nombre_emp" placeholder="Nombre de la Empresa *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="phone" id="phone" placeholder="Nombre del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="nombre_contact" id="nombre_contact" placeholder="Nombre del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="email" id="email" placeholder="Correo Electronico del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="email_contact" id="email_contact" placeholder="Correo Electronico del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" name="email" id="email" placeholder="Celular del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            <input type="text" name="celular_contact" id="celular_contact" placeholder="Celular del Contacto *" class="bg-transparent border-color-medium-dark-gray medium-input">
                         </div>
 
                         <div class="col-12 col-lg-6">
                             <div class="select-style medium-select border-color-medium-dark-gray">
-                                <select name="budget" id="budget" class="bg-transparent mb-0">
+                                <select name="asesoria" id="asesoria" class="bg-transparent mb-0">
                                     <option value="">Seleccione la Asesoria</option>
-                                    <option value="Calidad">Calidad de la Energia</option>
-                                    <option value="Tableros">Mantenimiento de Tableros</option>
+                                    <option value="Calidad de la Energia">Calidad de la Energia</option>
+                                    <option value="Mantenimiento de Tableros">Mantenimiento de Tableros</option>
                                 </select>
                             </div>
                         </div>

@@ -204,7 +204,7 @@
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
         <!-- javascript libraries -->
-        <script type="text/javascript" src="{{ asset('js-we/js-web/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/js-web/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/js-web/modernizr.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/js-web/bootstrap.bundle.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/js-web/jquery.easing.1.3.js') }}"></script>

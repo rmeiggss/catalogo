@@ -114,20 +114,20 @@ Universidad Nacional de Ingeniería')
                     Nombre del Departamento:
                     <br>
                     <select class="form-control" name="depart_solic">
-                        <option value="volvo">2020</option>
-                        <option value="saab">2019</option>
+                        <option value="volvo">Lima</option>
+                        <option value="saab">Arequipa</option>
                     </select>
                     Nombre de la Provincia:
                     <br>
                     <select class="form-control" name="prov_solic">
-                        <option value="volvo">2020</option>
-                        <option value="saab">2019</option>
+                        <option value="Lima">Lima</option>
+                        <option value="Arequipa">Arequipa</option>
                     </select>
                     Nombre del Distrito:
                     <br>
                     <select class="form-control" name="dist_solic">
-                        <option value="volvo">2020</option>
-                        <option value="saab">2019</option>
+                        <option value="Miraflores">Miraflores</option>
+                        <option value="San Juan de Luriganch">San Juan de Lurigancho</option>
                     </select>
                     <button type="submit" class="btn btn-primary-outline">Agregar solicitante</button>
                 </form>
