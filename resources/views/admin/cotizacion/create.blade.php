@@ -19,13 +19,13 @@
                 <div class="col-12">
                     <!--Main content-->
                     <div class="invoice p-3 mb-3">
-                     {!!Form::open(['route'=>'cotizacion.store','method'=>'post',])!!}   
+                     {!!Form::open(['route'=>'cotizacion.store','method'=>'post'])!!}   
                         <!-- info row 1 -->
                         <div class="row invoice-info">
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                                {!!Form::select('solicitante',Arr::pluck($solicitantes,'SOLIC_Nombre','id'),'S',['placeholder'=>'Seleccione un solicitante','class'=>'col-sm-6 form-control-sm'])!!}                                
+                                {!!Form::select('solicitante',Arr::pluck($solicitantes,'SOLIC_Nombre','id'),'',['placeholder'=>'::Seleccione::','class'=>'col-sm-6 form-control-sm','id'=>'solicitante'])!!}
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
@@ -58,9 +58,9 @@
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
-                            <div class="row form-group">
+                             <div class="row form-group">
                                 <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
-                                <i class="fas fa-plus" class="form-control-sm"></i>
+                                <i class="fas fa-plus" class="form-control-sm" id="agregar"></i>
                             </div>
                           </div>
                         </div>                        
@@ -110,15 +110,15 @@
                                 <table class="table">
                                   <tr>
                                     <th style="width:50%">Subtotal:</th>
-                                    <td><input type="text" class="form-control-sm w-50" value="$250.30"></td>
+                                    <td>{!!Form::text('subtotal',NULL,['class'=>'form-control-sm w-50','id'=>'subtotal'])!!}</td>
                                   </tr>
                                   <tr>
                                     <th>I.G.V. (18%)</th>
-                                    <td><input type="text" class="form-control-sm w-50" value="$10.34"></td>
+                                    <td>{!!Form::text('igv',NULL,['class'=>'form-control-sm w-50','id'=>'igv'])!!}</td>
                                   </tr>
                                   <tr>
                                     <th>Total:</th>
-                                    <td><input type="text" class="form-control-sm w-50" value="$265.24"></td>
+                                    <td>{!!Form::text('total',NULL,['class'=>'form-control-sm w-50','id'=>'total'])!!}</td>
                                   </tr>
                                 </table>
                               </div>
