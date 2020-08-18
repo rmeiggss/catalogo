@@ -6,11 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel</title>
         <link href="{{asset('css/app.css')}}" rel="stylesheet"> <!--Añadimos el css generado con webpack-->
+    
     </head>
     <body>
 <div id="app">
    <example-component></example-component>
 </div>
-        <script src="{{asset('js/app.js')}}"></script> <!--Añadimos el js generado con webpack, donde se encuentra nuestro componente vuejs-->
+<script src="{{asset('js/app.js')}}"></script> <!--Añadimos el js generado con webpack, donde se encuentra nuestro componente vuejs-->       
     </body>
 </html>
