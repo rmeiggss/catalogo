@@ -25,9 +25,9 @@ class CotizacionController extends Controller
      */
     public function create()
     {
-        //$solicitantes = Solicitante::all();
-        //return view("admin.cotizacion.create",compact('solicitantes'));
-        return view('home2');
+        $solicitantes = Solicitante::all();
+        return view("admin.cotizacion.create",compact('solicitantes'));
+        //return view('home2');
     }
 
     public function store(Request $request)
