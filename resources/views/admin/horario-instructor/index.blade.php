@@ -32,8 +32,8 @@
                 <tr>
                   <th scope="col">Código</th>
                   <th scope="col">Instructor</th>
-                  <th scope="col">Semana Laborable</th>
-                  <th scope="col">Día Laborable</th>
+                  <th scope="col">Fecha Inicial</th>
+                  <th scope="col">Fecha Final</th>
                   <th scope="col">Hora Inicial</th>
                   <th scope="col">Hora Final</th>
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
@@ -46,8 +46,8 @@
 	                    <!--actualizado por marck -->
 	                    <th scope="row">{{$item+1}}</th>
                       <td>{{$horarioinstructor->nombre_instructor}}</td>
-                      <td>{{$horarioinstructor->semana_labor}}</td>
-                      <td>{{$horarioinstructor->dia_labor}}</td>
+                      <td>{{$horarioinstructor->fecha_inicial}}</td>
+                      <td>{{$horarioinstructor->fecha_final}}</td>
                       <td>{{$horarioinstructor->hora_inicial}}</td>
                       <td>{{$horarioinstructor->hora_final}}</td>
 	                    <td><button class="btn btn-info btn-sm">

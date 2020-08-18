@@ -89,7 +89,7 @@ Universidad Nacional de Ingeniería')
         <div class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
-                <form class="form-horizontal form-control" method="POST" action="{{ route('cot_ensayos.store') }}"
+                <div class="form-horizontal form-control" method="POST" action="{{ route('cot_ensayos.store') }}"
                       style="width:500px;height:705px;margin:0 auto">
                     @csrf
                     Nombre del Solicitante:
@@ -129,27 +129,28 @@ Universidad Nacional de Ingeniería')
                         <option value="Miraflores">Miraflores</option>
                         <option value="San Juan de Luriganch">San Juan de Lurigancho</option>
                     </select>
-                    <button type="submit" class="btn btn-primary-outline">Agregar solicitante</button>
-                </form>
+                     <button type="submit" class="btn btn-primary-outline px-5 m-auto">Agregar</button>
+                </div>
                 <br>
             </div>
 
-            <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
-                <h4 style="text-align: center;color:black;">Representante de la Empresa Solicitante</h4>
-                <form class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
-                    @csrf
-                    Nombre del Contacto:
-                    <br>
-                    <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto" />
-                    Correo Electronico del Contacto:
-                    <br>
-                    <input class="form-control" type="text" name="email_contacto" id="email_contacto" />
-                    Celular del Contacto:
-                    <br>
-                    <input class="form-control" type="text" name="celular_contacto" id="celular_contacto" />
-                    <br>
-                </form>
-            </div>
+                    <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
+                        <h4 style="text-align: center;color:black;">Representante de la Empresa Solicitante</h4>
+                        <div class="form-horizontal form-control" action=""
+                              style="width:500px;height:705px;margin:0 auto">
+                            Nombre del Contacto:
+                            <br>
+                            <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto">
+                            Correo Electronico del Contacto:
+                            <br>
+                            <input class="form-control" type="text" name="email_contacto" id="email_contacto">
+                            Celular del Contacto:
+                            <br>
+                            <input class="form-control" type="text" name="celular_contacto" id="celular_contacto">
+                            <br>
+                        </div>
+                    </div>
+
         </div>
 
         <div class="container-fluid">

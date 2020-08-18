@@ -14,8 +14,8 @@ class CotizacionController extends Controller
         /*if($request->user()->authorizeRoles(['admin'])){
             echo "hola";
         }*/
-        $cotizaciones = Cotizacion::all(); 
-        return view('admin.cotizacion.index', compact('solicitantes','cotizaciones'));
+        $cotizaciones = Cotizacion::all();  
+        return view('admin.cotizacion.index', compact('cotizaciones'));
     }
 
     /**
@@ -25,24 +25,22 @@ class CotizacionController extends Controller
      */
     public function create()
     {
-        $solicitantes = Solicitante::all();
-        return view("admin.cotizacion.create",compact('solicitantes'));
+        //$solicitantes = Solicitante::all();
+        //return view("admin.cotizacion.create",compact('solicitantes'));
+        return view('home2');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        /*Cotizacion::create([
-            'CURSOC_Nombre' => request('nombre'),
-            'CURSOC_Descripcion' => request('descripcion'),
-            'CURSOC_Costo' => request('costo'),
-        ]);*/
-
+        Cotizacion::create([
+            'SOLIP_Codigo'   => request('solicitante'),
+            'COTIC_Numero'   => request('numero'),
+            'COTIC_Fecha'    => request('fecha'),
+            'USUA_Codigo'    => request('usuario'),
+            'COTIC_SubTotal' => request('subtotal'),
+            'COTIC_Igv'      => request('igv'),
+            'COTIC_Total'    => request('total')
+        ]);
         return Redirect::to("/cotizacion");
     }
 

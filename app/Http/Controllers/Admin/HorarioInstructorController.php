@@ -41,8 +41,8 @@ class HorarioInstructorController extends Controller
     {
         HorarioInstructor::create([
             'nombre_instructor' => request('nombre'),
-            'semana_labor' => request('semana'),
-            'dia_labor' => request('dia'),
+            'fecha_inicial' => request('fecha_inicial'),
+            'fecha_final' => request('fecha_final'),
             'hora_inicial' => request('hora_in'),
             'hora_final' => request('hora_fi'),
         ]);
@@ -86,8 +86,8 @@ class HorarioInstructorController extends Controller
         $horarioinstructor = HorarioInstructor::findOrFail($id);
 
         $horarioinstructor->nombre_instructor = $request->nombre;
-        $horarioinstructor->semana_labor = $request->semana;
-        $horarioinstructor->dia_labor = $request->dia;
+        $horarioinstructor->fecha_inicial = $request->fecha_inicial;
+        $horarioinstructor->fecha_final = $request->fecha_final;
         $horarioinstructor->hora_inicial = $request->hora_in;
         $horarioinstructor->hora_final = $request->hora_fi;
 
