@@ -22,6 +22,10 @@ Route::resource('solicitante','Admin\SolicitanteController');
 Auth::routes();
 
 // -------- Rutas de marck --------------------
+
+//------- Rutas de gerson -----------------------
+Route::resource('asesoria','Admin\AsesoriaController');
+
 // -------- Rutas del ADMIN
 Route::resource('curso','Admin\CursoController');
 Route::resource('instructor','Admin\InstructorController');
