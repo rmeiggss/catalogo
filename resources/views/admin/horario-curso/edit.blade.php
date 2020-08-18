@@ -25,13 +25,13 @@
                 </div>
 
                 <div class="form-group">
-                    {!!Form::label('semana','Semana del Mes')!!}
-                    {!!Form::text('semana', $horariocurso->semana_labor,['class'=>'form-control','id'=>'semana'])!!}
+                    {!!Form::label('fecha_inicial','Fecha de Inicio')!!}
+                    {!!Form::text('fecha_inicial', $horariocurso->fecha_inicial,['class'=>'form-control','id'=>'fecha_inicial'])!!}
                 </div>
 
                 <div class="form-group">
-                {!!Form::label('dia','Dia Laborable')!!}
-                    {!!Form::text('dia', $horariocurso->dia_labor,['class'=>'form-control','id'=>'dia'])!!}
+                {!!Form::label('fecha_final','Fecha Final')!!}
+                    {!!Form::text('fecha_final', $horariocurso->fecha_final,['class'=>'form-control','id'=>'fecha_final'])!!}
                 </div>
 
                 <div class="form-group">

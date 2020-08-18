@@ -29,7 +29,7 @@ Route::resource('horario-curso','Admin\HorarioCursoController');
 Route::resource('horario-instructor','Admin\HorarioInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
 // --------- Rutas del CLIENTE
-Route::resource('cot_ensayos','Cliente\EnsayoController');
+Route::resource('cot_ensayos','Cliente\SolicitanteController');
 Route::resource('cot_calibraciones','Cliente\CalibracionController');
 Route::resource('cot_capacitaciones','Cliente\CapacitacionController');
 

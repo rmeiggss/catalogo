@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Cliente;
 use App\Http\Controllers\Controller;
 use App\Ensayo;
+use App\Contacto;
 use Illuminate\Http\Request;
 use Redirect;
 
-class EnsayoController extends Controller
+class SolicitanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,6 +44,14 @@ class EnsayoController extends Controller
             'SOLIC_Telefono' => request('celular_solic'),
             'SOLIC_Email' => request('email_solic'),
         ]);
+
+        Contacto::create([
+            'nombre_contacto' => request('nombre_contacto'),
+            'email_contacto' => request('email_contacto'),
+            'celular_contacto' => request('celular_contacto'),
+            'user_id' => request('id'),
+        ]);
+
 
         return Redirect::to("/cot_ensayos");
     }
