@@ -23,13 +23,13 @@
                 </div>
 
                 <div class="form-group">
-                    {!!Form::label('semana','Semana del Mes')!!}
-                    {!!Form::text('semana',null,['class'=>'form-control','placeholder'=>'Semana del Mes ...','id'=>'semana'])!!}
+                    {!!Form::label('fecha_inicial','Fecha de Inicio')!!}
+                    {!!Form::date('fecha_inicial',"2020-08-17",['class'=>'form-control','id'=>'fecha_inicial'])!!}
                 </div>
 
                 <div class="form-group">
-                {!!Form::label('dia','Dia Laborable')!!}
-                    {!!Form::text('dia',null,['class'=>'form-control','placeholder'=>'Dia Laborable ...','id'=>'dia'])!!}
+                {!!Form::label('fecha_final','Fecha Final')!!}
+                    {!!Form::date('fecha_final',"2020-08-17",['class'=>'form-control','id'=>'fecha_final'])!!}
                 </div>
 
                 <div class="form-group">

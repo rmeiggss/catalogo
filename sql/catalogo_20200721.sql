@@ -29,7 +29,7 @@ CREATE TABLE `alumno` (
   `PERSP_Codigo` int DEFAULT NULL,
   `COCAP_Codigo` int DEFAULT NULL,
   `ALUMC_Identificador` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ALUMC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '1',
+  `ALUMC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
   `ALUMC_FechaModificacion` datetime DEFAULT NULL,
   `ALUMC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ALUMP_Codigo`),
@@ -85,7 +85,7 @@ CREATE TABLE `cotizacion` (
   `COTIC_Numero` int NOT NULL,
   `USUA_Codigo` int DEFAULT NULL,
   `COTIC_Observacion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `COTIC_Mensaje` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `COTIC_Mensaje` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `COTIC_SubTotal` int DEFAULT NULL,
   `COTIC_Igv` int DEFAULT NULL,
   `COTIC_Total` int DEFAULT NULL,
@@ -149,10 +149,10 @@ DROP TABLE IF EXISTS `cotizacion_detalle`;
 CREATE TABLE `cotizacion_detalle` (
   `CODEP_Codigo` int NOT NULL AUTO_INCREMENT,
   `CODEC_NombreEquipo` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CODEC_Descripcion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `CODEC_Fabricante` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `CODEC_Url` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `CODEC_FlagEstado` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `CODEC_Descripcion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CODEC_Fabricante` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CODEC_Url` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CODEC_FlagEstado` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `CODEC_Cantidad` int DEFAULT NULL,
   `CODEC_SubTotal` double DEFAULT NULL,
   `CODEC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -267,8 +267,8 @@ DROP TABLE IF EXISTS `horario_cursos`;
 CREATE TABLE `horario_cursos` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `nombre_curso` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `semana_labor` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `dia_labor` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `semana_labor` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `dia_labor` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `hora_inicial` int DEFAULT NULL,
   `hora_final` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -349,11 +349,11 @@ CREATE TABLE `menu` (
   `MENU_Codigo` int NOT NULL AUTO_INCREMENT,
   `MENU_Codigo_Padre` int NOT NULL DEFAULT '0',
   `MENU_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `MENU_Url` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `MENU_Url` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `MENU_Orden` int NOT NULL DEFAULT '1',
   `MENU_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `MENU_FechaModificacion` datetime DEFAULT NULL,
-  `MENU_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '1',
+  `MENU_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
   PRIMARY KEY (`MENU_Codigo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -488,7 +488,7 @@ DROP TABLE IF EXISTS `rol`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
   `ROL_Codigo` int NOT NULL AUTO_INCREMENT,
-  `ROL_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ROL_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `ROL_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ROL_FechaModificacion` datetime DEFAULT NULL,
   `ROL_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
@@ -567,13 +567,13 @@ DROP TABLE IF EXISTS `solicitante`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solicitante` (
   `SOLIP_Codigo` int NOT NULL AUTO_INCREMENT,
-  `UBIGP_Codigo` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `SOLIC_Nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `SOLIC_Ruc` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `UBIGP_Codigo` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `SOLIC_Nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `SOLIC_Ruc` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `SOLIC_Direccion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_Telefono` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `SOLIC_Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `SOLIC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '1',
+  `SOLIC_Telefono` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `SOLIC_Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `SOLIC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
   `SOLIC_FechaModificacion` datetime DEFAULT NULL,
   `SOLIC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`SOLIP_Codigo`),
@@ -624,14 +624,14 @@ DROP TABLE IF EXISTS `ubigeo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ubigeo` (
-  `UBIGP_Codigo` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `UBIGC_CodDpto` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `UBIGC_CodProv` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `UBIGP_Codigo` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `UBIGC_CodDpto` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `UBIGC_CodProv` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `UBIGC_CodDist` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `UBIGC_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `UBIGC_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `UBIGC_FechaRegistro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `UBIGC_FechaModificacion` datetime DEFAULT NULL,
-  `UBIGC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '1',
+  `UBIGC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
   PRIMARY KEY (`UBIGP_Codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

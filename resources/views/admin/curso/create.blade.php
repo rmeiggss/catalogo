@@ -26,10 +26,10 @@
                     {!!Form::textarea('descripcion',null,['class'=>'form-control','placeholder'=>'Ingrese la descripcion','id'=>'descripcion'])!!}
                 </div>
                 <div class="form-group">
-                {!!Form::label('costo','Costo')!!}
+                    {!!Form::label('costo','Costo')!!}
                     {!!Form::text('costo',null,['class'=>'form-control','placeholder'=>'Ingrese el costo','id'=>'costo'])!!}
                 </div>
-                {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
+                    {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
                 <!-- Agregar boton de cancelar -->
                 <a class="btn btn-danger" href="{{ route('curso.index') }}">Cancelar</a>
             {!!Form::close()!!}

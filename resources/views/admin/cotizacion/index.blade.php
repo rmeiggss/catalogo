@@ -29,20 +29,22 @@
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
-                <tr>
+                <tr class="text-center">
                   <th scope="col">Codigo</th>
                   <th scope="col">Numero</th>
-                  <th scope="col">Observacion</th>
+                  <th scope="col">Solicitante</th>
+                  <th scope="col">Fecha</th>
                   <th scope="col">Total</th>
-                  <th scope="col" colspan="2" class="text-center">Acciones</th>
+                  <th scope="col" colspan="2">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach($cotizaciones as $item=>$cot)
-                  <tr>
-                    <th scope="row">{{$item+1}}</th>
-                    <td>{{$cot->COTIP_Codigo}}</td>
-                    <td>{{$cot->COTIC_Observacion}}</td>
+                  <tr class="text-center">
+                    <th scope="row">{{$cot->COTIP_Codigo}}</th>
+                    <td>{{$cot->COTIC_Numero}}</td>
+                    <td>{{$cot->SOLIP_Codigo}}</td>
+                    <td>{{$cot->COTIC_Fecha}}</td>
                     <td>{{$cot->COTIC_Total}}</td>
                     <td><button class="btn btn-info">Editar</button></td>
                     <!--td></td-->
