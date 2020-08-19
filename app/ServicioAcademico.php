@@ -11,12 +11,15 @@ class ServicioAcademico extends Model
     protected $table = 'servicio';
 
     protected $fillable = [
+		'SERVICIOAC_Nombre',
+		'SERVICIOAC_Costo',
+		'SERVICIOAC_Descripcion',
     	'Universidad_Procedencia',
     	'Nombre_Contacto',
     	'Correo_Electrónico_Contacto',
     	'Celular_Contacto',
     	'Tipo_Servicio_Academico',
-    	'Descripcion_Servicio_Solicitado'
+		'Descripcion_Servicio_Solicitado'
     ];
 
     public $timestamps = false;

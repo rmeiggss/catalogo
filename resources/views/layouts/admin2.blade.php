@@ -226,7 +226,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+              <a href="{{ route('servicioac.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Servicio Academico</p>
                 </a>
