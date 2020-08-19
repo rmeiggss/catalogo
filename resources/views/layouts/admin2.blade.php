@@ -7,7 +7,6 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <!--title>{{ config('app.name', 'Catalogo de Productos') }}</title-->
   <title>Laboratorio de Electricidad</title>
-  <script src="{{asset('js/app.js')}}"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- overlayScrollbars -->
@@ -16,9 +15,10 @@
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Google Font: Source Sans Pro -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">
+  <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -322,10 +322,8 @@
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
-
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
-
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
 <script src="{{asset('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
@@ -334,8 +332,8 @@
 <script src="{{asset('plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
-
 <!-- PAGE SCRIPTS -->
 <script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>
