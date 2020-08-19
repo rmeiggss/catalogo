@@ -32,6 +32,7 @@ class CotizacionController extends Controller
 
     public function store(Request $request)
     {
+        //Grabamos la cabecera
         Cotizacion::create([
             'SOLIP_Codigo'   => request('solicitante'),
             'COTIC_Numero'   => request('numero'),
@@ -41,6 +42,7 @@ class CotizacionController extends Controller
             'COTIC_Igv'      => request('igv'),
             'COTIC_Total'    => request('total')
         ]);
+        
         return Redirect::to("/cotizacion");
     }
 

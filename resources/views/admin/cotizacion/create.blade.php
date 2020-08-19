@@ -90,15 +90,15 @@
                                </thead>
                                  <tbody>
                                      <tr class="text-center" v-for="row in rows">
-                                       <td>1</td>
-                                       <td><input type="text" class="form-control-sm w-100" value="Telurómetro"></td>
-                                       <td><input type="text" class="form-control-sm w-100" value="Equipo para medir la resitencia"></td>
-                                       <td><input type="text" class="form-control-sm w-100" value="Siemens"></td>
+                                       <td><label style="border: 1px solid red;color: blue;"> x </label></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="nombre[]"></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="descripcion[]"></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="fabricante[]"></td>
                                        <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                                        <td><button class="btn btn-outline-success btn-lg btn-sm">Lista</button></td>
-                                       <td><input type="text" class="form-control-sm w-100" value="250"></td>
-                                       <td><input type="text" class="form-control-sm w-100" value="3"></td>
-                                       <td><input type="text" class="form-control-sm w-100" value="750"></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="cantidad[]"></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="unitario[]"></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="subtotal[]"></td>
                                      </tr>
                                  </tbody>
                              </table>
