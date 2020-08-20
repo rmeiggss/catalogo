@@ -39,14 +39,14 @@ class CotizacionController extends Controller
         ]);
         //Grabamos detalle
         if(count($request->nombre)>0){
-            foreach($request->nombre as $value){
-                CotizacionDetalle::created([
-                    "CODEC_NombreEquipo"   => $value->nombre,
-                    "CODEC_Descripcion"    => $value->descripcion,
-                    "CODEC_Fabricante"     => $value->fabricante,
-                    "CODEC_Cantidad"       => $value->cantidad,
-                    "CODEC_PrecioUnitario" => $value->unitario,
-                    "CODEC_SubTotal"       => $value->subtotal
+            foreach($request->nombre as $item=>$value){
+                CotizacionDetalle::create([
+                    "CODEC_NombreEquipo"   => $request->nombre[$item],
+                    "CODEC_Descripcion"    => $request->descripcion[$item],
+                    "CODEC_Fabricante"     => $request->fabricante[$item],
+                    "CODEC_Cantidad"       => $request->cantidad[$item],
+                    "CODEC_PrecioUnitario" => $request->unitario[$item],
+                    "CODEC_SubTotal"       => $request->subtotaldet[$item]
                 ]);
             }
         }

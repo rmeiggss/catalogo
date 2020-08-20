@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
+Route::get('/usuario/list','Admin\UsuarioController@list');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');

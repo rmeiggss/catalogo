@@ -11,12 +11,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    <div>
-        <ol>
-          <example-component></example-component>
-          <example-component></example-component>
-        </ol>
-    </div>
+    
     <!-- Main Content-->
     <section class="content" id="app">
         <div class="container-fluid">
@@ -36,7 +31,7 @@
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                                {!!Form::text('numero',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'numero'])!!}  
+                                {!!Form::text('numero',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'numero','maxlenght'=>'11'])!!}  
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
@@ -98,7 +93,7 @@
                                        <td><button class="btn btn-outline-success btn-lg btn-sm">Lista</button></td>
                                        <td><input type="text" class="form-control-sm w-100" name="cantidad[]"></td>
                                        <td><input type="text" class="form-control-sm w-100" name="unitario[]"></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="subtotal[]"></td>
+                                       <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]"></td>
                                      </tr>
                                  </tbody>
                              </table>

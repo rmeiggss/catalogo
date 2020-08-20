@@ -2,7 +2,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('usuario-component', require('./components/UsuarioComponent.vue').default);
 
 const  app = new Vue({
   el: '#app',data:{
