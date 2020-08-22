@@ -2,7 +2,7 @@
  
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -59,48 +59,16 @@
                           </div>
                           <div class="col-sm-4 invoice-col">
                              <div class="row form-group">
-                                <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
-                                <a href="#" @click="addRow()"><i class="fas fa-plus" class="form-control-sm" id="agregar"></i></a>
+                                
                             </div>
                           </div>
                         </div>                        
                         <!-- /.info row 2 -->
                         
-                        <!-- Table row -->
-                         <div class="row">
-                           <div class="col-12 table-responsive">
-                            <table class="table table-striped">
-                               <thead>
-                                <tr class="text-center">
-                                 <th style="width:5%;">No</th>
-                                 <th style="width:30%;">Nombre</th>
-                                 <th style="width:30%;">Descripcion</th>
-                                 <th style="width:10%;">Fabricante</th>
-                                 <th style="width:5%;">Ficha</th>
-                                 <th style="width:5%;">Pruebas</th>
-                                 <th style="width:5%;">Cantidad</th>
-                                 <th style="width:5%;">P.Unitario</th>
-                                 <th style="width:5%;">Subtotal</th>
-                               </tr>
-                               </thead>
-                                 <tbody>
-                                     <tr class="text-center" v-for="row in rows">
-                                       <td><label style="border: 1px solid red;color: blue;"> x </label></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="nombre[]"></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="descripcion[]"></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="fabricante[]"></td>
-                                       <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
-                                       <td><button class="btn btn-outline-success btn-lg btn-sm">Lista</button></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="cantidad[]"></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="unitario[]"></td>
-                                       <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]"></td>
-                                     </tr>
-                                 </tbody>
-                             </table>
-                           </div>
-                           <!-- /.col -->
-                         </div>
-                         <!-- /.row -->
+                        <!-- Detalle -->
+                        <cotizacion-component></cotizacion-component>
+                         <!-- /.Detalle -->
+                         
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-9">&nbsp;</div>
