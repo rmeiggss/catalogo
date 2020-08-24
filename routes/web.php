@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
+Route::get('/usuario/list','Admin\UsuarioController@list');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');
@@ -32,6 +33,8 @@ Route::resource('instructor','Admin\InstructorController');
 Route::resource('horario-curso','Admin\HorarioCursoController');
 Route::resource('horario-instructor','Admin\HorarioInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
+// -------- Rutas de diego --------------------
+Route::resource('servicioac','Admin\ServicioAcademicoController');
 // --------- Rutas del CLIENTE
 Route::resource('cot_ensayos','Cliente\EnsayoController');
 Route::resource('cot_calibraciones','Cliente\CalibracionController');

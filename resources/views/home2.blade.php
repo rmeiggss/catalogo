@@ -9,9 +9,12 @@
     
     </head>
     <body>
-<div id="app">
-   <example-component></example-component>
-</div>
+    <div id="app">
+        <ol>
+          <example-component></example-component>
+          <example-component></example-component>
+        </ol>
+    </div>
 <script src="{{asset('js/app.js')}}"></script> <!--Añadimos el js generado con webpack, donde se encuentra nuestro componente vuejs-->       
     </body>
 </html>

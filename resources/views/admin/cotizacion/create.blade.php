@@ -2,7 +2,7 @@
  
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -13,7 +13,7 @@
     </section>
     
     <!-- Main Content-->
-    <section class="content">
+    <section class="content" id="app">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -31,7 +31,7 @@
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                                {!!Form::text('numero',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'numero'])!!}  
+                                {!!Form::text('numero',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'numero','maxlenght'=>'11'])!!}  
                               </div>
                           </div>
                           <div class="col-sm-4 invoice-col">
@@ -43,8 +43,8 @@
                         </div>
                         <!-- /.info row 1 -->
                         
-                        <!-- info row 2 -->
-                       <div class="row invoice-info">
+                         <!-- info row 2 -->
+                        <div class="row invoice-info">
                           <div class="col-sm-4 invoice-col">
                               <div class="row form-group">
                                 <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
@@ -59,48 +59,16 @@
                           </div>
                           <div class="col-sm-4 invoice-col">
                              <div class="row form-group">
-                                <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
-                                <i class="fas fa-plus" class="form-control-sm" id="agregar"></i>
+                                
                             </div>
                           </div>
                         </div>                        
                         <!-- /.info row 2 -->
                         
-                        <!-- Table row -->
-                         <div class="row">
-                           <div class="col-12 table-responsive">
-                             <table class="table table-striped">
-                               <thead>
-                                <tr class="text-center">
-                                 <th style="width:5%;">No</th>
-                                 <th style="width:30%;">Nombre</th>
-                                 <th style="width:30%;">Descripcion</th>
-                                 <th style="width:10%;">Fabricante</th>
-                                 <th style="width:5%;">Ficha</th>
-                                 <th style="width:5%;">Pruebas</th>
-                                 <th style="width:5%;">Cantidad</th>
-                                 <th style="width:5%;">P.Unitario</th>
-                                 <th style="width:5%;">Subtotal</th>
-                               </tr>
-                               </thead>
-                               <tbody>
-                               <tr class="text-center">
-                                 <td>1</td>
-                                 <td><input type="text" class="form-control-sm w-100" value="Telurómetro"></td>
-                                 <td><input type="text" class="form-control-sm w-100" value="Equipo para medir la resitencia"></td>
-                                 <td><input type="text" class="form-control-sm w-100" value="Siemens"></td>
-                                 <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
-                                 <td><button class="btn btn-outline-success btn-lg btn-sm">Lista</button></td>
-                                 <td><input type="text" class="form-control-sm w-100" value="250"></td>
-                                 <td><input type="text" class="form-control-sm w-100" value="3"></td>
-                                 <td><input type="text" class="form-control-sm w-100" value="750"></td>
-                               </tr>
-                               </tbody>
-                             </table>
-                           </div>
-                           <!-- /.col -->
-                         </div>
-                         <!-- /.row -->
+                        <!-- Detalle -->
+                        <cotizacion-component></cotizacion-component>
+                         <!-- /.Detalle -->
+                         
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-9">&nbsp;</div>

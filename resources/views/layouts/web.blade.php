@@ -25,23 +25,13 @@
 </head>
 <body>
  <!--Navbar-->
-  <nav class="navbar navbar-dark navbar-expand-lg scrolling-navbar nav-pills nav-fill" style="background-color: #195faa">
+  <nav class="navbar navbar-dark navbar-expand-lg scrolling-navbar nav-pills nav-fill" style="background-color: #800404">
     <a class="navbar-brand" href="{{ asset('/') }}">Laboratorio de Electricidad</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">Cotizaciones</a>
-          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="{{ asset('ensayos') }}" id="category1">Ensayos</a>
-            <a class="dropdown-item" href="{{ asset('calibraciones') }}" id="category2">Calibraciones</a>
-            <a class="dropdown-item" href="{{ asset('capacitaciones') }}" id="category3">Capacitaciones</a>
-          </div>
-        </li>
-      </ul>
     </div>
   </nav>
   <!--/Navbar-->
