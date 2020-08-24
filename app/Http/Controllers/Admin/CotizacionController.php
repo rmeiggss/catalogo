@@ -14,7 +14,7 @@ class CotizacionController extends Controller
         /*if($request->user()->authorizeRoles(['admin'])){
             echo "hola";
         }*/
-        $cotizaciones = Cotizacion::all();  
+        $cotizaciones = Cotizacion::all();
         return view('admin.cotizacion.index', compact('cotizaciones'));
     }
 
@@ -39,7 +39,11 @@ class CotizacionController extends Controller
             'USUA_Codigo'    => request('usuario'),
             'COTIC_SubTotal' => request('subtotal'),
             'COTIC_Igv'      => request('igv'),
-            'COTIC_Total'    => request('total')
+            'COTIC_Total'    => request('total'),
+            'COTIC_Correo1'    => request('correo1'),
+            'COTIC_correo2'    => request('correo2'),
+            'COTIC_correo3'    => request('correo3'),
+            'COTIC_correo4'    => request('correo4'),
         ]);
         return Redirect::to("/cotizacion");
     }

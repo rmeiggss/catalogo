@@ -8,9 +8,9 @@ class Contacto extends Model
 {
     protected $primaryKey = 'id';
 
-    protected $table = 'solicitante';
+    protected $table = 'contacto';
 
-    protected $fillable = ['nombre_contacto', 'email_contacto', 'celular_contacto', 'user_id'];
+    protected $fillable = ['nombre_contacto', 'email_contacto', 'celular_contacto'];
 
     public $timestamps = false;
 }

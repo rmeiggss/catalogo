@@ -19,7 +19,8 @@ class CreateContactoTable extends Migration
             $table->string('email_contacto')->nullable();
             $table->string('celular_contacto')->nullable();
 
-            $table->foreignId('user_id')->constrained('solicitante');
+            $table->unsignedBigInteger('contacto_id')->nullable();
+            $table->foreign('contacto_id')->references('id')->on('solicitante');
 
             $table->timestamps();
         });
