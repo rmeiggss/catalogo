@@ -244,16 +244,19 @@
     <!-- /.sidebar -->
   </aside>
 
-   @yield('content')
+    <div class="content-wrapper" id="app">
+        @yield('content')       
+    </div>   
+
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <!--footer class="main-footer">
     <strong>Copyright &copy; 2020 <a href="#">Laboratorio de Electricidad No6 - FIEE</a>.</strong>
     Todos los derechos reservados.
     <!--div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.4
     </div-->
-  </footer>
+  </footer-->
 
 </div>
 <!-- ./wrapper -->

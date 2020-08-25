@@ -1,32 +1,32 @@
-@extends('layouts.admin2')
+@extends('layouts.admin')
 
 @section('content')
 
-<div class="content-wrapper" id="app">
-    <!-- Content Header -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1>Listado de Contactos</h1>
-          </div>
-        </div>
+<!-- Content Header -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Listado de Usuarios</h1>
       </div>
-    </section>
-    <!-- /Content Header --!>
+      <div class="col-sm-6 text-right">
+        <a class="btn btn-info" href="/usuario/create">Agregar Usuario</a>
+      </div>        
+    </div>
+  </div>
+</section>
+<!-- /Content Header --!>
     
-    <!-- Main Content-->
-    <section class="content">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <usuario-component></usuario-component>
-          </div>
-        </div>
+<!-- Main Content-->
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <usuario-component></usuario-component>
       </div>
-    </section>
-    <!-- /Main Content-->
-
-</div>
+    </div>
+  </div>
+</section>
+<!-- /Main Content-->
 
 @endsection

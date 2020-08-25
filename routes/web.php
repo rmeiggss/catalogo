@@ -10,6 +10,7 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::get('/usuario/list','Admin\UsuarioController@list');
+Route::get('/cotizacion/list','Admin\CotizacionController@list');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');

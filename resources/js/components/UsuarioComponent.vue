@@ -1,8 +1,5 @@
 <template>
     <div class="card-body">
-      <h3 class="card-title mb-2 pr-4">
-        <a class="btn btn-info" href="#" @click="btnNuevo()">Agregar Contacto</a>
-      </h3>
       <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -19,12 +16,8 @@
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.ROL_Codigo}}</td>
-            <td>
-                <button class="btn btn-info" @click="btnEditar(user.id)">Editar</button>
-            </td>
-            <td>
-              <button class="btn btn-danger" @click="btnBorrar(user.id)">Eliminar</button>
-            </td>
+            <td><button class="btn btn-info" @click="btnEditar(user.id)">Editar</button></td>
+            <td><button class="btn btn-danger" @click="btnBorrar(user.id)">Eliminar</button></td>
           </tr>
         </tbody>
       </table>

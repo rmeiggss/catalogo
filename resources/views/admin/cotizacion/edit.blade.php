@@ -6,9 +6,9 @@
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
-        <h1>Agregar Ctotización</h1>
+        <h1>Editar Cotizacion</h1>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
     
 <!-- Main Content-->
@@ -17,8 +17,8 @@
         <div class="row">
             <div class="col-12">
                 <!--Main content-->
-                <div class="invoice p-3 mb-3">
-                 {!!Form::open(['route'=>'cotizacion.store','method'=>'post'])!!}   
+                <div class="invoice p-3 mb-3">  
+                {!!Form::model($cotizacion, ['route'=>['cotizacion.update', $cotizacion->COTIP_Codigo],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}                 
                     <!-- info row 1 -->
                     <div class="row invoice-info">
                       <div class="col-sm-4 invoice-col">
@@ -36,7 +36,7 @@
                       <div class="col-sm-4 invoice-col">
                           <div class="row form-group">
                             <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                            {!!Form::text('numero',$cotizacion->COTIC_Numero,['class'=>'col-sm-3 form-control-sm','id'=>'numero','maxlenght'=>'11'])!!}  
+                            {!!Form::text('numero',$cotizacion->COTIC_Numero,['class'=>'col-sm-3 form-control-sm','id'=>'numero','maxlenght'=>'11','readonly'=>'readonly'])!!}  
                           </div>
                       </div>
                     </div>

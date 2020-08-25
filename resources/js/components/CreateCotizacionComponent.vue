@@ -1,7 +1,7 @@
 <template>                         
     <div class="row">
-       <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
-       <a href="#" @click="addRow()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>                            
+      <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
+      <a href="#" @click="addRow()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>                            
       <div class="col-12 table-responsive">
        <table class="table table-striped">
           <thead>
@@ -18,7 +18,7 @@
           </tr>
           </thead>
             <tbody>
-                <tr class="text-center" v-for="(row, index) in rows">
+                <tr class="text-center" v-for="(row, index) in cotizaciones">
                   <td><label style="border: 1px solid red;color: blue;"><a href="#" @click="deleteRow(index)">x</a></label></td>
                   <td><input type="text" class="form-control-sm w-100" name="nombre[]"></td>
                   <td><input type="text" class="form-control-sm w-100" name="descripcion[]"></td>
@@ -107,7 +107,7 @@
     export default {
         data(){
             return {
-                rows : [],
+                cotizaciones : [],
                 saveData:null
             }
         },
@@ -115,11 +115,18 @@
             console.log('Component mounted.')
         },
         methods:{
+            listar(){
+                var url = '/cotizaciondetalle/list';
+                axios.get(url).then(response=>{
+                    this.cotizaciones = response.data;
+                    console.log(this.cotizaciones);
+                });
+            },
             addRow(){
-              this.rows.push({});
+              this.cotizaciones.push({});
             },
             deleteRow(index){
-              this.rows.splice(index, 1);
+              this.cotizaciones.splice(index, 1);
             }
         }
     }

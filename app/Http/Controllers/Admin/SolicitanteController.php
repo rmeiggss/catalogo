@@ -26,7 +26,8 @@ class SolicitanteController extends Controller
             'SOLIC_Direccion'  => request('direccion'),
             'SOLIC_Telefono'   => request('telefono'),
             'SOLIC_Email'      => request('email'),
-            'SOLIC_FlagEstado' => request('estado')
+            'SOLIC_FlagEstado' => request('estado'),
+            'SOLIC_Contacto'   => request('contacto')
         ]);
         return Redirect::to("/solicitante");
     }
@@ -45,6 +46,7 @@ class SolicitanteController extends Controller
         $solicitante->SOLIC_Direccion = $request->direccion;
         $solicitante->SOLIC_Telefono  = $request->telefono;
         $solicitante->SOLIC_Email     = $request->email;
+        $solicitante->SOLIC_Contacto  = $request->contacto;
         $solicitante->save();
         return redirect::to('/solicitante');
     }
