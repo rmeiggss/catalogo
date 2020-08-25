@@ -33,8 +33,7 @@
                   <th scope="col">Codigo</th>
                   <th scope="col">Nombre del Curso</th>
                   <th scope="col">Fecha Inicial</th>
-                  <th scope="col">Fecha Final</th>
-                  <th scope="col">Hora Inicial</th>
+                  <th scope="col">Hora Inicio</th>
                   <th scope="col">Hora Final</th>
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
@@ -46,8 +45,7 @@
 	                    <th scope="row">{{$item+1}}</th>
 	                    <td>{{$horariocurso->nombre_curso}}</td>
                       <td>{{$horariocurso->fecha_inicial}}</td>
-                      <td>{{$horariocurso->fecha_final}}</td>
-                      <td>{{$horariocurso->hora_inicial}}</td>
+                      <td>{{$horariocurso->hora_inicio}}</td>
                       <td>{{$horariocurso->hora_final}}</td>
 	                    <td><button class="btn btn-info">
 	                      <a class="text-light" href="{{ route('horario-curso.edit', $horariocurso->id) }}">
