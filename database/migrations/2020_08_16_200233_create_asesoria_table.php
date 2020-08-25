@@ -15,7 +15,7 @@ class CreateAsesoriaTable extends Migration
     {
         Schema::create('asesoria', function (Blueprint $table) {
             $table->id();
-            
+
             $table->bigInteger('ASESORIA_Codigo')->nullable();
             $table->string('ASESORIA_Nombre')->nullable();
             $table->text('ASESORIA_Descripcion');

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Cliente;
 use App\Http\Controllers\Controller;
-use App\Ensayo;
+use App\Solicitante;
 use App\Contacto;
+use App\Cotizacion;
 use Illuminate\Http\Request;
 use Redirect;
 
-class SolicitanteController extends Controller
+class EnsayoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +27,7 @@ class SolicitanteController extends Controller
      */
     public function create()
     {
-        return Redirect::to("/cot_ensayos");
+        //return Redirect::to("/cot_ensayos");
     }
 
     /**
@@ -37,21 +38,32 @@ class SolicitanteController extends Controller
      */
     public function store(Request $request)
     {
-        Ensayo::create([
+        Cotizacion::create([
+            'SOLIP_Codigo'   => request('solicitante'),
+            'COTIC_Numero'   => request('numero'),
+            'COTIC_Fecha'    => request('fecha'),
+            'USUA_Codigo'    => request('usuario'),
+            'COTIC_SubTotal' => request('subtotal'),
+            'COTIC_Igv'      => request('igv'),
+            'COTIC_Total'    => request('total'),
+            'COTIC_Correo1'    => request('correo1'),
+            'COTIC_correo2'    => request('correo2'),
+            'COTIC_correo3'    => request('correo3'),
+            'COTIC_correo4'    => request('correo4'),
+        ]);
+
+        Solicitante::create([
             'SOLIC_Nombre' => request('nombre_solic'),
             'SOLIC_Ruc' => request('ruc_solic'),
             'SOLIC_Direccion' => request('direc_solic'),
             'SOLIC_Telefono' => request('celular_solic'),
-            'SOLIC_Email' => request('email_solic'),
         ]);
 
         Contacto::create([
             'nombre_contacto' => request('nombre_contacto'),
             'email_contacto' => request('email_contacto'),
             'celular_contacto' => request('celular_contacto'),
-            'user_id' => request('id'),
         ]);
-
 
         return Redirect::to("/cot_ensayos");
     }

@@ -6,7 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <META name="description" CONTENT="Laboratorio N°6 de Electricidad FIEE-UNI">
   <META NAME="Distribution" CONTENT="Global">
-  <META NAME="Robots" CONTENT="All">  
+  <META NAME="Robots" CONTENT="All">
   <title>Laboratorio N°6 de Electricidad FIEE-UNI</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -21,7 +21,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body>
  <!--Navbar-->
@@ -34,8 +34,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     </div>
   </nav>
-  <!--/Navbar--> 
-  
+  <!--/Navbar-->
+
   <!--Pagina de contenido-->
   <section class="container-fluid">
     @yield('content')
@@ -43,7 +43,7 @@
   <!--/Pagina de contenido-->
 
   @yield('modals')
- 
+
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <!-- Bootstrap core JavaScript -->

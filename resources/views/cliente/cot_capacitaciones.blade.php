@@ -1,7 +1,7 @@
 @extends('layouts.cliente')
 
 @section('title', 'Laboratorio Nº6 de Electricidad de la Facultad de Ingeniería Eléctrica y Electrónica -
-        Universidad Nacional de Ingeniería')
+Universidad Nacional de Ingeniería')
 
 @section('content')
         <style>
@@ -84,68 +84,66 @@
         <!-- Inicio del formulario de cotizaciones de capacitacion -->
         <h1 style="text-align: center;font-size:65px;color:black;">Formulario de Solicitud de Capacitacion</h1>
         <hr>
-
+<form  method="POST" action="{{ route('cot_capacitaciones.store') }}">
+    @csrf
         <div class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
-                <h4 style="text-align: center;color:black;">
-                Empresa Solicitante
-                </h4>
-                <form class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
-                Nombre del Solicitante:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Tipo de Solicitante:
-                <br>
-                <select class="form-control">
-                <option value="volvo">Persona Juridica</option>
-                <option value="saab">Persona Natural</option>
-                </select>
-                RUC del Solicitante:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Direccion del Solicitante:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Telefono del Solicitante:
-                <input class="form-control" type="text" name="" id="primero" />
-                Email del Solicitante:
-                <input class="form-control" type="text" name="" id="primero" />
-                Nombre del Departamento:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">2020</option>
-                    <option value="saab">2019</option>
-                </select>
-                Nombre de la Provincia:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">2020</option>
-                    <option value="saab">2019</option>
-                </select>
-                Nombre del Distrito:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">2020</option>
-                    <option value="saab">2019</option>
-                </select>
-                <br>
-        </form>
+                <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
+                <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
+                    Nombre del Solicitante:
+                    <br>
+                    <input class="form-control" type="text" name="nombre_solic" id="nombre_solic" />
+                    Tipo de Solicitante:
+                    <br>
+                    <select class="form-control" name="tipo_solic">
+                        <option value="volvo">Persona Juridica</option>
+                        <option value="saab">Persona Natural</option>
+                    </select>
+                    RUC del Solicitante:
+                    <br>
+                    <input class="form-control" type="text" name="ruc_solic" id="ruc_solic" />
+                    Direccion del Solicitante:
+                    <br>
+                    <input class="form-control" type="text" name="direc_solic" id="direc_solic" />
+                    Telefono del Solicitante:
+                    <input class="form-control" type="text" name="celular_solic" id="celular_solic" />
+                    Email del Solicitante:
+                    <input class="form-control" type="text" name="email_solic" id="email_solic" />
+                    Nombre del Departamento:
+                    <br>
+                    <select class="form-control" name="depart_solic">
+                        <option value="volvo">Lima</option>
+                        <option value="saab">Arequipa</option>
+                    </select>
+                    Nombre de la Provincia:
+                    <br>
+                    <select class="form-control" name="prov_solic">
+                        <option value="Lima">Lima</option>
+                        <option value="Arequipa">Arequipa</option>
+                    </select>
+                    Nombre del Distrito:
+                    <br>
+                    <select class="form-control" name="dist_solic">
+                        <option value="Miraflores">Miraflores</option>
+                        <option value="San Juan de Luriganch">San Juan de Lurigancho</option>
+                    </select>
+                </div>
             </div>
 
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Representante de la Empresa Solicitante</h4>
-                <form class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
-                Nombre del Contacto:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Correo Electronico del Contacto:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Celular del Contacto:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                <br>
-                </form>
+                <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
+                    Nombre del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto">
+                    Correo Electronico del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="email_contacto" id="email_contacto">
+                    Celular del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="celular_contacto" id="celular_contacto">
+                    <br>
+                </div>
             </div>
         </div>
 
@@ -195,33 +193,28 @@
             <h4 style="text-align:center;color:black;">
             Ingresar los correos electrónicos a los que se les enviará la cotización en formato PDF
             </h4>
-            <div class="row">
+                <div class="row">
+                    <div class="col-sm-6" style="padding-bottom: 8px;padding-top:8px;">
+                    <div class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
+                        Correo #1:
+                        <br>
+                        <input class="form-control" type="text" name="email1" id="correo1" />
+                        Correo #2:
+                        <br>
+                        <input class="form-control" type="text" name="email2" id="correo2" />
+                    </div>
+                </div>
 
-            <div class="col-sm-6" style="padding-bottom: 8px;padding-top:8px;">
-
-                <form class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
-                Correo #1:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                Correo #2:
-                <br>
-                <input class="form-control" type="text" name="" id="primero" />
-                </form>
-            </div>
-
-<div class="col-sm-6" style="padding-bottom: 8px;;padding-top:8px;">
-
-    <form class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
-        Correo #3:
-        <br>
-        <input class="form-control" type="text" name="" id="primero" />
-        Correo #4:
-        <br>
-        <input class="form-control" type="text" name="" id="primero" />
-    </form>
-</div>
-
-
+                <div class="col-sm-6" style="padding-bottom: 8px;;padding-top:8px;">
+                    <div class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
+                        Correo #3:
+                        <br>
+                        <input class="form-control" type="text" name="email3" id="correo3" />
+                        Correo #4:
+                        <br>
+                        <input class="form-control" type="text" name="email4" id="correo4" />
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -232,13 +225,16 @@
         <br>
         <br>
         <br>
-        <div>
-            <center>
-            <button type="button" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#" id="boton_modal" style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
+
+    <center>
+        <button type="submit" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#" id="boton_modal"
+        style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
             Solicitar Cotización
-            </button>
-            </center>
-        </div>
+        </button>
+    </center>
+</form>
+
+
 
         <!-- Inicio de los formularios modales nuevo curso -->
         <div class="modal fade" id="mimodalcurso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
