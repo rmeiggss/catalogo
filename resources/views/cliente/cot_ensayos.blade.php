@@ -85,13 +85,12 @@ Universidad Nacional de Ingeniería')
 
         <h1 style="text-align: center;font-size:65px;color:black;">Formulario de Solicitud de Ensayo</h1>
         <hr>
-
+<form  method="POST" action="{{ route('cot_ensayos.store') }}">
+    @csrf
         <div class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
-                <div class="form-horizontal form-control" method="POST" action="{{ route('cot_ensayos.store') }}"
-                      style="width:500px;height:705px;margin:0 auto">
-                    @csrf
+                <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
                     Nombre del Solicitante:
                     <br>
                     <input class="form-control" type="text" name="nombre_solic" id="nombre_solic" />
@@ -129,28 +128,25 @@ Universidad Nacional de Ingeniería')
                         <option value="Miraflores">Miraflores</option>
                         <option value="San Juan de Luriganch">San Juan de Lurigancho</option>
                     </select>
-                     <button type="submit" class="btn btn-primary-outline px-5 m-auto">Agregar</button>
                 </div>
                 <br>
             </div>
 
-                    <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
-                        <h4 style="text-align: center;color:black;">Representante de la Empresa Solicitante</h4>
-                        <div class="form-horizontal form-control" action=""
-                              style="width:500px;height:705px;margin:0 auto">
-                            Nombre del Contacto:
-                            <br>
-                            <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto">
-                            Correo Electronico del Contacto:
-                            <br>
-                            <input class="form-control" type="text" name="email_contacto" id="email_contacto">
-                            Celular del Contacto:
-                            <br>
-                            <input class="form-control" type="text" name="celular_contacto" id="celular_contacto">
-                            <br>
-                        </div>
-                    </div>
-
+            <div class="col-sm-6 border float-right" style="padding-bottom: 8px;padding-top: 8px;">
+                <h4 style="text-align: center;color:black;">Representante de la Empresa Solicitante</h4>
+                <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
+                    Nombre del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto">
+                    Correo Electronico del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="email_contacto" id="email_contacto">
+                    Celular del Contacto:
+                    <br>
+                    <input class="form-control" type="text" name="celular_contacto" id="celular_contacto">
+                    <br>
+                </div>
+            </div>
         </div>
 
         <div class="container-fluid">
@@ -237,28 +233,26 @@ Universidad Nacional de Ingeniería')
 
             <div class="col-sm-6" style="padding-bottom: 8px;padding-top:8px;">
 
-                <form class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
-                    @csrf
+                <div class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
                     Correo #1:
                     <br>
                     <input class="form-control" type="text" name="correo1" id="correo1" />
                     Correo #2:
                     <br>
                     <input class="form-control" type="text" name="correo2" id="correo2" />
-                </form>
+                </div>
             </div>
 
             <div class="col-sm-6" style="padding-bottom: 8px;;padding-top:8px;">
 
-                <form class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
-                    @csrf
+                <div class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
                     Correo #3:
                     <br>
                     <input class="form-control" type="text" name="correo3" id="correo3" />
                     Correo #4:
                     <br>
                     <input class="form-control" type="text" name="correo4" id="correo4" />
-                </form>
+                </div>
             </div>
 
 
@@ -266,23 +260,24 @@ Universidad Nacional de Ingeniería')
         </div>
 
         <br>
-        <button type="button" class="btn btn-info btn-lg float-left" data-toggle="modal" data-target="#"
-                id="boton_modal" style="margin-left:10px;border-radius:5px;">
-            Vista Preliminar
-        </button>
+            <button type="button" class="btn btn-info btn-lg float-left" data-toggle="modal" data-target="#"
+                    id="boton_modal" style="margin-left:10px;border-radius:5px;">
+                Vista Preliminar
+            </button>
 
         <br>
         <br>
         <br>
 
-        <center>
-        <button type="button" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#"
+    <center>
+        <button type="submit" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#"
                 id="boton_modal" style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
             Solicitar Cotización
         </button>
-        </center>
-        </div>
-        <!-- Fin del formulario de cotizaciones de ensayos -->
+    </center>
+</form>
+
+<!-- Fin del formulario de cotizaciones de ensayos -->
 
         <br>
         <br>
@@ -297,8 +292,8 @@ Universidad Nacional de Ingeniería')
         <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"></h4>
         </div>
         <div class="modal-body">
 
@@ -306,35 +301,42 @@ Universidad Nacional de Ingeniería')
         <div class="container">
         <h1 style="text-align: center;color:black;font-size:40px;margin-bottom:10px;">Agregar Equipos a la Cotizacion</h1>
         <hr>
-        <form class="form-horizontal form-control" style="width:400px;height:1090px;margin:0 auto">
-        Nombre del Equipo:
-        <br>
-        <input class="form-control" type="text" name="" id="primero" />
-        Descripcion del Equipo:
-        <br>
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
-        Cantidad de Equipos:
-        <input class="form-control" type="text" name="" id="primero" />
-        Fabricante del Equipo:
-        <input class="form-control" type="text" name="" id="primero" />
-        Descripcion Tecnica del Equipo:
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
-        URL de la Ficha Tecnica del Equipo:
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
-        <div class="form-group">
-            <label for="ejemplo_archivo_1">Adjuntar un archivo de la descripcion del equipo</label>
-            <input type="file" id="ejemplo_archivo_1">
-        </div>
-        Estado de la Ficha Tecnica:
-        <select class="form-control">
-            <option value="volvo">Se describe en el formulario</option>
-            <option value="saab">Se proporciona el URL en el formulario</option>
-            <option value="volvo">Se describe y se indica el URL en el formulario</option>
-            <option value="saab">No se precisa la Ficha Tecnica en el formulario</option>
-        </select>
-        <br>
-        <input class="btn btn-primary btn-lg" type="submit" name="" value="Guardar" />
-        </form>
+            <div class="form-horizontal form-control" style="width:400px;height:1090px;margin:0 auto">
+                Nombre del Equipo:
+                <br>
+                <input class="form-control" type="text" name="nombre_equipo" id="nombre_equipo" />
+
+                Descripcion del Equipo:
+                <br>
+                <textarea style="resize: none" class="form-control" id ="descripcion_equipo" name="descripcion_equipo" rows="5" cols="5"></textarea>
+
+                Cantidad de Equipos:
+                <input class="form-control" type="text" name="cantidad" id="cantidad" />
+
+                Fabricante del Equipo:
+                <input class="form-control" type="text" name="fabricante" id="fabricante" />
+
+                Descripcion Tecnica del Equipo:
+                <textarea style="resize: none" class="form-control" name="descrip_tec_equipo" id="descrip_tec_equipo" rows="5" cols="5"></textarea>
+
+                URL de la Ficha Tecnica del Equipo:
+                <textarea style="resize: none" class="form-control" name="url_ficha_tec" id="url_ficha_tec" rows="5" cols="5"></textarea>
+
+                <div class="form-group">
+                    <label for="archiv_descrip_equipo">Adjuntar un archivo de la descripcion del equipo</label>
+                    <input type="file" id="archiv_descrip_equipo" name="archiv_descrip_equipo">
+                </div>
+
+                Estado de la Ficha Tecnica:
+                <select class="form-control" name="estado_ficha_tec">
+                    <option value="op1">Se describe en el formulario</option>
+                    <option value="op2">Se proporciona el URL en el formulario</option>
+                    <option value="op3">Se describe y se indica el URL en el formulario</option>
+                    <option value="op4">No se precisa la Ficha Tecnica en el formulario</option>
+                </select>
+                <br>
+                <button class="btn btn-primary btn-lg" type="submit" name="" value="Guardar">Guardar</button>
+            </div>
         </div>
         <!-- formulario -->
 
@@ -364,13 +366,13 @@ Universidad Nacional de Ingeniería')
         <form class="form-horizontal form-control" style="width:400px;height:770px;margin:0 auto">
         Descripcion de la Prueba a Realizar
         <br>
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
+        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5"></textarea>
         Norma Asociada a la Prueba:
         <br>
         <input class="form-control" type="text" name="" id="primero" />
         Descripcion de la Norma:
         <br>
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
+        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5"></textarea>
         <div class="form-group">
             <label for="ejemplo_archivo_1">Adjuntar un archivo de la descripcion de la Norma Tecnica</label>
             <input type="file" id="ejemplo_archivo_1">

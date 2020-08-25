@@ -15,7 +15,7 @@ class CotizacionController extends Controller
         /*if($request->user()->authorizeRoles(['admin'])){
             echo "hola";
         }*/
-        $cotizaciones = Cotizacion::all();  
+        $cotizaciones = Cotizacion::all();
         return view('admin.cotizacion.index', compact('cotizaciones'));
     }
 
@@ -29,6 +29,19 @@ class CotizacionController extends Controller
     {
         //Grabamos la cabecera
         Cotizacion::create([
+<<<<<<< HEAD
+            'SOLIP_Codigo'   => request('solicitante'),
+            'COTIC_Numero'   => request('numero'),
+            'COTIC_Fecha'    => request('fecha'),
+            'USUA_Codigo'    => request('usuario'),
+            'COTIC_SubTotal' => request('subtotal'),
+            'COTIC_Igv'      => request('igv'),
+            'COTIC_Total'    => request('total'),
+            'COTIC_Correo1'    => request('correo1'),
+            'COTIC_correo2'    => request('correo2'),
+            'COTIC_correo3'    => request('correo3'),
+            'COTIC_correo4'    => request('correo4'),
+=======
             'SOLIP_Codigo'   => $request->solicitante,
             'COTIC_Numero'   => $request->numero,
             'COTIC_Fecha'    => $request->fecha,
@@ -36,6 +49,7 @@ class CotizacionController extends Controller
             'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
             'COTIC_Total'    => $request->total
+>>>>>>> 6209449a6216122de36e56192fe58fcbf617310d
         ]);
         //Grabamos detalle
         if(count($request->nombre)>0){

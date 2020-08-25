@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Cliente;
+use App\Http\Controllers\Controller;
+use App\Solicitante;
+use App\Contacto;
+use App\Correo;
 use Illuminate\Http\Request;
+use Redirect;
 
 class CapacitacionController extends Controller
 {
@@ -34,7 +38,30 @@ class CapacitacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Solicitante::create([
+            'SOLIC_Nombre' => request('nombre_solic'),
+            'SOLIC_Ruc' => request('ruc_solic'),
+            'SOLIC_Direccion' => request('direc_solic'),
+            'SOLIC_Telefono' => request('celular_solic'),
+            'SOLIC_Email' => request('email_solic'),
+        ]);
+
+        Contacto::create([
+            'nombre_contacto' => request('nombre_contacto'),
+            'email_contacto' => request('email_contacto'),
+            'celular_contacto' => request('celular_contacto'),
+            'contacto_id' => request('id'),
+        ]);
+
+        Correo::create([
+            'email1' => request('email1'),
+            'email2' => request('email2'),
+            'email3' => request('email3'),
+            'email4' => request('email4'),
+            'correo_id' => request('id'),
+        ]);
+
+        return Redirect::to("cot_capacitaciones");
     }
 
     /**

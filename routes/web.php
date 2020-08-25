@@ -36,7 +36,7 @@ Route::resource('descuento','Admin\DescuentoController');
 // -------- Rutas de diego --------------------
 Route::resource('servicioac','Admin\ServicioAcademicoController');
 // --------- Rutas del CLIENTE
-Route::resource('cot_ensayos','Cliente\SolicitanteController');
+Route::resource('cot_ensayos','Cliente\EnsayoController');
 Route::resource('cot_calibraciones','Cliente\CalibracionController');
 Route::resource('cot_capacitaciones','Cliente\CapacitacionController');
 
