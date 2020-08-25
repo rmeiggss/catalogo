@@ -11,7 +11,8 @@ class Cotizacion extends Model
     protected $table = 'cotizacion';
 
     protected $fillable = [
-    	'SOLIP_Codigo',
+			'SOLIP_Codigo',
+			'COTIP_Codigo',
 	    'COTIC_Numero',
 	    'USUA_Codigo',
 	    'USUA_Codigo',

@@ -2013,6 +2013,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2029,6 +2032,291 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteRow: function deleteRow(index) {
       this.cotizaciones.splice(index, 1);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditCotizacionComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditCotizacionComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cotizacion: [],
+      cotizacionesdetalle: [],
+      solicitantes: [],
+      saveData: null
+    };
+  },
+  props: {
+    codigo: String
+  },
+  created: function created() {
+    this.getCotizacionDetalle(this.codigo);
+    this.getCotizacion(this.codigo);
+    this.listarSolicitantes();
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  computed: {
+    setSubTotal: function setSubTotal() {
+      var suma = 0;
+      return this.cotizacionesdetalle.reduce(function (suma, cotdetalle) {
+        return suma + cotdetalle.CODEC_Cantidad;
+      }, 0);
+    }
+  },
+  methods: {
+    getCotizacionDetalle: function getCotizacionDetalle(id) {
+      var _this = this;
+
+      var url = '/cotizaciondetalle/' + id + '/list';
+      axios.get(url).then(function (response) {
+        _this.cotizacionesdetalle = response.data;
+      });
+    },
+    getCotizacion: function getCotizacion(id) {
+      var _this2 = this;
+
+      var url = '/cotizacion/' + id + '/get';
+      axios.get(url).then(function (response) {
+        _this2.cotizacion = response.data;
+        console.log(_this2.cotizacion);
+      });
+    },
+    listarSolicitantes: function listarSolicitantes() {
+      var _this3 = this;
+
+      var url = '/solicitante/list';
+      axios.get(url).then(function (response) {
+        _this3.solicitantes = response.data;
+      });
+    },
+    addRow: function addRow() {
+      //let cotdet = {CODEP_Codigo:0};         
+      this.cotizacionesdetalle.push({});
+    },
+    deleteRow: function deleteRow(index) {
+      this.cotizacionesdetalle.splice(index, 1);
+    },
+    submit: function submit() {
+      this.$refs.form.submit();
     }
   }
 });
@@ -37732,7 +38020,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
+  return _c("div", { staticClass: "row invoice-info" }, [
     _c("label", { staticClass: "col-sm-2 col-form-label col-form-label-sm" }, [
       _vm._v("Agregar")
     ]),
@@ -37762,44 +38050,52 @@ var render = function() {
         _c(
           "tbody",
           _vm._l(_vm.cotizaciones, function(row, index) {
-            return _c("tr", { staticClass: "text-center" }, [
-              _c("td", [
-                _c(
-                  "label",
-                  { staticStyle: { border: "1px solid red", color: "blue" } },
-                  [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteRow(index)
+            return _c(
+              "tr",
+              { key: row.CODEP_Codigo, staticClass: "text-center" },
+              [
+                _c("td", [
+                  _c(
+                    "label",
+                    { staticStyle: { border: "1px solid red", color: "blue" } },
+                    [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteRow(index)
+                            }
                           }
-                        }
-                      },
-                      [_vm._v("x")]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(1, true),
-              _vm._v(" "),
-              _vm._m(2, true),
-              _vm._v(" "),
-              _vm._m(3, true),
-              _vm._v(" "),
-              _vm._m(4, true),
-              _vm._v(" "),
-              _vm._m(5, true),
-              _vm._v(" "),
-              _vm._m(6, true),
-              _vm._v(" "),
-              _vm._m(7, true),
-              _vm._v(" "),
-              _vm._m(8, true)
-            ])
+                        },
+                        [_vm._v("x")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "codigodet[]" }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(1, true),
+                _vm._v(" "),
+                _vm._m(2, true),
+                _vm._v(" "),
+                _vm._m(3, true),
+                _vm._v(" "),
+                _vm._m(4, true),
+                _vm._v(" "),
+                _vm._m(5, true),
+                _vm._v(" "),
+                _vm._m(6, true),
+                _vm._v(" "),
+                _vm._m(7, true),
+                _vm._v(" "),
+                _vm._m(8, true)
+              ]
+            )
           }),
           0
         )
@@ -37843,7 +38139,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "nombre[]" }
+        attrs: { type: "text", name: "nombre[]", autocomplete: "off" }
       })
     ])
   },
@@ -37854,7 +38150,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "descripcion[]" }
+        attrs: { type: "text", name: "descripcion[]", autocomplete: "off" }
       })
     ])
   },
@@ -37865,7 +38161,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "fabricante[]" }
+        attrs: { type: "text", name: "fabricante[]", autocomplete: "off" }
       })
     ])
   },
@@ -37906,7 +38202,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "cantidad[]" }
+        attrs: { type: "text", name: "cantidad[]", autocomplete: "off" }
       })
     ])
   },
@@ -37917,7 +38213,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "unitario[]" }
+        attrs: { type: "text", name: "unitario[]", autocomplete: "off" }
       })
     ])
   },
@@ -37928,7 +38224,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "subtotaldet[]" }
+        attrs: { type: "text", name: "subtotaldet[]", autocomplete: "off" }
       })
     ])
   },
@@ -38019,6 +38315,909 @@ var staticRenderFns = [
                       }),
                       _vm._v(
                         "\n                            Descripcion de la Norma:\n                            "
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "textarea",
+                        {
+                          staticClass: "form-control",
+                          staticStyle: { resize: "none" },
+                          attrs: { name: "", rows: "2", cols: "5" }
+                        },
+                        [_vm._v("Escribir algo...")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "btn btn-default btn-sm",
+                        attrs: { type: "submit", name: "", value: "Guardar" }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("table", { staticClass: "table table-bordered" }, [
+                    _c("tr", [
+                      _c("th", { staticClass: "text-center" }, [
+                        _vm._v("Identificador")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "text-center" }, [
+                        _vm._v("Descripcion de la Prueba")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "text-center" }, [
+                        _vm._v("Norma Asociada")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "text-center" }, [
+                        _vm._v("Estado")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "text-center" }, [
+                        _vm._v("Acciones")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", { staticClass: "text-center" }, [_vm._v("1")]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v("Prueba Dielectrica")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v("Norma IEC-123456")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v("Completa")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-default btn-sm",
+                            attrs: { href: "" }
+                          },
+                          [_vm._v("Editar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-default btn-sm",
+                            attrs: { href: "" }
+                          },
+                          [_vm._v("Eliminar")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", { staticClass: "text-center" }, [_vm._v("2")]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v("Prueba Dielectrica")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v("Norma IEC-123456")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v("Incompleta")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-default btn-sm",
+                            attrs: { href: "" }
+                          },
+                          [_vm._v("Editar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-default btn-sm",
+                            attrs: { href: "" }
+                          },
+                          [_vm._v("Eliminar")]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "invoice p-3 mb-3" }, [
+    _c("form", { ref: "form" }, [
+      _c("input", {
+        attrs: { type: "hidden", name: "_method", value: "PATCH" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Solicitante")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cotizacion.SOLIP_Codigo,
+                    expression: "cotizacion.SOLIP_Codigo"
+                  }
+                ],
+                staticClass: "col-sm-6 form-control-sm",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.cotizacion,
+                      "SOLIP_Codigo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.solicitantes, function(solicitante) {
+                return _c(
+                  "option",
+                  { key: solicitante.id, domProps: { value: solicitante.id } },
+                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                )
+              }),
+              0
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Fecha")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cotizacion.COTIC_Fecha,
+                  expression: "cotizacion.COTIC_Fecha"
+                }
+              ],
+              staticClass: "col-sm-4 form-control-sm",
+              attrs: { type: "text", autocomplete: "off" },
+              domProps: { value: _vm.cotizacion.COTIC_Fecha },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cotizacion, "COTIC_Fecha", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Numero")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cotizacion.COTIC_Numero,
+                  expression: "cotizacion.COTIC_Numero"
+                }
+              ],
+              staticClass: "col-sm-3 form-control-sm",
+              attrs: { type: "text", maxlength: "11", autocomplete: "off" },
+              domProps: { value: _vm.cotizacion.COTIC_Numero },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cotizacion, "COTIC_Numero", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Usuario")]
+            ),
+            _vm._v(" "),
+            _c("select", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cotizacion.USUA_Codigo,
+                  expression: "cotizacion.USUA_Codigo"
+                }
+              ],
+              staticClass: "col-sm-6 form-control-sm",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.cotizacion,
+                    "USUA_Codigo",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _c(
+          "label",
+          { staticClass: "col-sm-2 col-form-label col-form-label-sm" },
+          [_vm._v("Agregar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                return _vm.addRow()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-plus form-control-sm",
+              attrs: { id: "agregar" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 table-responsive" }, [
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.cotizacionesdetalle, function(cotdetalle, index) {
+                return _c(
+                  "tr",
+                  { key: cotdetalle.CODEP_Codigo, staticClass: "text-center" },
+                  [
+                    _c("td", [
+                      _c(
+                        "label",
+                        {
+                          staticStyle: {
+                            border: "1px solid red",
+                            color: "blue"
+                          }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteRow(index)
+                                }
+                              }
+                            },
+                            [_vm._v("x")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEP_Codigo,
+                            expression: "cotdetalle.CODEP_Codigo"
+                          }
+                        ],
+                        attrs: { type: "hidden", name: "codigodet[]" },
+                        domProps: { value: cotdetalle.CODEP_Codigo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEP_Codigo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEC_NombreEquipo,
+                            expression: "cotdetalle.CODEC_NombreEquipo"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "nombre[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: cotdetalle.CODEC_NombreEquipo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEC_NombreEquipo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEC_Descripcion,
+                            expression: "cotdetalle.CODEC_Descripcion"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "descripcion[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: cotdetalle.CODEC_Descripcion },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEC_Descripcion",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEC_Fabricante,
+                            expression: "cotdetalle.CODEC_Fabricante"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "fabricante[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: cotdetalle.CODEC_Fabricante },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEC_Fabricante",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3, true),
+                    _vm._v(" "),
+                    _vm._m(4, true),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEC_Cantidad,
+                            expression: "cotdetalle.CODEC_Cantidad"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "cantidad[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: cotdetalle.CODEC_Cantidad },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEC_Cantidad",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEC_PrecioUnitario,
+                            expression: "cotdetalle.CODEC_PrecioUnitario"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "unitario[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: cotdetalle.CODEC_PrecioUnitario },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEC_PrecioUnitario",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "subtotaldet[]",
+                          readonly: "readonly",
+                          autocomplete: "off"
+                        },
+                        domProps: {
+                          value:
+                            cotdetalle.CODEC_Cantidad *
+                            cotdetalle.CODEC_PrecioUnitario
+                        }
+                      })
+                    ])
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-9" }, [_vm._v(" ")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table" }, [
+              _c("tr", [
+                _c("th", { staticStyle: { width: "50%" } }, [
+                  _vm._v("Subtotal S/.:")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cotizacion.COTIC_SubTotal,
+                        expression: "cotizacion.COTIC_SubTotal"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-50",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.cotizacion.COTIC_SubTotal },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.cotizacion,
+                          "COTIC_SubTotal",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("I.G.V. S/. (18%)")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cotizacion.COTIC_Igv,
+                        expression: "cotizacion.COTIC_Igv"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-50",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.cotizacion.COTIC_Igv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.cotizacion,
+                          "COTIC_Igv",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Total S/.:")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cotizacion.COTIC_Total,
+                        expression: "cotizacion.COTIC_Total"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-50",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.cotizacion.COTIC_Total },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.cotizacion,
+                          "COTIC_Total",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(5),
+      _vm._v(" "),
+      _c("div", { staticClass: "row text-center" }, [
+        _c("div", { staticClass: "col text-center" }, [
+          _c(
+            "a",
+            { staticClass: "btn btn-danger", attrs: { href: "/cotizacion" } },
+            [_vm._v("Cancelar")]
+          ),
+          _vm._v(" "),
+          _c("a", { staticClass: "btn btn-info", on: { click: _vm.submit } }, [
+            _vm._v("Grabar")
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+      _c("div", { staticClass: "row form-group" }, [
+        _c(
+          "label",
+          { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+          [_vm._v("Contacto")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "col-sm-6 form-control-sm",
+          attrs: {
+            type: "text",
+            name: "contacto",
+            id: "contacto",
+            autocomplete: "off"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+      _c("div", { staticClass: "row form-group" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "text-center" }, [
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("No")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Descripcion")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Fabricante")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Ficha")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Pruebas")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("P.Unitario")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Subtotal")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "pb-0 mb-0" }, [
+      _c("i", {
+        staticClass: "far fa-file-pdf",
+        staticStyle: { color: "red", "font-size": "23px" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success btn-lg btn-sm",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal"
+          }
+        },
+        [_vm._v("Lista")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+                  [_vm._v("Pruebas del Equipo")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "container" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _vm._v(
+                        "\n                              Descripcion de la Prueba:\n                              "
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "textarea",
+                        {
+                          staticClass: "form-control",
+                          staticStyle: { resize: "none" },
+                          attrs: { name: "", rows: "3", cols: "5" }
+                        },
+                        [_vm._v("Escribir algo...")]
+                      ),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "ejemplo_archivo_1" } }, [
+                        _vm._v("Adjuntar un archivo de la Norma Tecnica")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "file", id: "ejemplo_archivo_1" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _vm._v(
+                        "\n                              Norma Asociada:\n                              "
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "", id: "primero" }
+                      }),
+                      _vm._v(
+                        "\n                              Descripcion de la Norma:\n                              "
                       ),
                       _c("br"),
                       _vm._v(" "),
@@ -50551,6 +51750,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('usuario-component', __webpack_require__(/*! ./components/UsuarioComponent.vue */ "./resources/js/components/UsuarioComponent.vue")["default"]);
 Vue.component('indexcotizacion-component', __webpack_require__(/*! ./components/IndexCotizacionComponent.vue */ "./resources/js/components/IndexCotizacionComponent.vue")["default"]);
 Vue.component('createcotizacion-component', __webpack_require__(/*! ./components/CreateCotizacionComponent.vue */ "./resources/js/components/CreateCotizacionComponent.vue")["default"]);
+Vue.component('editcotizacion-component', __webpack_require__(/*! ./components/EditCotizacionComponent.vue */ "./resources/js/components/EditCotizacionComponent.vue")["default"]);
 var app = new Vue({
   el: '#app',
   data: {}
@@ -50667,6 +51867,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateCotizacionComponent_vue_vue_type_template_id_b095010e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateCotizacionComponent_vue_vue_type_template_id_b095010e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditCotizacionComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/EditCotizacionComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditCotizacionComponent_vue_vue_type_template_id_3cb23c2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a& */ "./resources/js/components/EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a&");
+/* harmony import */ var _EditCotizacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditCotizacionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditCotizacionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditCotizacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditCotizacionComponent_vue_vue_type_template_id_3cb23c2a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditCotizacionComponent_vue_vue_type_template_id_3cb23c2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditCotizacionComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditCotizacionComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/EditCotizacionComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditCotizacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditCotizacionComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditCotizacionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditCotizacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditCotizacionComponent_vue_vue_type_template_id_3cb23c2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditCotizacionComponent.vue?vue&type=template&id=3cb23c2a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditCotizacionComponent_vue_vue_type_template_id_3cb23c2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditCotizacionComponent_vue_vue_type_template_id_3cb23c2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

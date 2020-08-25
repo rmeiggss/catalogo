@@ -10,8 +10,12 @@ class CotizacionDetalleController extends Controller
         
     }
     
-    public function list(){
-        
+    public function list($id){
+        $cotizacionesdetalle = CotizacionDetalle::where(
+                        ["COTIP_Codigo"=>$id])
+                        ->orderBy("CODEP_Codigo")
+                        ->get();
+        return $cotizacionesdetalle;      
     }
     
     public function create(){
