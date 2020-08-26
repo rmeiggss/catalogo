@@ -2013,6 +2013,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2315,7 +2318,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addRow: function addRow() {
+<<<<<<< HEAD
       //let cotdet = {CODEP_Codigo:0};
+=======
+      //let cotdet = {CODEP_Codigo:0};         
+>>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
       this.cotizacionesdetalle.push({});
     },
     deleteRow: function deleteRow(index) {
@@ -38026,7 +38033,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
+  return _c("div", { staticClass: "row invoice-info" }, [
     _c("label", { staticClass: "col-sm-2 col-form-label col-form-label-sm" }, [
       _vm._v("Agregar")
     ]),
@@ -38056,44 +38063,52 @@ var render = function() {
         _c(
           "tbody",
           _vm._l(_vm.cotizaciones, function(row, index) {
-            return _c("tr", { staticClass: "text-center" }, [
-              _c("td", [
-                _c(
-                  "label",
-                  { staticStyle: { border: "1px solid red", color: "blue" } },
-                  [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteRow(index)
+            return _c(
+              "tr",
+              { key: row.CODEP_Codigo, staticClass: "text-center" },
+              [
+                _c("td", [
+                  _c(
+                    "label",
+                    { staticStyle: { border: "1px solid red", color: "blue" } },
+                    [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteRow(index)
+                            }
                           }
-                        }
-                      },
-                      [_vm._v("x")]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(1, true),
-              _vm._v(" "),
-              _vm._m(2, true),
-              _vm._v(" "),
-              _vm._m(3, true),
-              _vm._v(" "),
-              _vm._m(4, true),
-              _vm._v(" "),
-              _vm._m(5, true),
-              _vm._v(" "),
-              _vm._m(6, true),
-              _vm._v(" "),
-              _vm._m(7, true),
-              _vm._v(" "),
-              _vm._m(8, true)
-            ])
+                        },
+                        [_vm._v("x")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "codigodet[]" }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(1, true),
+                _vm._v(" "),
+                _vm._m(2, true),
+                _vm._v(" "),
+                _vm._m(3, true),
+                _vm._v(" "),
+                _vm._m(4, true),
+                _vm._v(" "),
+                _vm._m(5, true),
+                _vm._v(" "),
+                _vm._m(6, true),
+                _vm._v(" "),
+                _vm._m(7, true),
+                _vm._v(" "),
+                _vm._m(8, true)
+              ]
+            )
           }),
           0
         )
@@ -38137,7 +38152,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "nombre[]" }
+        attrs: { type: "text", name: "nombre[]", autocomplete: "off" }
       })
     ])
   },
@@ -38148,7 +38163,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "descripcion[]" }
+        attrs: { type: "text", name: "descripcion[]", autocomplete: "off" }
       })
     ])
   },
@@ -38159,7 +38174,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "fabricante[]" }
+        attrs: { type: "text", name: "fabricante[]", autocomplete: "off" }
       })
     ])
   },
@@ -38200,7 +38215,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "cantidad[]" }
+        attrs: { type: "text", name: "cantidad[]", autocomplete: "off" }
       })
     ])
   },
@@ -38211,7 +38226,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "unitario[]" }
+        attrs: { type: "text", name: "unitario[]", autocomplete: "off" }
       })
     ])
   },
@@ -38222,7 +38237,7 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "subtotaldet[]" }
+        attrs: { type: "text", name: "subtotaldet[]", autocomplete: "off" }
       })
     ])
   },

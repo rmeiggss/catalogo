@@ -11,12 +11,14 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::get('/usuario/list','Admin\UsuarioController@list');
 Route::get('/cotizacion/list','Admin\CotizacionController@list');
+Route::get('/solicitante/list','Admin\SolicitanteController@list');
+Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
+Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-
 Route::resource('usuario','Admin\UsuarioController');
 Route::resource('cotizacion', 'Admin\CotizacionController');
 Route::resource('categoria','Admin\CategoriaController');

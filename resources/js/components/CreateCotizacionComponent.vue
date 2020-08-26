@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <template>
     <div class="row">
+=======
+<template>                         
+    <div class="row invoice-info">
+>>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
       <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
       <a href="#" @click="addRow()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>
       <div class="col-12 table-responsive">
@@ -18,16 +23,19 @@
           </tr>
           </thead>
             <tbody>
-                <tr class="text-center" v-for="(row, index) in cotizaciones">
-                  <td><label style="border: 1px solid red;color: blue;"><a href="#" @click="deleteRow(index)">x</a></label></td>
-                  <td><input type="text" class="form-control-sm w-100" name="nombre[]"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="descripcion[]"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="fabricante[]"></td>
+                <tr class="text-center" v-for="(row, index) in cotizaciones" :key="row.CODEP_Codigo">
+                  <td>
+                    <label style="border: 1px solid red;color: blue;"><a href="#" @click="deleteRow(index)">x</a></label>
+                    <input type="hidden" name="codigodet[]">
+                  </td>
+                  <td><input type="text" class="form-control-sm w-100" name="nombre[]" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="descripcion[]" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="fabricante[]" autocomplete="off"></td>
                   <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                   <td><button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal">Lista</button></td>
-                  <td><input type="text" class="form-control-sm w-100" name="cantidad[]"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="unitario[]"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="cantidad[]" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="unitario[]" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]" autocomplete="off"></td>
                 </tr>
             </tbody>
         </table>
@@ -115,13 +123,6 @@
             console.log('Component mounted.')
         },
         methods:{
-            listar(){
-                var url = '/cotizaciondetalle/list';
-                axios.get(url).then(response=>{
-                    this.cotizaciones = response.data;
-                    console.log(this.cotizaciones);
-                });
-            },
             addRow(){
               this.cotizaciones.push({});
             },

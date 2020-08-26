@@ -12,6 +12,10 @@ class SolicitanteController extends Controller
         $solicitantes = Solicitante::latest()->paginate(8);
         return view('admin.solicitante.index',compact('solicitantes'));
     }
+
+    public function list(){
+        return Solicitante::all();
+    }
     
     public function create(){
         return view('admin.solicitante.create');
