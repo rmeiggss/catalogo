@@ -23,6 +23,13 @@ class ServicioAcademicoController extends Controller
 
     public function store(Request $request)
     {
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'costo' => 'required',
+        ]);
+
         ServicioAcademico::create([
             'SERVICIOAC_Nombre' => request('nombre'),
             'SERVICIOAC_Descripcion' => request('descripcion'),

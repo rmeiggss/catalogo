@@ -15,27 +15,29 @@
     </section>
     <!---->
     <section class="content">
-    @if($errors->any())
+<!--     @if($errors->any())
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger">
             {{ $error}}
         </div>
         @endforeach
-    @endif
+    @endif -->
         <div class="grid-hor">
             {!!Form::open(['route'=>'horario-curso.store','method'=>'POST','class'=>'col-sm-10'])!!}
                 <div class="form-group col-md-6">
                     {!!Form::label('nombre','Nombre del Curso')!!}
-                    
                     {!!Form::select('nombre', $productos, 'null', ['class' => 'form-control', 'placeholder'=>'-Seleccionar Curso-','id'=>'nombre']) !!}
                     @error('nombre')
-                    <small class="text-danger">Selecciona el curso</small>    
+                    <small class="text-danger">Seleccionar el curso</small>    
                     @enderror    
                 </div>
 
                 <div class="form-group col-md-6">
                     {!!Form::label('fecha_inicial','Fecha de Inicio')!!}
                     {!!Form::date('fecha_inicial',"null",['class'=>'form-control','id'=>'fecha_inicial'])!!}
+                    @error('fecha_inicial')
+                    <small class="text-danger">Seleccionar la Fecha de inicio</small>    
+                    @enderror
                 </div>
 
 <!--                 <div class="form-group">
@@ -57,11 +59,17 @@
                         <div class="form-group col-md-3">
                             {!! Form::label('hora_ini', 'Hora de Inicio :') !!} 
                             {!! Form::time('hora_ini',null, ['class' => 'form-control','id'=>'hora_ini']) !!}
+                            @error('hora_ini')
+                            <small class="text-danger">Seleccionar la hora de inicio</small>    
+                            @enderror
                         </div>
 
                         <div class="form-group col-md-3">
                             {!! Form::label('hora_fi', 'Hora Final :') !!} 
                             {!! Form::time('hora_fi',null, ['class' => 'form-control','id'=>'hora_fi']) !!}
+                            @error('hora_fi')
+                            <small class="text-danger">Seleccionar la hora final</small>    
+                            @enderror
                         </div>
                     </div>
                 </div>
