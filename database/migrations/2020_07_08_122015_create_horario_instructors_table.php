@@ -18,8 +18,8 @@ class CreateHorarioInstructorsTable extends Migration
             $table->string('nombre_instructor')->nullable();
             $table->date('fecha_inicial')->nullable();
             $table->date('fecha_final')->nullable();
-            $table->integer('hora_inicial')->nullable();
-            $table->integer('hora_final')->nullable();
+            $table->time('hora_inicial')->nullable();
+            $table->time('hora_final')->nullable();
             $table->timestamps();
         });
     }

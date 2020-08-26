@@ -109,9 +109,6 @@ class CotizacionController extends Controller
         if(isset($request->nombre)){
             if(count($request->nombre)>0){
                 foreach($request->nombre as $item => $value){
-<<<<<<< HEAD
-
-=======
                     $codigodet = $request->codigodet[$item];
                     if(is_null($codigodet)){//Nuevo
                         CotizacionDetalle::create([
@@ -134,7 +131,6 @@ class CotizacionController extends Controller
                         $cotizaciondet->CODEC_SubTotal       = $request->subtotaldet[$item];
                         $cotizaciondet->save();
                     }
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
                 }
             }
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\HorarioInstructor;
+use App\Instructor;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -28,7 +29,8 @@ class HorarioInstructorController extends Controller
      */
     public function create()
     {
-        return view("admin.horario-instructor.create");
+        $instructors = Instructor::pluck('nombre', 'nombre');
+        return view("admin.horario-instructor.create", compact('instructors'));
     }
 
     /**
@@ -39,11 +41,20 @@ class HorarioInstructorController extends Controller
      */
     public function store(Request $request)
     {
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'fecha_inicial' => 'required',
+            'fecha_final' => 'required',
+            'hora_ini' => 'required',
+            'hora_fi' => 'required'
+        ]);
+        
         HorarioInstructor::create([
             'nombre_instructor' => request('nombre'),
             'fecha_inicial' => request('fecha_inicial'),
             'fecha_final' => request('fecha_final'),
-            'hora_inicial' => request('hora_in'),
+            'hora_inicial' => request('hora_ini'),
             'hora_final' => request('hora_fi'),
         ]);
 
@@ -70,8 +81,9 @@ class HorarioInstructorController extends Controller
     public function edit($id)
     {
         $horarioinstructor = HorarioInstructor::findOrFail($id);
+        $instructors = Instructor::pluck('nombre', 'nombre');
 
-        return view("admin.horario-instructor.edit", ['horarioinstructor' => $horarioinstructor]);
+        return view("admin.horario-instructor.edit", ['horarioinstructor' => $horarioinstructor], compact('instructors'));
     }
 
     /**
