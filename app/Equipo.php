@@ -8,7 +8,7 @@ class Equipo extends Model
 {
     protected $primaryKey = 'id';
 
-    protected $table = 'equipos';
+    protected $table = 'cotizacion_equipo';
 
     protected $fillable = [
     	'Nombre_Equipo',
@@ -19,8 +19,6 @@ class Equipo extends Model
     	'URL_Ficha_Tecnica_Equipo',
     	'Archivo_Descripcion_Equipo',
     	'Estado_Ficha_Tecnica_Equipo',
-    	'Costo',
-    	'equipos_id',
     ];
 
     public $timestamps = false;

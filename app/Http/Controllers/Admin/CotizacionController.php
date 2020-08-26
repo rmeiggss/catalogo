@@ -17,15 +17,15 @@ class CotizacionController extends Controller
             echo "hola";
         }*/
 
-        $cotizaciones = Cotizacion::orderBy('COTIC_Numero')->get();  
+        $cotizaciones = Cotizacion::orderBy('COTIC_Numero')->get();
 
         return view('admin.cotizacion.index', compact('cotizaciones'));
     }
-    
+
     public function list(){
-        $cotizaciones = Cotizacion::all();  
+        $cotizaciones = Cotizacion::all();
         return $cotizaciones;
-    }    
+    }
 
     public function create()
     {
@@ -46,11 +46,11 @@ class CotizacionController extends Controller
             'USUA_Codigo'    => $request->usuario,
             'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
-            'COTIC_Total'    => $request->total
-            'COTIC_Correo1'    => request('correo1'),
-            'COTIC_correo2'    => request('correo2'),
-            'COTIC_correo3'    => request('correo3'),
-            'COTIC_correo4'    => request('correo4'),
+            'COTIC_Total'    => $request->total,
+            'COTIC_Correo1'    => $request->correo1,
+            'COTIC_Correo2'    => $request->correo2,
+            'COTIC_Correo3'    => $request->correo3,
+            'COTIC_Correo4'    => $request->correo4,
 
         ]);
         //Grabamos detalle
@@ -66,7 +66,7 @@ class CotizacionController extends Controller
                         "CODEC_SubTotal"       => $request->subtotaldet[$item]
                     ]);
                 }
-            }            
+            }
         }
         return Redirect::to("/cotizacion");
     }
@@ -79,9 +79,9 @@ class CotizacionController extends Controller
     public function edit($id)
     {
         $solicitantes = Solicitante::all();
-        $usuarios     = User::all();        
+        $usuarios     = User::all();
         $cotizacion = Cotizacion::findOrFail($id);
-        return view("admin.cotizacion.edit",compact('cotizacion','solicitantes','usuarios'));        
+        return view("admin.cotizacion.edit",compact('cotizacion','solicitantes','usuarios'));
     }
 
     public function update(Request $request, $id)
@@ -97,7 +97,7 @@ class CotizacionController extends Controller
         if(isset($request->nombre)){
             if(count($request->nombre)>0){
                 foreach($request->nombre as $item => $value){
-                    
+
                 }
             }
         }

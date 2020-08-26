@@ -87,7 +87,7 @@ Universidad Nacional de Ingeniería')
         <hr>
 <form  method="POST" action="{{ route('cot_ensayos.store') }}">
     @csrf
-        <div class="row">
+        <div id="crud_equipos" class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
                 <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
@@ -153,8 +153,9 @@ Universidad Nacional de Ingeniería')
 
             <h4 style="text-align:center;text-decoration: underline;color:black;margin-top:25px;">Equipos que forman parte de la Cotizacion</h4>
             <br>
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#mimodalequipo" id="boton_modal" style="border-radius:5px;">
-            Nuevo Equipo
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal"
+                    data-target="#mimodalequipo" id="boton_modal" style="border-radius:5px;">
+                Nuevo Equipo
             </button>
             <br>
             <br>
@@ -190,7 +191,8 @@ Universidad Nacional de Ingeniería')
                         </button>
                     </td>
                     <td class="text-center">
-                        <a class="btn btn-warning btn-sm" href="" style="border-radius:5px;">Editar</a>
+                        <a class="btn btn-warning btn-sm" href="" data-toggle="modal"
+                            data-target="#mimodalequipo" style="border-radius:5px;">Editar</a>
                         <a class="btn btn-danger btn-sm" href="" style="border-radius:5px;">Eliminar</a>
                     </td>
                 </tr>
@@ -222,6 +224,7 @@ Universidad Nacional de Ingeniería')
                     </td>
                 </tr>
             </table>
+            @include('cliente.modales.create_equipos')
         </div>
 
         <div>
@@ -230,31 +233,29 @@ Universidad Nacional de Ingeniería')
             </h4>
             <div class="row">
 
+                <div class="col-sm-6" style="padding-bottom: 8px;padding-top:8px;">
 
-            <div class="col-sm-6" style="padding-bottom: 8px;padding-top:8px;">
-
-                <div class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
-                    Correo #1:
-                    <br>
-                    <input class="form-control" type="text" name="correo1" id="correo1" />
-                    Correo #2:
-                    <br>
-                    <input class="form-control" type="text" name="correo2" id="correo2" />
+                    <div class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
+                        Correo #1:
+                        <br>
+                        <input class="form-control" type="text" name="correo1" id="correo1" />
+                        Correo #2:
+                        <br>
+                        <input class="form-control" type="text" name="correo2" id="correo2" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-sm-6" style="padding-bottom: 8px;;padding-top:8px;">
+                <div class="col-sm-6" style="padding-bottom: 8px;;padding-top:8px;">
 
-                <div class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
-                    Correo #3:
-                    <br>
-                    <input class="form-control" type="text" name="correo3" id="correo3" />
-                    Correo #4:
-                    <br>
-                    <input class="form-control" type="text" name="correo4" id="correo4" />
+                    <div class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
+                        Correo #3:
+                        <br>
+                        <input class="form-control" type="text" name="correo3" id="correo3" />
+                        Correo #4:
+                        <br>
+                        <input class="form-control" type="text" name="correo4" id="correo4" />
+                    </div>
                 </div>
-            </div>
-
 
             </div>
         </div>
@@ -288,66 +289,7 @@ Universidad Nacional de Ingeniería')
         <!-- Inicio de las ventanas modales -->
 
         <!-- Modal Equipos -->
-        <div class="modal fade" id="mimodalequipo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"></h4>
-        </div>
-        <div class="modal-body">
 
-        <!-- formulario -->
-        <div class="container">
-        <h1 style="text-align: center;color:black;font-size:40px;margin-bottom:10px;">Agregar Equipos a la Cotizacion</h1>
-        <hr>
-            <div class="form-horizontal form-control" style="width:400px;height:1090px;margin:0 auto">
-                Nombre del Equipo:
-                <br>
-                <input class="form-control" type="text" name="nombre_equipo" id="nombre_equipo" />
-
-                Descripcion del Equipo:
-                <br>
-                <textarea style="resize: none" class="form-control" id ="descripcion_equipo" name="descripcion_equipo" rows="5" cols="5"></textarea>
-
-                Cantidad de Equipos:
-                <input class="form-control" type="text" name="cantidad" id="cantidad" />
-
-                Fabricante del Equipo:
-                <input class="form-control" type="text" name="fabricante" id="fabricante" />
-
-                Descripcion Tecnica del Equipo:
-                <textarea style="resize: none" class="form-control" name="descrip_tec_equipo" id="descrip_tec_equipo" rows="5" cols="5"></textarea>
-
-                URL de la Ficha Tecnica del Equipo:
-                <textarea style="resize: none" class="form-control" name="url_ficha_tec" id="url_ficha_tec" rows="5" cols="5"></textarea>
-
-                <div class="form-group">
-                    <label for="archiv_descrip_equipo">Adjuntar un archivo de la descripcion del equipo</label>
-                    <input type="file" id="archiv_descrip_equipo" name="archiv_descrip_equipo">
-                </div>
-
-                Estado de la Ficha Tecnica:
-                <select class="form-control" name="estado_ficha_tec">
-                    <option value="op1">Se describe en el formulario</option>
-                    <option value="op2">Se proporciona el URL en el formulario</option>
-                    <option value="op3">Se describe y se indica el URL en el formulario</option>
-                    <option value="op4">No se precisa la Ficha Tecnica en el formulario</option>
-                </select>
-                <br>
-                <button class="btn btn-primary btn-lg" type="submit" name="" value="Guardar">Guardar</button>
-            </div>
-        </div>
-        <!-- formulario -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-
-      </div>
-        </div>
-        </div>
-        </div>
 
         <!-- Modal Nueva Prueba -->
         <div class="modal fade" id="mimodalnuevaprueba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

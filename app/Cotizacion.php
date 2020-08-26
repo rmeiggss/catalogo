@@ -18,10 +18,10 @@ class Cotizacion extends Model
 	    'COTIC_Igv',
 	    'COTIC_Total',
 	    'COTIC_Fecha',
-	    'COTIC_correo1',
-	    'COTIC_correo2',
-	    'COTIC_correo3',
-	    'COTIC_correo4',
+	    'COTIC_Correo1',
+	    'COTIC_Correo2',
+	    'COTIC_Correo3',
+	    'COTIC_Correo4',
 	];
 
     public $timestamps = false;

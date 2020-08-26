@@ -1,7 +1,7 @@
-<template>                         
+<template>
     <div class="row">
       <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
-      <a href="#" @click="addRow()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>                            
+      <a href="#" @click="addRow()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>
       <div class="col-12 table-responsive">
        <table class="table table-striped">
           <thead>
@@ -46,7 +46,7 @@
                             <div class="col-md-6">
                                 Descripcion de la Prueba:
                                 <br>
-                                <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea> 
+                                <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea>
                                 <label for="ejemplo_archivo_1">Adjuntar un archivo de la Norma Tecnica</label>
                                 <input type="file" id="ejemplo_archivo_1">
                             </div>

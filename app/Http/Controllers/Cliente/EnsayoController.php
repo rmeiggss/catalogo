@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Solicitante;
 use App\Contacto;
 use App\Cotizacion;
+use App\Equipo;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -46,10 +47,10 @@ class EnsayoController extends Controller
             'COTIC_SubTotal' => request('subtotal'),
             'COTIC_Igv'      => request('igv'),
             'COTIC_Total'    => request('total'),
-            'COTIC_Correo1'    => request('correo1'),
-            'COTIC_correo2'    => request('correo2'),
-            'COTIC_correo3'    => request('correo3'),
-            'COTIC_correo4'    => request('correo4'),
+            'COTIC_Correo1'  => request('correo1'),
+            'COTIC_Correo2'  => request('correo2'),
+            'COTIC_Correo3'  => request('correo3'),
+            'COTIC_Correo4'  => request('correo4'),
         ]);
 
         Solicitante::create([
@@ -63,6 +64,17 @@ class EnsayoController extends Controller
             'nombre_contacto' => request('nombre_contacto'),
             'email_contacto' => request('email_contacto'),
             'celular_contacto' => request('celular_contacto'),
+        ]);
+
+        Equipo::create([
+            'Nombre_Equipo' => request('nombre_equipo'),
+            'Descripcion_Equipo' => request('descripcion_equipo'),
+            'Cantidad' => request('cantidad'),
+            'Fabricante' => request('fabricante'),
+            'Descripcion_Ficha_Tecnica_Equipo' => request('descrip_tec_equipo'),
+            'Archivo_Descripcion_Equipo' => request('archiv_descrip_equipo'),
+            'URL_Ficha_Tecnica_Equipo' => request('url_ficha_tec'),
+            'Estado_Ficha_Tecnica_Equipo' => request('estado_ficha_tec'),
         ]);
 
         return Redirect::to("/cot_ensayos");
