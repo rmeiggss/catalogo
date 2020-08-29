@@ -2016,6 +2016,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2027,15 +2032,6 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   methods: {
-    listar: function listar() {
-      var _this = this;
-
-      var url = '/cotizaciondetalle/list';
-      axios.get(url).then(function (response) {
-        _this.cotizaciones = response.data;
-        console.log(_this.cotizaciones);
-      });
-    },
     addRow: function addRow() {
       this.cotizaciones.push({});
     },
@@ -2056,6 +2052,32 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2318,11 +2340,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addRow: function addRow() {
-<<<<<<< HEAD
-      //let cotdet = {CODEP_Codigo:0};
-=======
       //let cotdet = {CODEP_Codigo:0};         
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
       this.cotizacionesdetalle.push({});
     },
     deleteRow: function deleteRow(index) {
@@ -52110,8 +52128,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

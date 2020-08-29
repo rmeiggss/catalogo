@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-<template>
-=======
+
+
+
 <template> 
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
 
   <!--Form content-->
   <div class="invoice p-3 mb-3">
@@ -24,11 +23,11 @@
                 <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
                 <input type="text" class="col-sm-4 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off">
             </div>
-<<<<<<< HEAD
-          </div>
-=======
+
+
+
           </div>                            
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
@@ -55,26 +54,26 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group"></div>
           </div>
-<<<<<<< HEAD
-        </div>
-        <!-- /.Cabecera fila 2 -->
 
-        <!--Detalle Cotizacion-->
-=======
+
+
+
+
+
         </div>                        
         <!-- /.Cabecera fila 2 -->
 
         <!--Detalle Cotizacion--> 
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
         <div class="row invoice-info">
           <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
           <a href="#" @click="addRow()">
             <i class="fas fa-plus form-control-sm" id="agregar"></i>
-<<<<<<< HEAD
-          </a>
-=======
+
+
+
           </a>                             
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
           <div class="col-12 table-responsive">
             <table class="table table-striped">
               <thead>
@@ -111,11 +110,11 @@
             </table>
           </div>
         </div>
-<<<<<<< HEAD
-        <!--/Detalle Cotizacion-->
-=======
+
+
+
         <!--/Detalle Cotizacion--> 
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
 
         <!--Subtotales-->
         <div class="row">
@@ -158,11 +157,11 @@
                             <div class="col-md-6">
                                 Descripcion de la Prueba:
                                 <br>
-<<<<<<< HEAD
-                                <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea>
-=======
+
+
+
                                 <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea> 
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
                                 <label for="ejemplo_archivo_1">Adjuntar un archivo de la Norma Tecnica</label>
                                 <input type="file" id="ejemplo_archivo_1">
                             </div>
@@ -270,11 +269,11 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
-<<<<<<< HEAD
-                    console.log(this.cotizacion);
-=======
+
+
+
                     console.log(this.cotizacion);                    
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
                 });
             },
             listarSolicitantes(){
@@ -284,11 +283,11 @@
                 });
             },
             addRow(){
-<<<<<<< HEAD
-              //let cotdet = {CODEP_Codigo:0};
-=======
+
+
+
               //let cotdet = {CODEP_Codigo:0};         
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
               this.cotizacionesdetalle.push({});
             },
             deleteRow(index){
