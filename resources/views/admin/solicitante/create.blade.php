@@ -22,30 +22,51 @@
                 <div class="form-group">
                     {!!Form::label('nombre','Nombres')!!}
                     {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'nombre'])!!}
+                    @error('nombre')
+                    <small class="text-danger">Escribir el nombre del solicitante</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                     {!!Form::label('tipo','Tipo')!!}
                     {!!Form::text('tipo','1',['class'=>'form-control','placeholder'=>'Ingrese el tipo de Solicitante','id'=>'tipo'])!!}
+                    @error('tipo')
+                    <small class="text-danger">Escribir el tipo de solicitante</small>    
+                    @enderror
                 </div>            
                 <div class="form-group">
                     {!!Form::label('ruc','R.U.C.')!!}
                     {!!Form::text('ruc',null,['class'=>'form-control','placeholder'=>'Ingrese el RUC de Solicitante','id'=>'ruc','maxlength'=>'11'])!!}
+                    @error('ruc')
+                    <small class="text-danger">Escribir el RUC del solicitante</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                 {!!Form::label('email','Email')!!}
-                    {!!Form::text('email',null,['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'email'])!!}
+                    {!!Form::email('email',null,['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'email'])!!}
+                    @error('email')
+                    <small class="text-danger">Escribir el email del solicitante</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                 {!!Form::label('direccion','Direccion')!!}
                     {!!Form::text('direccion',null,['class'=>'form-control','placeholder'=>'Ingrese la dirección','id'=>'direccion'])!!}
+                    @error('direccion')
+                    <small class="text-danger">Escribir la dirección del solicitante</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                     {!!Form::label('telefono','Telefono')!!}
-                    {!!Form::text('telefono',null,['class'=>'form-control','placeholder'=>'Ingrese el telefono','id'=>'telefono'])!!}
+                    {!!Form::tel('telefono',null,['class'=>'form-control','placeholder'=>'Ingrese el telefono','id'=>'telefono'])!!}
+                    @error('telefono')
+                    <small class="text-danger">Escribir el telefono del solicitante</small>    
+                    @enderror
                 </div>  
                 <div class="form-group">
                     {!!Form::label('ubigeo','Ubigeo')!!}
                     {!!Form::text('ubigeo','010104',['class'=>'form-control','placeholder'=>'Ingrese el Correo Electronico','id'=>'ubigeo'])!!}
+                    @error('ubigeo')
+                    <small class="text-danger">Escribir el ubigeo</small>    
+                    @enderror
                 </div>  
                 <a class="btn btn-danger" href="{{ route('solicitante.index') }}">Cancelar</a>            
                 {!!Form::submit('Crear',['class'=>'btn btn-info'])!!}

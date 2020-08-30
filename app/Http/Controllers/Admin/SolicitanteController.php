@@ -22,6 +22,18 @@ class SolicitanteController extends Controller
     }
     
     public function store(Request $request){
+
+        /* Validacion del Formulario */
+        $request->validate([
+            'tipo' => 'required',
+            'ubigeo' => 'required',
+            'nombre' => 'required',
+            'ruc' => 'required',
+            'direccion' => 'required',
+            'email' => 'required|email',
+            'telefono' => 'required'
+        ]);
+
         Solicitante::create([
             'TIPSOLIP_Codigo'  => request('tipo'),
             'UBIGP_Codigo'     => request('ubigeo'),
