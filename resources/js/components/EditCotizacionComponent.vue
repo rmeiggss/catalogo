@@ -1,6 +1,3 @@
-
-
-
 <template> 
 
   <!--Form content-->
@@ -23,9 +20,6 @@
                 <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
                 <input type="text" class="col-sm-4 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off">
             </div>
-
-
-
           </div>                            
 
           <div class="col-sm-4 invoice-col">
@@ -48,32 +42,23 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Usuario</label>
-                <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm"></select>
+                <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm">
+                  <option v-for="usuario in usuarios" v-bind:value="usuario.id" v-bind:key="usuario.id">{{ usuario.name }}</option>
+                </select>
               </div>
           </div>
           <div class="col-sm-4 invoice-col">
               <div class="row form-group"></div>
           </div>
-
-
-
-
-
-
         </div>                        
         <!-- /.Cabecera fila 2 -->
 
         <!--Detalle Cotizacion--> 
-
         <div class="row invoice-info">
           <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
           <a href="#" @click="addRow()">
             <i class="fas fa-plus form-control-sm" id="agregar"></i>
-
-
-
           </a>                             
-
           <div class="col-12 table-responsive">
             <table class="table table-striped">
               <thead>

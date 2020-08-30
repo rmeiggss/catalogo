@@ -2270,21 +2270,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38637,34 +38622,45 @@ var render = function() {
               [_vm._v("Usuario")]
             ),
             _vm._v(" "),
-            _c("select", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cotizacion.USUA_Codigo,
-                  expression: "cotizacion.USUA_Codigo"
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cotizacion.USUA_Codigo,
+                    expression: "cotizacion.USUA_Codigo"
+                  }
+                ],
+                staticClass: "col-sm-6 form-control-sm",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.cotizacion,
+                      "USUA_Codigo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              ],
-              staticClass: "col-sm-6 form-control-sm",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.cotizacion,
-                    "USUA_Codigo",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            })
+              },
+              _vm._l(_vm.usuarios, function(usuario) {
+                return _c(
+                  "option",
+                  { key: usuario.id, domProps: { value: usuario.id } },
+                  [_vm._v(_vm._s(usuario.name))]
+                )
+              }),
+              0
+            )
           ])
         ]),
         _vm._v(" "),
