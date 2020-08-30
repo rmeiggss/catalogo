@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     {!!Form::label('nombre','Nombre')!!}
-                    {!!Form::text('nombre', $descuento->nombre_curso,['class'=>'form-control','id'=>'nombre'])!!}
+                    {!!Form::select('nombre', $productos, $descuento->nombre_curso, ['class' => 'form-control', 'placeholder'=>'-Seleccionar Curso-','id'=>'nombre']) !!}
                 </div>
 
                 <div class="form-group">
