@@ -23,6 +23,12 @@ class AsesoriaController extends Controller
 
     public function store(Request $request)
     {
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+        ]);
+
         AsesoriaLab::create([
             'ASESORIA_Nombre' => request('nombre'),
             'ASESORIA_Descripcion' => request('descripcion'),

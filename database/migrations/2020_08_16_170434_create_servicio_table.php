@@ -21,6 +21,10 @@ class CreateServicioTable extends Migration
             $table->string('Celular_Contacto')->nullable();
             $table->string('Tipo_Servicio_Academico')->nullable();
             $table->text('Descripcion_Servicio_Solicitado')->nullable();
+            $table->string('SERVICIOAC_Nombre')->nullable();
+            $table->text('SERVICIOAC_Descripcion');
+            $table->decimal('SERVICIOAC_Descuento')->default('0.00');
+            $table->decimal('SERVICIOAC_Costo')->default('0.00');
             $table->timestamps();
         });
     }

@@ -262,5 +262,6 @@
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
         <!-- setting -->
         <script type="text/javascript" src="{{ asset('js/js-web/main.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

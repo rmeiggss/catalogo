@@ -23,6 +23,13 @@ class CursoController extends Controller
 
     public function store(Request $request)
     {
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'costo' => 'required'
+        ]);
+
         Producto::create([
             'CURSOC_Nombre' => request('nombre'),
             'CURSOC_Descripcion' => request('descripcion'),

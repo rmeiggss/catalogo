@@ -12,12 +12,28 @@ class SolicitanteController extends Controller
         $solicitantes = Solicitante::latest()->paginate(8);
         return view('admin.solicitante.index',compact('solicitantes'));
     }
+
+    public function list(){
+        return Solicitante::all();
+    }
     
     public function create(){
         return view('admin.solicitante.create');
     }
     
     public function store(Request $request){
+
+        /* Validacion del Formulario */
+        $request->validate([
+            'tipo' => 'required',
+            'ubigeo' => 'required',
+            'nombre' => 'required',
+            'ruc' => 'required',
+            'direccion' => 'required',
+            'email' => 'required|email',
+            'telefono' => 'required'
+        ]);
+
         Solicitante::create([
             'TIPSOLIP_Codigo'  => request('tipo'),
             'UBIGP_Codigo'     => request('ubigeo'),
@@ -26,7 +42,8 @@ class SolicitanteController extends Controller
             'SOLIC_Direccion'  => request('direccion'),
             'SOLIC_Telefono'   => request('telefono'),
             'SOLIC_Email'      => request('email'),
-            'SOLIC_FlagEstado' => request('estado')
+            'SOLIC_FlagEstado' => request('estado'),
+            'SOLIC_Contacto'   => request('contacto')
         ]);
         return Redirect::to("/solicitante");
     }
@@ -45,6 +62,7 @@ class SolicitanteController extends Controller
         $solicitante->SOLIC_Direccion = $request->direccion;
         $solicitante->SOLIC_Telefono  = $request->telefono;
         $solicitante->SOLIC_Email     = $request->email;
+        $solicitante->SOLIC_Contacto  = $request->contacto;
         $solicitante->save();
         return redirect::to('/solicitante');
     }

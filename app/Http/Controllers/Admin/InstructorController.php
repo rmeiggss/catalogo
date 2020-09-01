@@ -38,6 +38,13 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'celular' => 'required',
+            'email' => 'required|email',
+        ]);
+
         Instructor::create([
             'nombre' => request('nombre'),
             'celular' => request('celular'),
