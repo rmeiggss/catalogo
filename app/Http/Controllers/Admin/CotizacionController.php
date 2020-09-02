@@ -51,11 +51,7 @@ class CotizacionController extends Controller
             'COTIC_Correo2'    => $request->correo2,
             'COTIC_Correo3'    => $request->correo3,
             'COTIC_Correo4'    => $request->correo4,
-
-            'COTIC_Correo1'  => NULL,
-            'COTIC_correo2'  => NULL,
-            'COTIC_correo3'  => NULL,
-            'COTIC_correo4'  => NULL,
+            'TIPOCOP_Codigo'   => 1
         ]);
         //Grabamos detalle
         if(isset($request->nombre)){

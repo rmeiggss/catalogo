@@ -95,9 +95,6 @@
             </table>
           </div>
         </div>
-
-
-
         <!--/Detalle Cotizacion--> 
 
 
@@ -254,9 +251,6 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
-
-
-
                     console.log(this.cotizacion);                    
 
                 });
