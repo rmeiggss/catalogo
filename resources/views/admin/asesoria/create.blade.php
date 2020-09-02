@@ -20,10 +20,16 @@
                 <div class="form-group">
                     {!!Form::label('nombre','Nombre')!!}
                     {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'nombre'])!!}
+                    @error('nombre')
+                    <small class="text-danger">Escribir el nombre del curso</small>    
+                    @enderror 
                 </div>
                 <div class="form-group">
                     {!!Form::label('descripcion','Descripcion')!!}
                     {!!Form::textarea('descripcion',null,['class'=>'form-control','placeholder'=>'Ingrese la descripcion','id'=>'descripcion'])!!}
+                    @error('descripcion')
+                    <small class="text-danger">Escribir la descripcion del curso</small>    
+                    @enderror
                 </div>
                 
                     {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}

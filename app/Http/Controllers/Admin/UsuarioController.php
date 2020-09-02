@@ -23,6 +23,15 @@ class UsuarioController extends Controller
     }
     
     public function store(Request $request){
+
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'rol' => 'required'
+        ]);
+
         User::create([
             'name' => request('nombre'),
             'email' => request('email'),

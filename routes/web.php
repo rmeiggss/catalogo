@@ -23,6 +23,7 @@ Route::resource('usuario','Admin\UsuarioController');
 Route::resource('cotizacion', 'Admin\CotizacionController');
 Route::resource('categoria','Admin\CategoriaController');
 Route::resource('solicitante','Admin\SolicitanteController');
+Route::resource('contacto','Admin\ContactoController');
 Auth::routes();
 
 // -------- Rutas de marck --------------------

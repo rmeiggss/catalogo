@@ -95,9 +95,12 @@
             </table>
           </div>
         </div>
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> ecd2143599be59d717e8756a7e2062848d23fccc
         <!--/Detalle Cotizacion--> 
 
 
@@ -254,9 +257,12 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> ecd2143599be59d717e8756a7e2062848d23fccc
                     console.log(this.cotizacion);                    
 
                 });

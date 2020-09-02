@@ -20,18 +20,30 @@
                 <div class="form-group">
                     {!!Form::label('nombres','Nombres')!!}
                     {!!Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'nombre'])!!}
+                    @error('nombre')
+                    <small class="text-danger">Escribir el nombre del nuevo usuario</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                     {!!Form::label('email','Correo electronico')!!}
-                    {!!Form::text('email',null,['class'=>'form-control','placeholder'=>'Ingrese la descripcion','id'=>'email'])!!}
+                    {!!Form::email('email',null,['class'=>'form-control','placeholder'=>'Ingrese la descripcion','id'=>'email'])!!}
+                    @error('email')
+                    <small class="text-danger">Escribir email</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                     {!!Form::label('rol','Rol')!!}
                     {!!Form::text('rol',null,['class'=>'form-control','placeholder'=>'Ingrese el costo','id'=>'rol'])!!}
+                    @error('rol')
+                    <small class="text-danger">Escribir rol</small>    
+                    @enderror
                 </div>
                 <div class="form-group">
                     {!!Form::label('password','Contraseña')!!}
                     {!!Form::text('password',null,['class'=>'form-control','placeholder'=>'Ingrese el password','id'=>'password'])!!}
+                    @error('password')
+                    <small class="text-danger">Falta escribir el password</small>    
+                    @enderror
                 </div>            
                     {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
                 <!-- Agregar boton de cancelar -->

@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Instructor;
 use Illuminate\Http\Request;
 use Redirect;
 
-class InstructorController extends Controller
+class ContactoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,8 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        $instructors = Instructor::latest()->paginate(8);
-
-        return view('admin.instructor.index', compact('instructors'));
+        $usuarios = array();
+        return view('admin.contacto.index',compact('usuarios'));
     }
 
     /**
@@ -27,7 +24,7 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        return view("admin.instructor.create");
+        //
     }
 
     /**
@@ -38,20 +35,7 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        /* Validacion del Formulario */
-        $request->validate([
-            'nombre' => 'required',
-            'celular' => 'required',
-            'email' => 'required|email',
-        ]);
-
-        Instructor::create([
-            'nombre' => request('nombre'),
-            'celular' => request('celular'),
-            'email' => request('email'),
-        ]);
-
-        return Redirect::to("/instructor");
+        //
     }
 
     /**
@@ -73,9 +57,7 @@ class InstructorController extends Controller
      */
     public function edit($id)
     {
-        $instructor = Instructor::findOrFail($id);
-
-        return view("admin.instructor.edit", ['instructor' => $instructor]);
+        //
     }
 
     /**
@@ -87,15 +69,7 @@ class InstructorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $instructor = Instructor::findOrFail($id);
-
-        $instructor->nombre = $request->nombre;
-        $instructor->celular = $request->celular;
-        $instructor->email = $request->email;
-
-        $instructor->save();
-
-        return Redirect::to("/instructor");
+        //
     }
 
     /**
@@ -106,7 +80,6 @@ class InstructorController extends Controller
      */
     public function destroy($id)
     {
-        Instructor::destroy($id);
-        return Redirect::to("/instructor");
+        //
     }
 }

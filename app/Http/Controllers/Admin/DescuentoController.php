@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Descuento;
+use App\Producto;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -27,7 +28,9 @@ class DescuentoController extends Controller
      */
     public function create()
     {
-        return view("admin.descuento.create");
+        $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
+
+        return view("admin.descuento.create", compact('productos'));
     }
 
     /**
@@ -38,6 +41,15 @@ class DescuentoController extends Controller
      */
     public function store(Request $request)
     {
+        /* Validacion del Formulario */
+        $request->validate([
+            'nombre' => 'required',
+            'cant_min' => 'required',
+            'cant_max' => 'required',
+            'costo' => 'required',
+            'descuento' => 'required'
+        ]);
+
         Descuento::create([
             'nombre_curso' => request('nombre'),
             'cantidad_min' => request('cant_min'),
@@ -69,8 +81,9 @@ class DescuentoController extends Controller
     public function edit($id)
     {
         $descuento = Descuento::findOrFail($id);
+        $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
 
-        return view("admin.descuento.edit", ['descuento' => $descuento]);
+        return view("admin.descuento.edit", ['descuento' => $descuento], compact('productos'));
     }
 
     /**
