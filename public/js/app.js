@@ -2016,6 +2016,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2027,15 +2032,6 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   methods: {
-    listar: function listar() {
-      var _this = this;
-
-      var url = '/cotizaciondetalle/list';
-      axios.get(url).then(function (response) {
-        _this.cotizaciones = response.data;
-        console.log(_this.cotizaciones);
-      });
-    },
     addRow: function addRow() {
       this.cotizaciones.push({});
     },
@@ -2056,6 +2052,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2318,11 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addRow: function addRow() {
-<<<<<<< HEAD
-      //let cotdet = {CODEP_Codigo:0};
-=======
       //let cotdet = {CODEP_Codigo:0};         
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
       this.cotizacionesdetalle.push({});
     },
     deleteRow: function deleteRow(index) {
@@ -38619,34 +38622,45 @@ var render = function() {
               [_vm._v("Usuario")]
             ),
             _vm._v(" "),
-            _c("select", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cotizacion.USUA_Codigo,
-                  expression: "cotizacion.USUA_Codigo"
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cotizacion.USUA_Codigo,
+                    expression: "cotizacion.USUA_Codigo"
+                  }
+                ],
+                staticClass: "col-sm-6 form-control-sm",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.cotizacion,
+                      "USUA_Codigo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              ],
-              staticClass: "col-sm-6 form-control-sm",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.cotizacion,
-                    "USUA_Codigo",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            })
+              },
+              _vm._l(_vm.usuarios, function(usuario) {
+                return _c(
+                  "option",
+                  { key: usuario.id, domProps: { value: usuario.id } },
+                  [_vm._v(_vm._s(usuario.name))]
+                )
+              }),
+              0
+            )
           ])
         ]),
         _vm._v(" "),

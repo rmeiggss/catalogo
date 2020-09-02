@@ -149,9 +149,11 @@ Universidad Nacional de Ingeniería')
             </div>
         </div>
 
-        <div class="container-fluid">
 
-            <h4 style="text-align:center;text-decoration: underline;color:black;margin-top:25px;">Equipos que forman parte de la Cotizacion</h4>
+        <div class="container-fluid">
+            <h4 style="text-align:center;text-decoration: underline;color:black;margin-top:25px;">
+                Equipos que forman parte de la Cotizacion
+            </h4>
             <br>
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal"
                     data-target="#mimodalequipo" id="boton_modal" style="border-radius:5px;">
@@ -169,7 +171,6 @@ Universidad Nacional de Ingeniería')
                     <th class="text-center">Descripcion Ficha Tecnica</th>
                     <th class="text-center">URL Ficha Tecnica del Equipo</th>
                     <th class="text-center">Nueva Prueba</th>
-                    <th class="text-center">Listado de Pruebas</th>
                     <th class="text-center">Acciones</th>
                 </tr>
                 <tr>
@@ -181,13 +182,9 @@ Universidad Nacional de Ingeniería')
                     <td class="text-center">Equipo para medir la resistencia...</td>
                     <td class="text-center">www.sieemes.com.pe</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba" id="boton_modal" style="border-radius:5px;">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba"
+                        id="boton_modal" style="border-radius:5px;">
                         Nueva Prueba
-                        </button>
-                    </td>
-                    <td class="text-center" style="color:white;">
-                        <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#mimodallistaprueba" id="boton_modal" style="border-radius:5px;">
-                        Listado de Prueba
                         </button>
                     </td>
                     <td class="text-center">
@@ -196,6 +193,7 @@ Universidad Nacional de Ingeniería')
                         <a class="btn btn-danger btn-sm" href="" style="border-radius:5px;">Eliminar</a>
                     </td>
                 </tr>
+
                 <tr>
                     <td class="text-center">2</td>
                     <td class="text-center">Telurometro</td>
@@ -205,18 +203,10 @@ Universidad Nacional de Ingeniería')
                     <td class="text-center">Equipo para medir la resistencia...</td>
                     <td class="text-center">www.sieemes.com.pe</td>
                     <td class="text-center">
-
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba" id="boton_modal" style="border-radius:5px;">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba"
+                        id="boton_modal" style="border-radius:5px;">
                         Nueva Prueba
                         </button>
-
-                    </td>
-                    <td class="text-center">
-
-                        <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#mimodallistaprueba" id="boton_modal" style="color:white;border-radius:5px;">
-                        Listado de Prueba
-                        </button>
-
                     </td>
                     <td class="text-center">
                         <a class="btn btn-warning btn-sm" href="" style="border-radius:5px;">Editar</a>
@@ -278,126 +268,9 @@ Universidad Nacional de Ingeniería')
     </center>
 </form>
 
-<!-- Fin del formulario de cotizaciones de ensayos -->
-
         <br>
         <br>
         <br>
         <br>
 
-
-        <!-- Inicio de las ventanas modales -->
-
-        <!-- Modal Equipos -->
-
-
-        <!-- Modal Nueva Prueba -->
-        <div class="modal fade" id="mimodalnuevaprueba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
-
-        <!-- formulario -->
-        <div class="container">
-        <h1 style="text-align: center;color:black;font-size:40px;">Agregar una Nueva Prueba al Equipo Seleccionado</h1>
-        <hr>
-        <form class="form-horizontal form-control" style="width:400px;height:770px;margin:0 auto">
-        Descripcion de la Prueba a Realizar
-        <br>
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5"></textarea>
-        Norma Asociada a la Prueba:
-        <br>
-        <input class="form-control" type="text" name="" id="primero" />
-        Descripcion de la Norma:
-        <br>
-        <textarea style="resize: none" class="form-control" name="" rows="5" cols="5"></textarea>
-        <div class="form-group">
-            <label for="ejemplo_archivo_1">Adjuntar un archivo de la descripcion de la Norma Tecnica</label>
-            <input type="file" id="ejemplo_archivo_1">
-        </div>
-        Estado de la Norma:
-        <br>
-        <select class="form-control">
-            <option value="volvo">La norma se describio en el formulario</option>
-            <option value="saab">La norma se envio como archivo en el formulario</option>
-            <option value="saab">La norma se describio y se envio como archivo en el formulario</option>
-            <option value="saab">La norma no se envio en el formulario</option>
-        </select>
-
-        <br>
-        <input class="btn btn-primary btn-lg" type="submit" name="" value="Guardar" />
-        </form>
-        </div>
-        <!-- formulario -->
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-        <!-- Modal Listado de Prueba -->
-        <div class="modal fade" id="mimodallistaprueba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
-        <h2 style="text-align: center;text-decoration: underline;color:black;font-size:40px;">Listado de Pruebas del Equipo Seleccionado</h2>
-        <br>
-        <!-- formulario -->
-        <!-- formulario -->
-        <table class="table table-bordered">
-    <tr>
-        <th class="text-center">Identificador</th>
-        <th class="text-center">Descripcion de la Prueba a Realizar</th>
-        <th class="text-center">Norma Asociada a la Prueba</th>
-        <th class="text-center">Descripcion de la Norma</th>
-        <th class="text-center">Estado de la Norma</th>
-        <th class="text-center">Acciones</th>
-    </tr>
-    <tr>
-        <td class="text-center">1</td>
-        <td class="text-center">Prueba Dielectrica</td>
-        <td class="text-center">Norma IEC-123456</td>
-        <td class="text-center">Descripcion de la Norma</td>
-        <td class="text-center">La norma se describio en el formulario</td>
-        <td class="text-center">
-            <a class="btn btn-warning btn-sm" href="" style="border-radius:5px;">Editar</a>
-            <a class="btn btn-danger btn-sm" href="" style="border-radius:5px;">Eliminar</a>
-        </td>
-    </tr>
-    <tr>
-        <td class="text-center">2</td>
-        <td class="text-center">Prueba Dielectrica</td>
-        <td class="text-center">Norma IEC-123456</td>
-        <td class="text-center">Descripcion de la Norma</td>
-        <td class="text-center">La norma se describio en el formulario</td>
-        <td class="text-center">
-            <a class="btn btn-warning btn-sm" href="" style="border-radius:5px;">Editar</a>
-            <a class="btn btn-danger btn-sm" href="" style="border-radius:5px;">Eliminar</a>
-        </td>
-    </tr>
-</table>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-        <!-- Fin de las ventanas modales -->
 @endsection

@@ -1,10 +1,10 @@
-<<<<<<< HEAD
-<template>
-    <div class="row">
-=======
+
+
+
+
 <template>                         
     <div class="row invoice-info">
->>>>>>> 1bf8d842289c56f03e4843c3ba6e6ac06ffae847
+
       <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
       <a href="#" @click="addRow()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>
       <div class="col-12 table-responsive">

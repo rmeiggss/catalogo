@@ -50,16 +50,9 @@ class CapacitacionController extends Controller
             'nombre_contacto' => request('nombre_contacto'),
             'email_contacto' => request('email_contacto'),
             'celular_contacto' => request('celular_contacto'),
-            'contacto_id' => request('id'),
         ]);
 
-        Correo::create([
-            'email1' => request('email1'),
-            'email2' => request('email2'),
-            'email3' => request('email3'),
-            'email4' => request('email4'),
-            'correo_id' => request('id'),
-        ]);
+
 
         return Redirect::to("cot_capacitaciones");
     }
