@@ -55,7 +55,7 @@ class HorarioCursoController extends Controller
          /*    'fecha_final' => request('fecha_final'),
             'hora_inicial' => request('hora_in'),
             'hora_final' => request('hora_fi'), */
-            'hora_inicio' => request('hora_ini'),
+            'hora_inicial' => request('hora_ini'),
             'hora_final' => request('hora_fi'),
         ]);
 
@@ -105,7 +105,7 @@ class HorarioCursoController extends Controller
         /* $horariocurso->fecha_final = $request->fecha_final;
         $horariocurso->hora_inicial = $request->hora_in;
         $horariocurso->hora_final = $request->hora_fi; */
-        $horariocurso->hora_inicio = $request->hora_ini;
+        $horariocurso->hora_inicial = $request->hora_ini;
         $horariocurso->hora_final = $request->hora_fi;
         $horariocurso->save();
 

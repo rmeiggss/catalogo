@@ -17,7 +17,7 @@
     <section class="content">
         <div class="grid-hor">
 
-            {!!Form::model($instructor, ['route'=>['instructor.update', $instructor->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
+            {!!Form::model($instructor, ['route'=>['instructor.update', $instructor->INSTP_Codigo],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
                 <div class="form-group">
                     {!!Form::label('nombre','Nombre')!!}

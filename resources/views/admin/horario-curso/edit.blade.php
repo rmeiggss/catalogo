@@ -49,12 +49,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="form-group col-md-3">
-                            {!! Form::label('hora_ini', 'Hora de Inicio :') !!} 
-                            {!! Form::time('hora_ini', $horariocurso->hora_inicio, ['class' => 'form-control','id'=>'hora_ini']) !!}
+                            {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                            {!! Form::time('hora_ini', $horariocurso->hora_inicial, ['class' => 'form-control','id'=>'hora_ini']) !!}
                         </div>
 
                         <div class="form-group col-md-3">
-                            {!! Form::label('hora_fi', 'Hora de Final :') !!} 
+                            {!! Form::label('hora_fi', 'Hora de Final :') !!}
                             {!! Form::time('hora_fi', $horariocurso->hora_final, ['class' => 'form-control','id'=>'hora_fi']) !!}
                         </div>
                     </div>

@@ -38,33 +38,33 @@
                 </tr>
                 </thead>
                 <tbody>
-				<!-- Empieza listado de instructores -->
-					        @forelse($instructors as $item=>$instructor)
-	                  <tr>
-	                    <!--actualizado por marck -->
-	                    <th scope="row">{{$item+1}}</th>
-	                    <td>{{$instructor->nombre}}</td>
-	                    <td>{{$instructor->celular}}</td>
-	                    <td>{{$instructor->email}}</td>
-	                    <td><button class="btn btn-info">
-	                      <a class="text-light" href="{{ route('instructor.edit', $instructor->id) }}">
-	                        Editar
-	                      </a></button></td>
-	                    <td>
-	                      <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-	                      {!!Form::open(['route'=>['instructor.destroy',$instructor->id],'method'=>'DELETE'])!!}
-	                          {{ csrf_field() }}
-	                          {{ method_field('DELETE') }}
-	                          {!!Form::submit('Eliminar',
-	                                ['class'=>'btn btn-danger'])
-	                          !!}
-	                      {!!Form::close()!!}
-	                     </td>
-	                  </tr>
+        <!-- Empieza listado de instructores -->
+                  @forelse($instructors as $item=>$instructor)
+                    <tr>
+                      <!--actualizado por marck -->
+                      <th scope="row">{{$item+1}}</th>
+                      <td>{{$instructor->nombre}}</td>
+                      <td>{{$instructor->celular}}</td>
+                      <td>{{$instructor->email}}</td>
+                      <td><button class="btn btn-info">
+                        <a class="text-light" href="{{ route('instructor.edit', $instructor->INSTP_Codigo) }}">
+                          Editar
+                        </a></button></td>
+                      <td>
+                        <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
+                        {!!Form::open(['route'=>['instructor.destroy',$instructor->INSTP_Codigo],'method'=>'DELETE'])!!}
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            {!!Form::submit('Eliminar',
+                                  ['class'=>'btn btn-danger'])
+                            !!}
+                        {!!Form::close()!!}
+                       </td>
+                    </tr>
                   @empty
                     <p><i>No se han encontrado elementos en la base de datos ...</i></p>
                   @endforelse
-				<!-- Termina listado -->
+        <!-- Termina listado -->
                 </tbody>
               </table>
 

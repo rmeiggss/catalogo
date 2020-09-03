@@ -8,7 +8,7 @@ class HorarioCurso extends Model
 {
     protected $table = 'horario_cursos';
 
-    protected $fillable = ['nombre_curso', 'fecha_inicial', 'hora_inicio', 'hora_final'];
+    protected $fillable = ['nombre_curso', 'fecha_inicial', 'hora_inicial', 'hora_final'];
 
     public $timestamps = false;
 }
