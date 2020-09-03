@@ -1,4 +1,4 @@
-<template> 
+<template>
 
   <!--Form content-->
   <div class="invoice p-3 mb-3">
@@ -20,7 +20,7 @@
                 <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
                 <input type="text" class="col-sm-4 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off">
             </div>
-          </div>                            
+          </div>
 
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
@@ -50,15 +50,15 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group"></div>
           </div>
-        </div>                        
+        </div>
         <!-- /.Cabecera fila 2 -->
 
-        <!--Detalle Cotizacion--> 
+        <!--Detalle Cotizacion-->
         <div class="row invoice-info">
           <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
           <a href="#" @click="addRow()">
             <i class="fas fa-plus form-control-sm" id="agregar"></i>
-          </a>                             
+          </a>
           <div class="col-12 table-responsive">
             <table class="table table-striped">
               <thead>
@@ -95,13 +95,7 @@
             </table>
           </div>
         </div>
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> ecd2143599be59d717e8756a7e2062848d23fccc
-        <!--/Detalle Cotizacion--> 
+        <!--/Detalle Cotizacion-->
 
 
         <!--Subtotales-->
@@ -148,7 +142,7 @@
 
 
 
-                                <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea> 
+                                <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea>
 
                                 <label for="ejemplo_archivo_1">Adjuntar un archivo de la Norma Tecnica</label>
                                 <input type="file" id="ejemplo_archivo_1">
@@ -257,13 +251,7 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> ecd2143599be59d717e8756a7e2062848d23fccc
-                    console.log(this.cotizacion);                    
+                    console.log(this.cotizacion);
 
                 });
             },
@@ -277,7 +265,7 @@
 
 
 
-              //let cotdet = {CODEP_Codigo:0};         
+              //let cotdet = {CODEP_Codigo:0};
 
               this.cotizacionesdetalle.push({});
             },

@@ -149,73 +149,7 @@ Universidad Nacional de Ingeniería')
             </div>
         </div>
 
-
-        <div class="container-fluid">
-            <h4 style="text-align:center;text-decoration: underline;color:black;margin-top:25px;">
-                Equipos que forman parte de la Cotizacion
-            </h4>
-            <br>
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal"
-                    data-target="#mimodalequipo" id="boton_modal" style="border-radius:5px;">
-                Nuevo Equipo
-            </button>
-            <br>
-            <br>
-            <table class="table table-bordered">
-                <tr>
-                    <th class="text-center">Identificador</th>
-                    <th class="text-center">Nombre del Equipo</th>
-                    <th class="text-center">Descripcion del Equipo</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-center">Fabricante</th>
-                    <th class="text-center">Descripcion Ficha Tecnica</th>
-                    <th class="text-center">URL Ficha Tecnica del Equipo</th>
-                    <th class="text-center">Nueva Prueba</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">Telurometro</td>
-                    <td class="text-center">Equipo para medir la resistencia...</td>
-                    <td class="text-center">2</td>
-                    <td class="text-center">Siemens</td>
-                    <td class="text-center">Equipo para medir la resistencia...</td>
-                    <td class="text-center">www.sieemes.com.pe</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba"
-                        id="boton_modal" style="border-radius:5px;">
-                        Nueva Prueba
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <a class="btn btn-warning btn-sm" href="" data-toggle="modal"
-                            data-target="#mimodalequipo" style="border-radius:5px;">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="" style="border-radius:5px;">Eliminar</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="text-center">2</td>
-                    <td class="text-center">Telurometro</td>
-                    <td class="text-center">Equipo para medir la resistencia...</td>
-                    <td class="text-center">1</td>
-                    <td class="text-center">Siemens</td>
-                    <td class="text-center">Equipo para medir la resistencia...</td>
-                    <td class="text-center">www.sieemes.com.pe</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba"
-                        id="boton_modal" style="border-radius:5px;">
-                        Nueva Prueba
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <a class="btn btn-warning btn-sm" href="" style="border-radius:5px;">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="" style="border-radius:5px;">Eliminar</a>
-                    </td>
-                </tr>
-            </table>
-            @include('cliente.modales.create_equipos')
-        </div>
+        <ensayos-component></ensayos-component>
 
         <div>
             <h4 style="text-align:center;color:black;">
