@@ -32,11 +32,15 @@ CREATE TABLE IF NOT EXISTS `alumno` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla catalogo.asesoria_laboratorio
-CREATE TABLE IF NOT EXISTS `asesoria_laboratorio` (
+-- Volcando estructura para tabla catalogo.asesoria
+CREATE TABLE IF NOT EXISTS `asesoria` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ASESORIA_Nombre` varchar(255) DEFAULT NULL,
-  `ASESORIA_Descripcion` mediumtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `ASESORIA_Descripcion` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `update_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -141,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   PRIMARY KEY (`id`),
   KEY `fk_curso_instructor_idx` (`INSTP_Codigo`),
   CONSTRAINT `fk_curso_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -220,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `instructor` (
   PRIMARY KEY (`INSTP_Codigo`),
   KEY `fk_instructor_persona_idx` (`PERSP_Codigo`),
   CONSTRAINT `fk_instructor_persona` FOREIGN KEY (`PERSP_Codigo`) REFERENCES `persona` (`PERSP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -375,10 +379,14 @@ CREATE TABLE IF NOT EXISTS `tiposolicitante` (
 
 -- Volcando estructura para tabla catalogo.tipo_servicio_academico
 CREATE TABLE IF NOT EXISTS `tipo_servicio_academico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `SERVICIOAC_Nombre` varchar(255) DEFAULT NULL,
   `SERVICIOAC_Descripcion` mediumtext DEFAULT NULL,
-  `SERVICIOAC_Costo` decimal(10,0) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `SERVICIOAC_Costo` decimal(10,0) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `update_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 

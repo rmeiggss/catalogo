@@ -13,6 +13,7 @@
           <div class="col-sm-6 text-right">
             <!-- actualizado por marck, usando ELOQUENT -->
             <a class="btn btn-info" href="{{ route('curso.create') }}">Agregar Curso</a>
+            <a href="{{ route('cursos.pdf') }}">Generar Reporte</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
