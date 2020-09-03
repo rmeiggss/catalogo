@@ -3,10 +3,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Producto;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use Redirect;
 
 class CursoController extends Controller
 {
+    public function exportPdf()
+    {
+        $cursos = Producto::get();
+        $pdf = PDF::loadView('pdf.cursos', compact('cursos'));
+
+        return $pdf->download('cursos-list.pdf');
+    }
 
     public function index()
     {

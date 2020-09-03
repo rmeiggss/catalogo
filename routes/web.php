@@ -18,6 +18,8 @@ Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');
 Route::get('/home', 'HomeController@index')->name('home');
+//Ruta para crear el pdf
+Route::get('cursos-list-pdf', 'Admin\CursoController@exportPdf')->name('cursos.pdf');
 //Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::resource('usuario','Admin\UsuarioController');
 Route::resource('cotizacion', 'Admin\CotizacionController');
