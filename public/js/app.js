@@ -2017,10 +2017,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2266,13 +2262,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-<<<<<<< HEAD
-//
-//
-//
-=======
->>>>>>> ecd2143599be59d717e8756a7e2062848d23fccc
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {

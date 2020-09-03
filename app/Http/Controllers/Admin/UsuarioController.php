@@ -3,12 +3,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Redirect;
 
 class UsuarioController extends Controller
 {
     public function index(){
         //$usuarios = User::all();
+        $fecha_actual = Carbon::now()->format('d-m-Y');
+        echo $fecha_actual;        
         $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get();
         return view('admin.usuario.index',compact('usuarios'));
     }
