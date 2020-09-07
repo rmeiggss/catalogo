@@ -95,8 +95,11 @@
             </table>
           </div>
         </div>
+<<<<<<< HEAD
         <!--/Detalle Cotizacion-->
-
+=======
+        <!--/Detalle Cotizacion--> 
+>>>>>>> bf8c839e468a5cde8d43d361f150d6093fe78f3c
 
         <!--Subtotales-->
         <div class="row">
@@ -251,7 +254,11 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
+<<<<<<< HEAD
                     console.log(this.cotizacion);
+=======
+                    console.log(this.cotizacion);                    
+>>>>>>> bf8c839e468a5cde8d43d361f150d6093fe78f3c
 
                 });
             },
