@@ -20,18 +20,13 @@
             {!!Form::model($horarioinstructor, ['route'=>['horario-instructor.update', $horarioinstructor->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
                 <div class="form-group">
-                    {!!Form::label('nombre','Nombre del Curso')!!}
+                    {!!Form::label('nombre','Nombre del Instructor')!!}
                     {!!Form::text('nombre', $horarioinstructor->nombre_instructor,['class'=>'form-control','id'=>'nombre'])!!}
                 </div>
 
                 <div class="form-group">
                     {!!Form::label('fecha_inicial','Fecha de Inicial')!!}
                     {!!Form::date('fecha_inicial', $horarioinstructor->fecha_inicial,['class'=>'form-control','id'=>'fecha_inicial'])!!}
-                </div>
-
-                <div class="form-group">
-                {!!Form::label('fecha_final','Fecha Final')!!}
-                    {!!Form::date('fecha_final', $horarioinstructor->fecha_final,['class'=>'form-control','id'=>'fecha_final'])!!}
                 </div>
 
                 <div class="form-group">
