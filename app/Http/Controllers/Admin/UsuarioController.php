@@ -2,17 +2,15 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Redirect;
 
 class UsuarioController extends Controller
 {
     public function index(){
-        //$usuarios = User::all();
-        $fecha_actual = Carbon::now()->format('d-m-Y');
-        echo $fecha_actual;        
-        $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get();
+        $usuarios = User::all();
+    /*     $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get(); */
         return view('admin.usuario.index',compact('usuarios'));
     }
     
@@ -22,7 +20,8 @@ class UsuarioController extends Controller
     }
     
     public function create(){
-        return view("admin.usuario.create");
+        $rol = Role::pluck('ROL_Descripcion', 'ROL_Descripcion');
+        return view("admin.usuario.create", compact('rol'));
     }
     
     public function store(Request $request){

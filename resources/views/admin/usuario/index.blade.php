@@ -40,7 +40,7 @@
                   <th scope="row">{{$item+1}}</th>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
-                  <td>{{ $user->hasRole('Admin')?'hola':'' }}</td>
+                  <td>{{ $user->ROL_Codigo }}</td>
                   <td><a class="btn btn-info" href="{{ route('usuario.edit', $user->id) }}">Editar</a></td>
                   <td>
                     {!!Form::open(['route'=>['usuario.destroy',$user->id],'method'=>'DELETE'])!!}
