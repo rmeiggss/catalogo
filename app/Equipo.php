@@ -9,14 +9,14 @@ class Equipo extends Model
     protected $table = 'equipos';
 
     protected $fillable = [
-    	'Nombre_Equipo',
-    	'Descripcion_Equipo',
-    	'Cantidad',
-    	'Fabricante',
-    	'Descripcion_Ficha_Tecnica_Equipo',
-    	'URL_Ficha_Tecnica_Equipo',
-    	'Archivo_Descripcion_Equipo',
-    	'Estado_Ficha_Tecnica_Equipo',
+    	'nombre_eq',
+    	'descripcion_eq',
+    	'cantidad_eq',
+    	'fabricante_eq',
+    	'descrip_tec_eq',
+    	'url_tec_eq',
+    	'arch_descrip_eq',
+    	'estado_tec_eq',
     ];
 
     public $timestamps = false;

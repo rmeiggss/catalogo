@@ -149,7 +149,20 @@ Universidad Nacional de Ingeniería')
             </div>
         </div>
 
-        <ensayos-component></ensayos-component>
+        <button type="button" class="btn btn-success btn-lg ml-3" data-toggle="modal"
+                data-target="#mimodalequipo" id="boton_modal" style="border-radius:5px;">
+                Nuevo Equipo
+        </button>
+
+        <br>
+        <br>
+
+        <div id="app" class="mr-3 ml-3">
+            <ensayos-component></ensayos-component>
+        </div>
+
+        <br>
+        <br>
 
         <div>
             <h4 style="text-align:center;color:black;">

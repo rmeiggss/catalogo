@@ -48,6 +48,20 @@ Route::resource('asesorias','Cliente\AsesoriaController');
 Route::resource('servicio_academico','Cliente\ServicioAcademicoController');
 // --------------------------------------------
 
+// --------------------------------------------
+// CREACIÓN PARA LA RUTA DE EQUIPOS (ENSAYOS, CALIBRACIONES)
+Route::get('cot_ensayos', 'Cliente\EquipoController@index');
+
+Route::put('/cot_ensayos/editar', 'Cliente\EquipoController@update');
+
+Route::post('/cot_ensayos/guardar', 'Cliente\EquipoController@store');
+
+Route::delete('/cot_ensayos/borrar/{id}', 'Cliente\EquipoController@destroy');
+
+Route::get('/cot_ensayos/buscar', 'Cliente\EquipoController@show');
+// --------------------------------------------
+
+
 // ------- RUTAS CLIENTE ---------------------
 Route::view('/academico', 'cliente/academico')->name('academico');
 Route::view('/asesorias', 'cliente/asesorias')->name('asesorias');
