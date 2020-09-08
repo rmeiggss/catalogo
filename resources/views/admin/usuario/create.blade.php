@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     {!!Form::label('password','Contraseña')!!}
-                    {!!Form::password('password',null,['class'=>'form-control','placeholder'=>'Ingrese el password','id'=>'password'])!!}
+                    {!!Form::password('password' ['class'=>'form-control','placeholder'=>'Ingrese el password','id'=>'password'])!!}
                     @error('password')
                     <small class="text-danger">Falta escribir el password</small>    
                     @enderror
