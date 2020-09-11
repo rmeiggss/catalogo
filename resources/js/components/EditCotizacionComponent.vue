@@ -87,19 +87,17 @@
                   <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="cotdetalle.CODEC_Fabricante" autocomplete="off"></td>
                   <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                   <td><button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal">Lista</button></td>
-                  <td><input type="text" class="form-control-sm w-100" name="cantidad[]" v-model="cotdetalle.CODEC_Cantidad" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="cantidad[]" v-model="cotdetalle.CODEC_Cantidad" v-on:keyup="keymonitor" id="cantidad" autocomplete="off"></td>
                   <td><input type="text" class="form-control-sm w-100" name="unitario[]" v-model="cotdetalle.CODEC_PrecioUnitario" autocomplete="off"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]" :value="cotdetalle.CODEC_Cantidad*cotdetalle.CODEC_PrecioUnitario" readonly="readonly" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]" v-model="cotdetalle.CODEC_SubTotal" readonly="readonly" autocomplete="off"></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-<<<<<<< HEAD
+
         <!--/Detalle Cotizacion-->
-=======
-        <!--/Detalle Cotizacion--> 
->>>>>>> bf8c839e468a5cde8d43d361f150d6093fe78f3c
+
 
         <!--Subtotales-->
         <div class="row">
@@ -110,13 +108,13 @@
                 <tr>
                   <th style="width:50%">Subtotal S/.:</th>
                   <td>
-                    <input type="text" v-model="cotizacion.COTIC_SubTotal" class="form-control-sm w-50">
+                    <input type="text" class="form-control-sm w-50" :value="setSubTotal">
                     </td>
                 </tr>
                 <tr>
                   <th>I.G.V. S/. (18%)</th>
                   <td>
-                    <input type="text" v-model="cotizacion.COTIC_Igv" class="form-control-sm w-50"></td>
+                    <input type="text" v-model="setIgv" class="form-control-sm w-50"></td>
                 </tr>
                 <tr>
                   <th>Total S/.:</th>
@@ -142,6 +140,7 @@
                             <div class="col-md-6">
                                 Descripcion de la Prueba:
                                 <br>
+
 
 
 
@@ -223,6 +222,7 @@
                 cotizacion:[],
                 cotizacionesdetalle : [],
                 solicitantes:[],
+                usuarios:[],
                 saveData:null
             }
         },
@@ -233,6 +233,7 @@
             this.getCotizacionDetalle(this.codigo);
             this.getCotizacion(this.codigo);
             this.listarSolicitantes();
+            this.listarUsuarios();
         },
         mounted() {
             console.log('Component mounted.')
@@ -240,7 +241,13 @@
         computed:{
           setSubTotal:function(){
             var suma = 0;
-            return this.cotizacionesdetalle.reduce((suma,cotdetalle)=>suma+cotdetalle.CODEC_Cantidad,0);
+            return this.cotizacionesdetalle.reduce((suma,cotdetalle)=>suma+cotdetalle.CODEC_SubTotal,0);
+          },
+          setIgv:function(){
+            return Number(this.setSubTotal)*0.18;
+          },
+          keymonitor:function(){
+            //alert(this.cantidad);
           }
         },
         methods:{
@@ -254,11 +261,9 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
-<<<<<<< HEAD
+
                     console.log(this.cotizacion);
-=======
-                    console.log(this.cotizacion);                    
->>>>>>> bf8c839e468a5cde8d43d361f150d6093fe78f3c
+
 
                 });
             },
@@ -268,11 +273,19 @@
                     this.solicitantes = response.data;
                 });
             },
+            listarUsuarios(){
+                var url = '/usuario/list';
+                axios.get(url).then(response=>{
+                    this.usuarios = response.data;
+                });
+            },
             addRow(){
 
 
 
+
               //let cotdet = {CODEP_Codigo:0};
+
 
               this.cotizacionesdetalle.push({});
             },

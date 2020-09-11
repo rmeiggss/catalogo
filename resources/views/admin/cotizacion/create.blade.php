@@ -48,7 +48,7 @@
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                       <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                      {!!Form::text('contacto',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'contacto','disabled'=>'disabled'])!!}
+                      {!!Form::text('contacto',NULL,['class'=>'col-sm-6 form-control-sm','id'=>'contacto'])!!}
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
