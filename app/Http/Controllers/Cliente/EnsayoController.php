@@ -66,17 +66,6 @@ class EnsayoController extends Controller
             'celular_contacto' => request('celular_contacto'),
         ]);
 
-        Equipo::create([
-            'Nombre_Equipo' => request('nombre_equipo'),
-            'Descripcion_Equipo' => request('descripcion_equipo'),
-            'Cantidad' => request('cantidad'),
-            'Fabricante' => request('fabricante'),
-            'Descripcion_Ficha_Tecnica_Equipo' => request('descrip_tec_equipo'),
-            'Archivo_Descripcion_Equipo' => request('archiv_descrip_equipo'),
-            'URL_Ficha_Tecnica_Equipo' => request('url_ficha_tec'),
-            'Estado_Ficha_Tecnica_Equipo' => request('estado_ficha_tec'),
-        ]);
-
         return Redirect::to("/cot_ensayos");
     }
 

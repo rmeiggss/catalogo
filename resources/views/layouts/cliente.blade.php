@@ -199,7 +199,7 @@
             </div>
         </footer>
 	</footer>
-
+        <script src="{{ asset('js/app.js') }}"></script>
 	<!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top  -->
@@ -262,6 +262,5 @@
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
         <!-- setting -->
         <script type="text/javascript" src="{{ asset('js/js-web/main.js') }}"></script>
-        <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

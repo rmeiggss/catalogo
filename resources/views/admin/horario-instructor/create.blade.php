@@ -33,14 +33,6 @@
                             <small class="text-danger">Seleccionar la fecha de inicio</small>
                             @enderror
                         </div>
-
-                        <div class="form-group col-md-3">
-                            {!!Form::label('fecha_final','Fecha Final')!!}
-                            {!!Form::date('fecha_final',"null",['class'=>'form-control','id'=>'fecha_final'])!!}
-                            @error('fecha_final')
-                            <small class="text-danger">Seleccionar la fecha de finalización</small>
-                            @enderror
-                        </div>
                     </div>
                 </div>
 

@@ -45,15 +45,13 @@ class HorarioInstructorController extends Controller
         $request->validate([
             'nombre' => 'required',
             'fecha_inicial' => 'required',
-            'fecha_final' => 'required',
             'hora_ini' => 'required',
             'hora_fi' => 'required'
         ]);
-        
+
         HorarioInstructor::create([
             'nombre_instructor' => request('nombre'),
             'fecha_inicial' => request('fecha_inicial'),
-            'fecha_final' => request('fecha_final'),
             'hora_inicial' => request('hora_ini'),
             'hora_final' => request('hora_fi'),
         ]);
@@ -99,7 +97,6 @@ class HorarioInstructorController extends Controller
 
         $horarioinstructor->nombre_instructor = $request->nombre;
         $horarioinstructor->fecha_inicial = $request->fecha_inicial;
-        $horarioinstructor->fecha_final = $request->fecha_final;
         $horarioinstructor->hora_inicial = $request->hora_in;
         $horarioinstructor->hora_final = $request->hora_fi;
 

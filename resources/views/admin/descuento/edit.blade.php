@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                {!!Form::label('descuento','Descuento')!!}
+                {!!Form::label('descuento','Descuento (%)')!!}
                     {!!Form::text('descuento', $descuento->descuento,['class'=>'form-control','id'=>'descuento'])!!}
                 </div>
 

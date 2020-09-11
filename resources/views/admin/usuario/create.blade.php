@@ -33,14 +33,15 @@
                 </div>
                 <div class="form-group">
                     {!!Form::label('rol','Rol')!!}
-                    {!!Form::text('rol',null,['class'=>'form-control','placeholder'=>'Ingrese el costo','id'=>'rol'])!!}
+                    {!!Form::select('rol', $rol, 'null', ['class' => 'form-control', 'placeholder'=>'-Seleccionar Rol-','id'=>'rol']) !!}
+                   
                     @error('rol')
                     <small class="text-danger">Escribir rol</small>    
                     @enderror
                 </div>
                 <div class="form-group">
                     {!!Form::label('password','Contraseña')!!}
-                    {!!Form::text('password',null,['class'=>'form-control','placeholder'=>'Ingrese el password','id'=>'password'])!!}
+                    {!!Form::password('password' ['class'=>'form-control','placeholder'=>'Ingrese el password','id'=>'password'])!!}
                     @error('password')
                     <small class="text-danger">Falta escribir el password</small>    
                     @enderror
