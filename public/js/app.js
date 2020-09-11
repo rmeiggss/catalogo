@@ -2020,7 +2020,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      cotizaciones: [],
+      cotizaciondetalle: [],
       saveData: null
     };
   },
@@ -2029,10 +2029,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addRow: function addRow() {
-      this.cotizaciones.push({});
+      this.cotizaciondetalle.push({});
     },
     deleteRow: function deleteRow(index) {
-      this.cotizaciones.splice(index, 1);
+      this.cotizaciondetalle.splice(index, 1);
     }
   }
 });
@@ -2258,16 +2258,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cotizacion: [],
       cotizacionesdetalle: [],
       solicitantes: [],
+      usuarios: [],
       saveData: null
     };
   },
@@ -2278,6 +2275,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getCotizacionDetalle(this.codigo);
     this.getCotizacion(this.codigo);
     this.listarSolicitantes();
+    this.listarUsuarios();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2286,8 +2284,13 @@ __webpack_require__.r(__webpack_exports__);
     setSubTotal: function setSubTotal() {
       var suma = 0;
       return this.cotizacionesdetalle.reduce(function (suma, cotdetalle) {
-        return suma + cotdetalle.CODEC_Cantidad;
+        return suma + cotdetalle.CODEC_SubTotal;
       }, 0);
+    },
+    setIgv: function setIgv() {
+      return Number(this.setSubTotal) * 0.18;
+    },
+    keymonitor: function keymonitor() {//alert(this.cantidad);
     }
   },
   methods: {
@@ -2316,8 +2319,16 @@ __webpack_require__.r(__webpack_exports__);
         _this3.solicitantes = response.data;
       });
     },
+    listarUsuarios: function listarUsuarios() {
+      var _this4 = this;
+
+      var url = '/usuario/list';
+      axios.get(url).then(function (response) {
+        _this4.usuarios = response.data;
+      });
+    },
     addRow: function addRow() {
-      //let cotdet = {CODEP_Codigo:0};         
+      //let cotdet = {CODEP_Codigo:0};      
       this.cotizacionesdetalle.push({});
     },
     deleteRow: function deleteRow(index) {
@@ -38057,10 +38068,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.cotizaciones, function(row, index) {
+          _vm._l(_vm.cotizaciondetalle, function(cotdetalle, index) {
             return _c(
               "tr",
-              { key: row.CODEP_Codigo, staticClass: "text-center" },
+              { key: cotdetalle.CODEP_Codigo, staticClass: "text-center" },
               [
                 _c("td", [
                   _c(
@@ -38083,7 +38094,124 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("input", {
-                    attrs: { type: "hidden", name: "codigodet[]" }
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: cotdetalle.CODEP_Codigo,
+                        expression: "cotdetalle.CODEP_Codigo"
+                      }
+                    ],
+                    attrs: { type: "hidden", name: "codigodet[]" },
+                    domProps: { value: cotdetalle.CODEP_Codigo },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          cotdetalle,
+                          "CODEP_Codigo",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: cotdetalle.CODEC_NombreEquipo,
+                        expression: "cotdetalle.CODEC_NombreEquipo"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-100",
+                    attrs: {
+                      type: "text",
+                      name: "nombre[]",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: cotdetalle.CODEC_NombreEquipo },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          cotdetalle,
+                          "CODEC_NombreEquipo",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: cotdetalle.CODEC_Descripcion,
+                        expression: "cotdetalle.CODEC_Descripcion"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-100",
+                    attrs: {
+                      type: "text",
+                      name: "descripcion[]",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: cotdetalle.CODEC_Descripcion },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          cotdetalle,
+                          "CODEC_Descripcion",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: cotdetalle.CODEC_Fabricante,
+                        expression: "cotdetalle.CODEC_Fabricante"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-100",
+                    attrs: {
+                      type: "text",
+                      name: "fabricante[]",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: cotdetalle.CODEC_Fabricante },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          cotdetalle,
+                          "CODEC_Fabricante",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -38091,17 +38219,86 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(2, true),
                 _vm._v(" "),
-                _vm._m(3, true),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: cotdetalle.CODEC_Cantidad,
+                        expression: "cotdetalle.CODEC_Cantidad"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-100",
+                    attrs: {
+                      type: "text",
+                      name: "cantidad[]",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: cotdetalle.CODEC_Cantidad },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          cotdetalle,
+                          "CODEC_Cantidad",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
                 _vm._v(" "),
-                _vm._m(4, true),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: cotdetalle.CODEC_PrecioUnitario,
+                        expression: "cotdetalle.CODEC_PrecioUnitario"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-100",
+                    attrs: {
+                      type: "text",
+                      name: "unitario[]",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: cotdetalle.CODEC_PrecioUnitario },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          cotdetalle,
+                          "CODEC_PrecioUnitario",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
                 _vm._v(" "),
-                _vm._m(5, true),
-                _vm._v(" "),
-                _vm._m(6, true),
-                _vm._v(" "),
-                _vm._m(7, true),
-                _vm._v(" "),
-                _vm._m(8, true)
+                _c("td", [
+                  _c("input", {
+                    staticClass: "form-control-sm w-100",
+                    attrs: {
+                      type: "text",
+                      name: "subtotaldet[]",
+                      readonly: "readonly",
+                      autocomplete: "off"
+                    },
+                    domProps: {
+                      value:
+                        cotdetalle.CODEC_Cantidad *
+                        cotdetalle.CODEC_PrecioUnitario
+                    }
+                  })
+                ])
               ]
             )
           }),
@@ -38110,7 +38307,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(9)
+    _vm._m(3)
   ])
 }
 var staticRenderFns = [
@@ -38144,39 +38341,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "nombre[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "descripcion[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "fabricante[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("td", { staticClass: "pb-0 mb-0" }, [
       _c("i", {
         staticClass: "far fa-file-pdf",
@@ -38201,39 +38365,6 @@ var staticRenderFns = [
         },
         [_vm._v("Lista")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "cantidad[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "unitario[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "subtotaldet[]", autocomplete: "off" }
-      })
     ])
   },
   function() {
@@ -38860,10 +38991,12 @@ var render = function() {
                         attrs: {
                           type: "text",
                           name: "cantidad[]",
+                          id: "cantidad",
                           autocomplete: "off"
                         },
                         domProps: { value: cotdetalle.CODEC_Cantidad },
                         on: {
+                          keyup: _vm.keymonitor,
                           input: function($event) {
                             if ($event.target.composing) {
                               return
@@ -38912,6 +39045,14 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: cotdetalle.CODEC_SubTotal,
+                            expression: "cotdetalle.CODEC_SubTotal"
+                          }
+                        ],
                         staticClass: "form-control-sm w-100",
                         attrs: {
                           type: "text",
@@ -38919,10 +39060,18 @@ var render = function() {
                           readonly: "readonly",
                           autocomplete: "off"
                         },
-                        domProps: {
-                          value:
-                            cotdetalle.CODEC_Cantidad *
-                            cotdetalle.CODEC_PrecioUnitario
+                        domProps: { value: cotdetalle.CODEC_SubTotal },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              cotdetalle,
+                              "CODEC_SubTotal",
+                              $event.target.value
+                            )
+                          }
                         }
                       })
                     ])
@@ -38948,29 +39097,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cotizacion.COTIC_SubTotal,
-                        expression: "cotizacion.COTIC_SubTotal"
-                      }
-                    ],
                     staticClass: "form-control-sm w-50",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.cotizacion.COTIC_SubTotal },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.cotizacion,
-                          "COTIC_SubTotal",
-                          $event.target.value
-                        )
-                      }
-                    }
+                    domProps: { value: _vm.setSubTotal }
                   })
                 ])
               ]),
@@ -38984,23 +39113,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.cotizacion.COTIC_Igv,
-                        expression: "cotizacion.COTIC_Igv"
+                        value: _vm.setIgv,
+                        expression: "setIgv"
                       }
                     ],
                     staticClass: "form-control-sm w-50",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.cotizacion.COTIC_Igv },
+                    domProps: { value: _vm.setIgv },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.cotizacion,
-                          "COTIC_Igv",
-                          $event.target.value
-                        )
+                        _vm.setIgv = $event.target.value
                       }
                     }
                   })
