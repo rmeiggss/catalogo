@@ -39,7 +39,6 @@ class CotizacionController extends Controller
     {
         //Grabamos la cabecera
         $cot = Cotizacion::create([
-
             'SOLIP_Codigo'   => $request->solicitante,
             'COTIC_Numero'   => $request->numero,
             'COTIC_Fecha'    => $request->fecha,
@@ -47,11 +46,11 @@ class CotizacionController extends Controller
             'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
             'COTIC_Total'    => $request->total,
-            'COTIC_Correo1'    => $request->correo1,
-            'COTIC_Correo2'    => $request->correo2,
-            'COTIC_Correo3'    => $request->correo3,
-            'COTIC_Correo4'    => $request->correo4,
-            'TIPOCOP_Codigo'   => 1
+            'COTIC_Correo1'  => $request->correo1,
+            'COTIC_Correo2'  => $request->correo2,
+            'COTIC_Correo3'  => $request->correo3,
+            'COTIC_Correo4'  => $request->correo4,
+            'TIPOCOP_Codigo' => 1
         ]);
         //Grabamos detalle
         if(isset($request->nombre)){

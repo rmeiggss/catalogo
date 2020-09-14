@@ -2017,22 +2017,159 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      cotizaciones: [],
+      cotizacion: [],
+      cotizaciondetalle: [],
+      solicitantes: [],
+      usuarios: [],
       saveData: null
     };
+  },
+  created: function created() {
+    this.listarSolicitantes();
+    this.listarUsuarios();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
+  computed: {
+    setSubTotal: function setSubTotal() {
+      var suma = 0;
+      return this.cotizaciondetalle.reduce(function (suma, cotdetalle) {
+        return suma + cotdetalle.CODEC_PrecioUnitario * cotdetalle.CODEC_Cantidad;
+      }, 0).toFixed(2);
+    },
+    setIgv: function setIgv() {
+      return (Number(this.setSubTotal) * 0.18).toFixed(2);
+    },
+    setTotal: function setTotal() {
+      return (Number(this.setSubTotal) + Number(this.setIgv)).toFixed(2);
+    }
+  },
   methods: {
     addRow: function addRow() {
-      this.cotizaciones.push({});
+      this.cotizaciondetalle.push({});
     },
     deleteRow: function deleteRow(index) {
-      this.cotizaciones.splice(index, 1);
+      this.cotizaciondetalle.splice(index, 1);
+    },
+    listarSolicitantes: function listarSolicitantes() {
+      var _this = this;
+
+      var url = '/solicitante/list';
+      axios.get(url).then(function (response) {
+        _this.solicitantes = response.data;
+      });
+    },
+    listarUsuarios: function listarUsuarios() {
+      var _this2 = this;
+
+      var url = '/usuario/list';
+      axios.get(url).then(function (response) {
+        _this2.usuarios = response.data;
+        console.log(_this2.cotizacion);
+      });
+    },
+    submit: function submit() {
+      this.$refs.form.submit();
     }
   }
 });
@@ -2255,23 +2392,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-<<<<<<< HEAD
-//
-=======
->>>>>>> bf8c839e468a5cde8d43d361f150d6093fe78f3c
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cotizacion: [],
       cotizacionesdetalle: [],
       solicitantes: [],
+      usuarios: [],
       saveData: null
     };
   },
@@ -2282,6 +2409,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getCotizacionDetalle(this.codigo);
     this.getCotizacion(this.codigo);
     this.listarSolicitantes();
+    this.listarUsuarios();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2290,8 +2418,14 @@ __webpack_require__.r(__webpack_exports__);
     setSubTotal: function setSubTotal() {
       var suma = 0;
       return this.cotizacionesdetalle.reduce(function (suma, cotdetalle) {
-        return suma + cotdetalle.CODEC_Cantidad;
+        return suma + cotdetalle.CODEC_PrecioUnitario * cotdetalle.CODEC_Cantidad;
       }, 0);
+    },
+    setIgv: function setIgv() {
+      return (Number(this.setSubTotal) * 0.18).toFixed(2);
+    },
+    setTotal: function setTotal() {
+      return (Number(this.setSubTotal) + Number(this.setIgv)).toFixed(2);
     }
   },
   methods: {
@@ -2320,8 +2454,16 @@ __webpack_require__.r(__webpack_exports__);
         _this3.solicitantes = response.data;
       });
     },
+    listarUsuarios: function listarUsuarios() {
+      var _this4 = this;
+
+      var url = '/usuario/list';
+      axios.get(url).then(function (response) {
+        _this4.usuarios = response.data;
+        console.log(_this4.cotizacion);
+      });
+    },
     addRow: function addRow() {
-      //let cotdet = {CODEP_Codigo:0};
       this.cotizacionesdetalle.push({});
     },
     deleteRow: function deleteRow(index) {
@@ -18093,7 +18235,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.20';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -21800,21 +21942,8 @@ return jQuery;
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
-      if (iteratees.length) {
-        iteratees = arrayMap(iteratees, function(iteratee) {
-          if (isArray(iteratee)) {
-            return function(value) {
-              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
-            }
-          }
-          return iteratee;
-        });
-      } else {
-        iteratees = [identity];
-      }
-
       var index = -1;
-      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -22071,10 +22200,6 @@ return jQuery;
         var key = toKey(path[index]),
             newValue = value;
 
-        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-          return object;
-        }
-
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -22227,14 +22352,11 @@ return jQuery;
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      var low = 0,
-          high = array == null ? 0 : array.length;
-      if (high === 0) {
-        return 0;
-      }
-
       value = iteratee(value);
-      var valIsNaN = value !== value,
+
+      var low = 0,
+          high = array == null ? 0 : array.length,
+          valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -23719,11 +23841,10 @@ return jQuery;
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Check that cyclic values are equal.
-      var arrStacked = stack.get(array);
-      var othStacked = stack.get(other);
-      if (arrStacked && othStacked) {
-        return arrStacked == other && othStacked == array;
+      // Assume cyclic values are equal.
+      var stacked = stack.get(array);
+      if (stacked && stack.get(other)) {
+        return stacked == other;
       }
       var index = -1,
           result = true,
@@ -23885,11 +24006,10 @@ return jQuery;
           return false;
         }
       }
-      // Check that cyclic values are equal.
-      var objStacked = stack.get(object);
-      var othStacked = stack.get(other);
-      if (objStacked && othStacked) {
-        return objStacked == other && othStacked == object;
+      // Assume cyclic values are equal.
+      var stacked = stack.get(object);
+      if (stacked && stack.get(other)) {
+        return stacked == other;
       }
       var result = true;
       stack.set(object, other);
@@ -27270,10 +27390,6 @@ return jQuery;
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
-     *
-     * // Combining several predicates using `_.overEvery` or `_.overSome`.
-     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
-     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -28023,15 +28139,15 @@ return jQuery;
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 30 },
+     *   { 'user': 'fred',   'age': 40 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -32906,11 +33022,11 @@ return jQuery;
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
-      // and escape the comment, thus injecting code that gets evaled.
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/\s/g, ' ')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -32943,6 +33059,8 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -33649,9 +33767,6 @@ return jQuery;
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
-     * **Note:** Multiple values can be checked by combining several matchers
-     * using `_.overSome`
-     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -33667,10 +33782,6 @@ return jQuery;
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
-     *
-     * // Checking for several possible values
-     * _.filter(objects, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
-     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -33684,9 +33795,6 @@ return jQuery;
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
-     *
-     * **Note:** Multiple values can be checked by combining several matchers
-     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -33704,10 +33812,6 @@ return jQuery;
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
-     *
-     * // Checking for several possible values
-     * _.filter(objects, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
-     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -33931,10 +34035,6 @@ return jQuery;
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
-     * Following shorthands are possible for providing predicates.
-     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
-     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
-     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -33961,10 +34061,6 @@ return jQuery;
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
-     * Following shorthands are possible for providing predicates.
-     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
-     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
-     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -33984,9 +34080,6 @@ return jQuery;
      *
      * func(NaN);
      * // => false
-     *
-     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
-     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -38350,92 +38443,646 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row invoice-info" }, [
-    _c("label", { staticClass: "col-sm-2 col-form-label col-form-label-sm" }, [
-      _vm._v("Agregar")
-    ]),
-    _vm._v(" "),
+  return _c("div", { staticClass: "invoice p-3 mb-3" }, [
     _c(
-      "a",
-      {
-        attrs: { href: "#" },
-        on: {
-          click: function($event) {
-            return _vm.addRow()
-          }
-        }
-      },
+      "form",
+      { ref: "form", attrs: { method: "POST", action: "/cotizacion" } },
       [
-        _c("i", {
-          staticClass: "fas fa-plus form-control-sm",
-          attrs: { id: "agregar" }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12 table-responsive" }, [
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(0),
+        _c("input", {
+          attrs: {
+            name: "_token",
+            type: "hidden",
+            value: "I9CuL6B0JcZ9uvzjeZmYQ45m4GIxT8kEdgt6uWDL"
+          }
+        }),
         _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.cotizaciones, function(row, index) {
-            return _c(
-              "tr",
-              { key: row.CODEP_Codigo, staticClass: "text-center" },
-              [
-                _c("td", [
-                  _c(
-                    "label",
-                    { staticStyle: { border: "1px solid red", color: "blue" } },
+        _c("div", { staticClass: "row invoice-info" }, [
+          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+            _c("div", { staticClass: "row form-group" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+                [_vm._v("Solicitante")]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cotizacion.SOLIP_Codigo,
+                      expression: "cotizacion.SOLIP_Codigo"
+                    }
+                  ],
+                  staticClass: "col-sm-6 form-control-sm",
+                  attrs: { name: "solicitante" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.cotizacion,
+                        "SOLIP_Codigo",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.solicitantes, function(solicitante) {
+                  return _c(
+                    "option",
+                    {
+                      key: solicitante.id,
+                      domProps: { value: solicitante.id }
+                    },
+                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+            _c("div", { staticClass: "row form-group" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+                [_vm._v("Fecha")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cotizacion.COTIC_Fecha,
+                    expression: "cotizacion.COTIC_Fecha"
+                  }
+                ],
+                staticClass: "col-sm-4 form-control-sm",
+                attrs: { type: "text", autocomplete: "off", name: "fecha" },
+                domProps: { value: _vm.cotizacion.COTIC_Fecha },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.cotizacion, "COTIC_Fecha", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+            _c("div", { staticClass: "row form-group" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+                [_vm._v("Numero")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cotizacion.COTIC_Numero,
+                    expression: "cotizacion.COTIC_Numero"
+                  }
+                ],
+                staticClass: "col-sm-3 form-control-sm",
+                attrs: {
+                  type: "text",
+                  maxlength: "11",
+                  autocomplete: "off",
+                  name: "numero"
+                },
+                domProps: { value: _vm.cotizacion.COTIC_Numero },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.cotizacion,
+                      "COTIC_Numero",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row invoice-info" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+            _c("div", { staticClass: "row form-group" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+                [_vm._v("Usuario")]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cotizacion.USUA_Codigo,
+                      expression: "cotizacion.USUA_Codigo"
+                    }
+                  ],
+                  staticClass: "col-sm-6 form-control-sm",
+                  attrs: { name: "usuario" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.cotizacion,
+                        "USUA_Codigo",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.usuarios, function(usuario) {
+                  return _c(
+                    "option",
+                    { key: usuario.id, domProps: { value: usuario.id } },
+                    [_vm._v(_vm._s(usuario.name))]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row invoice-info" }, [
+          _c(
+            "label",
+            { staticClass: "col-sm-2 col-form-label col-form-label-sm" },
+            [_vm._v("Agregar")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  return _vm.addRow()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-plus form-control-sm",
+                attrs: { id: "agregar" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 table-responsive" }, [
+            _c("table", { staticClass: "table table-striped" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.cotizaciondetalle, function(cotdetalle, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: cotdetalle.CODEP_Codigo,
+                      staticClass: "text-center"
+                    },
                     [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
+                      _c("td", [
+                        _c(
+                          "label",
+                          {
+                            staticStyle: {
+                              border: "1px solid red",
+                              color: "blue"
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteRow(index)
+                                  }
+                                }
+                              },
+                              [_vm._v("x")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: cotdetalle.CODEP_Codigo,
+                              expression: "cotdetalle.CODEP_Codigo"
+                            }
+                          ],
+                          attrs: { type: "hidden", name: "codigodet[]" },
+                          domProps: { value: cotdetalle.CODEP_Codigo },
                           on: {
-                            click: function($event) {
-                              return _vm.deleteRow(index)
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEP_Codigo",
+                                $event.target.value
+                              )
                             }
                           }
-                        },
-                        [_vm._v("x")]
-                      )
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: cotdetalle.CODEC_NombreEquipo,
+                              expression: "cotdetalle.CODEC_NombreEquipo"
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "text",
+                            name: "nombre[]",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: cotdetalle.CODEC_NombreEquipo },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_NombreEquipo",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: cotdetalle.CODEC_Descripcion,
+                              expression: "cotdetalle.CODEC_Descripcion"
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "text",
+                            name: "descripcion[]",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: cotdetalle.CODEC_Descripcion },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_Descripcion",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: cotdetalle.CODEC_Fabricante,
+                              expression: "cotdetalle.CODEC_Fabricante"
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "text",
+                            name: "fabricante[]",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: cotdetalle.CODEC_Fabricante },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_Fabricante",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3, true),
+                      _vm._v(" "),
+                      _vm._m(4, true),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: cotdetalle.CODEC_Cantidad,
+                              expression: "cotdetalle.CODEC_Cantidad",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "number",
+                            name: "cantidad[]",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: cotdetalle.CODEC_Cantidad },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_Cantidad",
+                                _vm._n($event.target.value)
+                              )
+                            },
+                            blur: function($event) {
+                              return _vm.$forceUpdate()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: cotdetalle.CODEC_PrecioUnitario,
+                              expression: "cotdetalle.CODEC_PrecioUnitario",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "number",
+                            name: "unitario[]",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: cotdetalle.CODEC_PrecioUnitario },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_PrecioUnitario",
+                                _vm._n($event.target.value)
+                              )
+                            },
+                            blur: function($event) {
+                              return _vm.$forceUpdate()
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "text",
+                            name: "subtotaldet[]",
+                            readonly: "readonly",
+                            autocomplete: "off"
+                          },
+                          domProps: {
+                            value:
+                              cotdetalle.CODEC_Cantidad *
+                              cotdetalle.CODEC_PrecioUnitario
+                          }
+                        })
+                      ])
                     ]
-                  ),
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(5)
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row invoice-info" }, [
+          _c("div", { staticClass: "col-9" }, [_vm._v(" ")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table" }, [
+                _c("tr", [
+                  _c("th", { staticStyle: { width: "50%" } }, [
+                    _vm._v("Subtotal S/.:")
+                  ]),
                   _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "hidden", name: "codigodet[]" }
-                  })
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.setSubTotal,
+                          expression: "setSubTotal"
+                        }
+                      ],
+                      staticClass: "form-control-sm w-50",
+                      attrs: { type: "text", name: "subtotal" },
+                      domProps: { value: _vm.setSubTotal },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.setSubTotal = $event.target.value
+                        }
+                      }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, true),
+                _c("tr", [
+                  _c("th", [_vm._v("I.G.V. S/. (18%)")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.setIgv,
+                          expression: "setIgv"
+                        }
+                      ],
+                      staticClass: "form-control-sm w-50",
+                      attrs: { type: "text", name: "igv" },
+                      domProps: { value: _vm.setIgv },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.setIgv = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
-                _vm._m(2, true),
-                _vm._v(" "),
-                _vm._m(3, true),
-                _vm._v(" "),
-                _vm._m(4, true),
-                _vm._v(" "),
-                _vm._m(5, true),
-                _vm._v(" "),
-                _vm._m(6, true),
-                _vm._v(" "),
-                _vm._m(7, true),
-                _vm._v(" "),
-                _vm._m(8, true)
-              ]
+                _c("tr", [
+                  _c("th", [_vm._v("Total S/.:")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.setTotal,
+                          expression: "setTotal"
+                        }
+                      ],
+                      staticClass: "form-control-sm w-50",
+                      attrs: { type: "text", name: "total" },
+                      domProps: { value: _vm.setTotal },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.setTotal = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row text-center" }, [
+          _c("div", { staticClass: "col text-center" }, [
+            _c(
+              "a",
+              { staticClass: "btn btn-danger", attrs: { href: "/cotizacion" } },
+              [_vm._v("Cancelar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-info", on: { click: _vm.submit } },
+              [_vm._v("Grabar")]
             )
-          }),
-          0
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(9)
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+      _c("div", { staticClass: "row form-group" }, [
+        _c(
+          "label",
+          { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+          [_vm._v("Contacto")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "col-sm-6 form-control-sm",
+          attrs: {
+            type: "text",
+            name: "contacto",
+            id: "contacto",
+            autocomplete: "off"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+      _c("div", { staticClass: "row form-group" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -38466,39 +39113,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "nombre[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "descripcion[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "fabricante[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("td", { staticClass: "pb-0 mb-0" }, [
       _c("i", {
         staticClass: "far fa-file-pdf",
@@ -38523,39 +39137,6 @@ var staticRenderFns = [
         },
         [_vm._v("Lista")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "cantidad[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "unitario[]", autocomplete: "off" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        staticClass: "form-control-sm w-100",
-        attrs: { type: "text", name: "subtotaldet[]", autocomplete: "off" }
-      })
     ])
   },
   function() {
@@ -38610,7 +39191,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-6" }, [
                       _vm._v(
-                        "\n                            Descripcion de la Prueba:\n                            "
+                        "\n                                  Descripcion de la Prueba:\n                                  "
                       ),
                       _c("br"),
                       _vm._v(" "),
@@ -38635,7 +39216,7 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-6" }, [
                       _vm._v(
-                        "\n                            Norma Asociada:\n                            "
+                        "\n                                  Norma Asociada:\n                                  "
                       ),
                       _c("br"),
                       _vm._v(" "),
@@ -38644,7 +39225,7 @@ var staticRenderFns = [
                         attrs: { type: "text", name: "", id: "primero" }
                       }),
                       _vm._v(
-                        "\n                            Descripcion de la Norma:\n                            "
+                        "\n                                  Descripcion de la Norma:\n                                  "
                       ),
                       _c("br"),
                       _vm._v(" "),
@@ -39173,15 +39754,17 @@ var render = function() {
                         directives: [
                           {
                             name: "model",
-                            rawName: "v-model",
+                            rawName: "v-model.number",
                             value: cotdetalle.CODEC_Cantidad,
-                            expression: "cotdetalle.CODEC_Cantidad"
+                            expression: "cotdetalle.CODEC_Cantidad",
+                            modifiers: { number: true }
                           }
                         ],
                         staticClass: "form-control-sm w-100",
                         attrs: {
                           type: "text",
                           name: "cantidad[]",
+                          id: "cantidad",
                           autocomplete: "off"
                         },
                         domProps: { value: cotdetalle.CODEC_Cantidad },
@@ -39193,8 +39776,11 @@ var render = function() {
                             _vm.$set(
                               cotdetalle,
                               "CODEC_Cantidad",
-                              $event.target.value
+                              _vm._n($event.target.value)
                             )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
                           }
                         }
                       })
@@ -39205,9 +39791,10 @@ var render = function() {
                         directives: [
                           {
                             name: "model",
-                            rawName: "v-model",
+                            rawName: "v-model.number",
                             value: cotdetalle.CODEC_PrecioUnitario,
-                            expression: "cotdetalle.CODEC_PrecioUnitario"
+                            expression: "cotdetalle.CODEC_PrecioUnitario",
+                            modifiers: { number: true }
                           }
                         ],
                         staticClass: "form-control-sm w-100",
@@ -39225,8 +39812,11 @@ var render = function() {
                             _vm.$set(
                               cotdetalle,
                               "CODEC_PrecioUnitario",
-                              $event.target.value
+                              _vm._n($event.target.value)
                             )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
                           }
                         }
                       })
@@ -39242,9 +39832,10 @@ var render = function() {
                           autocomplete: "off"
                         },
                         domProps: {
-                          value:
+                          value: (
                             cotdetalle.CODEC_Cantidad *
                             cotdetalle.CODEC_PrecioUnitario
+                          ).toFixed(2)
                         }
                       })
                     ])
@@ -39274,23 +39865,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.cotizacion.COTIC_SubTotal,
-                        expression: "cotizacion.COTIC_SubTotal"
+                        value: _vm.setSubTotal,
+                        expression: "setSubTotal"
                       }
                     ],
                     staticClass: "form-control-sm w-50",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.cotizacion.COTIC_SubTotal },
+                    domProps: { value: _vm.setSubTotal },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.cotizacion,
-                          "COTIC_SubTotal",
-                          $event.target.value
-                        )
+                        _vm.setSubTotal = $event.target.value
                       }
                     }
                   })
@@ -39306,23 +39893,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.cotizacion.COTIC_Igv,
-                        expression: "cotizacion.COTIC_Igv"
+                        value: _vm.setIgv,
+                        expression: "setIgv"
                       }
                     ],
                     staticClass: "form-control-sm w-50",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.cotizacion.COTIC_Igv },
+                    domProps: { value: _vm.setIgv },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.cotizacion,
-                          "COTIC_Igv",
-                          $event.target.value
-                        )
+                        _vm.setIgv = $event.target.value
                       }
                     }
                   })
@@ -39338,23 +39921,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.cotizacion.COTIC_Total,
-                        expression: "cotizacion.COTIC_Total"
+                        value: _vm.setTotal,
+                        expression: "setTotal"
                       }
                     ],
                     staticClass: "form-control-sm w-50",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.cotizacion.COTIC_Total },
+                    domProps: { value: _vm.setTotal },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.cotizacion,
-                          "COTIC_Total",
-                          $event.target.value
-                        )
+                        _vm.setTotal = $event.target.value
                       }
                     }
                   })
@@ -53152,8 +53731,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
