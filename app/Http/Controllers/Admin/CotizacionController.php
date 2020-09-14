@@ -6,10 +6,22 @@ use App\CotizacionDetalle;
 use App\User;
 use App\Solicitante;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use Redirect;
 
 class CotizacionController extends Controller
 {
+    public function exportPdf()
+    {
+        $cotizaciones = Cotizacion::get();
+        $cotizacion_detalle = CotizacionDetalle::get();
+        $usuario = User::get();
+        $solicitante = Solicitante::get();
+        $pdf = PDF::loadView('pdf.cotizaciones', compact('cotizaciones'), compact('cotizacion_detalle'), compact('usuario'), compact('solicitante'));
+
+        return $pdf->download('cotizaciones-list.pdf');
+    }
+
     public function index()
     {
 

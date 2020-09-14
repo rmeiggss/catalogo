@@ -12,6 +12,7 @@
       <div class="col-sm-6 text-right">
         <!-- actualizado por marck, usando ELOQUENT -->
         <a class="btn btn-info" href="{{ route('solicitante.create') }}">Agregar Solicitante</a>
+        <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('cotizaciones.pdf') }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
       </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -35,7 +36,7 @@
                   <th scope="col">Tipo</th>
                   <th scope="col">RUC</th>
                   <th scope="col">Email</th>
-                  <th scope="col" colspan="2" class="text-center">Acciones</th>
+                  <th scope="col" colspan="3" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +52,10 @@
                   <a class="text-light" href="{{ route('solicitante.edit', $sol->id) }}">
                     Editar
                   </a></button></td>
+                <td>
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('solicitante.show', $sol->id) }}"><i class="far fa-file-pdf" style="color:red; font-size:25px; cursor:pointer;"></i></a>
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('solicitante.show', $sol->id) }}"><i class="far fa-file-excel" style="color:green; font-size:25px; cursor:pointer;"></i></a>
+                </td>
                 <td>
                   <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
                   {!!Form::open(['route'=>['solicitante.destroy',$sol->id],'method'=>'DELETE'])!!}
