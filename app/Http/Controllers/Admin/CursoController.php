@@ -50,7 +50,10 @@ class CursoController extends Controller
 
     public function show($id)
     {
-        //
+        $producto = Producto::find($id);
+        $view = view('admin.curso.show', compact('producto'));
+        $pdf = PDF::loadView('admin.curso.show', compact('producto'));
+        return $pdf->download('reporte_de_curso.pdf');
     }
 
     public function edit($id)

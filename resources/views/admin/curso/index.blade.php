@@ -13,7 +13,8 @@
           <div class="col-sm-6 text-right">
             <!-- actualizado por marck, usando ELOQUENT -->
             <a class="btn btn-info" href="{{ route('curso.create') }}">Agregar Curso</a>
-            <a href="{{ route('cursos.pdf') }}">Generar Reporte</a>
+            <!-- <a class="btn btn-dark" href="{{ route('cursos.pdf') }}">Generar Reporte</a> -->
+            <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('cursos.pdf') }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -36,7 +37,7 @@
                   <th scope="col">Nombre</th>
                   <th scope="col">Descripcion</th>
                   <th scope="col">Costo</th>
-                  <th scope="col" colspan="2" class="text-center">Acciones</th>
+                  <th scope="col" colspan="3" class="text-center">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,7 +51,12 @@
                     <td><button class="btn btn-info">
                       <a class="text-light" href="{{ route('curso.edit', $cur->id_curso) }}">
                         Editar
-                      </a></button></td>
+                      </a></button>
+                    </td>
+                    <td>
+                      <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $prod->id) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+                      <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $prod->id) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
+                    </td>
                     <td>
                       <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
                       {!!Form::open(['route'=>['curso.destroy',$cur->id_curso],'method'=>'DELETE'])!!}
