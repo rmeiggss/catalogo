@@ -53,8 +53,8 @@
                     Editar
                   </a></button></td>
                 <td>
-                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('solicitante.show', $sol->id) }}"><i class="far fa-file-pdf" style="color:red; font-size:25px; cursor:pointer;"></i></a>
-                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('solicitante.show', $sol->id) }}"><i class="far fa-file-excel" style="color:green; font-size:25px; cursor:pointer;"></i></a>
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('solicitante.show', $sol->SOLIP_Codigo) }}"><i class="far fa-file-pdf" style="color:red; font-size:25px; cursor:pointer;"></i></a>
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('solicitante.show', $sol->SOLIP_Codigo) }}"><i class="far fa-file-excel" style="color:green; font-size:25px; cursor:pointer;"></i></a>
                 </td>
                 <td>
                   <!-- $prod-> (debe señalar al "ID") - fijado por marck -->

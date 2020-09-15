@@ -54,11 +54,11 @@
                       </a></button>
                     </td>
                     <td>
-                      <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $prod->id) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
-                      <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $prod->id) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
+                      <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+                      <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
                     </td>
                     <td>
-                      <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
+                      <!-- $cur-> (debe señalar al "ID") - fijado por marck -->
                       {!!Form::open(['route'=>['curso.destroy',$cur->id_curso],'method'=>'DELETE'])!!}
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
