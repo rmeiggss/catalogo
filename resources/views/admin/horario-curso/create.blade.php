@@ -40,33 +40,106 @@
                     @enderror
                 </div>
 
-<!--                 <div class="form-group">
-                {!!Form::label('fecha_final','Fecha Final')!!}
-                    {!!Form::date('fecha_final',"2020-08-17",['class'=>'form-control','id'=>'fecha_final'])!!}
-                </div> -->
-
-<!--                 <div class="form-group">
-                {!!Form::label('hora_in','Hora Inicial')!!}
-                    {!!Form::text('hora_in',null,['class'=>'form-control','placeholder'=>'Hora Inicial ...','id'=>'hora_in'])!!}
-                </div> -->
-
-<!--                 <div class="form-group">
-                {!!Form::label('hora_fi','Hora Final')!!}
-                    {!!Form::text('hora_fi',null,['class'=>'form-control','placeholder'=>'Hora Final ...','id'=>'hora_fi'])!!}
-                </div> -->
                 <div class="container">
                     <div class="row">
-                        <div class="form-group col-md-3">
-                            {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
-                            {!! Form::time('hora_ini',null, ['class' => 'form-control','id'=>'hora_ini']) !!}
-                            @error('hora_ini')
-                            <small class="text-danger">Seleccionar la hora de inicio</small>
-                            @enderror
+                        <div class="form-group col-md-2">	
+                            <div class="form-group">	
+                            {!!Form::checkbox('Lunes', "Lunes", false, ['class' => '','id' => 'dia-lunes'])!!}	
+                            {!!Form::label('fecha_inicial','Lunes')!!}
+                            </div>
+                            <div class="form-group">	
+                            {!!Form::checkbox('Martes', "Martes", false, ['class' => '','id' => 'dia-martes'])!!}	
+                            {!!Form::label('fecha_inicial','Martes')!!}	
+                            </div>
+                            <div class="form-group">
+                            {!!Form::checkbox('Meercoles', "Miercoles", false, ['class' => '','id' => 'dia-miercoles'])!!}	
+                            {!!Form::label('fecha_inicial','Miércoles')!!}	
+                            </div>
+                            <div class="form-group">
+                            {!!Form::checkbox('Jueves', "Jueves", false, ['class' => '','id' => 'dia-jueves'])!!}	
+                            {!!Form::label('fecha_inicial','Jueves')!!}	
+                            </div>
+                            <div class="form-group">
+                            {!!Form::checkbox('Viernes', "Viernes", false, ['class' => '','id' => 'dia-viernes'])!!}	
+                            {!!Form::label('fecha_inicial','Viernes')!!}
+                            </div>
+                            <div class="form-group">
+                            {!!Form::checkbox('Sabado', "Sabado", false, ['class' => '','id' => 'dia-sabado'])!!}	
+                            {!!Form::label('fecha_inicial','Sábado')!!}
+                            </div>
+                            <div class="form-group">
+                            {!!Form::checkbox('Domingo', "Domingo", false, ['class' => '','id' => 'dia-domingo'])!!}	
+                            {!!Form::label('fecha_inicial','Domingo')!!}
+                            </div>
                         </div>
 
                         <div class="form-group col-md-3">
-                            {!! Form::label('hora_fi', 'Hora Final :') !!}
-                            {!! Form::time('hora_fi',null, ['class' => 'form-control','id'=>'hora_fi']) !!}
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
+                            </div> 
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
+                                {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
+                            </div>                           
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 
+                            </div> 
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('hora_fi', 'Hora Final :') !!}
+                                {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            {!! Form::label('num_horas', 'Numero de Horas: ') !!}
+                            {!! Form::number('num:horas',null, ['class' => 'form-control','id'=>'num_horas']) !!}
                             @error('hora_fi')
                             <small class="text-danger">Seleccionar la hora final</small>
                             @enderror
