@@ -40,20 +40,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @forelse($productos as $item=>$prod)
+                  @forelse($cursos as $item=>$cur)
                   <tr>
                     <!--actualizado por marck -->
                     <th scope="row">{{$item+1}}</th>
-                    <td>{{$prod->CURSOC_Nombre}}</td>
-                    <td>{{$prod->CURSOC_Descripcion}}</td>
-                    <td>{{$prod->CURSOC_Costo}}</td>
+                    <td>{{$cur->CURSOC_Nombre}}</td>
+                    <td>{{$cur->CURSOC_Descripcion}}</td>
+                    <td>{{$cur->CURSOC_Costo}}</td>
                     <td><button class="btn btn-info">
-                      <a class="text-light" href="{{ route('curso.edit', $prod->id) }}">
+                      <a class="text-light" href="{{ route('curso.edit', $cur->id_curso) }}">
                         Editar
                       </a></button></td>
                     <td>
                       <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-                      {!!Form::open(['route'=>['curso.destroy',$prod->id],'method'=>'DELETE'])!!}
+                      {!!Form::open(['route'=>['curso.destroy',$cur->id_curso],'method'=>'DELETE'])!!}
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
                           {!!Form::submit('Eliminar',
@@ -68,7 +68,7 @@
                     <!-- -------------------- -->
                 </tbody>
               </table>
-              {{ $productos->links() }}
+              {{ $cursos->links() }}
             </div>
             <!-- /.card-body -->
           </div>

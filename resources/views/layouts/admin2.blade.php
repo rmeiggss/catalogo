@@ -134,7 +134,13 @@
                   <i class="far nav-icon"></i>
                   <p>Solicitante</p>
                 </a>
-              </li>         
+              </li>
+              <li class="nav-item">
+                <a href="{{ asset('contacto') }}" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Contactos</p>
+                </a>
+              </li>                          
               <li class="nav-item">
                 <a href="{{ asset('cotizacion') }}" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -153,6 +159,12 @@
                   <p>Cot.Capacitaciones</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ asset('contacto') }}" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Busqueda</p>
+                </a>
+              </li>                 
             </ul>
           </li>
           <li class="nav-item has-treeview">

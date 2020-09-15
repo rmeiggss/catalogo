@@ -10,7 +10,7 @@
         <h1>Listado de Contactos</h1>
       </div>
       <div class="col-sm-6 text-right">
-        <a class="btn btn-info" href="/usuario/create">Agregar Usuario</a>
+        <a class="btn btn-info" href="/contacto/create">Agregar Contacto</a>
       </div>        
     </div>
   </div>
@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <indexcontacto-component></indexcontacto-component>
+
       </div>
     </div>
   </div>

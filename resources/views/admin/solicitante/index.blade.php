@@ -42,18 +42,18 @@
               @forelse($solicitantes as $item => $sol)
               <tr class="text-center">
                 <!--actualizado por marck -->
-                <th scope="row">{{$sol->id}}</th>
+                <th scope="row">{{$sol->SOLIP_Codigo}}</th>
                 <td class="text-left">{{$sol->SOLIC_Nombre}}</td>
                 <td>{{$sol->TIPSOLIP_Codigo}}</td>
                 <td>{{$sol->SOLIC_Ruc}}</td>
                 <td class="text-left">{{$sol->SOLIC_Email}}</td>
                 <td><button class="btn btn-info">
-                  <a class="text-light" href="{{ route('solicitante.edit', $sol->id) }}">
+                  <a class="text-light" href="{{ route('solicitante.edit', $sol->SOLIP_Codigo) }}">
                     Editar
                   </a></button></td>
                 <td>
                   <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-                  {!!Form::open(['route'=>['solicitante.destroy',$sol->id],'method'=>'DELETE'])!!}
+                  {!!Form::open(['route'=>['solicitante.destroy',$sol->SOLIP_Codigo],'method'=>'DELETE'])!!}
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
                       {!!Form::submit('Eliminar',
