@@ -12,14 +12,18 @@
         </tr>
         </thead>
         <tbody>
-          <tr v-for="(contacto,indice) of contactos" class="text-center">
+          <tr v-for="(contacto,indice) of contactos" :key="contacto.id_contacto" class="text-center">
             <th scope="row">{{contacto.id_contacto}}</th>
             <td>{{contacto.nombre_contacto}}</td>            
             <td>{{contacto.SOLIC_Nombre}}</td>
             <td>{{contacto.correo_contacto}}</td>
             <td>{{contacto.celular_contacto}}</td>
-            <td><button class="btn btn-info" @click="btnEditar(contacto.id_contacto)">Editar</button></td>
-            <td><button class="btn btn-danger" @click="btnBorrar(contacto.id_contacto)">Eliminar</button></td>
+            <td>
+                <button class="btn btn-info" @click="btnEditar(contacto.id_contacto)">Editar</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" v-on:submit.prevent="btnBorrar(indice)" @click="btnBorrar(contacto, indice) in contactos">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -42,12 +46,12 @@
                 var url = '/contacto/list';
                 axios.get(url).then(response=>{
                     this.contactos = response.data;
-                    console.log(this.contactos);
                 });
             },
-            btnBorrar(id){
-                var url = '/contacto/'+id;
+            btnBorrar(contacto,indice){
+                var url = '/contacto/'+contacto.id_contacto;
                 axios.delete(url).then(response=>{
+                    //this.result.splice(indice, 1)
                     this.listar();
                 });
             },

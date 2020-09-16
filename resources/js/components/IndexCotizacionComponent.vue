@@ -19,14 +19,16 @@
             </tr>
             </thead>
             <tbody>
-              <tr v-for="(cotizacion,indice) of cotizaciones" class="text-center">
+              <tr v-for="(cotizacion,indice) of cotizaciones" :key="cotizacion.COTIP_Codigo" class="text-center">
                 <td>{{cotizacion.COTIC_Numero}}</td>
                 <td>{{cotizacion.SOLIP_Codigo}}</td>
                 <td>{{cotizacion.nombre_contacto}}</td>
                 <td>{{cotizacion.COTIC_Fecha}}</td>
-                <td>{{cotizacion.COTIC_Total}}</td>
-                <td><button class="btn btn-info" @click="btnEditar(cotizacion.COTIP_Codigo)">Editar</button></td>
-                <td><button class="btn btn-danger" @click="btnBorrar(cotizacion.COTIP_Codigo)">Eliminar</button></td>
+                <td class="text-right">{{cotizacion.COTIC_Total}}</td>
+                <td>
+                  <button class="btn btn-info" @click="btnEditar(cotizacion.COTIP_Codigo)">Editar</button>
+                </td>
+                <td><button class="btn btn-danger" v-on:submit.prevent="btnBorrar(indice)" @click="btnBorrar(cotizacion, indice) in cotizaciones">Eliminar</button></td>
               </tr>
             </tbody>
           </table>
@@ -58,8 +60,8 @@
                     console.log(this.cotizaciones);
                 });
             },
-            btnBorrar(id){
-                var url = '/cotizacion/'+id;
+            btnBorrar(cotizacion,indice){
+                var url = '/cotizacion/'+cotizacion.COTIP_Codigo;
                 axios.delete(url).then(response=>{
                     this.listar();
                 });

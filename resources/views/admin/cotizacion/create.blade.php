@@ -17,7 +17,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <createcotizacion-component></createcotizacion-component>
+        <createcotizacion-component token="{{csrf_token()}}"></createcotizacion-component>
       </div>
     </div>
   </div>

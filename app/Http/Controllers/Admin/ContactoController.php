@@ -45,7 +45,7 @@ class ContactoController extends Controller
         Contacto::create([
             'SOLIP_Codigo'     => $request->solicitante,
             'nombre_contacto'  => $request->nombres,
-            'correo_contacto'  => $request->email,
+            'correo_contacto'  => $request->correo,
             'celular_contacto' => $request->celular
         ]);
         return Redirect::to("/contacto");
@@ -87,7 +87,13 @@ class ContactoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $contacto = Contacto::findOrFail($id);
+        $contacto->SOLIP_Codigo     = $request->solicitante;
+        $contacto->nombre_contacto  = $request->nombre;
+        $contacto->correo_contacto  = $request->correo;
+        $contacto->celular_contacto = $request->celular;
+        $contacto->save();
+        return Redirect::to("/contacto");
     }
 
     /**
@@ -98,6 +104,7 @@ class ContactoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Contacto::destroy($id);
+        return response()->json(['message'=>'Contacto borrado']);
     }
 }

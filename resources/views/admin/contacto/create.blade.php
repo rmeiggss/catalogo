@@ -16,7 +16,7 @@
 
 <!-- Main Content-->
 <section class="content">
-    <createcontacto-component></createcontacto-component>
+    <createcontacto-component token="{{csrf_token()}}"></createcontacto-component>
 </section>
 <!-- /Main Content-->
 

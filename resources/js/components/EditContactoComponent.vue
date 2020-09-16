@@ -1,9 +1,9 @@
 <template>
   <div class="grid-hor">
 
-    <form ref="form" method="POST" action="computedAction" class="col-sm-10"> 
+    <form ref="form" method="POST" :action="computedAction" class="col-sm-10"> 
         <input name="_method" type="hidden" value="PATCH">
-        <input name="_token" type="hidden" value="OlZ7ahmcvHXrnmXNnsosJAm2d58EK9yrZGpj8Geq">      
+        <input name="_token" type="hidden" v-model="token">      
         <div class="form-group">
           <label>Solicitante</label>
           <select v-model="contacto.SOLIP_Codigo" class="form-control" name="solicitante">
@@ -16,11 +16,11 @@
         </div>
         <div class="form-group">
           <label>Correo electronico</label>
-          <input type="text" class="form-control" v-model="contacto.correo_contacto" autocomplete="off" name="email" placeholder="Ingrese el correo">
+          <input type="text" class="form-control" v-model="contacto.correo_contacto" autocomplete="off" name="correo" placeholder="Ingrese el correo">
         </div>
         <div class="form-group">
           <label>Celular</label>
-          <input type="text" class="form-control" v-model="contacto.celular_contacto" autocomplete="off" name="password" placeholder="Ingrese el password">
+          <input type="text" class="form-control" v-model="contacto.celular_contacto" autocomplete="off" name="celular" placeholder="Ingrese el número de celular">
         </div>                           
         <a class="btn btn-info" v-on:click="submit">Editar</a>
         <a class="btn btn-danger" href="/contacto">Cancelar</a>
@@ -39,7 +39,8 @@
             }
         },
         props:{
-            codigo:String
+            codigo:String,
+            token:String
         },        
         created(){
           this.getContacto(this.codigo);
@@ -47,7 +48,7 @@
         },
         computed:{
           computedAction:function(){
-            return '/contacto/edit';
+            return '/contacto/'+this.codigo;
           }
         },         
         methods:{

@@ -2,10 +2,10 @@
   <div class="grid-hor">
 
     <form ref="form" method="POST" action="/contacto" class="col-sm-10"> 
-      <input name="_token" type="hidden" value="OlZ7ahmcvHXrnmXNnsosJAm2d58EK9yrZGpj8Geq">
+      <input name="_token" type="hidden" v-model="token">    
         <div class="form-group">
           <label>Solicitante</label>
-          <select v-model="contacto.SOLIP_Codigo" class="form-control" name="solicitante" placeholder="Seleccione Solicitante">
+          <select v-model="contacto.SOLIP_Codigo" class="form-control" name="solicitante">
             <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
           </select>
         </div>      
@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
           <label>Correo electronico</label>
-          <input type="text" class="form-control" v-model="contacto.correo_contacto" autocomplete="off" name="email" placeholder="Ingrese el correo">
+          <input type="text" class="form-control" v-model="contacto.correo_contacto" autocomplete="off" name="correo" placeholder="Ingrese el correo">
         </div>
         <div class="form-group">
           <label>Celular</label>
@@ -37,6 +37,9 @@
               saveData:null
             }
         },
+        props:{
+            token:String
+        },          
         created(){
             this.listarSolicitantes();
         }, 

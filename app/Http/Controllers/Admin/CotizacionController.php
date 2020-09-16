@@ -107,7 +107,7 @@ class CotizacionController extends Controller
         //Actualiza cabecera
         $cotizacion = Cotizacion::findOrFail($id);
         $cotizacion->COTIC_Fecha    = $request->fecha;
-        $cotizacion->SOLIP_Codigo   = $request->solicitante;
+        $cotizacion->id_contacto    = $request->contacto;
         $cotizacion->USUA_Codigo    = $request->usuario;
         $cotizacion->COTIC_SubTotal = $request->subtotal;
         $cotizacion->COTIC_Igv      = $request->igv;
@@ -148,5 +148,6 @@ class CotizacionController extends Controller
     public function destroy($id)
     {
         Cotizacion::destroy($id);
+        return response()->json(['message'=>'Cotizacionntacto borrado']);        
     }
 }

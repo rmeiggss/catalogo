@@ -16,7 +16,7 @@
 
 <!-- Main Content-->
 <section class="content">
-    <editcontacto-component codigo = "{{$contacto->id_contacto}}"></editcontacto-component>
+    <editcontacto-component codigo = "{{$contacto->id_contacto}}" token="{{csrf_token()}}"></editcontacto-component>
 </section>
 <!-- /Main Content-->
 

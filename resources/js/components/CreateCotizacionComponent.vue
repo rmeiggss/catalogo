@@ -2,7 +2,7 @@
   <!--Form content-->
   <div class="invoice p-3 mb-3">
       <form ref="form" method="POST" action="/cotizacion">
-        <input name="_token" type="hidden" value="OlZ7ahmcvHXrnmXNnsosJAm2d58EK9yrZGpj8Geq">
+        <input name="_token" type="hidden" v-model="token">   
         <!-- Cabecera fila 1 -->
         <div class="row invoice-info">
           <div class="col-sm-4 invoice-col">
@@ -213,6 +213,9 @@
               saveData:null
             }
         },
+        props:{
+            token:String
+        },          
         created(){
             this.listarContactos();
             this.listarUsuarios();
