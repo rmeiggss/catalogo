@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Cotizacion;
+use App\Contacto;
 use App\CotizacionDetalle;
 use App\User;
 use App\Solicitante;
@@ -35,7 +36,7 @@ class CotizacionController extends Controller
     }
 
     public function list(){
-        $cotizaciones = Cotizacion::all();
+        $cotizaciones = Cotizacion::join('contacto','contacto.id_contacto','=','cotizacion.id_contacto')->select()->get();         
         return $cotizaciones;
     }
 
@@ -51,7 +52,7 @@ class CotizacionController extends Controller
     {
         //Grabamos la cabecera
         $cot = Cotizacion::create([
-            'SOLIP_Codigo'   => $request->solicitante,
+            'id_contacto'    => $request->contacto,
             'COTIC_Numero'   => $request->numero,
             'COTIC_Fecha'    => $request->fecha,
             'USUA_Codigo'    => $request->usuario,

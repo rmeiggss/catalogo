@@ -2,15 +2,16 @@
  
 @section('content')
 
-<!-- Content Header (Page header) -->
+<!-- Content Header-->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
         <h1>Agregar Cotización</h1>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
-    
+<!-- /Content Header-->
+
 <!-- Main Content-->
 <section class="content">
   <div class="container-fluid">

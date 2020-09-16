@@ -12,8 +12,10 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 Route::get('/usuario/list','Admin\UsuarioController@list');
 Route::get('/cotizacion/list','Admin\CotizacionController@list');
 Route::get('/solicitante/list','Admin\SolicitanteController@list');
+Route::get('/contacto/list','Admin\ContactoController@list');
 Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
 Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
+Route::get('/contacto/{contacto}/get','Admin\ContactoController@get');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Contacto;
+use App\Role;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -13,8 +15,13 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $usuarios = array();
-        return view('admin.contacto.index',compact('usuarios'));
+        $contactos = Contacto::all();
+        return view('admin.contacto.index',compact('contactos'));
+    }
+
+    public function list(){
+        $contactos = Contacto::join('solicitante','solicitante.SOLIP_Codigo','=','contacto.SOLIP_Codigo')->select()->get();
+        return $contactos;
     }
 
     /**
@@ -35,7 +42,13 @@ class ContactoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Contacto::create([
+            'SOLIP_Codigo'     => $request->solicitante,
+            'nombre_contacto'  => $request->nombres,
+            'correo_contacto'  => $request->email,
+            'celular_contacto' => $request->celular
+        ]);
+        return Redirect::to("/contacto");
     }
 
     /**
@@ -57,8 +70,13 @@ class ContactoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contacto = Contacto::findOrFail($id);
+        return view("admin.contacto.edit", ['contacto' => $contacto]);
     }
+
+    public function get($id){
+        return Contacto::findOrFail($id);
+    }    
 
     /**
      * Update the specified resource in storage.

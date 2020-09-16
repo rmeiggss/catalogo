@@ -12,6 +12,7 @@
             <tr class="text-center">
               <th scope="col">Numero</th>
               <th scope="col">Solicitante</th>
+              <th scope="col">Contacto</th>
               <th scope="col">Fecha</th>
               <th scope="col">Total S/.</th>
               <th scope="col" colspan="2">Acciones</th>
@@ -21,6 +22,7 @@
               <tr v-for="(cotizacion,indice) of cotizaciones" class="text-center">
                 <td>{{cotizacion.COTIC_Numero}}</td>
                 <td>{{cotizacion.SOLIP_Codigo}}</td>
+                <td>{{cotizacion.nombre_contacto}}</td>
                 <td>{{cotizacion.COTIC_Fecha}}</td>
                 <td>{{cotizacion.COTIC_Total}}</td>
                 <td><button class="btn btn-info" @click="btnEditar(cotizacion.COTIP_Codigo)">Editar</button></td>

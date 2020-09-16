@@ -1,16 +1,15 @@
 <template>
   <!--Form content-->
   <div class="invoice p-3 mb-3">
-
       <form ref="form" method="POST" action="/cotizacion">
-        <input name="_token" type="hidden" value="I9CuL6B0JcZ9uvzjeZmYQ45m4GIxT8kEdgt6uWDL">
+        <input name="_token" type="hidden" value="OlZ7ahmcvHXrnmXNnsosJAm2d58EK9yrZGpj8Geq">
         <!-- Cabecera fila 1 -->
         <div class="row invoice-info">
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
-                <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                <select v-model="cotizacion.SOLIP_Codigo" class="col-sm-6 form-control-sm" name="solicitante">
-                  <option v-for="solicitante in solicitantes" v-bind:value="solicitante.id" v-bind:key="solicitante.id">{{ solicitante.SOLIC_Nombre }}</option>
+                <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto">
+                  <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                 </select>
               </div>
           </div>
@@ -33,8 +32,8 @@
         <div class="row invoice-info">
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
-                <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                <input type="text" name="contacto" id="contacto" autocomplete="off" class="col-sm-6 form-control-sm">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                <input type="text" name="solicitante" id="solicitante" autocomplete="off" class="col-sm-6 form-control-sm">
               </div>
           </div>
           <div class="col-sm-4 invoice-col">
@@ -188,10 +187,10 @@
         <!--/Subtotales--> 
 
         <!--Botones-->                        
-        <div class="row text-center">
-            <div class="col text-center">
-                <a class="btn btn-danger" href="/cotizacion">Cancelar</a>
-                <a class="btn btn-info" v-on:click="submit">Grabar</a>
+        <div class="row text-left">
+            <div class="col text-left">
+              <a class="btn btn-info" v-on:click="submit">Agregar</a>
+              <a class="btn btn-danger" href="/cotizacion">Cancelar</a>  
             </div>
         </div>
         <!--/Botones-->
@@ -209,13 +208,13 @@
             return {
               cotizacion:[],
               cotizaciondetalle : [],
-              solicitantes:[],
+              contactos:[],
               usuarios:[],              
               saveData:null
             }
         },
         created(){
-            this.listarSolicitantes();
+            this.listarContactos();
             this.listarUsuarios();
         },        
         mounted() {
@@ -240,10 +239,10 @@
             deleteRow(index){
               this.cotizaciondetalle.splice(index, 1);
             },
-            listarSolicitantes(){
-                var url = '/solicitante/list';
+            listarContactos(){
+                var url = '/contacto/list';
                 axios.get(url).then(response=>{
-                    this.solicitantes = response.data;
+                    this.contactos = response.data;
                 });
             },
             listarUsuarios(){

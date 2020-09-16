@@ -191,10 +191,10 @@
         <!--/Modal-->
 
         <!--Botones-->
-        <div class="row text-center">
-            <div class="col text-center">
+        <div class="row text-left">
+            <div class="col text-left">
+                <a class="btn btn-info" v-on:click="submit">Editar</a>              
                 <a class="btn btn-danger" href="/cotizacion">Cancelar</a>
-                <a class="btn btn-info" v-on:click="submit">Grabar</a>
             </div>
         </div>
         <!--/Botones-->

@@ -19,13 +19,7 @@
     
 <!-- Main Content-->
 <section class="content">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-
-      </div>
-    </div>
-  </div>
+    <indexcontacto-component></indexcontacto-component>
 </section>
 <!-- /Main Content-->
 
