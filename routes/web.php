@@ -12,14 +12,17 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 Route::get('/usuario/list','Admin\UsuarioController@list');
 Route::get('/cotizacion/list','Admin\CotizacionController@list');
 Route::get('/solicitante/list','Admin\SolicitanteController@list');
+Route::get('/contacto/list','Admin\ContactoController@list');
 Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
 Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
+Route::get('/contacto/{contacto}/get','Admin\ContactoController@get');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
 Route::get('/capacitaciones','WebController@capacitaciones');
 Route::get('/home', 'HomeController@index')->name('home');
 //Ruta para crear el pdf
 Route::get('cursos-list-pdf', 'Admin\CursoController@exportPdf')->name('cursos.pdf');
+Route::get('cotizaciones-list-pdf', 'Admin\SolicitanteController@exportPdf')->name('cotizaciones.pdf');
 //Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::resource('usuario','Admin\UsuarioController');
 Route::resource('cotizacion', 'Admin\CotizacionController');

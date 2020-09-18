@@ -26,16 +26,16 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <!--li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li-->
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!--form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -44,7 +44,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form-->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -94,14 +94,14 @@
    <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ asset('home') }}" class="brand-link">
+    <a href="{{ asset('home') }}" class="brand-link" style="background-color: rgba(128,4,4,0.7)">
       <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">ELECTRILAB</span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="background-color: rgba(128,4,4,0.7)">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -132,7 +132,7 @@
               <li class="nav-item">
                 <a href="{{ asset('solicitante') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Solicitante</p>
+                  <p>Solicitantes</p>
                 </a>
               </li>     
               <li class="nav-item">
@@ -159,6 +159,12 @@
                   <p>Cot.Capacitaciones</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Busqueda</p>
+                </a>
+              </li>                   
             </ul>
           </li>
           <li class="nav-item has-treeview">

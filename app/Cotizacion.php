@@ -11,10 +11,9 @@ class Cotizacion extends Model
     protected $table = 'cotizacion';
 
     protected $fillable = [
-			'SOLIP_Codigo',
+			'id_contacto',
 			'COTIP_Codigo',
 	    'COTIC_Numero',
-	    'USUA_Codigo',
 	    'USUA_Codigo',
 	    'COTIC_Igv',
 	    'COTIC_Total',
@@ -22,7 +21,7 @@ class Cotizacion extends Model
 	    'COTIC_Correo1',
 	    'COTIC_Correo2',
 	    'COTIC_Correo3',
-	    'COTIC_Correo4',
+			'COTIC_Correo4',
 	];
 
     public $timestamps = false;

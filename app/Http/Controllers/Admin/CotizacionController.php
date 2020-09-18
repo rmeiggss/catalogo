@@ -2,14 +2,27 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Cotizacion;
+use App\Contacto;
 use App\CotizacionDetalle;
 use App\User;
 use App\Solicitante;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use Redirect;
 
 class CotizacionController extends Controller
 {
+    public function exportPdf()
+    {
+        $cotizaciones = Cotizacion::get();
+        $cotizacion_detalle = CotizacionDetalle::get();
+        $usuario = User::get();
+        $solicitante = Solicitante::get();
+        $pdf = PDF::loadView('pdf.cotizaciones', compact('cotizaciones'), compact('cotizacion_detalle'), compact('usuario'), compact('solicitante'));
+
+        return $pdf->download('cotizaciones-list.pdf');
+    }
+
     public function index()
     {
 
@@ -23,7 +36,7 @@ class CotizacionController extends Controller
     }
 
     public function list(){
-        $cotizaciones = Cotizacion::all();
+        $cotizaciones = Cotizacion::join('contacto','contacto.id_contacto','=','cotizacion.id_contacto')->select()->get();         
         return $cotizaciones;
     }
 
@@ -39,19 +52,18 @@ class CotizacionController extends Controller
     {
         //Grabamos la cabecera
         $cot = Cotizacion::create([
-
-            'SOLIP_Codigo'   => $request->solicitante,
+            'id_contacto'    => $request->contacto,
             'COTIC_Numero'   => $request->numero,
             'COTIC_Fecha'    => $request->fecha,
             'USUA_Codigo'    => $request->usuario,
             'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
             'COTIC_Total'    => $request->total,
-            'COTIC_Correo1'    => $request->correo1,
-            'COTIC_Correo2'    => $request->correo2,
-            'COTIC_Correo3'    => $request->correo3,
-            'COTIC_Correo4'    => $request->correo4,
-            'TIPOCOP_Codigo'   => 1
+            'COTIC_Correo1'  => $request->correo1,
+            'COTIC_Correo2'  => $request->correo2,
+            'COTIC_Correo3'  => $request->correo3,
+            'COTIC_Correo4'  => $request->correo4,
+            'TIPOCOP_Codigo' => 1
         ]);
         //Grabamos detalle
         if(isset($request->nombre)){
@@ -95,7 +107,7 @@ class CotizacionController extends Controller
         //Actualiza cabecera
         $cotizacion = Cotizacion::findOrFail($id);
         $cotizacion->COTIC_Fecha    = $request->fecha;
-        $cotizacion->SOLIP_Codigo   = $request->solicitante;
+        $cotizacion->id_contacto    = $request->contacto;
         $cotizacion->USUA_Codigo    = $request->usuario;
         $cotizacion->COTIC_SubTotal = $request->subtotal;
         $cotizacion->COTIC_Igv      = $request->igv;
@@ -136,5 +148,6 @@ class CotizacionController extends Controller
     public function destroy($id)
     {
         Cotizacion::destroy($id);
+        return response()->json(['message'=>'Cotizacionntacto borrado']);        
     }
 }

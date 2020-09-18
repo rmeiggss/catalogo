@@ -18,8 +18,8 @@ class CursoController extends Controller
 
     public function index()
     {
-        $productos = Producto::latest()->paginate(8);
-        return view('admin.curso.index', compact('productos'));
+        $cursos = Producto::latest()->paginate(8);
+        return view('admin.curso.index', compact('cursos'));
     }
 
 
@@ -50,14 +50,16 @@ class CursoController extends Controller
 
     public function show($id)
     {
-        //
+        $producto = Producto::find($id);
+        $view = view('admin.curso.show', compact('producto'));
+        $pdf = PDF::loadView('admin.curso.show', compact('producto'));
+        return $pdf->download('reporte_de_curso.pdf');
     }
 
     public function edit($id)
     {
-        $producto = Producto::findOrFail($id);
-
-        return view("admin.curso.edit", ['producto' => $producto]);
+        $curso = Producto::findOrFail($id);
+        return view("admin.curso.edit", ['curso' => $curso]);
     }
 
 

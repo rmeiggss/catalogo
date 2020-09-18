@@ -2,23 +2,24 @@
 
   <!--Form content-->
   <div class="invoice p-3 mb-3">
-      <form ref="form">
+      <form ref="form" method="POST" :action="computedAction">
 
         <!-- Cabecera fila 1 -->
-        <input type="hidden" name="_method" value="PATCH">
+        <input name="_method" type="hidden" value="PATCH">
+        <input name="_token" type="hidden" v-model="token">   
         <div class="row invoice-info">
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
-                <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                <select v-model="cotizacion.SOLIP_Codigo" class="col-sm-6 form-control-sm">
-                  <option v-for="solicitante in solicitantes" v-bind:value="solicitante.id" v-bind:key="solicitante.id">{{ solicitante.SOLIC_Nombre }}</option>
+                <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto">
+                  <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                 </select>
               </div>
           </div>
           <div class="col-sm-4 invoice-col">
             <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
-                <input type="text" class="col-sm-4 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off">
+                <input type="text" class="col-sm-4 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha">
             </div>
           </div>
 
@@ -35,14 +36,14 @@
         <div class="row invoice-info">
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
-                <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                <input type="text" name="contacto" id="contacto" autocomplete="off" class="col-sm-6 form-control-sm">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                <input type="text" name="solicitante" id="solicitante" autocomplete="off" class="col-sm-6 form-control-sm">
               </div>
           </div>
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Usuario</label>
-                <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm">
+                <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm" name="usuario">
                   <option v-for="usuario in usuarios" v-bind:value="usuario.id" v-bind:key="usuario.id">{{ usuario.name }}</option>
                 </select>
               </div>
@@ -87,17 +88,15 @@
                   <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="cotdetalle.CODEC_Fabricante" autocomplete="off"></td>
                   <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                   <td><button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal">Lista</button></td>
-                  <td><input type="text" class="form-control-sm w-100" name="cantidad[]" v-model="cotdetalle.CODEC_Cantidad" v-on:keyup="keymonitor" id="cantidad" autocomplete="off"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="unitario[]" v-model="cotdetalle.CODEC_PrecioUnitario" autocomplete="off"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]" v-model="cotdetalle.CODEC_SubTotal" readonly="readonly" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="cantidad[]" v-model.number="cotdetalle.CODEC_Cantidad" id="cantidad" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="unitario[]" v-model.number="cotdetalle.CODEC_PrecioUnitario" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]" :value="(cotdetalle.CODEC_Cantidad*cotdetalle.CODEC_PrecioUnitario).toFixed(2)" readonly="readonly" autocomplete="off"></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
         <!--/Detalle Cotizacion-->
-
 
         <!--Subtotales-->
         <div class="row">
@@ -107,18 +106,15 @@
               <table class="table">
                 <tr>
                   <th style="width:50%">Subtotal S/.:</th>
-                  <td>
-                    <input type="text" class="form-control-sm w-50" :value="setSubTotal">
-                    </td>
+                  <td><input type="text" class="form-control-sm w-50" v-model="setSubTotal" name="subtotal"></td>
                 </tr>
                 <tr>
                   <th>I.G.V. S/. (18%)</th>
-                  <td>
-                    <input type="text" v-model="setIgv" class="form-control-sm w-50"></td>
+                  <td><input type="text" v-model="setIgv" class="form-control-sm w-50" name="igv"></td>
                 </tr>
                 <tr>
                   <th>Total S/.:</th>
-                  <td><input type="text" v-model="cotizacion.COTIC_Total" class="form-control-sm w-50"></td>
+                  <td><input type="text" v-model="setTotal" class="form-control-sm w-50" name="total"></td>
                 </tr>
               </table>
             </div>
@@ -140,12 +136,7 @@
                             <div class="col-md-6">
                                 Descripcion de la Prueba:
                                 <br>
-
-
-
-
                                 <textarea style="resize: none" class="form-control" name="" rows="3" cols="5">Escribir algo...</textarea>
-
                                 <label for="ejemplo_archivo_1">Adjuntar un archivo de la Norma Tecnica</label>
                                 <input type="file" id="ejemplo_archivo_1">
                             </div>
@@ -201,10 +192,10 @@
         <!--/Modal-->
 
         <!--Botones-->
-        <div class="row text-center">
-            <div class="col text-center">
+        <div class="row text-left">
+            <div class="col text-left">
+                <a class="btn btn-info" v-on:click="submit">Editar</a>              
                 <a class="btn btn-danger" href="/cotizacion">Cancelar</a>
-                <a class="btn btn-info" v-on:click="submit">Grabar</a>
             </div>
         </div>
         <!--/Botones-->
@@ -221,18 +212,19 @@
             return {
                 cotizacion:[],
                 cotizacionesdetalle : [],
-                solicitantes:[],
+                contactos:[],
                 usuarios:[],
                 saveData:null
             }
         },
         props:{
-            codigo:String
-        },
+            codigo:String,
+            token:String
+        }, 
         created(){
             this.getCotizacionDetalle(this.codigo);
             this.getCotizacion(this.codigo);
-            this.listarSolicitantes();
+            this.listarContactos();
             this.listarUsuarios();
         },
         mounted() {
@@ -241,14 +233,17 @@
         computed:{
           setSubTotal:function(){
             var suma = 0;
-            return this.cotizacionesdetalle.reduce((suma,cotdetalle)=>suma+cotdetalle.CODEC_SubTotal,0);
+            return this.cotizacionesdetalle.reduce((suma,cotdetalle)=>suma+(cotdetalle.CODEC_PrecioUnitario*cotdetalle.CODEC_Cantidad),0);
           },
           setIgv:function(){
-            return Number(this.setSubTotal)*0.18;
+            return (Number(this.setSubTotal)*0.18).toFixed(2);
           },
-          keymonitor:function(){
-            //alert(this.cantidad);
-          }
+          setTotal:function(){
+            return (Number(this.setSubTotal)+Number(this.setIgv)).toFixed(2);
+          },
+          computedAction:function(){
+            return '/cotizacion/'+this.codigo;
+          }          
         },
         methods:{
             getCotizacionDetalle(id){
@@ -261,32 +256,23 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     this.cotizacion = response.data;
-
                     console.log(this.cotizacion);
-
-
                 });
             },
-            listarSolicitantes(){
-                var url = '/solicitante/list';
+            listarContactos(){
+                var url = '/contacto/list';
                 axios.get(url).then(response=>{
-                    this.solicitantes = response.data;
+                    this.contactos = response.data;
                 });
             },
             listarUsuarios(){
                 var url = '/usuario/list';
                 axios.get(url).then(response=>{
                     this.usuarios = response.data;
+                    console.log(this.cotizacion);
                 });
             },
             addRow(){
-
-
-
-
-              //let cotdet = {CODEP_Codigo:0};
-
-
               this.cotizacionesdetalle.push({});
             },
             deleteRow(index){

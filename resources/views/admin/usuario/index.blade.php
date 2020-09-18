@@ -26,7 +26,7 @@
         <div class="card-body">
           <table id="example2" class="table table-bordered table-hover">
             <thead>
-            <tr>
+            <tr class="text-center">
               <th scope="col">Codigo</th>
               <th scope="col">Nombre</th>
               <th scope="col">Email</th>
@@ -36,11 +36,11 @@
             </thead>
             <tbody>
               @forelse($usuarios as $item=>$user)
-                <tr>
+                <tr class="text-center">
                   <th scope="row">{{$item+1}}</th>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
-                  <td>{{ $user->ROL_Codigo }}</td>
+                  <td>{{ $user->ROL_Descripcion }}</td>
                   <td><a class="btn btn-info" href="{{ route('usuario.edit', $user->id) }}">Editar</a></td>
                   <td>
                     {!!Form::open(['route'=>['usuario.destroy',$user->id],'method'=>'DELETE'])!!}

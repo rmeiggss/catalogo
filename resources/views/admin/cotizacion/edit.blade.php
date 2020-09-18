@@ -16,7 +16,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <editcotizacion-component codigo = "{{$cotizacion->COTIP_Codigo}}"></editcotizacion-component>
+        <editcotizacion-component codigo = "{{$cotizacion->COTIP_Codigo}}" token="{{csrf_token()}}"></editcotizacion-component>
       </div>
     </div>
   </div>

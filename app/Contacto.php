@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contacto extends Model
 {
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_contacto';
 
     protected $table = 'contacto';
 
-    protected $fillable = ['nombre_contacto', 'email_contacto', 'celular_contacto'];
+    protected $fillable = ['SOLIP_Codigo','nombre_contacto', 'email_contacto', 'celular_contacto'];
 
     public $timestamps = false;
 }

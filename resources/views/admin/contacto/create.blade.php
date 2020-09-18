@@ -7,19 +7,16 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Listado de Contactos</h1>
+        <h1>Nuevo Contacto</h1>
       </div>
-      <div class="col-sm-6 text-right">
-        <a class="btn btn-info" href="/contacto/create">Agregar Contacto</a>
-      </div>        
     </div>
   </div>
 </section>
-<!-- /Content Header -->
-    
+<!--Content Header -->
+
 <!-- Main Content-->
 <section class="content">
-    <indexcontacto-component></indexcontacto-component>
+    <createcontacto-component token="{{csrf_token()}}"></createcontacto-component>
 </section>
 <!-- /Main Content-->
 

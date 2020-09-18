@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Solicitante extends Model
 {
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'SOLIP_Codigo';
 
     protected $table = 'solicitante';
 
