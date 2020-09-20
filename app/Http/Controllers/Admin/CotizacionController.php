@@ -147,6 +147,7 @@ class CotizacionController extends Controller
 
     public function destroy($id)
     {
+        CotizacionDetalle::where('COTIP_Codigo',$id)->firstorfail()->delete();
         Cotizacion::destroy($id);
         return response()->json(['message'=>'Cotizacionntacto borrado']);        
     }

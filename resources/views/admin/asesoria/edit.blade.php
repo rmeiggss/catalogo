@@ -1,8 +1,8 @@
-@extends('layouts.admin2')
+@extends('layouts.admin')
 
 @section('content')
 <!--grid-->
-<div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -35,5 +35,5 @@
             {!!Form::close()!!}
         </div>
     </section>
-</div>
+
 @endsection

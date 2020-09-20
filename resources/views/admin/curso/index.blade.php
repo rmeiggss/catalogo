@@ -13,7 +13,10 @@
         <!-- actualizado por marck, usando ELOQUENT -->
         <a class="btn btn-info" href="{{ route('curso.create') }}">Agregar Curso</a>
         <!-- <a class="btn btn-dark" href="{{ route('cursos.pdf') }}">Generar Reporte</a> -->
-        <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('cursos.pdf') }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+        <!--a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('cursos.pdf') }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a-->
+
+        <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="#"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+
       </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -49,8 +52,12 @@
                 <td class="text-left">{{$cur->CURSOC_Descripcion}}</td>
                 <td class="text-right">{{$cur->CURSOC_Costo}}</td>
                 <td>
-                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
-                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
+                  <!--a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a-->
+
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="#"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+                  <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="#"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
+
                 </td>                
                 <td><button class="btn btn-info">
                   <a class="text-light" href="{{ route('curso.edit', $cur->id_curso) }}">
