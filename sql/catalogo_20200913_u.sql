@@ -11,9 +11,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Volcando estructura de base de datos para catalogo1
+<<<<<<< HEAD
+CREATE DATABASE IF NOT EXISTS `catalogo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+=======
 
 CREATE DATABASE IF NOT EXISTS `catalogo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 USE `catalogo`;
 
 
@@ -29,9 +33,13 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   PRIMARY KEY (`ALUMP_Codigo`),
   KEY `fk_alumno_persona_idx` (`PERSP_Codigo`),
   CONSTRAINT `fk_alumno_persona` FOREIGN KEY (`PERSP_Codigo`) REFERENCES `persona` (`PERSP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.alumno: ~0 rows (aproximadamente)
 DELETE FROM `alumno`;
@@ -44,10 +52,14 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `categoria` varchar(6) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
   `nombre` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`categoria`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.categoria: ~0 rows (aproximadamente)
 DELETE FROM `categoria`;
@@ -65,9 +77,13 @@ CREATE TABLE IF NOT EXISTS `contacto` (
   PRIMARY KEY (`id_contacto`),
   KEY `FK_contacto_solicitante` (`SOLIP_Codigo`),
   CONSTRAINT `FK_contacto_solicitante` FOREIGN KEY (`SOLIP_Codigo`) REFERENCES `solicitante` (`SOLIP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.contacto: ~0 rows (aproximadamente)
 DELETE FROM `contacto`;
@@ -102,9 +118,13 @@ CREATE TABLE IF NOT EXISTS `cotizacion` (
   KEY `FK_cotizacion_contacto` (`id_contacto`),
   CONSTRAINT `FK_cotizacion_contacto` FOREIGN KEY (`id_contacto`) REFERENCES `contacto` (`id_contacto`),
   CONSTRAINT `fk_cotizacion_tipocotizacion` FOREIGN KEY (`TIPOCOP_Codigo`) REFERENCES `tipocotizacion` (`TIPOCOP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.cotizacion: ~0 rows (aproximadamente)
 DELETE FROM `cotizacion`;
@@ -122,9 +142,13 @@ CREATE TABLE IF NOT EXISTS `cotizacion_capacitacion` (
   PRIMARY KEY (`COCAP_Codigo`),
   KEY `fk_cotizacioncapac_curso_idx` (`CURSOP_Codigo`),
   CONSTRAINT `fk_cotizacioncapac_curso` FOREIGN KEY (`CURSOP_Codigo`) REFERENCES `curso` (`id_curso`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.cotizacion_capacitacion: ~0 rows (aproximadamente)
 DELETE FROM `cotizacion_capacitacion`;
@@ -149,9 +173,13 @@ CREATE TABLE IF NOT EXISTS `cotizacion_detalle` (
   PRIMARY KEY (`CODEP_Codigo`),
   KEY `fk_cotizacion_cotizaciondetalle` (`COTIP_Codigo`),
   CONSTRAINT `fk_cotizacion_cotizaciondetalle` FOREIGN KEY (`COTIP_Codigo`) REFERENCES `cotizacion` (`COTIP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.cotizacion_detalle: ~0 rows (aproximadamente)
 DELETE FROM `cotizacion_detalle`;
@@ -173,9 +201,13 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_curso`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.curso: ~0 rows (aproximadamente)
 DELETE FROM `curso`;
@@ -193,9 +225,13 @@ CREATE TABLE IF NOT EXISTS `curso_instructor` (
   KEY `FK_curso_instructor_instructor` (`INSTP_Codigo`),
   CONSTRAINT `FK_curso_instructor_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`),
   CONSTRAINT `FK_curso_instructor_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.curso_instructor: ~0 rows (aproximadamente)
 DELETE FROM `curso_instructor`;
@@ -214,9 +250,13 @@ CREATE TABLE IF NOT EXISTS `descuentos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.descuentos: ~0 rows (aproximadamente)
 DELETE FROM `descuentos`;
@@ -237,9 +277,13 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   `estado_tec_eq` varchar(50) DEFAULT NULL,
   `cantidad_eq` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.equipos: ~0 rows (aproximadamente)
 DELETE FROM `equipos`;
@@ -256,9 +300,13 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.failed_jobs: ~0 rows (aproximadamente)
 DELETE FROM `failed_jobs`;
@@ -277,9 +325,13 @@ CREATE TABLE IF NOT EXISTS `form_asesoria` (
   `Fecha_Registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ID_Asesoria` int(11) NOT NULL,
   PRIMARY KEY (`ID_Form_Asesoria`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.form_asesoria: ~0 rows (aproximadamente)
 DELETE FROM `form_asesoria`;
@@ -300,9 +352,13 @@ CREATE TABLE IF NOT EXISTS `horario_cursos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.horario_cursos: ~0 rows (aproximadamente)
 DELETE FROM `horario_cursos`;
@@ -321,9 +377,13 @@ CREATE TABLE IF NOT EXISTS `horario_instructors` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.horario_instructors: ~0 rows (aproximadamente)
 DELETE FROM `horario_instructors`;
@@ -343,9 +403,13 @@ CREATE TABLE IF NOT EXISTS `instructor` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`INSTP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.instructor: ~0 rows (aproximadamente)
 DELETE FROM `instructor`;
@@ -364,9 +428,13 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `MENU_FechaModificacion` datetime DEFAULT NULL,
   `MENU_FlagEstado` char(1) DEFAULT '1',
   PRIMARY KEY (`MENU_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.menu: ~0 rows (aproximadamente)
 DELETE FROM `menu`;
@@ -380,9 +448,13 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.migrations: ~0 rows (aproximadamente)
 DELETE FROM `migrations`;
@@ -396,9 +468,13 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.password_resets: ~0 rows (aproximadamente)
 DELETE FROM `password_resets`;
@@ -414,9 +490,13 @@ CREATE TABLE IF NOT EXISTS `permiso` (
   `COMPP_Codigo` int(11) NOT NULL,
   `PERM_FlagEstado` char(1) DEFAULT '1',
   PRIMARY KEY (`PERM_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.permiso: ~0 rows (aproximadamente)
 DELETE FROM `permiso`;
@@ -441,9 +521,13 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `PERSC_FechaRegistro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `EMPRP_Codigo` int(11) DEFAULT NULL,
   PRIMARY KEY (`PERSP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=562 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=562 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.persona: ~0 rows (aproximadamente)
 DELETE FROM `persona`;
@@ -464,9 +548,13 @@ CREATE TABLE IF NOT EXISTS `prueba_equipo` (
   PRIMARY KEY (`id_prueba_a_realizar`),
   KEY `FK_prueba_equipo_cotizacion_detalle` (`CODEP_Codigo`),
   CONSTRAINT `FK_prueba_equipo_cotizacion_detalle` FOREIGN KEY (`CODEP_Codigo`) REFERENCES `cotizacion_detalle` (`CODEP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.prueba_equipo: ~0 rows (aproximadamente)
 DELETE FROM `prueba_equipo`;
@@ -482,9 +570,13 @@ CREATE TABLE IF NOT EXISTS `rol` (
   `ROL_FechaModificacion` datetime DEFAULT NULL,
   `ROL_FlagEstado` char(1) DEFAULT '1',
   PRIMARY KEY (`ROL_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.rol: ~0 rows (aproximadamente)
 DELETE FROM `rol`;
@@ -500,9 +592,13 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.roles: ~0 rows (aproximadamente)
 DELETE FROM `roles`;
@@ -518,9 +614,13 @@ CREATE TABLE IF NOT EXISTS `role_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.role_user: ~0 rows (aproximadamente)
 DELETE FROM `role_user`;
@@ -549,9 +649,13 @@ CREATE TABLE IF NOT EXISTS `solicitante` (
   KEY `fk_tiposolicitante_solicitante_idx` (`TIPSOLIP_Codigo`),
   CONSTRAINT `fk_tiposolicitante_solicitante` FOREIGN KEY (`TIPSOLIP_Codigo`) REFERENCES `tiposolicitante` (`TIPSOLIP_Codigo`),
   CONSTRAINT `fk_ubigeo_solicitante` FOREIGN KEY (`UBIGP_Codigo`) REFERENCES `ubigeo` (`UBIGP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=239 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=239 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.solicitante: ~0 rows (aproximadamente)
 DELETE FROM `solicitante`;
@@ -564,9 +668,13 @@ CREATE TABLE IF NOT EXISTS `tipocotizacion` (
   `TIPOCOP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
   `TIPOCOC_Descripcion` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`TIPOCOP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.tipocotizacion: ~0 rows (aproximadamente)
 DELETE FROM `tipocotizacion`;
@@ -581,9 +689,13 @@ CREATE TABLE IF NOT EXISTS `tiposolicitante` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TIPSOLIP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.tiposolicitante: ~0 rows (aproximadamente)
 DELETE FROM `tiposolicitante`;
@@ -602,9 +714,13 @@ CREATE TABLE IF NOT EXISTS `ubigeo` (
   `UBIGC_FechaModificacion` datetime DEFAULT NULL,
   `UBIGC_FlagEstado` char(1) DEFAULT '1',
   PRIMARY KEY (`UBIGP_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.ubigeo: ~0 rows (aproximadamente)
 DELETE FROM `ubigeo`;
@@ -627,9 +743,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `FK_users_rol` (`ROL_Codigo`),
   CONSTRAINT `FK_users_rol` FOREIGN KEY (`ROL_Codigo`) REFERENCES `rol` (`ROL_Codigo`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.users: ~0 rows (aproximadamente)
 DELETE FROM `users`;
@@ -645,9 +765,13 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
 
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+>>>>>>> 105e358ce39b952046aeb27cb965e345a702c779
 
 -- Volcando datos para la tabla catalogo1.usuario: ~0 rows (aproximadamente)
 DELETE FROM `usuario`;
