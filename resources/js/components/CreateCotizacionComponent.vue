@@ -16,13 +16,13 @@
           <div class="col-sm-4 invoice-col">
             <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
-                <input type="text" class="col-sm-4 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha">
+                <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha">
             </div>
           </div>                            
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                <input type="text" v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero">
+                <input type="number" v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero">
               </div>
           </div>
         </div>

@@ -38972,8 +38972,8 @@ var render = function() {
                     expression: "cotizacion.COTIC_Fecha"
                   }
                 ],
-                staticClass: "col-sm-4 form-control-sm",
-                attrs: { type: "text", autocomplete: "off", name: "fecha" },
+                staticClass: "col-sm-6 form-control-sm",
+                attrs: { type: "date", autocomplete: "off", name: "fecha" },
                 domProps: { value: _vm.cotizacion.COTIC_Fecha },
                 on: {
                   input: function($event) {
@@ -39006,7 +39006,7 @@ var render = function() {
                 ],
                 staticClass: "col-sm-3 form-control-sm",
                 attrs: {
-                  type: "text",
+                  type: "number",
                   maxlength: "11",
                   autocomplete: "off",
                   name: "numero"
@@ -40140,8 +40140,8 @@ var render = function() {
                     expression: "cotizacion.COTIC_Fecha"
                   }
                 ],
-                staticClass: "col-sm-4 form-control-sm",
-                attrs: { type: "text", autocomplete: "off", name: "fecha" },
+                staticClass: "col-sm-6 form-control-sm",
+                attrs: { type: "date", autocomplete: "off", name: "fecha" },
                 domProps: { value: _vm.cotizacion.COTIC_Fecha },
                 on: {
                   input: function($event) {
@@ -41707,11 +41707,11 @@ var render = function() {
                       staticClass: "text-center"
                     },
                     [
+                      _c("td", [_vm._v(_vm._s(cotizacion.COTIP_Codigo))]),
+                      _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(cotizacion.COTIC_Numero))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(cotizacion.SOLIP_Codigo))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(cotizacion.nombre_contacto))]),
+                      _c("td", [_vm._v(_vm._s(cotizacion.SOLIC_Nombre))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(cotizacion.COTIC_Fecha))]),
                       _vm._v(" "),
@@ -41772,11 +41772,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "text-center" }, [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Numero")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Solicitante")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Contacto")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
