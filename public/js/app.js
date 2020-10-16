@@ -2182,14 +2182,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cotizacion: [],
-      cotizaciondetalle: [],
+      equipo: [],
+      prueba: [],
+      equipos: [],
+      pruebas: [],
       contactos: [],
       usuarios: [],
-      saveData: null
+      saveData: null,
+      idxEquipo: null,
+      idxPrueba: null
     };
   },
   props: {
@@ -2205,7 +2212,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     setSubTotal: function setSubTotal() {
       var suma = 0;
-      return this.cotizaciondetalle.reduce(function (suma, cotdetalle) {
+      return this.equipos.reduce(function (suma, cotdetalle) {
         return suma + cotdetalle.CODEC_PrecioUnitario * cotdetalle.CODEC_Cantidad;
       }, 0).toFixed(2);
     },
@@ -2217,11 +2224,44 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    addRow: function addRow() {
-      this.cotizaciondetalle.push({});
+    addEquipo: function addEquipo() {
+      var fila = {
+        CODEP_Codigo: "",
+        CODEC_NombreEquipo: "",
+        CODEC_Descripcion: "",
+        CODEC_Fabricante: "",
+        CODEC_Cantidad: "",
+        CODEC_PrecioUnitario: "",
+        pruebas: []
+      };
+      this.equipos.push(fila);
     },
-    deleteRow: function deleteRow(index) {
-      this.cotizaciondetalle.splice(index, 1);
+    editEquipo: function editEquipo(index) {
+      this.idxEquipo = index;
+      this.equipo = this.equipos[index];
+    },
+    updateEquipo: function updateEquipo() {
+      this.equipos[this.idxEquipo] = this.equipo;
+      this.equipo = [];
+      this.idxEquipo = null;
+    },
+    deleteEquipo: function deleteEquipo(index) {
+      this.equipos.splice(index, 1);
+    },
+    addPrueba: function addPrueba() {
+      this.equipo.pruebas.push(this.prueba);
+      this.prueba = [];
+    },
+    editPrueba: function editPrueba(indice) {
+      this.idxPrueba = indice;
+      this.prueba = this.equipo.pruebas[indice];
+    },
+    updatePrueba: function updatePrueba() {
+      this.prueba = [];
+      this.idxPrueba = null;
+    },
+    deletePrueba: function deletePrueba(indice) {
+      this.equipo.pruebas.splice(indice, 1);
     },
     listarContactos: function listarContactos() {
       var _this = this;
@@ -39101,7 +39141,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
-                  return _vm.addRow()
+                  return _vm.addEquipo()
                 }
               }
             },
@@ -39119,13 +39159,10 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.cotizaciondetalle, function(cotdetalle, index) {
+                _vm._l(_vm.equipos, function(equipo, index) {
                   return _c(
                     "tr",
-                    {
-                      key: cotdetalle.CODEP_Codigo,
-                      staticClass: "text-center"
-                    },
+                    { key: equipo.index, staticClass: "text-center" },
                     [
                       _c("td", [
                         _c(
@@ -39143,7 +39180,7 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteRow(index)
+                                    return _vm.deleteEquipo(index)
                                   }
                                 }
                               },
@@ -39157,19 +39194,19 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEP_Codigo,
-                              expression: "cotdetalle.CODEP_Codigo"
+                              value: equipo.CODEP_Codigo,
+                              expression: "equipo.CODEP_Codigo"
                             }
                           ],
                           attrs: { type: "hidden", name: "codigodet[]" },
-                          domProps: { value: cotdetalle.CODEP_Codigo },
+                          domProps: { value: equipo.CODEP_Codigo },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                cotdetalle,
+                                equipo,
                                 "CODEP_Codigo",
                                 $event.target.value
                               )
@@ -39184,8 +39221,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_NombreEquipo,
-                              expression: "cotdetalle.CODEC_NombreEquipo"
+                              value: equipo.CODEC_NombreEquipo,
+                              expression: "equipo.CODEC_NombreEquipo"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -39194,14 +39231,14 @@ var render = function() {
                             name: "nombre[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_NombreEquipo },
+                          domProps: { value: equipo.CODEC_NombreEquipo },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                cotdetalle,
+                                equipo,
                                 "CODEC_NombreEquipo",
                                 $event.target.value
                               )
@@ -39216,8 +39253,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_Descripcion,
-                              expression: "cotdetalle.CODEC_Descripcion"
+                              value: equipo.CODEC_Descripcion,
+                              expression: "equipo.CODEC_Descripcion"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -39226,14 +39263,14 @@ var render = function() {
                             name: "descripcion[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_Descripcion },
+                          domProps: { value: equipo.CODEC_Descripcion },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                cotdetalle,
+                                equipo,
                                 "CODEC_Descripcion",
                                 $event.target.value
                               )
@@ -39248,8 +39285,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_Fabricante,
-                              expression: "cotdetalle.CODEC_Fabricante"
+                              value: equipo.CODEC_Fabricante,
+                              expression: "equipo.CODEC_Fabricante"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -39258,14 +39295,14 @@ var render = function() {
                             name: "fabricante[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_Fabricante },
+                          domProps: { value: equipo.CODEC_Fabricante },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                cotdetalle,
+                                equipo,
                                 "CODEC_Fabricante",
                                 $event.target.value
                               )
@@ -39276,7 +39313,26 @@ var render = function() {
                       _vm._v(" "),
                       _vm._m(3, true),
                       _vm._v(" "),
-                      _vm._m(4, true),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-outline-success btn-lg btn-sm",
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "modal",
+                              "data-target": "#exampleModal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.editEquipo(index)
+                              }
+                            }
+                          },
+                          [_vm._v("Lista")]
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _c("input", {
@@ -39284,8 +39340,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model.number",
-                              value: cotdetalle.CODEC_Cantidad,
-                              expression: "cotdetalle.CODEC_Cantidad",
+                              value: equipo.CODEC_Cantidad,
+                              expression: "equipo.CODEC_Cantidad",
                               modifiers: { number: true }
                             }
                           ],
@@ -39295,14 +39351,14 @@ var render = function() {
                             name: "cantidad[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_Cantidad },
+                          domProps: { value: equipo.CODEC_Cantidad },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                cotdetalle,
+                                equipo,
                                 "CODEC_Cantidad",
                                 _vm._n($event.target.value)
                               )
@@ -39320,8 +39376,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model.number",
-                              value: cotdetalle.CODEC_PrecioUnitario,
-                              expression: "cotdetalle.CODEC_PrecioUnitario",
+                              value: equipo.CODEC_PrecioUnitario,
+                              expression: "equipo.CODEC_PrecioUnitario",
                               modifiers: { number: true }
                             }
                           ],
@@ -39331,14 +39387,14 @@ var render = function() {
                             name: "unitario[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_PrecioUnitario },
+                          domProps: { value: equipo.CODEC_PrecioUnitario },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                cotdetalle,
+                                equipo,
                                 "CODEC_PrecioUnitario",
                                 _vm._n($event.target.value)
                               )
@@ -39361,8 +39417,8 @@ var render = function() {
                           },
                           domProps: {
                             value:
-                              cotdetalle.CODEC_Cantidad *
-                              cotdetalle.CODEC_PrecioUnitario
+                              equipo.CODEC_Cantidad *
+                              equipo.CODEC_PrecioUnitario
                           }
                         })
                       ])
@@ -39374,7 +39430,305 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(5)
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "exampleModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "exampleModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-lg",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _c("div", { staticClass: "modal-header" }, [
+                      _c(
+                        "h5",
+                        {
+                          staticClass: "modal-title",
+                          attrs: { id: "myModalLabel" }
+                        },
+                        [
+                          _vm._v(
+                            "Pruebas del Equipo :: " +
+                              _vm._s(_vm.equipo.CODEC_NombreEquipo)
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(4)
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "container" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _vm._v(
+                              "\n                                  Descripcion de la Prueba:\n                                  "
+                            ),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.prueba.Descripcion_Prueba,
+                                  expression: "prueba.Descripcion_Prueba"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              staticStyle: { resize: "none" },
+                              attrs: { rows: "3", cols: "5" },
+                              domProps: {
+                                value: _vm.prueba.Descripcion_Prueba
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.prueba,
+                                    "Descripcion_Prueba",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "ejemplo_archivo_1" } },
+                              [_vm._v("Adjuntar Norma Tecnica")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "file", id: "ejemplo_archivo_1" }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-9" }, [
+                                _vm._v(
+                                  "\n                                    Norma Asociada:\n                                    "
+                                ),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.prueba.Norma_Asoc_Prueba,
+                                      expression: "prueba.Norma_Asoc_Prueba"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  domProps: {
+                                    value: _vm.prueba.Norma_Asoc_Prueba
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.prueba,
+                                        "Norma_Asoc_Prueba",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-3" }, [
+                                _vm._v(
+                                  "\n                                    Costo\n                                    "
+                                ),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.prueba.Costo,
+                                      expression: "prueba.Costo"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  domProps: { value: _vm.prueba.Costo },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.prueba,
+                                        "Costo",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _vm._v(
+                                "\n                                  Descripcion de la Norma:\n                                  "
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.prueba.Descripcion_Norma,
+                                    expression: "prueba.Descripcion_Norma"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                staticStyle: { resize: "none" },
+                                attrs: { rows: "2", cols: "5" },
+                                domProps: {
+                                  value: _vm.prueba.Descripcion_Norma
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.prueba,
+                                      "Descripcion_Norma",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "btn btn-default btn-sm",
+                                attrs: { type: "button", value: "Agregar" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.addPrueba()
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "btn btn-default btn-sm",
+                                attrs: { type: "button", value: "Actualizar" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updatePrueba()
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered" },
+                          [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _vm._l(_vm.equipo.pruebas, function(
+                              prueba,
+                              indice
+                            ) {
+                              return _c("tr", { key: prueba.indice }, [
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v(_vm._s(indice + 1))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(prueba.Descripcion_Prueba))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-right" }, [
+                                  _vm._v(_vm._s(prueba.Costo))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-default btn-sm",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editPrueba(indice)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Editar")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-default btn-sm",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deletePrueba(indice)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Eliminar")]
+                                  )
+                                ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { type: "button", "data-dismiss": "modal" },
+                          on: {
+                            click: function($event) {
+                              return _vm.updateEquipo()
+                            }
+                          }
+                        },
+                        [_vm._v("Aceptar")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row invoice-info" }, [
@@ -39566,243 +39920,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success btn-lg btn-sm",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
-        [_vm._v("Lista")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "exampleModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
-                  [_vm._v("Pruebas del Equipo")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "container" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _vm._v(
-                        "\n                                  Descripcion de la Prueba:\n                                  "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "textarea",
-                        {
-                          staticClass: "form-control",
-                          staticStyle: { resize: "none" },
-                          attrs: { name: "", rows: "3", cols: "5" }
-                        },
-                        [_vm._v("Escribir algo...")]
-                      ),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "ejemplo_archivo_1" } }, [
-                        _vm._v("Adjuntar un archivo de la Norma Tecnica")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "file", id: "ejemplo_archivo_1" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _vm._v(
-                        "\n                                  Norma Asociada:\n                                  "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "", id: "primero" }
-                      }),
-                      _vm._v(
-                        "\n                                  Descripcion de la Norma:\n                                  "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "textarea",
-                        {
-                          staticClass: "form-control",
-                          staticStyle: { resize: "none" },
-                          attrs: { name: "", rows: "2", cols: "5" }
-                        },
-                        [_vm._v("Escribir algo...")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "btn btn-default btn-sm",
-                        attrs: { type: "submit", name: "", value: "Guardar" }
-                      })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("table", { staticClass: "table table-bordered" }, [
-                    _c("tr", [
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Identificador")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Descripcion de la Prueba")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Norma Asociada")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Estado")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Acciones")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "text-center" }, [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Prueba Dielectrica")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Norma IEC-123456")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Completa")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Editar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Eliminar")]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "text-center" }, [_vm._v("2")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Prueba Dielectrica")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Norma IEC-123456")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Incompleta")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Editar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Eliminar")]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("tr", [
+      _c("th", { staticClass: "text-center" }, [_vm._v("Item")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [
+        _vm._v("Descripcion de la Prueba")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Norma Asociada")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Costo")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Acciones")])
+    ])
   }
 ]
 render._withStripped = true
