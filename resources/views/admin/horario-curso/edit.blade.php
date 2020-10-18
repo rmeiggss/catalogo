@@ -17,7 +17,7 @@
     <section class="content">
         <div class="grid-hor">
 
-            {!!Form::model($horariocurso, ['route'=>['horario-curso.update', $horariocurso->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
+            {!!Form::model($horariocurso, ['route'=>['horario-curso.update', $horariocurso->ID_Horario_apertura_curso],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
                 <div class="form-group col-md-6">
                     {!!Form::label('nombre','Nombre del Curso')!!}

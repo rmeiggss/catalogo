@@ -215,13 +215,19 @@
               <li class="nav-item">
                 <a href="{{ route('horario-curso.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Horario de Cursos</p>
+                  <p>Horario Apertura de Cursos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('horario-instructor.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Horario de Instructores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('instructor-curso.index') }}" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Curso Instructor</p>
                 </a>
               </li>
               <li class="nav-item">
