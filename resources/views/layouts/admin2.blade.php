@@ -225,6 +225,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('instructor-curso.index') }}" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>Curso Instructor</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('descuento.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>Descuento de Cursos</p>

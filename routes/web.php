@@ -41,6 +41,7 @@ Route::resource('curso','Admin\CursoController');
 Route::resource('instructor','Admin\InstructorController');
 Route::resource('horario-curso','Admin\HorarioCursoController');
 Route::resource('horario-instructor','Admin\HorarioInstructorController');
+Route::resource('instructor-curso','Admin\CursoInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
 // -------- Rutas de diego --------------------
 Route::resource('servicioac','Admin\ServicioAcademicoController');
