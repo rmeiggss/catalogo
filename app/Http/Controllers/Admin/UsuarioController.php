@@ -10,7 +10,6 @@ use Redirect;
 class UsuarioController extends Controller
 {
     public function index(){
-<<<<<<< HEAD
         $usuarios = User::all();
             $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get();
             return view('admin.usuario.index',compact('usuarios'));
@@ -35,11 +34,9 @@ class UsuarioController extends Controller
         ->addcolumn('btn','admin.usuario.dataTable.btn')
         ->rawColumns(['btn'])
         ->toJson();
-=======
         //$usuarios = User::all();
         $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get(); 
         return view('admin.usuario.index',compact('usuarios'));
->>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
     }
     
     public function list(){
