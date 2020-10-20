@@ -4,14 +4,36 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use Redirect;
 
 class UsuarioController extends Controller
 {
     public function index(){
         $usuarios = User::all();
-    /*     $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get(); */
-        return view('admin.usuario.index',compact('usuarios'));
+            $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get();
+            return view('admin.usuario.index',compact('usuarios'));
+    }
+
+    /* DataTable */
+    public function dataTable()
+    {
+        return DataTables::of(User::query())
+        ->editColumn('created_at', function(User $user){
+            return $user->created_at->diffForHumans();
+        })
+        ->addIndexColumn()
+        /* ->addColumn('edit','<a href="{{route(\'usuario.edit\', $id) }}" class="btn btn-info">'.('Edit').'</a>')
+        ->addColumn('delete','<form action="{{route(\'usuario.destroy\',$id)}}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" name="submit" value="'.('Eliminar').'" class="btn btn-danger "
+                    onClick="return  confirm(\'¿Seguro que quiere eliminar?\')">
+                    {{csrf_field()}}
+                    </form>') */
+
+        ->addcolumn('btn','admin.usuario.dataTable.btn')
+        ->rawColumns(['btn'])
+        ->toJson();
     }
     
     public function list(){
@@ -38,7 +60,7 @@ class UsuarioController extends Controller
             'name' => request('nombre'),
             'email' => request('email'),
             'password' => request('password'),
-            'ROL_Codigo' => request('rol'),
+            'ROL_descripcion' => request('rol'),
         ]);
 
         return Redirect::to("/usuario");
@@ -67,5 +89,6 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
+        return Redirect::to("/usuario");
     }
 }

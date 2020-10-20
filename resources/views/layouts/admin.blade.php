@@ -16,6 +16,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
+
+  <!--  Datatables estilos-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
@@ -265,7 +271,7 @@
   <!--footer class="main-footer">
     <strong>Copyright &copy; 2020 <a href="#">Laboratorio de Electricidad No6 - FIEE</a>.</strong>
     Todos los derechos reservados.
-    <!--div class="float-right d-none d-sm-inline-block">
+   div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.4
     </div-->
   </footer-->
@@ -295,5 +301,20 @@
 <!-- PAGE SCRIPTS -->
 <script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
-</body>
+<!-- Datatables JS-->
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+<!-- bortones datatable-->
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.colVis.min.js"></script>
+@yield('scripts')
+</body> 
 </html>
