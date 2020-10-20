@@ -40,7 +40,6 @@ Auth::routes();
 
 //------- Rutas de gerson -----------------------
 Route::resource('asesoria','Admin\AsesoriaController');
-
 // -------- Rutas del ADMIN
 Route::resource('curso','Admin\CursoController');
 Route::resource('instructor','Admin\InstructorController');
@@ -98,3 +97,6 @@ Route::view('/cot_capacitaciones', 'cliente/cot_capacitaciones')->name('cot_capa
 //Route::view('/intranet_capacitaciones', 'cliente/intranet_capacitaciones')->name('intranet_capacitaciones');
 // -------------------------------------------
 
+//---------- Rutas para DataTable----------------
+Route::get('dataTableUser','Admin\UsuarioController@dataTable')->name('dataTableUser');
+Route::get('dataTableAsesoria','Admin\AsesoriaController@dataTable')->name('dataTableAsesoria');

@@ -17,7 +17,12 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
         "laravelcollective/html": "^6.1",
+<<<<<<< HEAD
+        "yajra/laravel-datatables": "^1.5",
+        "yajra/laravel-datatables-oracle": "^9.11"
+=======
         "nesbot/carbon": "^2.40"
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
     },
     "require-dev": {
         "facade/ignition": "^2.0",
