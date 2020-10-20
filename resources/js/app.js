@@ -11,8 +11,9 @@ Vue.component('createcontacto-component', require('./components/CreateContactoCo
 Vue.component('editcotizacion-component', require('./components/EditCotizacionComponent.vue').default);
 Vue.component('editcontacto-component', require('./components/EditContactoComponent.vue').default);
 
-Vue.component('ensayos-component', require('./components/EnsayosComponent.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('ensayos-component', require('./components/EnsayosComponent.vue').default);
+
 
 const app = new Vue({
 	el: '#app',

@@ -44,26 +44,30 @@ Route::resource('horario-instructor','Admin\HorarioInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
 // -------- Rutas de diego --------------------
 Route::resource('servicioac','Admin\ServicioAcademicoController');
-// --------- Rutas del CLIENTE
-Route::resource('cot_ensayos','Cliente\EnsayoController');
-Route::resource('cot_calibraciones','Cliente\CalibracionController');
-Route::resource('cot_capacitaciones','Cliente\CapacitacionController');
+// --------- Rutas del CLIENTE ----------------------
 
-Route::resource('asesorias','Cliente\AsesoriaController');
-Route::resource('servicio_academico','Cliente\ServicioAcademicoController');
+//Route::resource('cot_calibraciones','Cliente\CalibracionController');
+//Route::resource('cot_capacitaciones','Cliente\CapacitacionController');
+//Route::resource('asesorias','Cliente\AsesoriaController');
+//Route::resource('servicio_academico','Cliente\ServicioAcademicoController');
 // --------------------------------------------
 
 // --------------------------------------------
 // CREACIÓN PARA LA RUTA DE EQUIPOS (ENSAYOS, CALIBRACIONES)
-Route::get('cot_ensayos', 'Cliente\EquipoController@index');
+//Route::resource('cot_ensayos','Cliente\EnsayoController');
 
-Route::put('/cot_ensayos/editar', 'Cliente\EquipoController@update');
+Route::get('/cot_ensayos', 'Cliente\EnsayoController@index');
 
-Route::post('/cot_ensayos/guardar', 'Cliente\EquipoController@store');
+Route::put('/cot_ensayos/actualizar', 'Cliente\EnsayoController@update');
 
-Route::delete('/cot_ensayos/borrar/{id}', 'Cliente\EquipoController@destroy');
+Route::post('/cot_ensayos/guardar', 'Cliente\EnsayoController@store');
 
-Route::get('/cot_ensayos/buscar', 'Cliente\EquipoController@show');
+Route::delete('/cot_ensayos/borrar/{id}', 'Cliente\EnsayoController@destroy');
+
+Route::get('/cot_ensayos/buscar', 'Cliente\EnsayoController@show');
+
+Route::view('/cot_ensayos', 'cliente/cot_ensayos')->name('cot_ensayos');
+
 // --------------------------------------------
 
 
@@ -81,7 +85,6 @@ Route::view('/responsabilidad', 'cliente/responsabilidad')->name('responsabilida
 Route::view('/visitas', 'cliente/visitas')->name('visitas');
 Route::view('/clientes', 'cliente/clientes')->name('clientes');
 Route::view('/ubicacion', 'cliente/ubicacion')->name('ubicacion');
-Route::view('/cot_ensayos', 'cliente/cot_ensayos')->name('cot_ensayos');
 Route::view('/cot_calibraciones', 'cliente/cot_calibraciones')->name('cot_calibraciones');
 Route::view('/cot_capacitaciones', 'cliente/cot_capacitaciones')->name('cot_capacitaciones');
 //Route::view('/intranet_ensayos', 'cliente/intranet_ensayos')->name('intranet_ensayos');
