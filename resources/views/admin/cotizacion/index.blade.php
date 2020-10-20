@@ -10,7 +10,7 @@
         <h1>Listado de Cotizaciones</h1>
       </div>
       <div class="col-sm-6 text-right">
-        <a class="btn btn-info" href="{{ route('cotizacion.create') }}">Agregar Cotizacion</a>
+        <a class="btn btn-info" href="{{ route('createCotizacion') }}">Agregar Cotizacion</a>
       </div>
     </div>
   </div><!-- /.container-fluid -->

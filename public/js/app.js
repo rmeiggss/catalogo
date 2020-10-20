@@ -2184,6 +2184,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2224,6 +2226,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    /*Equipos*/
     addEquipo: function addEquipo() {
       var fila = {
         CODEP_Codigo: "",
@@ -2248,8 +2251,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteEquipo: function deleteEquipo(index) {
       this.equipos.splice(index, 1);
     },
+
+    /*Pruebas*/
     addPrueba: function addPrueba() {
       this.equipo.pruebas.push(this.prueba);
+      console.log(this.prueba);
       this.prueba = [];
     },
     editPrueba: function editPrueba(indice) {
@@ -2262,6 +2268,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     deletePrueba: function deletePrueba(indice) {
       this.equipo.pruebas.splice(indice, 1);
+    },
+
+    /*Cotizaciones */
+    addCotizacion: function addCotizacion() {
+      var url = '/cotizacion/store';
+      axios.post(url, {
+        contacto: this.cotizacion.id_contacto,
+        fecha: this.cotizacion.COTIC_Fecha,
+        numero: this.cotizacion.COTIC_Numero,
+        usuario: this.cotizacion.USUA_Codigo,
+        equipos: this.equipos
+      }).then(function (response) {//alert(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     listarContactos: function listarContactos() {
       var _this = this;
@@ -2279,10 +2300,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.usuarios = response.data;
         console.log(_this2.cotizacion);
       });
-    },
-    submit: function submit() {
-      this.$refs.form.submit();
     }
+    /*submit(){
+      this.$refs.form.submit();
+    } */
+
   }
 });
 
@@ -38981,700 +39003,609 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "invoice p-3 mb-3" }, [
-    _c(
-      "form",
-      { ref: "form", attrs: { method: "POST", action: "/cotizacion" } },
-      [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.token,
-              expression: "token"
-            }
-          ],
-          attrs: { name: "_token", type: "hidden" },
-          domProps: { value: _vm.token },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.token = $event.target.value
-            }
+    _c("form", { ref: "form" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.token,
+            expression: "token"
           }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "row invoice-info" }, [
-          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
-            _c("div", { staticClass: "row form-group" }, [
-              _c(
-                "label",
-                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Contacto")]
-              ),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.cotizacion.id_contacto,
-                      expression: "cotizacion.id_contacto"
-                    }
-                  ],
-                  staticClass: "col-sm-6 form-control-sm",
-                  attrs: { name: "contacto" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.cotizacion,
-                        "id_contacto",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.contactos, function(contacto) {
-                  return _c(
-                    "option",
-                    {
-                      key: contacto.id_contacto,
-                      domProps: { value: contacto.id_contacto }
-                    },
-                    [_vm._v(_vm._s(contacto.nombre_contacto))]
-                  )
-                }),
-                0
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
-            _c("div", { staticClass: "row form-group" }, [
-              _c(
-                "label",
-                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Fecha")]
-              ),
-              _vm._v(" "),
-              _c("input", {
+        ],
+        attrs: { name: "_token", type: "hidden" },
+        domProps: { value: _vm.token },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.token = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Contacto")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.cotizacion.COTIC_Fecha,
-                    expression: "cotizacion.COTIC_Fecha"
+                    value: _vm.cotizacion.id_contacto,
+                    expression: "cotizacion.id_contacto"
                   }
                 ],
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: { type: "date", autocomplete: "off", name: "fecha" },
-                domProps: { value: _vm.cotizacion.COTIC_Fecha },
+                attrs: { name: "contacto" },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.cotizacion, "COTIC_Fecha", $event.target.value)
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.cotizacion,
+                      "id_contacto",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
                   }
                 }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
-            _c("div", { staticClass: "row form-group" }, [
-              _c(
-                "label",
-                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Numero")]
-              ),
-              _vm._v(" "),
-              _c("input", {
+              },
+              _vm._l(_vm.contactos, function(contacto) {
+                return _c(
+                  "option",
+                  {
+                    key: contacto.id_contacto,
+                    domProps: { value: contacto.id_contacto }
+                  },
+                  [_vm._v(_vm._s(contacto.nombre_contacto))]
+                )
+              }),
+              0
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Fecha")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cotizacion.COTIC_Fecha,
+                  expression: "cotizacion.COTIC_Fecha"
+                }
+              ],
+              staticClass: "col-sm-6 form-control-sm",
+              attrs: { type: "date", autocomplete: "off", name: "fecha" },
+              domProps: { value: _vm.cotizacion.COTIC_Fecha },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cotizacion, "COTIC_Fecha", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Numero")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cotizacion.COTIC_Numero,
+                  expression: "cotizacion.COTIC_Numero"
+                }
+              ],
+              staticClass: "col-sm-3 form-control-sm",
+              attrs: { maxlength: "11", autocomplete: "off", name: "numero" },
+              domProps: { value: _vm.cotizacion.COTIC_Numero },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cotizacion, "COTIC_Numero", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Usuario")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.cotizacion.COTIC_Numero,
-                    expression: "cotizacion.COTIC_Numero"
+                    value: _vm.cotizacion.USUA_Codigo,
+                    expression: "cotizacion.USUA_Codigo"
                   }
                 ],
-                staticClass: "col-sm-3 form-control-sm",
-                attrs: {
-                  type: "number",
-                  maxlength: "11",
-                  autocomplete: "off",
-                  name: "numero"
-                },
-                domProps: { value: _vm.cotizacion.COTIC_Numero },
+                staticClass: "col-sm-6 form-control-sm",
+                attrs: { name: "usuario" },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
                     _vm.$set(
                       _vm.cotizacion,
-                      "COTIC_Numero",
-                      $event.target.value
+                      "USUA_Codigo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                     )
                   }
                 }
-              })
-            ])
+              },
+              _vm._l(_vm.usuarios, function(usuario) {
+                return _c(
+                  "option",
+                  { key: usuario.id, domProps: { value: usuario.id } },
+                  [_vm._v(_vm._s(usuario.name))]
+                )
+              }),
+              0
+            )
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row invoice-info" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
-            _c("div", { staticClass: "row form-group" }, [
-              _c(
-                "label",
-                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Usuario")]
-              ),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.cotizacion.USUA_Codigo,
-                      expression: "cotizacion.USUA_Codigo"
-                    }
-                  ],
-                  staticClass: "col-sm-6 form-control-sm",
-                  attrs: { name: "usuario" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.cotizacion,
-                        "USUA_Codigo",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.usuarios, function(usuario) {
-                  return _c(
-                    "option",
-                    { key: usuario.id, domProps: { value: usuario.id } },
-                    [_vm._v(_vm._s(usuario.name))]
-                  )
-                }),
-                0
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
-        ]),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _c(
+          "label",
+          { staticClass: "col-sm-2 col-form-label col-form-label-sm" },
+          [_vm._v("Agregar")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "row invoice-info" }, [
-          _c(
-            "label",
-            { staticClass: "col-sm-2 col-form-label col-form-label-sm" },
-            [_vm._v("Agregar")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  return _vm.addEquipo()
-                }
+        _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                return _vm.addEquipo()
               }
-            },
-            [
-              _c("i", {
-                staticClass: "fas fa-plus form-control-sm",
-                attrs: { id: "agregar" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 table-responsive" }, [
-            _c("table", { staticClass: "table table-striped" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.equipos, function(equipo, index) {
-                  return _c(
-                    "tr",
-                    { key: equipo.index, staticClass: "text-center" },
-                    [
-                      _c("td", [
-                        _c(
-                          "label",
-                          {
-                            staticStyle: {
-                              border: "1px solid red",
-                              color: "blue"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.deleteEquipo(index)
-                                  }
-                                }
-                              },
-                              [_vm._v("x")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: equipo.CODEP_Codigo,
-                              expression: "equipo.CODEP_Codigo"
-                            }
-                          ],
-                          attrs: { type: "hidden", name: "codigodet[]" },
-                          domProps: { value: equipo.CODEP_Codigo },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                equipo,
-                                "CODEP_Codigo",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: equipo.CODEC_NombreEquipo,
-                              expression: "equipo.CODEC_NombreEquipo"
-                            }
-                          ],
-                          staticClass: "form-control-sm w-100",
-                          attrs: {
-                            type: "text",
-                            name: "nombre[]",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: equipo.CODEC_NombreEquipo },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                equipo,
-                                "CODEC_NombreEquipo",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: equipo.CODEC_Descripcion,
-                              expression: "equipo.CODEC_Descripcion"
-                            }
-                          ],
-                          staticClass: "form-control-sm w-100",
-                          attrs: {
-                            type: "text",
-                            name: "descripcion[]",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: equipo.CODEC_Descripcion },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                equipo,
-                                "CODEC_Descripcion",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: equipo.CODEC_Fabricante,
-                              expression: "equipo.CODEC_Fabricante"
-                            }
-                          ],
-                          staticClass: "form-control-sm w-100",
-                          attrs: {
-                            type: "text",
-                            name: "fabricante[]",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: equipo.CODEC_Fabricante },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                equipo,
-                                "CODEC_Fabricante",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(3, true),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "btn btn-outline-success btn-lg btn-sm",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "modal",
-                              "data-target": "#exampleModal"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.editEquipo(index)
-                              }
-                            }
-                          },
-                          [_vm._v("Lista")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model.number",
-                              value: equipo.CODEC_Cantidad,
-                              expression: "equipo.CODEC_Cantidad",
-                              modifiers: { number: true }
-                            }
-                          ],
-                          staticClass: "form-control-sm w-100",
-                          attrs: {
-                            type: "number",
-                            name: "cantidad[]",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: equipo.CODEC_Cantidad },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                equipo,
-                                "CODEC_Cantidad",
-                                _vm._n($event.target.value)
-                              )
-                            },
-                            blur: function($event) {
-                              return _vm.$forceUpdate()
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model.number",
-                              value: equipo.CODEC_PrecioUnitario,
-                              expression: "equipo.CODEC_PrecioUnitario",
-                              modifiers: { number: true }
-                            }
-                          ],
-                          staticClass: "form-control-sm w-100",
-                          attrs: {
-                            type: "number",
-                            name: "unitario[]",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: equipo.CODEC_PrecioUnitario },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                equipo,
-                                "CODEC_PrecioUnitario",
-                                _vm._n($event.target.value)
-                              )
-                            },
-                            blur: function($event) {
-                              return _vm.$forceUpdate()
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("input", {
-                          staticClass: "form-control-sm w-100",
-                          attrs: {
-                            type: "text",
-                            name: "subtotaldet[]",
-                            readonly: "readonly",
-                            autocomplete: "off"
-                          },
-                          domProps: {
-                            value:
-                              equipo.CODEC_Cantidad *
-                              equipo.CODEC_PrecioUnitario
-                          }
-                        })
-                      ])
-                    ]
-                  )
-                }),
-                0
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "modal fade",
-              attrs: {
-                id: "exampleModal",
-                tabindex: "-1",
-                role: "dialog",
-                "aria-labelledby": "exampleModalLabel",
-                "aria-hidden": "true"
-              }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "modal-dialog modal-lg",
-                  attrs: { role: "document" }
-                },
-                [
-                  _c("div", { staticClass: "modal-content" }, [
-                    _c("div", { staticClass: "modal-header" }, [
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-plus form-control-sm",
+              attrs: { id: "agregar" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 table-responsive" }, [
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.equipos, function(equipo, index) {
+                return _c(
+                  "tr",
+                  { key: equipo.index, staticClass: "text-center" },
+                  [
+                    _c("td", [
                       _c(
-                        "h5",
+                        "label",
                         {
-                          staticClass: "modal-title",
-                          attrs: { id: "myModalLabel" }
+                          staticStyle: {
+                            border: "1px solid red",
+                            color: "blue"
+                          }
                         },
                         [
-                          _vm._v(
-                            "Pruebas del Equipo :: " +
-                              _vm._s(_vm.equipo.CODEC_NombreEquipo)
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteEquipo(index)
+                                }
+                              }
+                            },
+                            [_vm._v("x")]
                           )
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: equipo.CODEP_Codigo,
+                            expression: "equipo.CODEP_Codigo"
+                          }
+                        ],
+                        attrs: { type: "hidden", name: "codigodet[]" },
+                        domProps: { value: equipo.CODEP_Codigo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEP_Codigo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "modal-body" }, [
-                      _c("div", { staticClass: "container" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _vm._v(
-                              "\n                                  Descripcion de la Prueba:\n                                  "
-                            ),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("textarea", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.prueba.Descripcion_Prueba,
-                                  expression: "prueba.Descripcion_Prueba"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              staticStyle: { resize: "none" },
-                              attrs: { rows: "3", cols: "5" },
-                              domProps: {
-                                value: _vm.prueba.Descripcion_Prueba
-                              },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.prueba,
-                                    "Descripcion_Prueba",
-                                    $event.target.value
-                                  )
-                                }
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: equipo.CODEC_NombreEquipo,
+                            expression: "equipo.CODEC_NombreEquipo"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "nombre[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: equipo.CODEC_NombreEquipo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEC_NombreEquipo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: equipo.CODEC_Descripcion,
+                            expression: "equipo.CODEC_Descripcion"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "descripcion[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: equipo.CODEC_Descripcion },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEC_Descripcion",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: equipo.CODEC_Fabricante,
+                            expression: "equipo.CODEC_Fabricante"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "fabricante[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: equipo.CODEC_Fabricante },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEC_Fabricante",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3, true),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-success btn-lg btn-sm",
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "modal",
+                            "data-target": "#exampleModal"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.editEquipo(index)
+                            }
+                          }
+                        },
+                        [_vm._v("Lista")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: equipo.CODEC_Cantidad,
+                            expression: "equipo.CODEC_Cantidad",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "cantidad[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: equipo.CODEC_Cantidad },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEC_Cantidad",
+                              _vm._n($event.target.value)
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: equipo.CODEC_PrecioUnitario,
+                            expression: "equipo.CODEC_PrecioUnitario",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "unitario[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: equipo.CODEC_PrecioUnitario },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEC_PrecioUnitario",
+                              _vm._n($event.target.value)
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "subtotaldet[]",
+                          readonly: "readonly",
+                          autocomplete: "off"
+                        },
+                        domProps: {
+                          value:
+                            equipo.CODEC_Cantidad * equipo.CODEC_PrecioUnitario
+                        }
+                      })
+                    ])
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-lg",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [
+                        _vm._v(
+                          "Pruebas del Equipo :: " +
+                            _vm._s(_vm.equipo.CODEC_NombreEquipo)
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(4)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "container" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._v(
+                            "\n                                  Descripcion de la Prueba:\n                                  "
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.prueba.Descripcion_Prueba,
+                                expression: "prueba.Descripcion_Prueba"
                               }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              { attrs: { for: "ejemplo_archivo_1" } },
-                              [_vm._v("Adjuntar Norma Tecnica")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              attrs: { type: "file", id: "ejemplo_archivo_1" }
-                            })
+                            ],
+                            staticClass: "form-control",
+                            staticStyle: { resize: "none" },
+                            attrs: { rows: "3", cols: "5" },
+                            domProps: { value: _vm.prueba.Descripcion_Prueba },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.prueba,
+                                  "Descripcion_Prueba",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "ejemplo_archivo_1" } }, [
+                            _vm._v("Adjuntar Norma Tecnica")
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-md-6" }, [
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-md-9" }, [
-                                _vm._v(
-                                  "\n                                    Norma Asociada:\n                                    "
-                                ),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.prueba.Norma_Asoc_Prueba,
-                                      expression: "prueba.Norma_Asoc_Prueba"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  domProps: {
-                                    value: _vm.prueba.Norma_Asoc_Prueba
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.prueba,
-                                        "Norma_Asoc_Prueba",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-md-3" }, [
-                                _vm._v(
-                                  "\n                                    Costo\n                                    "
-                                ),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.prueba.Costo,
-                                      expression: "prueba.Costo"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  domProps: { value: _vm.prueba.Costo },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.prueba,
-                                        "Costo",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row" }, [
+                          _c("input", {
+                            attrs: { type: "file", id: "ejemplo_archivo_1" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-9" }, [
                               _vm._v(
-                                "\n                                  Descripcion de la Norma:\n                                  "
+                                "\n                                    Norma Asociada:\n                                    "
                               ),
                               _c("br"),
                               _vm._v(" "),
-                              _c("textarea", {
+                              _c("input", {
                                 directives: [
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.prueba.Descripcion_Norma,
-                                    expression: "prueba.Descripcion_Norma"
+                                    value: _vm.prueba.Norma_Asoc_Prueba,
+                                    expression: "prueba.Norma_Asoc_Prueba"
                                   }
                                 ],
                                 staticClass: "form-control",
-                                staticStyle: { resize: "none" },
-                                attrs: { rows: "2", cols: "5" },
                                 domProps: {
-                                  value: _vm.prueba.Descripcion_Norma
+                                  value: _vm.prueba.Norma_Asoc_Prueba
                                 },
                                 on: {
                                   input: function($event) {
@@ -39683,235 +39614,305 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       _vm.prueba,
-                                      "Descripcion_Norma",
+                                      "Norma_Asoc_Prueba",
                                       $event.target.value
                                     )
                                   }
                                 }
-                              }),
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _vm._v(
+                                "\n                                    Costo\n                                    "
+                              ),
+                              _c("br"),
                               _vm._v(" "),
                               _c("input", {
-                                staticClass: "btn btn-default btn-sm",
-                                attrs: { type: "button", value: "Agregar" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addPrueba()
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.prueba.Costo,
+                                    expression: "prueba.Costo"
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "btn btn-default btn-sm",
-                                attrs: { type: "button", value: "Actualizar" },
+                                ],
+                                staticClass: "form-control",
+                                domProps: { value: _vm.prueba.Costo },
                                 on: {
-                                  click: function($event) {
-                                    return _vm.updatePrueba()
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.prueba,
+                                      "Costo",
+                                      $event.target.value
+                                    )
                                   }
                                 }
                               })
                             ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _vm._v(
+                              "\n                                  Descripcion de la Norma:\n                                  "
+                            ),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.prueba.Descripcion_Norma,
+                                  expression: "prueba.Descripcion_Norma"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              staticStyle: { resize: "none" },
+                              attrs: { rows: "2", cols: "5" },
+                              domProps: { value: _vm.prueba.Descripcion_Norma },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.prueba,
+                                    "Descripcion_Norma",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass: "btn btn-default btn-sm",
+                              attrs: { type: "button", value: "Agregar" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.addPrueba()
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass: "btn btn-default btn-sm",
+                              attrs: { type: "button", value: "Actualizar" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.updatePrueba()
+                                }
+                              }
+                            })
                           ])
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c(
-                          "table",
-                          { staticClass: "table table-bordered" },
-                          [
-                            _vm._m(5),
-                            _vm._v(" "),
-                            _vm._l(_vm.equipo.pruebas, function(
-                              prueba,
-                              indice
-                            ) {
-                              return _c("tr", { key: prueba.indice }, [
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v(_vm._s(indice + 1))
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-left" }, [
-                                  _vm._v(_vm._s(prueba.Descripcion_Prueba))
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-left" }, [
-                                  _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-right" }, [
-                                  _vm._v(_vm._s(prueba.Costo))
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-default btn-sm",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.editPrueba(indice)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Editar")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-default btn-sm",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deletePrueba(indice)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Eliminar")]
-                                  )
-                                ])
-                              ])
-                            })
-                          ],
-                          2
-                        )
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "modal-footer" }, [
+                    _c("div", { staticClass: "row" }, [
                       _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-default",
-                          attrs: { type: "button", "data-dismiss": "modal" },
-                          on: {
-                            click: function($event) {
-                              return _vm.updateEquipo()
-                            }
-                          }
-                        },
-                        [_vm._v("Aceptar")]
+                        "table",
+                        { staticClass: "table table-bordered" },
+                        [
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
+                            return _c("tr", { key: prueba.indice }, [
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(indice + 1))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-left" }, [
+                                _vm._v(_vm._s(prueba.Descripcion_Prueba))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-left" }, [
+                                _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _vm._v(_vm._s(prueba.Costo))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-default btn-sm",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editPrueba(indice)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Editar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-default btn-sm",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletePrueba(indice)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Eliminar")]
+                                )
+                              ])
+                            ])
+                          })
+                        ],
+                        2
                       )
                     ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row invoice-info" }, [
-          _c("div", { staticClass: "col-9" }, [_vm._v(" ")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "table" }, [
-                _c("tr", [
-                  _c("th", { staticStyle: { width: "50%" } }, [
-                    _vm._v("Subtotal S/.:")
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.setSubTotal,
-                          expression: "setSubTotal"
-                        }
-                      ],
-                      staticClass: "form-control-sm w-50",
-                      attrs: { type: "text", name: "subtotal" },
-                      domProps: { value: _vm.setSubTotal },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            return _vm.updateEquipo()
                           }
-                          _vm.setSubTotal = $event.target.value
                         }
-                      }
-                    })
+                      },
+                      [_vm._v("Aceptar")]
+                    )
                   ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row invoice-info" }, [
+        _c("div", { staticClass: "col-9" }, [_vm._v(" ")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table" }, [
+              _c("tr", [
+                _c("th", { staticStyle: { width: "50%" } }, [
+                  _vm._v("Subtotal S/.:")
                 ]),
                 _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("I.G.V. S/. (18%)")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.setIgv,
-                          expression: "setIgv"
-                        }
-                      ],
-                      staticClass: "form-control-sm w-50",
-                      attrs: { type: "text", name: "igv" },
-                      domProps: { value: _vm.setIgv },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.setIgv = $event.target.value
-                        }
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.setSubTotal,
+                        expression: "setSubTotal"
                       }
-                    })
-                  ])
-                ]),
+                    ],
+                    staticClass: "form-control-sm w-50",
+                    attrs: { type: "text", name: "subtotal" },
+                    domProps: { value: _vm.setSubTotal },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.setSubTotal = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("I.G.V. S/. (18%)")]),
                 _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Total S/.:")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.setTotal,
-                          expression: "setTotal"
-                        }
-                      ],
-                      staticClass: "form-control-sm w-50",
-                      attrs: { type: "text", name: "total" },
-                      domProps: { value: _vm.setTotal },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.setTotal = $event.target.value
-                        }
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.setIgv,
+                        expression: "setIgv"
                       }
-                    })
-                  ])
+                    ],
+                    staticClass: "form-control-sm w-50",
+                    attrs: { type: "text", name: "igv" },
+                    domProps: { value: _vm.setIgv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.setIgv = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Total S/.:")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.setTotal,
+                        expression: "setTotal"
+                      }
+                    ],
+                    staticClass: "form-control-sm w-50",
+                    attrs: { type: "text", name: "total" },
+                    domProps: { value: _vm.setTotal },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.setTotal = $event.target.value
+                      }
+                    }
+                  })
                 ])
               ])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row text-left" }, [
-          _c("div", { staticClass: "col text-left" }, [
-            _c(
-              "a",
-              { staticClass: "btn btn-info", on: { click: _vm.submit } },
-              [_vm._v("Agregar")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-danger", attrs: { href: "/cotizacion" } },
-              [_vm._v("Cancelar")]
-            )
-          ])
         ])
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row text-left" }, [
+        _c("div", { staticClass: "col text-left" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-info",
+              on: {
+                click: function($event) {
+                  return _vm.addCotizacion()
+                }
+              }
+            },
+            [_vm._v("Agregar")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-danger", attrs: { href: "/cotizacion" } },
+            [_vm._v("Cancelar")]
+          )
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
