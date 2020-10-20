@@ -1,7 +1,7 @@
 <template>
   <!--Form content-->
   <div class="invoice p-3 mb-3">
-      <form ref="form" method="POST" action="/cotizacion">
+      <form ref="form">
         <input name="_token" type="hidden" v-model="token">   
         <!-- Cabecera fila 1 -->
         <div class="row invoice-info">
@@ -22,7 +22,7 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                <input type="number" v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero">
+                <input v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero">
               </div>
           </div>
         </div>
@@ -81,9 +81,11 @@
                       <td><input type="text" class="form-control-sm w-100" name="descripcion[]" v-model="equipo.CODEC_Descripcion" autocomplete="off"></td>
                       <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="equipo.CODEC_Fabricante" autocomplete="off"></td>
                       <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
-                      <td><button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal" @click="editEquipo(index)">Lista</button></td>
-                      <td><input type="number" class="form-control-sm w-100" name="cantidad[]" v-model.number="equipo.CODEC_Cantidad" autocomplete="off"></td>
-                      <td><input type="number" class="form-control-sm w-100" name="unitario[]" v-model.number="equipo.CODEC_PrecioUnitario" autocomplete="off"></td>
+                      <td>
+                        <button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal" @click="editEquipo(index)">Lista</button>
+                      </td>
+                      <td><input type="text" class="form-control-sm w-100" name="cantidad[]" v-model.number="equipo.CODEC_Cantidad" autocomplete="off"></td>
+                      <td><input type="text" class="form-control-sm w-100" name="unitario[]" v-model.number="equipo.CODEC_PrecioUnitario" autocomplete="off"></td>
                       <td><input type="text" class="form-control-sm w-100" name="subtotaldet[]" :value="equipo.CODEC_Cantidad*equipo.CODEC_PrecioUnitario"  readonly="readonly" autocomplete="off"></td>
                     </tr>
                 </tbody>
@@ -191,7 +193,7 @@
         <!--Botones-->                        
         <div class="row text-left">
             <div class="col text-left">
-              <a class="btn btn-info" v-on:click="submit">Agregar</a>
+              <a class="btn btn-info" @click="addCotizacion()">Agregar</a>
               <a class="btn btn-danger" href="/cotizacion">Cancelar</a>  
             </div>
         </div>
@@ -243,6 +245,7 @@
           }
         },
         methods:{
+            /*Equipos*/ 
             addEquipo(){
               let fila = {
                 CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",pruebas:[]};
@@ -260,8 +263,10 @@
             deleteEquipo(index){
               this.equipos.splice(index, 1);
             },
+            /*Pruebas*/ 
             addPrueba(){
               this.equipo.pruebas.push(this.prueba);
+              console.log(this.prueba);
               this.prueba = [];
             },   
             editPrueba(indice){
@@ -274,7 +279,22 @@
             },
             deletePrueba(indice){
               this.equipo.pruebas.splice(indice, 1);
-            },     
+            },    
+            /*Cotizaciones */ 
+            addCotizacion(){
+              let url = '/cotizacion/store';
+              axios.post(url,{
+                contacto:this.cotizacion.id_contacto,
+                fecha:this.cotizacion.COTIC_Fecha,
+                numero:this.cotizacion.COTIC_Numero,
+                usuario:this.cotizacion.USUA_Codigo,
+                equipos:this.equipos
+              }).then(function(response){
+                  //alert(response.data);
+              }).catch(function(error){
+                console.log(error);
+              });
+            },
             listarContactos(){
                 var url = '/contacto/list';
                 axios.get(url).then(response=>{
@@ -287,10 +307,10 @@
                     this.usuarios = response.data;
                     console.log(this.cotizacion);
                 });
-            },
-            submit(){
+            }
+            /*submit(){
               this.$refs.form.submit();
-            }                        
+            } */                       
         }
     }
 </script>
