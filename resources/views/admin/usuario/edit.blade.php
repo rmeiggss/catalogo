@@ -19,7 +19,7 @@
         {!!Form::model($usuario, ['route'=>['usuario.update', $usuario->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
             <div class="form-group">
                 {!!Form::label('id','Codigo')!!}
-                {!!Form::text('id',$usuario->id,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'id'])!!}
+                {!!Form::text('id',$usuario->id,['class'=>'form-control','placeholder'=>'Ingrese el nombre','id'=>'id','readonly'=>'readonly'])!!}
             </div>            
             <div class="form-group">
                 {!!Form::label('nombres','Nombres')!!}
@@ -31,13 +31,13 @@
             </div>
             <div class="form-group">
                 {!!Form::label('rol','Rol')!!}
-                {!!Form::text('rol',$usuario->ROL_Codigo,['class'=>'form-control','placeholder'=>'Ingrese el costo','id'=>'rol'])!!}
+                {!!Form::select('rol', $rol,$usuario->ROL_Codigo, ['class' => 'form-control', 'placeholder'=>'Seleccionar Rol','id'=>'rol']) !!}                
             </div>
             <div class="form-group">
                 {!!Form::label('password','Contraseña')!!}
                 {!!Form::text('password',null,['class'=>'form-control','placeholder'=>'Ingrese el password','id'=>'password'])!!}
             </div>                
-            {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
+            {!!Form::submit('Editar',['class'=>'btn btn-info'])!!}
             <!-- Agregar boton de cancelar -->
             <a class="btn btn-danger" href="{{ route('usuario.index') }}">Cancelar</a>
         {!!Form::close()!!}

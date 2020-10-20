@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Curso N° {{$producto->id}}</title>
+    <title>Curso N° {{$producto->id_curso}}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
 .clearfix:after {
@@ -179,7 +179,7 @@ footer {
         </thead>
         <tbody>
             <tr>
-              <td scope="row">{{$producto->id}}</td>
+              <td scope="row">{{$producto->id_curso}}</td>
               <td class="desc">{{$producto->CURSOC_Descripcion}}</td>
               <td class="service">{{$producto->CURSOC_Nombre}}</td>
               <td class="unit">{{$producto->CURSOC_Costo}}</td>
@@ -211,7 +211,7 @@ footer {
     </thead>
     <tbody>
         <tr>
-            <td scope="row">{{$producto->id}}</td>
+            <td scope="row">{{$producto->id_curso}}</td>
             <td class="desc">{{$producto->CURSOC_Descripcion}}</td>
             <td class="service">{{$producto->CURSOC_Nombre}}</td>
             <td class="unit">{{$producto->CURSOC_Costo}}</td>

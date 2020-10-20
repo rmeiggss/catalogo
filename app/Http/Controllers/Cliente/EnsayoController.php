@@ -1,116 +1,67 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
-use App\Http\Controllers\Controller;
-use App\Solicitante;
-use App\Contacto;
-use App\Cotizacion;
-use App\Equipo;
+namespace App\Http\Controllers;
+
+use App\Ensayo;
 use Illuminate\Http\Request;
-use Redirect;
 
 class EnsayoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $ensayo = Ensayo::all();
+        return $ensayo;
+        //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //return Redirect::to("/cot_ensayos");
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        Cotizacion::create([
-            'SOLIP_Codigo'   => request('solicitante'),
-            'COTIC_Numero'   => request('numero'),
-            'COTIC_Fecha'    => request('fecha'),
-            'USUA_Codigo'    => request('usuario'),
-            'COTIC_SubTotal' => request('subtotal'),
-            'COTIC_Igv'      => request('igv'),
-            'COTIC_Total'    => request('total'),
-            'COTIC_Correo1'  => request('correo1'),
-            'COTIC_Correo2'  => request('correo2'),
-            'COTIC_Correo3'  => request('correo3'),
-            'COTIC_Correo4'  => request('correo4'),
-        ]);
+        $ensayo = new Ensayo();
+        $ensayo->id = $request->id;
+        $ensayo->nombre_eq = $request->nombre_eq;
+        $ensayo->descripcion_eq = $request->descripcion_eq;
+        $ensayo->cantidad_eq = $request->cantidad_eq;
+        $ensayo->fabricante_eq = $request->fabricante_eq;
+        $ensayo->descrip_tec_eq = $request->descrip_tec_eq;
+        $ensayo->url_tec_eq = $request->url_tec_eq;
+        $ensayo->arch_descrip_eq = $request->arch_descrip_eq;
+        $ensayo->estado_tec_eq = $request->estado_tec_eq;
 
-        Solicitante::create([
-            'SOLIC_Nombre' => request('nombre_solic'),
-            'SOLIC_Ruc' => request('ruc_solic'),
-            'SOLIC_Direccion' => request('direc_solic'),
-            'SOLIC_Telefono' => request('celular_solic'),
-        ]);
-
-        Contacto::create([
-            'nombre_contacto' => request('nombre_contacto'),
-            'email_contacto' => request('email_contacto'),
-            'celular_contacto' => request('celular_contacto'),
-        ]);
-
-        return Redirect::to("/cot_ensayos");
+        $ensayo->save();
+        //Esta función guardará las tareas que enviaremos mediante vuejs
+    }
+    public function show(Request $request)
+    {
+        $ensayo = Ensayo::findOrFail($request->id);
+        return $ensayo;
+        //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update(Request $request)
     {
-        //
+        $ensayo = Ensayo::findOrFail($request->id);
+
+        $ensayo->id = $request->id;
+        $ensayo->nombre_eq = $request->nombre_eq;
+        $ensayo->descripcion_eq = $request->descripcion_eq;
+        $ensayo->cantidad_eq = $request->cantidad_eq;
+        $ensayo->fabricante_eq = $request->fabricante_eq;
+        $ensayo->descrip_tec_eq = $request->descrip_tec_eq;
+        $ensayo->url_tec_eq = $request->url_tec_eq;
+        $ensayo->arch_descrip_eq = $request->arch_descrip_eq;
+        $ensayo->estado_tec_eq = $request->estado_tec_eq;
+
+        $ensayo->save();
+
+        return $ensayo;
+        //Esta función actualizará la tarea que hayamos seleccionado
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $ensayo = Ensayo::destroy($request->id);
+        return $ensayo;
+        //Esta función obtendra el id de la tarea que hayamos seleccionado y la borrará de nuestra BD
     }
 }

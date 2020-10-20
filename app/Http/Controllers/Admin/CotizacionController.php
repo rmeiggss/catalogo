@@ -2,9 +2,11 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Cotizacion;
+use App\Contacto;
 use App\CotizacionDetalle;
 use App\User;
 use App\Solicitante;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Redirect;
@@ -35,7 +37,14 @@ class CotizacionController extends Controller
     }
 
     public function list(){
-        $cotizaciones = Cotizacion::all();
+        $cotizaciones = 
+        Cotizacion::join('contacto','contacto.id_contacto','=','cotizacion.id_contacto')
+                    ->join('solicitante','solicitante.SOLIP_Codigo','=','contacto.SOLIP_Codigo')
+                    ->select()
+                    ->get();    
+        
+
+
         return $cotizaciones;
     }
 
@@ -50,10 +59,11 @@ class CotizacionController extends Controller
     public function store(Request $request)
     {
         //Grabamos la cabecera
+        $fecha = Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d');
         $cot = Cotizacion::create([
-            'SOLIP_Codigo'   => $request->solicitante,
+            'id_contacto'    => $request->contacto,
             'COTIC_Numero'   => $request->numero,
-            'COTIC_Fecha'    => $request->fecha,
+            'COTIC_Fecha'    => $fecha,
             'USUA_Codigo'    => $request->usuario,
             'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
@@ -106,7 +116,7 @@ class CotizacionController extends Controller
         //Actualiza cabecera
         $cotizacion = Cotizacion::findOrFail($id);
         $cotizacion->COTIC_Fecha    = $request->fecha;
-        $cotizacion->SOLIP_Codigo   = $request->solicitante;
+        $cotizacion->id_contacto    = $request->contacto;
         $cotizacion->USUA_Codigo    = $request->usuario;
         $cotizacion->COTIC_SubTotal = $request->subtotal;
         $cotizacion->COTIC_Igv      = $request->igv;
@@ -146,6 +156,8 @@ class CotizacionController extends Controller
 
     public function destroy($id)
     {
+        CotizacionDetalle::where('COTIP_Codigo',$id)->firstorfail()->delete();
         Cotizacion::destroy($id);
+        return response()->json(['message'=>'Cotizacionntacto borrado']);        
     }
 }

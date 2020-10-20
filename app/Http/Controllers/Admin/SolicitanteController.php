@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Solicitante;
+use App\TipoSolicitante;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -9,7 +10,10 @@ class SolicitanteController extends Controller
 {	
     public function index()
     {
-        $solicitantes = Solicitante::latest()->paginate(8);
+        //$solicitantes = Solicitante::latest()->paginate(8);
+
+        $solicitantes = Solicitante::join('tiposolicitante','tiposolicitante.TIPSOLIP_Codigo','=','solicitante.TIPSOLIP_Codigo')->select()->get();
+
         return view('admin.solicitante.index',compact('solicitantes'));
     }
 
@@ -18,7 +22,8 @@ class SolicitanteController extends Controller
     }
     
     public function create(){
-        return view('admin.solicitante.create');
+        $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');
+        return view('admin.solicitante.create',compact('tiposolicitante'));
     }
     
     public function store(Request $request){
@@ -49,8 +54,9 @@ class SolicitanteController extends Controller
     }
     
     public function edit($id){
+        $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');        
         $solicitante = Solicitante::findOrFail($id);
-        return view("admin.solicitante.edit",['solicitante' => $solicitante]);
+        return view("admin.solicitante.edit",['solicitante' => $solicitante,'tiposolicitante'=>$tiposolicitante]);
     }
     
     public function update(Request $request,$id){

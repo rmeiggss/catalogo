@@ -10,7 +10,7 @@
         <h1>Listado de Contactos</h1>
       </div>
       <div class="col-sm-6 text-right">
-        <a class="btn btn-info" href="/contacto/create">Agregar Contacto</a>
+        <a class="btn btn-info" href="{{ route('contacto.create') }}">Agregar Contacto</a>
       </div>        
     </div>
   </div>
@@ -19,13 +19,7 @@
     
 <!-- Main Content-->
 <section class="content">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-
-      </div>
-    </div>
-  </div>
+    <indexcontacto-component></indexcontacto-component>
 </section>
 <!-- /Main Content-->
 

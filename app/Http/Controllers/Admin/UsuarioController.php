@@ -10,6 +10,7 @@ use Redirect;
 class UsuarioController extends Controller
 {
     public function index(){
+<<<<<<< HEAD
         $usuarios = User::all();
             $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get();
             return view('admin.usuario.index',compact('usuarios'));
@@ -34,6 +35,11 @@ class UsuarioController extends Controller
         ->addcolumn('btn','admin.usuario.dataTable.btn')
         ->rawColumns(['btn'])
         ->toJson();
+=======
+        //$usuarios = User::all();
+        $usuarios = User::join('rol','rol.ROL_Codigo','=','users.ROL_Codigo')->select()->get(); 
+        return view('admin.usuario.index',compact('usuarios'));
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
     }
     
     public function list(){
@@ -42,7 +48,7 @@ class UsuarioController extends Controller
     }
     
     public function create(){
-        $rol = Role::pluck('ROL_Descripcion', 'ROL_Descripcion');
+        $rol = Role::pluck('ROL_Descripcion', 'ROL_Codigo');
         return view("admin.usuario.create", compact('rol'));
     }
     
@@ -71,8 +77,9 @@ class UsuarioController extends Controller
     }
     
     public function edit($id){
+        $rol = Role::pluck('ROL_Descripcion', 'ROL_Codigo');
         $usuario = User::findOrFail($id);
-        return view("admin.usuario.edit", ['usuario' => $usuario]);
+        return view("admin.usuario.edit", ['usuario' => $usuario,'rol'=>$rol]);
     }
     
     public function update(Request $request, $id)

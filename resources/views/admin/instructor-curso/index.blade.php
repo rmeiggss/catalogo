@@ -7,11 +7,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Horarios de Capacitacion del Instructor</h1>
+        <h1>Cursos que enseñaran los Instructores</h1>
       </div>
       <div class="col-sm-6 text-right">
         <!-- actualizado por marck, usando ELOQUENT -->
-        <a class="btn btn-info" href="{{ route('horario-instructor.create') }}">Agregar Horario</a>
+        <a class="btn btn-info" href="{{ route('instructor-curso.create') }}">Agregar Curso a Instructor</a>
       </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -28,36 +28,31 @@
         <div class="card-body">
           <table id="example2" class="table table-bordered table-hover">
             <thead>
-            <tr class="text-center">
-              <th scope="col">Código</th>
-              <th scope="col">Instructor</th>
-              <th scope="col">Fecha Inicial</th>
-              <th scope="col">Hora Inicial</th>
-              <th scope="col">Hora Final</th>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre del Curso</th>
+              <th scope="col">Nombre del Instructor</th>
               <th scope="col" colspan="2" class="text-center">Acciones</th>
             </tr>
             </thead>
             <tbody>
-    <!-- Empieza listado de instructores -->
-              @forelse($horarioinstructors as $item=>$horarioinstructor)
-                <tr class="text-center">
+              @forelse($cursoinstructor as $item=>$cursoinstructor)
+                <tr>
                   <!--actualizado por marck -->
                   <th scope="row">{{$item+1}}</th>
-                  <td class="text-left">{{$horarioinstructor->nombre_instructor}}</td>
-                  <td>{{$horarioinstructor->fecha_inicial}}</td>
-                  <td>{{$horarioinstructor->hora_inicial}}</td>
-                  <td>{{$horarioinstructor->hora_final}}</td>
-                  <td><button class="btn btn-info btn-sm">
-                    <a class="text-light" href="{{ route('horario-instructor.edit', $horarioinstructor->id) }}">
+                  <td>{{$cursoinstructor->nombre_curso}}</td>
+                  <td>{{$cursoinstructor->nombre_instructor}}</td>
+                  <td><button class="btn btn-info">
+                    <a class="text-light" href="{{ route('instructor-curso.edit', $cursoinstructor->id_curso_instructor) }}">
                       Editar
                     </a></button></td>
                   <td>
-                    <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-                    {!!Form::open(['route'=>['horario-instructor.destroy',$horarioinstructor->id],'method'=>'DELETE'])!!}
+                    <!--- fijado por marck -->
+                    {!!Form::open(['route'=>['instructor-curso.destroy',$cursoinstructor->id_curso_instructor],'method'=>'DELETE'])!!}
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         {!!Form::submit('Eliminar',
-                              ['class'=>'btn btn-danger btn-sm'])
+                              ['class'=>'btn btn-danger'])
                         !!}
                     {!!Form::close()!!}
                     </td>
@@ -69,7 +64,7 @@
             </tbody>
           </table>
 
-          {{ $horarioinstructors->links() }}
+          {{ $cursoinstructor->links() }}
         </div>
         <!-- /.card-body -->
       </div>

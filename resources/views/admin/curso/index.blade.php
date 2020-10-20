@@ -30,14 +30,15 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="tabla_datos" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th scope="col">Codigo</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Descripcion</th>
                   <th scope="col">Costo</th>
-                  <th scope="col" colspan="3" class="text-center">Acciones</th>
+                  <th scope="col" class="text-center">Ver</th>
+                  <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,17 +46,19 @@
                   <tr>
                     <!--actualizado por marck -->
                     <th scope="row">{{$item+1}}</th>
-                    <td>{{$cur->CURSOC_Nombre}}</td>
-                    <td>{{$cur->CURSOC_Descripcion}}</td>
-                    <td>{{$cur->CURSOC_Costo}}</td>
-                    <td><button class="btn btn-info">
-                      <a class="text-light" href="{{ route('curso.edit', $cur->id_curso) }}">
-                        Editar
-                      </a></button>
-                    </td>
-                    <td>
+                    <td class="text-left">{{$cur->CURSOC_Nombre}}</td>
+                    <td class="text-left">{{$cur->CURSOC_Descripcion}}</td>
+                    <td class="text-right">{{$cur->CURSOC_Costo}}</td>
+                    <td class="text-center">
                       <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
                       <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
+                    </td>
+                    <td>
+                      <button class="btn btn-info">
+                        <a class="text-light" href="{{ route('curso.edit', $cur->id_curso) }}">
+                          Editar
+                        </a>
+                      </button>
                     </td>
                     <td>
                       <!-- $cur-> (debe señalar al "ID") - fijado por marck -->
@@ -66,7 +69,7 @@
                                 ['class'=>'btn btn-danger'])
                           !!}
                       {!!Form::close()!!}
-                     </td>
+                    </td>
                   </tr>
                   @empty
                     <p><i>No se han encontrado elementos en la base de datos ...</i></p>
@@ -79,14 +82,11 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
     </section>
-
-
 </div>
 
 @endsection

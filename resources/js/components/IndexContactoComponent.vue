@@ -2,22 +2,28 @@
     <div class="card-body">
       <table id="example2" class="table table-bordered table-hover">
         <thead>
-        <tr>
+        <tr class="text-center">
           <th scope="col">Codigo</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Email</th>
-          <th scope="col">Rol</th>
+          <th scope="col">Nombres</th>          
+          <th scope="col">Solicitante</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Celular</th>
           <th scope="col" colspan="2" class="text-center">Acciones</th>
         </tr>
         </thead>
         <tbody>
-          <tr v-for="(user,indice) of usuarios">
-            <th scope="row">{{indice+1}}</th>
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.ROL_Codigo}}</td>
-            <td><button class="btn btn-info" @click="btnEditar(user.id)">Editar</button></td>
-            <td><button class="btn btn-danger" @click="btnBorrar(user.id)">Eliminar</button></td>
+          <tr v-for="(contacto,indice) of contactos" :key="contacto.id_contacto" class="text-center">
+            <th scope="row">{{contacto.id_contacto}}</th>
+            <td>{{contacto.nombre_contacto}}</td>            
+            <td>{{contacto.SOLIC_Nombre}}</td>
+            <td>{{contacto.correo_contacto}}</td>
+            <td>{{contacto.celular_contacto}}</td>
+            <td>
+                <button class="btn btn-info" @click="btnEditar(contacto.id_contacto)">Editar</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" v-on:submit.prevent="btnBorrar(indice)" @click="btnBorrar(contacto, indice) in contactos">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -28,7 +34,7 @@
     export default {
         data(){
             return {
-                usuarios: [],
+                contactos: [],
                 saveData:null
             }
         },
@@ -37,23 +43,23 @@
         },
         methods: {
             listar(){
-                var url = '/usuario/list';
+                var url = '/contacto/list';
                 axios.get(url).then(response=>{
-                    this.usuarios = response.data;
-                    console.log(this.usuarios);
+                    this.contactos = response.data;
                 });
             },
-            btnBorrar(id){
-                var url = '/usuario/'+id;
+            btnBorrar(contacto,indice){
+                var url = '/contacto/'+contacto.id_contacto;
                 axios.delete(url).then(response=>{
+                    //this.result.splice(indice, 1)
                     this.listar();
                 });
             },
             btnEditar(id){
-                location.href = '/usuario/'+id+'/edit';
+                location.href = '/contacto/'+id+'/edit';
             },
             btnNuevo(){
-                location.href = '/usuario/create';
+                location.href = '/contacto/create';
             }
         },
         mounted() {

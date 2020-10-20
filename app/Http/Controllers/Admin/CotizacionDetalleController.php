@@ -22,5 +22,14 @@ class CotizacionDetalleController extends Controller
 
     }
 
+    public function destroy($id)
+    {
+        CotizacionDetalle::destroy($id);
+        return response()->json(['message'=>'Cotizaciondetalle borrado']);        
+    }
 
+    public function destroyById($id){
+        CotizacionDetalle::where('COTIP_Codigo',$id)->firstorfail()->delete();
+        return response()->json(['message'=>'Cotizaciondetalle borrado']); 
+    }
 }

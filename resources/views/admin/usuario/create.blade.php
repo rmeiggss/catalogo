@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 {!!Form::label('rol','Rol')!!}
-                {!!Form::select('rol', $rol, 'null', ['class' => 'form-control', 'placeholder'=>'-Seleccionar Rol-','id'=>'rol']) !!}
+                {!!Form::select('rol', $rol, 'null', ['class' => 'form-control', 'placeholder'=>'Seleccionar Rol','id'=>'rol']) !!}
                 
                 @error('rol')
                 <small class="text-danger">Escribir rol</small>    
@@ -45,7 +45,7 @@
                 <small class="text-danger">Falta escribir el password</small>    
                 @enderror
             </div>            
-                {!!Form::submit('Crear',['class'=>'btn btn-success'])!!}
+                {!!Form::submit('Agregar',['class'=>'btn btn-info'])!!}
             <!-- Agregar boton de cancelar -->
             <a class="btn btn-danger" href="{{ route('usuario.index') }}">Cancelar</a>
         {!!Form::close()!!}

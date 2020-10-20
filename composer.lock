@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "8950d4291e06ae3b24edbdfa035dcb0f",
+=======
+    "content-hash": "48e8e4b560b22a7d5ce69b4a8f40562c",
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -164,6 +168,7 @@
                 "brick",
                 "math"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://tidelift.com/funding/github/packagist/brick/math",
@@ -171,6 +176,9 @@
                 }
             ],
             "time": "2020-08-18T23:57:15+00:00"
+=======
+            "time": "2020-04-15T15:59:35+00:00"
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1465,6 +1473,7 @@
             "time": "2020-01-24T23:17:29+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "league/mime-type-detection",
             "version": "1.4.0",
             "source": {
@@ -1476,6 +1485,19 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/fda190b62b962d96a069fcc414d781db66d65b69",
                 "reference": "fda190b62b962d96a069fcc414d781db66d65b69",
+=======
+            "name": "nesbot/carbon",
+            "version": "2.40.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/briannesbitt/Carbon.git",
+                "reference": "6c7646154181013ecd55e80c201b9fd873c6ee5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/6c7646154181013ecd55e80c201b9fd873c6ee5d",
+                "reference": "6c7646154181013ecd55e80c201b9fd873c6ee5d",
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
                 "shasum": ""
             },
             "require": {
@@ -1483,8 +1505,19 @@
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
+<<<<<<< HEAD
                 "phpstan/phpstan": "^0.12.36",
                 "phpunit/phpunit": "^8.5.8"
+=======
+                "doctrine/orm": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.14 || ^3.0",
+                "kylekatarnls/multi-tester": "^2.0",
+                "phpmd/phpmd": "^2.9",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.35",
+                "phpunit/phpunit": "^7.5 || ^8.0",
+                "squizlabs/php_codesniffer": "^3.4"
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
             },
             "type": "library",
             "autoload": {
@@ -1513,7 +1546,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-08-09T10:34:01+00:00"
+=======
+            "time": "2020-09-11T19:00:58+00:00"
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
         },
         {
             "name": "maatwebsite/excel",
@@ -6491,20 +6528,6 @@
                 "php",
                 "symfony"
             ],
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
             "time": "2020-04-04T19:56:08+00:00"
         },
         {
@@ -7231,6 +7254,7 @@
                 "highlight.php",
                 "syntax"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://github.com/allejo",
@@ -7238,6 +7262,9 @@
                 }
             ],
             "time": "2020-08-27T03:24:44+00:00"
+=======
+            "time": "2020-03-02T05:59:21+00:00"
+>>>>>>> 000ffb6dc49abf3548968d46e7d37decd4247d03
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
