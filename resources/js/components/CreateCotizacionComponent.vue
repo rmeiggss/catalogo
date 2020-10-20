@@ -283,6 +283,7 @@
             /*Cotizaciones */ 
             addCotizacion(){
               let url = '/cotizacion/store';
+              console.log(this.cotizacion.COTIC_Fecha);
               axios.post(url,{
                 contacto:this.cotizacion.id_contacto,
                 fecha:this.cotizacion.COTIC_Fecha,

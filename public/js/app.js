@@ -2273,6 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
     /*Cotizaciones */
     addCotizacion: function addCotizacion() {
       var url = '/cotizacion/store';
+      console.log(cotizacion.COTIC_Fecha);
       axios.post(url, {
         contacto: this.cotizacion.id_contacto,
         fecha: this.cotizacion.COTIC_Fecha,
@@ -55221,8 +55222,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
