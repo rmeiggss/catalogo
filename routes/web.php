@@ -10,7 +10,6 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::get('/usuario/list','Admin\UsuarioController@list');
-Route::get('/cotizacion/list','Admin\CotizacionController@list');
 Route::get('/solicitante/list','Admin\SolicitanteController@list');
 Route::get('/contacto/list','Admin\ContactoController@list');
 Route::get('/contacto/{contacto}/get','Admin\ContactoController@get');
@@ -23,13 +22,15 @@ Route::get('cursos-list-pdf', 'Admin\CursoController@exportPdf')->name('cursos.p
 Route::get('cotizaciones-list-pdf', 'Admin\SolicitanteController@exportPdf')->name('cotizaciones.pdf');
 //Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::resource('usuario','Admin\UsuarioController');
-//Route::resource('cotizacion', 'Admin\CotizacionController');
+
 Route::post('/cotizacion/store', 'Admin\CotizacionController@store');
 Route::get('/cotizacion/list', 'Admin\CotizacionController@list');
 Route::get('/cotizacion/create', 'Admin\CotizacionController@create')->name('createCotizacion');
 Route::get('/cotizacion', 'Admin\CotizacionController@index');
+Route::get("/cotizacion/delete/{id}","Admin\CotizacionController@delete")->name("delCotizacion");
 Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
 Route::get('/cotizacion/{cotizacion}/edit','Admin\CotizacionController@edit');
+
 Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
 Route::resource('categoria','Admin\CategoriaController');
 Route::resource('solicitante','Admin\SolicitanteController');

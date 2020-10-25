@@ -1978,6 +1978,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2254,8 +2256,15 @@ __webpack_require__.r(__webpack_exports__);
 
     /*Pruebas*/
     addPrueba: function addPrueba() {
-      this.equipo.pruebas.push(this.prueba);
-      console.log(this.prueba);
+      var _fila;
+
+      var fila = (_fila = {
+        Descripcion_Prueba: this.prueba.Descripcion_Prueba,
+        Descripcion_Norma: this.prueba.Descripcion_Norma,
+        Norma_Asoc_Prueba: this.prueba.Norma_Asoc_Prueba
+      }, _defineProperty(_fila, "Descripcion_Prueba", this.prueba.Descripcion_Prueba), _defineProperty(_fila, "Costo", this.prueba.Costo), _fila);
+      this.equipo.pruebas.push(fila); //console.log(JSON.stringify(this.equipo));
+
       this.prueba = [];
     },
     editPrueba: function editPrueba(indice) {
@@ -2273,17 +2282,38 @@ __webpack_require__.r(__webpack_exports__);
     /*Cotizaciones */
     addCotizacion: function addCotizacion() {
       var url = '/cotizacion/store';
-      console.log(cotizacion.COTIC_Fecha);
-      axios.post(url, {
-        contacto: this.cotizacion.id_contacto,
-        fecha: this.cotizacion.COTIC_Fecha,
-        numero: this.cotizacion.COTIC_Numero,
-        usuario: this.cotizacion.USUA_Codigo,
-        equipos: this.equipos
-      }).then(function (response) {//alert(response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
+
+      if (typeof this.cotizacion.COTIC_Fecha == 'undefined') {
+        alert("Debe ingresar la fecha");
+      } else if (typeof this.cotizacion.COTIC_Numero == 'undefined') {
+        this.$refs.numero.focus();
+        alert("Debe ingresar el numero");
+      } else if (typeof this.cotizacion.id_contacto == 'undefined') {
+        this.$refs.contacto.focus();
+        alert("Debe seleccionar un contacto");
+      } else if (typeof this.cotizacion.USUA_Codigo == 'undefined') {
+        this.$refs.usuario.focus();
+        alert("Debe seleccionar un usuario");
+      } else if (this.equipos.length == 0) {
+        alert("Debe ingresar al menos 1 equipo");
+      } else {
+        console.log(this.equipos);
+        axios.post(url, {
+          contacto: this.cotizacion.id_contacto,
+          fecha: this.cotizacion.COTIC_Fecha,
+          numero: this.cotizacion.COTIC_Numero,
+          usuario: this.cotizacion.USUA_Codigo,
+          equipos: this.equipos,
+          subtotal: this.setSubTotal,
+          igv: this.setIgv,
+          total: this.setTotal
+        }).then(function (response) {
+          alert(response.data);
+          location.href = '/cotizacion';
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     listarContactos: function listarContactos() {
       var _this = this;
@@ -3192,15 +3222,16 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/cotizacion/list';
       axios.get(url).then(function (response) {
-        _this.cotizaciones = response.data;
-        console.log(_this.cotizaciones);
+        _this.cotizaciones = response.data; //console.log(this.cotizaciones);
       });
     },
     btnBorrar: function btnBorrar(cotizacion, indice) {
       var _this2 = this;
 
-      var url = '/cotizacion/' + cotizacion.COTIP_Codigo;
+      var url = '/cotizacion/delete/' + cotizacion.COTIP_Codigo;
       axios["delete"](url).then(function (response) {
+        alert("Se elimino un registro");
+
         _this2.listar();
       });
     },
@@ -39046,6 +39077,7 @@ var render = function() {
                     expression: "cotizacion.id_contacto"
                   }
                 ],
+                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
                 attrs: { name: "contacto" },
                 on: {
@@ -39125,11 +39157,13 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
+                  rawName: "v-model.number",
                   value: _vm.cotizacion.COTIC_Numero,
-                  expression: "cotizacion.COTIC_Numero"
+                  expression: "cotizacion.COTIC_Numero",
+                  modifiers: { number: true }
                 }
               ],
+              ref: "numero",
               staticClass: "col-sm-3 form-control-sm",
               attrs: { maxlength: "11", autocomplete: "off", name: "numero" },
               domProps: { value: _vm.cotizacion.COTIC_Numero },
@@ -39138,7 +39172,14 @@ var render = function() {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.cotizacion, "COTIC_Numero", $event.target.value)
+                  _vm.$set(
+                    _vm.cotizacion,
+                    "COTIC_Numero",
+                    _vm._n($event.target.value)
+                  )
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
                 }
               }
             })
@@ -39168,6 +39209,7 @@ var render = function() {
                     expression: "cotizacion.USUA_Codigo"
                   }
                 ],
+                ref: "usuario",
                 staticClass: "col-sm-6 form-control-sm",
                 attrs: { name: "usuario" },
                 on: {

@@ -6,6 +6,7 @@ use App\Contacto;
 use App\CotizacionDetalle;
 use App\User;
 use App\Solicitante;
+use App\Prueba;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -60,15 +61,15 @@ class CotizacionController extends Controller
         $objCotizacion = [
             'id_contacto'    => $request->contacto,
             'COTIC_Numero'   => $request->numero,
-            'COTIC_Fecha'    => "2020-10-01",
+            'COTIC_Fecha'    => $request->fecha,
             'USUA_Codigo'    => $request->usuario,
-           /* 'COTIC_SubTotal' => $request->subtotal,
+            'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
             'COTIC_Total'    => $request->total,
-            'COTIC_Correo1'  => $request->correo1,
-            'COTIC_Correo2'  => $request->correo2,
-            'COTIC_Correo3'  => $request->correo3,
-            'COTIC_Correo4'  => $request->correo4,*/
+            'COTIC_Correo1'  => isset($request->correo1)?$request->correo1:"",
+            'COTIC_Correo2'  => isset($request->correo2)?$request->correo2:"",
+            'COTIC_Correo3'  => isset($request->correo3)?$request->correo3:"",
+            'COTIC_Correo4'  => isset($request->correo4)?$request->correo4:"",
             'TIPOCOP_Codigo' => 1
         ];
         $cot = Cotizacion::create($objCotizacion);
@@ -87,16 +88,21 @@ class CotizacionController extends Controller
                     ]);
                     $pruebas = $value["pruebas"];
                     //Grabamos las pruebas
-                    print_r($pruebas);
                     if(count($pruebas)>0){
                         foreach($pruebas as $value2){
-                            print_r($value2);
+                            $pruebas = Prueba::create([
+                                "CODEP_Codigo"       => $equipo->CODEP_Codigo,
+                                "Descripcion_Prueba" => $value2["Descripcion_Prueba"],
+                                "Descripcion_Norma"  => $value2["Descripcion_Norma"],
+                                "Norma_Asoc_Prueba"  => $value2["Norma_Asoc_Prueba"],
+                                "Costo"              => $value2["Costo"]
+                            ]);
                         }
                     }
                 }
             }
         }
-        //return Redirect::to("/cotizacion");
+        return response()->json(['Se guardo el registro']);   
     }
 
     public function show($id)
@@ -159,9 +165,9 @@ class CotizacionController extends Controller
         return Redirect::to("/cotizacion");
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        CotizacionDetalle::where('COTIP_Codigo',$id)->firstorfail()->delete();
+        //CotizacionDetalle::where('COTIP_Codigo',$id)->firstorfail()->delete();
         Cotizacion::destroy($id);
         return response()->json(['message'=>'Cotizacionntacto borrado']);        
     }

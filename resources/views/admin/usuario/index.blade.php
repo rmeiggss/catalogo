@@ -36,11 +36,9 @@
               <th scope="col">Eliminar</th> -->
               <th scope="col">Fecha de creacion</th>
               <th scope="col" class ="no-exportar">Acciones</th>
-
-<!--               <th scope="col" colspan="2" class="text-center">Acciones</th>
- -->            </tr>
+           </tr>
             </thead>
-            <!-- <tbody>
+            <tbody>
               @forelse($usuarios as $item=>$user)
                 <tr class="text-center">
                   <th scope="row">{{$item+1}}</th>
@@ -61,7 +59,7 @@
               @empty
                 <p><i>No se han encontrado elementos en la base de datos ...</i></p>
               @endforelse
-            </tbody> -->
+            </tbody>          
           </table>
         </div>
 
@@ -74,7 +72,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<!--script>
   $(document).ready(function() {
    var table= $('#example2').DataTable({
     dom: 'Bfrtip',
@@ -174,5 +172,5 @@
         "colvis": "Visibilidad"
     }
 }
-</script>
+</script-->
 @endsection

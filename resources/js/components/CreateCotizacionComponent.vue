@@ -8,7 +8,7 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto">
+                <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto">
                   <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                 </select>
               </div>
@@ -22,7 +22,7 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                <input v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero">
+                <input v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero" ref="numero">
               </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Usuario</label>
-                <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm" name="usuario">
+                <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm" name="usuario" ref="usuario">
                   <option v-for="usuario in usuarios" v-bind:value="usuario.id" v-bind:key="usuario.id">{{ usuario.name }}</option>
                 </select>
               </div>
@@ -265,8 +265,15 @@
             },
             /*Pruebas*/ 
             addPrueba(){
-              this.equipo.pruebas.push(this.prueba);
-              console.log(this.prueba);
+              let fila = {
+                Descripcion_Prueba:this.prueba.Descripcion_Prueba,
+                Descripcion_Norma:this.prueba.Descripcion_Norma,
+                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,
+                Descripcion_Prueba:this.prueba.Descripcion_Prueba,                
+                Costo:this.prueba.Costo
+              };
+              this.equipo.pruebas.push(fila);
+              //console.log(JSON.stringify(this.equipo));
               this.prueba = [];
             },   
             editPrueba(indice){
@@ -283,18 +290,42 @@
             /*Cotizaciones */ 
             addCotizacion(){
               let url = '/cotizacion/store';
-              console.log(this.cotizacion.COTIC_Fecha);
-              axios.post(url,{
-                contacto:this.cotizacion.id_contacto,
-                fecha:this.cotizacion.COTIC_Fecha,
-                numero:this.cotizacion.COTIC_Numero,
-                usuario:this.cotizacion.USUA_Codigo,
-                equipos:this.equipos
-              }).then(function(response){
-                  //alert(response.data);
-              }).catch(function(error){
-                console.log(error);
-              });
+              if(typeof this.cotizacion.COTIC_Fecha == 'undefined'){
+                alert("Debe ingresar la fecha");
+              }
+              else if(typeof this.cotizacion.COTIC_Numero == 'undefined'){
+                this.$refs.numero.focus();
+                alert("Debe ingresar el numero");
+              }
+              else if(typeof this.cotizacion.id_contacto == 'undefined'){
+                this.$refs.contacto.focus();
+                alert("Debe seleccionar un contacto");
+              }   
+              else if(typeof this.cotizacion.USUA_Codigo == 'undefined'){
+                this.$refs.usuario.focus();
+                alert("Debe seleccionar un usuario");
+              }    
+              else if(this.equipos.length==0){
+                alert("Debe ingresar al menos 1 equipo");
+              }                                          
+              else{
+                console.log(this.equipos);
+                axios.post(url,{
+                  contacto:this.cotizacion.id_contacto,
+                  fecha:this.cotizacion.COTIC_Fecha,
+                  numero:this.cotizacion.COTIC_Numero,
+                  usuario:this.cotizacion.USUA_Codigo,
+                  equipos:this.equipos,
+                  subtotal:this.setSubTotal,
+                  igv:this.setIgv,
+                  total:this.setTotal
+                }).then(function(response){
+                    alert(response.data);
+                    location.href = '/cotizacion';
+                }).catch(function(error){
+                  console.log(error);
+                });
+              }
             },
             listarContactos(){
                 var url = '/contacto/list';

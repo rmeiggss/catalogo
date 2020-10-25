@@ -101,8 +101,14 @@
                         <ul>
                             <li><a href="{{ route('servicios') }}">ENSAYOS, PRUEBAS Y CALIBRACIONES</a></li>
                             <li><a href="{{ route('capacitaciones') }}">CAPACITACIONES TÉCNICAS Y PROFESIONALES Y ASESORES</a></li>
-                            <li><a href="{{ route('asesorias') }}">ASESORIA DE SERVICIOS IN-HOUSE</a></li>
-                            <li><a href="{{ route('academico') }}">SERVICIO ACADEMICO</a></li>
+                            <li>
+                            <!--a href="{{ route('asesorias') }}">ASESORIA DE SERVICIOS IN-HOUSE</a-->
+                            <a href="#">ASESORIA DE SERVICIOS IN-HOUSE</a>
+                            </li>
+                            <li>
+                            <!--a href="{{ route('academico') }}">SERVICIO ACADEMICO</a-->
+                            <a href="#">SERVICIO ACADEMICO</a>
+                            </li>
                         </ul>
                     </li>
                     <li><a href="#">EVENTOS</a>
@@ -117,8 +123,10 @@
                     <li><a href="#">COTIZACIONES</a>
                         <ul>
                             <li><a href="{{ route('cot_ensayos') }}">ENSAYOS</a></li>
-                            <li><a href="{{ route('cot_calibraciones') }}">CALIBRACIONES</a></li>
-                            <li><a href="{{ route('cot_capacitaciones') }}">CAPACITACIONES</a></li>
+                            <!--li><a href="{{ route('cot_calibraciones') }}">CALIBRACIONES</a></li-->
+                            <li><a href="#">CALIBRACIONES</a></li>
+                            <!--li><a href="{{ route('cot_capacitaciones') }}">CAPACITACIONES</a></li-->
+                            <li><a href="#">CAPACITACIONES</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ route('login') }}">INTRANET</a>

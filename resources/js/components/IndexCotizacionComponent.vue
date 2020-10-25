@@ -57,13 +57,14 @@
                 var url = '/cotizacion/list';
                 axios.get(url).then(response=>{
                     this.cotizaciones = response.data;
-                    console.log(this.cotizaciones);
+                    //console.log(this.cotizaciones);
                 });
             },
             btnBorrar(cotizacion,indice){
-                var url = '/cotizacion/'+cotizacion.COTIP_Codigo;
+                let url = '/cotizacion/delete/'+cotizacion.COTIP_Codigo;
                 axios.delete(url).then(response=>{
-                    this.listar();
+                  alert("Se elimino un registro");
+                  this.listar();
                 });
             },
             btnEditar(id){
