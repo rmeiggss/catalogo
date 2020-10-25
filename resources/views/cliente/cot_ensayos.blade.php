@@ -45,6 +45,18 @@ Universidad Nacional de Ingeniería')
                 padding:1rem 0.5rem;
             }
 
+            td {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align: justify;
+            }
+
+            table {
+                table-layout:fixed;
+                width: 100%;
+            }
+
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -85,8 +97,8 @@ Universidad Nacional de Ingeniería')
 
         <h1 style="text-align: center;font-size:65px;color:black;">Formulario de Solicitud de Ensayo</h1>
         <hr>
-<form  method="POST" action="{{ route('cot_ensayos.store') }}">
-    @csrf
+
+
         <div id="crud_equipos" class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
@@ -149,14 +161,6 @@ Universidad Nacional de Ingeniería')
             </div>
         </div>
 
-        <button type="button" class="btn btn-success btn-lg ml-3" data-toggle="modal"
-                data-target="#mimodalequipo" id="boton_modal" style="border-radius:5px;">
-                Nuevo Equipo
-        </button>
-
-        <br>
-        <br>
-
         <div id="app" class="mr-3 ml-3">
             <ensayos-component></ensayos-component>
         </div>
@@ -213,7 +217,7 @@ Universidad Nacional de Ingeniería')
             Solicitar Cotización
         </button>
     </center>
-</form>
+
 
         <br>
         <br>

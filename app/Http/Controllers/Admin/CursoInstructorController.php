@@ -2,12 +2,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\HorarioCurso;
+use App\CursoInstructor;
+use App\Instructor;
 use App\Producto;
 use Illuminate\Http\Request;
 use Redirect;
 
-class HorarioCursoController extends Controller
+class CursoInstructorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,9 @@ class HorarioCursoController extends Controller
      */
     public function index()
     {
-        $horariocursos = HorarioCurso::latest()->paginate(8);
+        $cursoinstructor = CursoInstructor::latest()->paginate(8);
 
-        return view('admin.horario-curso.index', compact('horariocursos'));
+        return view('admin.instructor-curso.index', compact('cursoinstructor'));
     }
 
     /**
@@ -29,7 +30,8 @@ class HorarioCursoController extends Controller
     public function create()
     {
         $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
-        return view("admin.horario-curso.create", compact('productos'));
+        $instructors = Instructor::pluck('nombre', 'nombre');
+        return view("admin.instructor-curso.create", compact('productos'), compact('instructors'));
 
     }
 
@@ -43,25 +45,19 @@ class HorarioCursoController extends Controller
     {
         /* Validacion del Formulario */
         $request->validate([
-            'nombre' => 'required',
-            'fecha_inicial' => 'required',
-            'hora_ini' => 'required',
-            'hora_fi' => 'required'
+            'nombre_instructor' => 'required',
+            'nombre_curso' => 'required',
         ]);
 
         HorarioCurso::create([
-            'nombre_curso' => request('nombre'),
-            'fecha_inicial' => request('fecha_inicial'),
-         /*    'fecha_final' => request('fecha_final'),
-            'hora_inicial' => request('hora_in'),
-            'hora_final' => request('hora_fi'), */
-            'hora_inicial' => request('hora_ini'),
-            'hora_final' => request('hora_fi'),
+            'nombre_instructor' => request('nombre'),
+            'nombre_curso' => request('fecha_inicial'),
+
         ]);
 
 
 
-        return Redirect::to("/horario-curso");
+        return Redirect::to("/instructor-curso");
     }
 
     /**
@@ -83,10 +79,12 @@ class HorarioCursoController extends Controller
      */
     public function edit($id)
     {
-        $horariocurso = HorarioCurso::findOrFail($id);
+        $cursoinstructor = CursoInstructor::findOrFail($id);
         $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
+        $instructors = Instructor::pluck('nombre', 'nombre');
 
-        return view("admin.horario-curso.edit", ['horariocurso' => $horariocurso], compact('productos'));
+
+        return view("admin.instructor-curso.edit", ['cursoinstructor' => $cursoinstructor], compact('productos'), compact('instructors'));
     }
 
     /**
@@ -98,18 +96,14 @@ class HorarioCursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $horariocurso = HorarioCurso::findOrFail($id);
+        $cursoinstructor = CursoInstructor::findOrFail($id);
 
-        $horariocurso->Nombre_Curso = $request->nombre;
-        $horariocurso->fecha_inicial = $request->fecha_inicial;
-        /* $horariocurso->fecha_final = $request->fecha_final;
-        $horariocurso->hora_inicial = $request->hora_in;
-        $horariocurso->hora_final = $request->hora_fi; */
-        $horariocurso->hora_inicial = $request->hora_ini;
-        $horariocurso->hora_final = $request->hora_fi;
+        $CursoInstructor->nombre_curso = $request->nombre_curso;
+        $CursoInstructor->nombre_instructor = $request->nombre_instructor;
+
         $horariocurso->save();
 
-        return Redirect::to("/horario-curso");
+        return Redirect::to("/instructor-curso");
     }
 
     /**
@@ -121,6 +115,6 @@ class HorarioCursoController extends Controller
     public function destroy($id)
     {
         HorarioCurso::destroy($id);
-        return Redirect::to("/horario-curso");
+        return Redirect::to("/instructor-curso");
     }
 }

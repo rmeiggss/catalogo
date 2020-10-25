@@ -13,8 +13,6 @@ Route::get('/usuario/list','Admin\UsuarioController@list');
 Route::get('/cotizacion/list','Admin\CotizacionController@list');
 Route::get('/solicitante/list','Admin\SolicitanteController@list');
 Route::get('/contacto/list','Admin\ContactoController@list');
-Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
-Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
 Route::get('/contacto/{contacto}/get','Admin\ContactoController@get');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
@@ -25,7 +23,14 @@ Route::get('cursos-list-pdf', 'Admin\CursoController@exportPdf')->name('cursos.p
 Route::get('cotizaciones-list-pdf', 'Admin\SolicitanteController@exportPdf')->name('cotizaciones.pdf');
 //Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::resource('usuario','Admin\UsuarioController');
-Route::resource('cotizacion', 'Admin\CotizacionController');
+//Route::resource('cotizacion', 'Admin\CotizacionController');
+Route::post('/cotizacion/store', 'Admin\CotizacionController@store');
+Route::get('/cotizacion/list', 'Admin\CotizacionController@list');
+Route::get('/cotizacion/create', 'Admin\CotizacionController@create')->name('createCotizacion');
+Route::get('/cotizacion', 'Admin\CotizacionController@index');
+Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
+Route::get('/cotizacion/{cotizacion}/edit','Admin\CotizacionController@edit');
+Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
 Route::resource('categoria','Admin\CategoriaController');
 Route::resource('solicitante','Admin\SolicitanteController');
 Route::resource('contacto','Admin\ContactoController');
@@ -35,35 +40,39 @@ Auth::routes();
 
 //------- Rutas de gerson -----------------------
 Route::resource('asesoria','Admin\AsesoriaController');
-
 // -------- Rutas del ADMIN
 Route::resource('curso','Admin\CursoController');
 Route::resource('instructor','Admin\InstructorController');
 Route::resource('horario-curso','Admin\HorarioCursoController');
 Route::resource('horario-instructor','Admin\HorarioInstructorController');
+Route::resource('instructor-curso','Admin\CursoInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
 // -------- Rutas de diego --------------------
 Route::resource('servicioac','Admin\ServicioAcademicoController');
-// --------- Rutas del CLIENTE
-Route::resource('cot_ensayos','Cliente\EnsayoController');
-Route::resource('cot_calibraciones','Cliente\CalibracionController');
-Route::resource('cot_capacitaciones','Cliente\CapacitacionController');
+// --------- Rutas del CLIENTE ----------------------
 
-Route::resource('asesorias','Cliente\AsesoriaController');
-Route::resource('servicio_academico','Cliente\ServicioAcademicoController');
+//Route::resource('cot_calibraciones','Cliente\CalibracionController');
+//Route::resource('cot_capacitaciones','Cliente\CapacitacionController');
+//Route::resource('asesorias','Cliente\AsesoriaController');
+//Route::resource('servicio_academico','Cliente\ServicioAcademicoController');
 // --------------------------------------------
 
 // --------------------------------------------
 // CREACIÓN PARA LA RUTA DE EQUIPOS (ENSAYOS, CALIBRACIONES)
-Route::get('cot_ensayos', 'Cliente\EquipoController@index');
+//Route::resource('cot_ensayos','Cliente\EnsayoController');
 
-Route::put('/cot_ensayos/editar', 'Cliente\EquipoController@update');
+Route::get('/cot_ensayos', 'Cliente\EnsayoController@index');
 
-Route::post('/cot_ensayos/guardar', 'Cliente\EquipoController@store');
+Route::put('/cot_ensayos/actualizar', 'Cliente\EnsayoController@update');
 
-Route::delete('/cot_ensayos/borrar/{id}', 'Cliente\EquipoController@destroy');
+Route::post('/cot_ensayos/guardar', 'Cliente\EnsayoController@store');
 
-Route::get('/cot_ensayos/buscar', 'Cliente\EquipoController@show');
+Route::delete('/cot_ensayos/borrar/{id}', 'Cliente\EnsayoController@destroy');
+
+Route::get('/cot_ensayos/buscar', 'Cliente\EnsayoController@show');
+
+Route::view('/cot_ensayos', 'cliente/cot_ensayos')->name('cot_ensayos');
+
 // --------------------------------------------
 
 
@@ -81,7 +90,6 @@ Route::view('/responsabilidad', 'cliente/responsabilidad')->name('responsabilida
 Route::view('/visitas', 'cliente/visitas')->name('visitas');
 Route::view('/clientes', 'cliente/clientes')->name('clientes');
 Route::view('/ubicacion', 'cliente/ubicacion')->name('ubicacion');
-Route::view('/cot_ensayos', 'cliente/cot_ensayos')->name('cot_ensayos');
 Route::view('/cot_calibraciones', 'cliente/cot_calibraciones')->name('cot_calibraciones');
 Route::view('/cot_capacitaciones', 'cliente/cot_capacitaciones')->name('cot_capacitaciones');
 //Route::view('/intranet_ensayos', 'cliente/intranet_ensayos')->name('intranet_ensayos');
@@ -89,3 +97,6 @@ Route::view('/cot_capacitaciones', 'cliente/cot_capacitaciones')->name('cot_capa
 //Route::view('/intranet_capacitaciones', 'cliente/intranet_capacitaciones')->name('intranet_capacitaciones');
 // -------------------------------------------
 
+//---------- Rutas para DataTable----------------
+Route::get('dataTableUser','Admin\UsuarioController@dataTable')->name('dataTableUser');
+Route::get('dataTableAsesoria','Admin\AsesoriaController@dataTable')->name('dataTableAsesoria');

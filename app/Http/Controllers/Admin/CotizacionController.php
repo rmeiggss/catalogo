@@ -42,9 +42,6 @@ class CotizacionController extends Controller
                     ->join('solicitante','solicitante.SOLIP_Codigo','=','contacto.SOLIP_Codigo')
                     ->select()
                     ->get();    
-        
-
-
         return $cotizaciones;
     }
 
@@ -59,39 +56,47 @@ class CotizacionController extends Controller
     public function store(Request $request)
     {
         //Grabamos la cabecera
-        $fecha = Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d');
-        $cot = Cotizacion::create([
+        //$fecha = Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d');
+        $objCotizacion = [
             'id_contacto'    => $request->contacto,
             'COTIC_Numero'   => $request->numero,
-            'COTIC_Fecha'    => $fecha,
+            'COTIC_Fecha'    => "2020-10-01",
             'USUA_Codigo'    => $request->usuario,
-            'COTIC_SubTotal' => $request->subtotal,
+           /* 'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
             'COTIC_Total'    => $request->total,
             'COTIC_Correo1'  => $request->correo1,
             'COTIC_Correo2'  => $request->correo2,
             'COTIC_Correo3'  => $request->correo3,
-            'COTIC_Correo4'  => $request->correo4,
+            'COTIC_Correo4'  => $request->correo4,*/
             'TIPOCOP_Codigo' => 1
-        ]);
-        //Grabamos detalle
-        if(isset($request->nombre)){
-            if(count($request->nombre)>0){
-                foreach($request->nombre as $item=>$value){
-                    $codigodet = $request->codigodet[$item];
-                    CotizacionDetalle::create([
+        ];
+        $cot = Cotizacion::create($objCotizacion);
+        //Grabamos equipos
+        if(isset($request->equipos)){
+            if(count($request->equipos)>0){
+                foreach($request->equipos as $item=>$value){
+                    $equipo = CotizacionDetalle::create([
                         'COTIP_Codigo'         => $cot->COTIP_Codigo,
-                        "CODEC_NombreEquipo"   => $request->nombre[$item],
-                        "CODEC_Descripcion"    => $request->descripcion[$item],
-                        "CODEC_Fabricante"     => $request->fabricante[$item],
-                        "CODEC_Cantidad"       => $request->cantidad[$item],
-                        "CODEC_PrecioUnitario" => $request->unitario[$item],
-                        "CODEC_SubTotal"       => $request->subtotaldet[$item]
+                        "CODEC_NombreEquipo"   => $value["CODEC_NombreEquipo"],
+                        "CODEC_Descripcion"    => $value["CODEC_Descripcion"],
+                        "CODEC_Fabricante"     => $value["CODEC_Fabricante"],
+                        "CODEC_Cantidad"       => $value["CODEC_Cantidad"],
+                        "CODEC_PrecioUnitario" => $value["CODEC_PrecioUnitario"],
+                        "CODEC_SubTotal"       => $value["CODEC_Cantidad"]*$value["CODEC_PrecioUnitario"]
                     ]);
+                    $pruebas = $value["pruebas"];
+                    //Grabamos las pruebas
+                    print_r($pruebas);
+                    if(count($pruebas)>0){
+                        foreach($pruebas as $value2){
+                            print_r($value2);
+                        }
+                    }
                 }
             }
         }
-        return Redirect::to("/cotizacion");
+        //return Redirect::to("/cotizacion");
     }
 
     public function show($id)
