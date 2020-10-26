@@ -37,7 +37,7 @@
                   <th scope="col">Nombre</th>
                   <th scope="col">Descripcion</th>
                   <th scope="col">Costo</th>
-                  <<!-- th scope="col" class="text-center">Ver</th> -->
+                  <!-- th scope="col" class="text-center">Ver</th> -->
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
                 </thead>
