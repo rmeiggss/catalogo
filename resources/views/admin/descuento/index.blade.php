@@ -33,7 +33,6 @@
               <th scope="col">Nombre del Curso</th>
               <th scope="col">Cantidad Mínima</th>
               <th scope="col">Cantidad Máxima</th>
-              <th scope="col">Costo del Curso</th>
               <th scope="col">Descuento (%) </th>
               <th scope="col" colspan="2" class="text-center">Acciones</th>
             </tr>
@@ -47,7 +46,6 @@
                   <td class="text-left">{{$descuento->nombre_curso}}</td>
                   <td class="text-right">{{$descuento->cantidad_min}}</td>
                   <td class="text-right">{{$descuento->cantidad_max}}</td>
-                  <td class="text-right">{{$descuento->costo}}</td>
                   <td class="text-right">{{$descuento->descuento}}</td>
                   <td><button class="btn btn-info btn-sm">
                     <a class="text-light" href="{{ route('descuento.edit', $descuento->id) }}">

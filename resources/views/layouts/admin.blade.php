@@ -221,7 +221,7 @@
               <li class="nav-item">
                 <a href="{{ route('horario-curso.index') }}" class="nav-link">
                   <i class="far nav-icon"></i>
-                  <p>Horario Apertura de Cursos</p>
+                  <p>Horario de Cursos</p>
                 </a>
               </li>
               <li class="nav-item">

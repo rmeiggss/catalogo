@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <div class="form-group">
                             {!! Form::label('hora_ini', 'Hora de Inicio :') !!}
                             {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
@@ -102,7 +102,7 @@
                             {!! Form::time('hora_ini',null, ['class' => '','id'=>'hora_ini']) !!} 
                         </div>                           
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <div class="form-group">
                             {!! Form::label('hora_fi', 'Hora Final :') !!}
                             {!! Form::time('hora_fi',null, ['class' => '','id'=>'hora_fi']) !!} 

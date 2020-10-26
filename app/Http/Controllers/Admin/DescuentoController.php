@@ -46,7 +46,6 @@ class DescuentoController extends Controller
             'nombre' => 'required',
             'cant_min' => 'required',
             'cant_max' => 'required',
-            'costo' => 'required',
             'descuento' => 'required'
         ]);
 
@@ -54,7 +53,6 @@ class DescuentoController extends Controller
             'nombre_curso' => request('nombre'),
             'cantidad_min' => request('cant_min'),
             'cantidad_max' => request('cant_max'),
-            'costo' => request('costo'),
             'descuento' => request('descuento'),
         ]);
 
@@ -100,7 +98,6 @@ class DescuentoController extends Controller
         $descuento->nombre_curso = $request->nombre;
         $descuento->cantidad_min = $request->cant_min;
         $descuento->cantidad_max = $request->cant_max;
-        $descuento->costo = $request->costo;
         $descuento->descuento = $request->descuento;
 
         $descuento->save();

@@ -40,13 +40,13 @@
             @enderror
         </div>
 
-        <div class="form-group">
+<!--         <div class="form-group">
             {!!Form::label('costo','Costo')!!}
             {!!Form::text('costo',null,['class'=>'form-control','placeholder'=>'Ingrese el costo ...','id'=>'costo'])!!}
             @error('costo')
             <small class="text-danger">Falta escribir el costo</small>
             @enderror
-        </div>
+        </div> -->
 
         <div class="form-group">
             {!!Form::label('descuento','Descuento (%)')!!}
