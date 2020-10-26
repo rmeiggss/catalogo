@@ -105,7 +105,7 @@
                                 <div class="col-md-6">
                                     Descripcion de la Prueba:
                                     <br>
-                                    <textarea style="resize: none" class="form-control" rows="3" cols="5" v-model="prueba.Descripcion_Prueba"></textarea>
+                                    <textarea style="resize: none" class="form-control" rows="3" cols="5" v-model="prueba.Descripcion_Prueba" name="descprueba"></textarea>
                                     <label for="ejemplo_archivo_1">Adjuntar Norma Tecnica</label>
                                     <input type="file" id="ejemplo_archivo_1">
                                 </div>
@@ -339,10 +339,7 @@
                     this.usuarios = response.data;
                     console.log(this.cotizacion);
                 });
-            }
-            /*submit(){
-              this.$refs.form.submit();
-            } */                       
+            }                   
         }
     }
 </script>

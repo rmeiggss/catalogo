@@ -2332,10 +2332,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(_this2.cotizacion);
       });
     }
-    /*submit(){
-      this.$refs.form.submit();
-    } */
-
   }
 });
 
@@ -2645,14 +2641,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cotizacion: [],
-      cotizacionesdetalle: [],
+      equipo: [],
+      prueba: [],
+      equipos: [],
+      pruebas: [],
       contactos: [],
       usuarios: [],
-      saveData: null
+      saveData: null,
+      idxEquipo: null,
+      idxPrueba: null
     };
   },
   props: {
@@ -2660,7 +2674,7 @@ __webpack_require__.r(__webpack_exports__);
     token: String
   },
   created: function created() {
-    this.getCotizacionDetalle(this.codigo);
+    this.getEquipos(this.codigo);
     this.getCotizacion(this.codigo);
     this.listarContactos();
     this.listarUsuarios();
@@ -2671,7 +2685,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     setSubTotal: function setSubTotal() {
       var suma = 0;
-      return this.cotizacionesdetalle.reduce(function (suma, cotdetalle) {
+      return this.equipos.reduce(function (suma, cotdetalle) {
         return suma + cotdetalle.CODEC_PrecioUnitario * cotdetalle.CODEC_Cantidad;
       }, 0);
     },
@@ -2686,48 +2700,163 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    getCotizacionDetalle: function getCotizacionDetalle(id) {
-      var _this = this;
+    /*Equipos*/
+    getEquipos: function getEquipos(id) {
+      var _this2 = this;
 
       var url = '/cotizaciondetalle/' + id + '/list';
       axios.get(url).then(function (response) {
-        _this.cotizacionesdetalle = response.data;
+        _this2.equipos = response.data;
       });
     },
+    addEquipo: function addEquipo() {
+      var fila = {
+        CODEP_Codigo: "",
+        CODEC_NombreEquipo: "",
+        CODEC_Descripcion: "",
+        CODEC_Fabricante: "",
+        CODEC_Cantidad: "",
+        CODEC_PrecioUnitario: "",
+        pruebas: []
+      };
+      this.equipos.push(fila);
+    },
+    editEquipo: function editEquipo(index) {
+      this.idxEquipo = index;
+      this.equipo = this.equipos[index];
+    },
+    deleteEquipo: function deleteEquipo(index) {
+      this.equipos.splice(index, 1);
+    },
+
+    /*Pruebas */
+    addPrueba: function addPrueba() {
+      var _this = this;
+
+      var datos = {
+        CODEP_Codigo: this.equipo.CODEP_Codigo,
+        Descripcion_Prueba: this.prueba.Descripcion_Prueba,
+        Descripcion_Norma: this.prueba.Descripcion_Norma,
+        Norma_Asoc_Prueba: this.prueba.Norma_Asoc_Prueba,
+        Costo: this.prueba.Costo
+      };
+
+      if (typeof this.prueba.Descripcion_Prueba == 'undefined') {
+        this.$refs.descripcion_prueba.focus();
+        alert("Debe ingresar una descripcion");
+      } else if (typeof this.prueba.Costo == 'undefined') {
+        this.$refs.costo_prueba.focus();
+        alert("Debe ingresar un costo");
+      } else {
+        var url = '/prueba/store';
+        axios.post(url, datos).then(function (response) {
+          _this.prueba = [];
+
+          _this.getPruebas(datos.CODEP_Codigo);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    getPruebas: function getPruebas(id) {
+      var _this3 = this;
+
+      var url = '/prueba/' + id + '/list';
+      axios.get(url).then(function (response) {
+        _this3.equipo.pruebas = response.data;
+        console.log(_this3.equipo);
+      });
+    },
+    editPrueba: function editPrueba(indice) {
+      this.idxPrueba = indice;
+      this.prueba = this.equipo.pruebas[indice];
+      console.log(this.prueba);
+    },
+    updatePrueba: function updatePrueba(indice) {
+      var _this = this;
+
+      var url = "/prueba/update";
+      var datos = {
+        id_prueba_a_realizar: this.prueba.id_prueba_a_realizar,
+        CODEP_Codigo: this.equipo.CODEP_Codigo,
+        Descripcion_Prueba: this.prueba.Descripcion_Prueba,
+        Descripcion_Norma: this.prueba.Descripcion_Norma,
+        Norma_Asoc_Prueba: this.prueba.Norma_Asoc_Prueba,
+        Costo: this.prueba.Costo
+      };
+      axios.put(url, datos).then(function (response) {
+        _this.prueba = [];
+
+        _this.getPruebas(datos.CODEP_Codigo); //this.prueba = [];
+        //this.idxPrueba = null;                
+
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deletePrueba: function deletePrueba(indice) {
+      var _this = this;
+
+      var datos = this.equipo.pruebas[indice];
+      var id_prueba = datos.id_prueba_a_realizar;
+      var url = "/prueba/delete/" + id_prueba;
+      axios["delete"](url).then(function (response) {
+        _this.getPruebas(datos.CODEP_Codigo);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    closePruebas: function closePruebas() {
+      this.prueba = [];
+    },
+
+    /*Cotizaciones */
     getCotizacion: function getCotizacion(id) {
-      var _this2 = this;
+      var _this4 = this;
 
       var url = '/cotizacion/' + id + '/get';
       axios.get(url).then(function (response) {
-        _this2.cotizacion = response.data;
-        console.log(_this2.cotizacion);
+        var resultado = response.data;
+        resultado.COTIC_Fecha = resultado.COTIC_Fecha.split(' ')[0];
+        _this4.cotizacion = resultado;
+        console.log(resultado);
+      });
+    },
+    updateCotizacion: function updateCotizacion() {
+      var url = '/cotizacion/update';
+      axios.put(url, {
+        id_cotizacion: this.cotizacion.COTIP_Codigo,
+        contacto: this.cotizacion.id_contacto,
+        fecha: this.cotizacion.COTIC_Fecha,
+        numero: this.cotizacion.COTIC_Numero,
+        usuario: this.cotizacion.USUA_Codigo,
+        equipos: this.equipos,
+        subtotal: this.setSubTotal,
+        igv: this.setIgv,
+        total: this.setTotal
+      }).then(function (response) {
+        alert(response.data);
+        location.href = '/cotizacion';
+      })["catch"](function (error) {
+        console.log(error);
       });
     },
     listarContactos: function listarContactos() {
-      var _this3 = this;
+      var _this5 = this;
 
       var url = '/contacto/list';
       axios.get(url).then(function (response) {
-        _this3.contactos = response.data;
+        _this5.contactos = response.data;
       });
     },
     listarUsuarios: function listarUsuarios() {
-      var _this4 = this;
+      var _this6 = this;
 
       var url = '/usuario/list';
       axios.get(url).then(function (response) {
-        _this4.usuarios = response.data;
-        console.log(_this4.cotizacion);
+        _this6.usuarios = response.data;
+        console.log(_this6.cotizacion);
       });
-    },
-    addRow: function addRow() {
-      this.cotizacionesdetalle.push({});
-    },
-    deleteRow: function deleteRow(index) {
-      this.cotizacionesdetalle.splice(index, 1);
-    },
-    submit: function submit() {
-      this.$refs.form.submit();
     }
   }
 });
@@ -3218,21 +3347,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     listar: function listar() {
-      var _this = this;
+      var _this2 = this;
 
       var url = '/cotizacion/list';
       axios.get(url).then(function (response) {
-        _this.cotizaciones = response.data; //console.log(this.cotizaciones);
+        _this2.cotizaciones = response.data; //console.log(this.cotizaciones);
       });
     },
     btnBorrar: function btnBorrar(cotizacion, indice) {
-      var _this2 = this;
+      var _this = this;
 
       var url = '/cotizacion/delete/' + cotizacion.COTIP_Codigo;
       axios["delete"](url).then(function (response) {
-        alert("Se elimino un registro");
+        alert(response.data.message);
 
-        _this2.listar();
+        _this.listar();
+      })["catch"](function (error) {
+        console.log(error);
       });
     },
     btnEditar: function btnEditar(id) {
@@ -39604,7 +39735,7 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             staticStyle: { resize: "none" },
-                            attrs: { rows: "3", cols: "5" },
+                            attrs: { rows: "3", cols: "5", name: "descprueba" },
                             domProps: { value: _vm.prueba.Descripcion_Prueba },
                             on: {
                               input: function($event) {
@@ -40325,7 +40456,28 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "row invoice-info" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.cotizacion.COTIP_Codigo,
+              expression: "cotizacion.COTIP_Codigo"
+            }
+          ],
+          attrs: { name: "id_cotizacion", type: "hidden" },
+          domProps: { value: _vm.cotizacion.COTIP_Codigo },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.cotizacion, "COTIP_Codigo", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row row-sm invoice-info" }, [
           _c("div", { staticClass: "col-sm-4 invoice-col" }, [
             _c("div", { staticClass: "row form-group" }, [
               _c(
@@ -40400,7 +40552,12 @@ var render = function() {
                   }
                 ],
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: { type: "date", autocomplete: "off", name: "fecha" },
+                attrs: {
+                  type: "date",
+                  autocomplete: "off",
+                  name: "fecha",
+                  readonly: "readonly"
+                },
                 domProps: { value: _vm.cotizacion.COTIC_Fecha },
                 on: {
                   input: function($event) {
@@ -40432,7 +40589,13 @@ var render = function() {
                   }
                 ],
                 staticClass: "col-sm-3 form-control-sm",
-                attrs: { type: "text", maxlength: "11", autocomplete: "off" },
+                staticStyle: { "text-align": "right" },
+                attrs: {
+                  type: "text",
+                  maxlength: "11",
+                  autocomplete: "off",
+                  readonly: "readonly"
+                },
                 domProps: { value: _vm.cotizacion.COTIC_Numero },
                 on: {
                   input: function($event) {
@@ -40451,7 +40614,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row invoice-info" }, [
+        _c("div", { staticClass: "row row-sm invoice-info" }, [
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-4 invoice-col" }, [
@@ -40523,7 +40686,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
-                  return _vm.addRow()
+                  return _vm.addEquipo()
                 }
               }
             },
@@ -40536,12 +40699,12 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 table-responsive" }, [
-            _c("table", { staticClass: "table table-striped" }, [
+            _c("table", { staticClass: "table table-striped table-sm" }, [
               _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.cotizacionesdetalle, function(cotdetalle, index) {
+                _vm._l(_vm.equipos, function(cotdetalle, index) {
                   return _c(
                     "tr",
                     {
@@ -40565,7 +40728,7 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteRow(index)
+                                    return _vm.deleteEquipo(index)
                                   }
                                 }
                               },
@@ -40583,6 +40746,7 @@ var render = function() {
                               expression: "cotdetalle.CODEP_Codigo"
                             }
                           ],
+                          staticClass: "form-control-sm",
                           attrs: { type: "hidden", name: "codigodet[]" },
                           domProps: { value: cotdetalle.CODEP_Codigo },
                           on: {
@@ -40698,7 +40862,26 @@ var render = function() {
                       _vm._v(" "),
                       _vm._m(3, true),
                       _vm._v(" "),
-                      _vm._m(4, true),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-outline-success btn-lg btn-sm",
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "modal",
+                              "data-target": "#exampleModal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.editEquipo(index)
+                              }
+                            }
+                          },
+                          [_vm._v("Lista")]
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _c("input", {
@@ -40712,6 +40895,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control-sm w-100",
+                          staticStyle: { "text-align": "right" },
                           attrs: {
                             type: "text",
                             name: "cantidad[]",
@@ -40749,6 +40933,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control-sm w-100",
+                          staticStyle: { "text-align": "right" },
                           attrs: {
                             type: "text",
                             name: "unitario[]",
@@ -40776,6 +40961,7 @@ var render = function() {
                       _c("td", [
                         _c("input", {
                           staticClass: "form-control-sm w-100",
+                          staticStyle: { "text-align": "right" },
                           attrs: {
                             type: "text",
                             name: "subtotaldet[]",
@@ -40800,17 +40986,17 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-9" }, [_vm._v(" ")]),
+          _c("div", { staticClass: "col-8" }),
           _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "table" }, [
+          _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "table-responsive table-sm" }, [
+              _c("table", { staticClass: "table float-right" }, [
                 _c("tr", [
-                  _c("th", { staticStyle: { width: "50%" } }, [
-                    _vm._v("Subtotal S/.:")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "text-right" }, [
+                    _c("span", { staticClass: "mr-2" }, [
+                      _vm._v("Subtotal S/.")
+                    ]),
+                    _vm._v(" "),
                     _c("input", {
                       directives: [
                         {
@@ -40820,7 +41006,8 @@ var render = function() {
                           expression: "setSubTotal"
                         }
                       ],
-                      staticClass: "form-control-sm w-50",
+                      staticClass: "form-control-sm w-25",
+                      staticStyle: { "text-align": "right" },
                       attrs: { type: "text", name: "subtotal" },
                       domProps: { value: _vm.setSubTotal },
                       on: {
@@ -40836,9 +41023,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tr", [
-                  _c("th", [_vm._v("I.G.V. S/. (18%)")]),
-                  _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "text-right" }, [
+                    _c("span", { staticClass: "mr-2" }, [
+                      _vm._v("I.G.V. S/. (18%)")
+                    ]),
+                    _vm._v(" "),
                     _c("input", {
                       directives: [
                         {
@@ -40848,7 +41037,8 @@ var render = function() {
                           expression: "setIgv"
                         }
                       ],
-                      staticClass: "form-control-sm w-50",
+                      staticClass: "form-control-sm w-25",
+                      staticStyle: { "text-align": "right" },
                       attrs: { type: "text", name: "igv" },
                       domProps: { value: _vm.setIgv },
                       on: {
@@ -40864,9 +41054,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tr", [
-                  _c("th", [_vm._v("Total S/.:")]),
-                  _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "text-right" }, [
+                    _c("span", { staticClass: "mr-2" }, [_vm._v("Total S/.")]),
+                    _vm._v(" "),
                     _c("input", {
                       directives: [
                         {
@@ -40876,7 +41066,8 @@ var render = function() {
                           expression: "setTotal"
                         }
                       ],
-                      staticClass: "form-control-sm w-50",
+                      staticClass: "form-control-sm w-25",
+                      staticStyle: { "text-align": "right" },
                       attrs: { type: "text", name: "total" },
                       domProps: { value: _vm.setTotal },
                       on: {
@@ -40895,13 +41086,383 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(5),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-lg",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [
+                        _vm._v(
+                          "Pruebas del Equipo :: " +
+                            _vm._s(_vm.equipo.CODEC_NombreEquipo)
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(4)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "container" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _vm._v(
+                            "\n                              Descripcion de la Prueba:\n                              "
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.equipo.CODEP_Codigo,
+                                expression: "equipo.CODEP_Codigo"
+                              }
+                            ],
+                            staticClass: "form-control-sm",
+                            attrs: { type: "hidden" },
+                            domProps: { value: _vm.equipo.CODEP_Codigo },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.equipo,
+                                  "CODEP_Codigo",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.prueba.Descripcion_Prueba,
+                                expression: "prueba.Descripcion_Prueba"
+                              }
+                            ],
+                            ref: "descripcion_prueba",
+                            staticClass: "form-control",
+                            staticStyle: { resize: "none" },
+                            attrs: { rows: "3", cols: "5" },
+                            domProps: { value: _vm.prueba.Descripcion_Prueba },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.prueba,
+                                  "Descripcion_Prueba",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "ejemplo_archivo_1" } }, [
+                            _vm._v("Adjuntar Norma Tecnica")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: { type: "file", id: "ejemplo_archivo_1" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-9" }, [
+                              _vm._v(
+                                "\n                                Norma Asociada:\n                                "
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.prueba.Norma_Asoc_Prueba,
+                                    expression: "prueba.Norma_Asoc_Prueba"
+                                  }
+                                ],
+                                ref: "norma_asociada",
+                                staticClass: "form-control",
+                                domProps: {
+                                  value: _vm.prueba.Norma_Asoc_Prueba
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.prueba,
+                                      "Norma_Asoc_Prueba",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _vm._v(
+                                "\n                                Costo\n                                "
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model.number",
+                                    value: _vm.prueba.Costo,
+                                    expression: "prueba.Costo",
+                                    modifiers: { number: true }
+                                  }
+                                ],
+                                ref: "costo_prueba",
+                                staticClass: "form-control",
+                                domProps: { value: _vm.prueba.Costo },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.prueba,
+                                      "Costo",
+                                      _vm._n($event.target.value)
+                                    )
+                                  },
+                                  blur: function($event) {
+                                    return _vm.$forceUpdate()
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _vm._v(
+                              "\n                              Descripcion de la Norma:\n                              "
+                            ),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.prueba.Descripcion_Norma,
+                                  expression: "prueba.Descripcion_Norma"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              staticStyle: { resize: "none" },
+                              attrs: { rows: "2", cols: "5" },
+                              domProps: { value: _vm.prueba.Descripcion_Norma },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.prueba,
+                                    "Descripcion_Norma",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.prueba.id_prueba_a_realizar > 0
+                              ? _c("span", [
+                                  _c("input", {
+                                    staticClass: "btn btn-default btn-sm",
+                                    attrs: {
+                                      type: "button",
+                                      value: "Actualizar"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.updatePrueba()
+                                      }
+                                    }
+                                  })
+                                ])
+                              : _c("span", [
+                                  _c("input", {
+                                    staticClass: "btn btn-default btn-sm",
+                                    attrs: { type: "button", value: "Agregar" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addPrueba()
+                                      }
+                                    }
+                                  })
+                                ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered table-sm" },
+                          [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _vm._l(_vm.equipo.pruebas, function(
+                              prueba,
+                              indice
+                            ) {
+                              return _c("tr", { key: prueba.indice }, [
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(indice + 1)
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: prueba.id_prueba_a_realizar,
+                                        expression:
+                                          "prueba.id_prueba_a_realizar"
+                                      }
+                                    ],
+                                    staticClass: "form-control-sm w-25",
+                                    attrs: { type: "hidden" },
+                                    domProps: {
+                                      value: prueba.id_prueba_a_realizar
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          prueba,
+                                          "id_prueba_a_realizar",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(prueba.Descripcion_Prueba))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-right" }, [
+                                  _vm._v(_vm._s(prueba.Costo))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-default btn-sm",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editPrueba(indice)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Editar")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-default btn-sm",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deletePrueba(indice)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Eliminar")]
+                                  )
+                                ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row float-right pb-2" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: { type: "button", "data-dismiss": "modal" },
+                            on: {
+                              click: function($event) {
+                                return _vm.closePruebas()
+                              }
+                            }
+                          },
+                          [_vm._v("Cerrar")]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "row text-left" }, [
           _c("div", { staticClass: "col text-left" }, [
             _c(
               "a",
-              { staticClass: "btn btn-info", on: { click: _vm.submit } },
+              {
+                staticClass: "btn btn-info",
+                on: {
+                  click: function($event) {
+                    return _vm.updateCotizacion()
+                  }
+                }
+              },
               [_vm._v("Editar")]
             ),
             _vm._v(" "),
@@ -40990,243 +41551,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success btn-lg btn-sm",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
-        [_vm._v("Lista")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "exampleModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
-                  [_vm._v("Pruebas del Equipo")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "container" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _vm._v(
-                        "\n                              Descripcion de la Prueba:\n                              "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "textarea",
-                        {
-                          staticClass: "form-control",
-                          staticStyle: { resize: "none" },
-                          attrs: { name: "", rows: "3", cols: "5" }
-                        },
-                        [_vm._v("Escribir algo...")]
-                      ),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "ejemplo_archivo_1" } }, [
-                        _vm._v("Adjuntar un archivo de la Norma Tecnica")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "file", id: "ejemplo_archivo_1" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _vm._v(
-                        "\n                              Norma Asociada:\n                              "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "", id: "primero" }
-                      }),
-                      _vm._v(
-                        "\n                              Descripcion de la Norma:\n                              "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "textarea",
-                        {
-                          staticClass: "form-control",
-                          staticStyle: { resize: "none" },
-                          attrs: { name: "", rows: "2", cols: "5" }
-                        },
-                        [_vm._v("Escribir algo...")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "btn btn-default btn-sm",
-                        attrs: { type: "submit", name: "", value: "Guardar" }
-                      })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("table", { staticClass: "table table-bordered" }, [
-                    _c("tr", [
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Identificador")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Descripcion de la Prueba")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Norma Asociada")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Estado")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Acciones")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "text-center" }, [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Prueba Dielectrica")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Norma IEC-123456")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Completa")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Editar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Eliminar")]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "text-center" }, [_vm._v("2")]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Prueba Dielectrica")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Norma IEC-123456")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Incompleta")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Editar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-default btn-sm",
-                            attrs: { href: "" }
-                          },
-                          [_vm._v("Eliminar")]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("tr", [
+      _c("th", { staticClass: "text-center", attrs: { width: "5%" } }, [
+        _vm._v("Item")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { width: "45%" } }, [
+        _vm._v("Descripcion de la Prueba")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { width: "20%" } }, [
+        _vm._v("Norma Asociada")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { width: "10%" } }, [
+        _vm._v("Costo")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { width: "20%" } }, [
+        _vm._v("Acciones")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -42381,7 +42743,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(cotizacion.SOLIC_Nombre))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(cotizacion.COTIC_Fecha))]),
+                      _c("td", [
+                        _vm._v(_vm._s(cotizacion.COTIC_Fecha.split(" ")[0]))
+                      ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-right" }, [
                         _vm._v(_vm._s(cotizacion.COTIC_Total))

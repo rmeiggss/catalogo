@@ -13,4 +13,8 @@ class CotizacionDetalle extends Model
     protected $fillable = ['CODEC_NombreEquipo', 'CODEC_Descripcion', 'CODEC_Fabricante', 'CODEC_Url', 'CODEC_Cantidad','CODEC_SubTotal','CODEC_PrecioUnitario','COTIP_Codigo'];
 
     public $timestamps = false;
+
+    public function pruebas(){
+        return $this->hasMany('App\Prueba','CODEP_Codigo');
+    }
 }

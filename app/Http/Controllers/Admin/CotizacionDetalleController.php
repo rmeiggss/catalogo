@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\CotizacionDetalle;
+use App\Prueba;
 use Illuminate\Http\Request;
 
 class CotizacionDetalleController extends Controller
@@ -11,11 +12,17 @@ class CotizacionDetalleController extends Controller
     }
 
     public function list($id){
-        $cotizacionesdetalle = CotizacionDetalle::where(
+        $equipos = CotizacionDetalle::where(
                         ["COTIP_Codigo"=>$id])
                         ->orderBy("CODEP_Codigo")
-                        ->get();
-        return $cotizacionesdetalle;
+                        ->get();   
+        $objeto = array();
+        foreach($equipos as $value){
+            $equipo = $value;
+            $equipo->pruebas = CotizacionDetalle::find($value->CODEP_Codigo)->pruebas;
+            array_push($objeto,$equipo);
+        }             
+        return $objeto;
     }
 
     public function create(){

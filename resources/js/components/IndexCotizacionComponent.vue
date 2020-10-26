@@ -23,7 +23,7 @@
                 <td>{{cotizacion.COTIP_Codigo}}</td>
                 <td>{{cotizacion.COTIC_Numero}}</td>
                 <td>{{cotizacion.SOLIC_Nombre}}</td>
-                <td>{{cotizacion.COTIC_Fecha}}</td>
+                <td>{{cotizacion.COTIC_Fecha.split(' ')[0]}}</td>
                 <td class="text-right">{{cotizacion.COTIC_Total}}</td>
                 <td>
                   <button class="btn btn-info" @click="btnEditar(cotizacion.COTIP_Codigo)">Editar</button>
@@ -54,18 +54,21 @@
         },
         methods: {
             listar(){
-                var url = '/cotizacion/list';
-                axios.get(url).then(response=>{
-                    this.cotizaciones = response.data;
-                    //console.log(this.cotizaciones);
-                });
+              var url = '/cotizacion/list';
+              axios.get(url).then(response=>{
+                this.cotizaciones = response.data;
+                //console.log(this.cotizaciones);
+              });
             },
             btnBorrar(cotizacion,indice){
-                let url = '/cotizacion/delete/'+cotizacion.COTIP_Codigo;
-                axios.delete(url).then(response=>{
-                  alert("Se elimino un registro");
-                  this.listar();
-                });
+              let _this = this;
+              let url = '/cotizacion/delete/'+cotizacion.COTIP_Codigo;
+              axios.delete(url).then(function(response){
+                alert(response.data.message);
+                _this.listar();
+              }).catch(function(error){
+                console.log(error);
+              });
             },
             btnEditar(id){
                 location.href = '/cotizacion/'+id+'/edit';

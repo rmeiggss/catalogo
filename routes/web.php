@@ -27,11 +27,17 @@ Route::post('/cotizacion/store', 'Admin\CotizacionController@store');
 Route::get('/cotizacion/list', 'Admin\CotizacionController@list');
 Route::get('/cotizacion/create', 'Admin\CotizacionController@create')->name('createCotizacion');
 Route::get('/cotizacion', 'Admin\CotizacionController@index');
-Route::get("/cotizacion/delete/{id}","Admin\CotizacionController@delete")->name("delCotizacion");
+Route::delete("/cotizacion/delete/{id}","Admin\CotizacionController@delete")->name("delCotizacion");
 Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
 Route::get('/cotizacion/{cotizacion}/edit','Admin\CotizacionController@edit');
+Route::put("/cotizacion/update",'Admin\CotizacionController@update')->name('updateCotizacion');
 
 Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
+Route::get('/prueba/{cotizaciondetalle}/list', 'Admin\PruebaController@list');
+Route::post('/prueba/store', 'Admin\PruebaController@store');
+Route::delete("/prueba/delete/{id}","Admin\PruebaController@delete")->name("delPrueba");
+Route::put("/prueba/update",'Admin\PruebaController@update')->name('updatePrueba');
+
 Route::resource('categoria','Admin\CategoriaController');
 Route::resource('solicitante','Admin\SolicitanteController');
 Route::resource('contacto','Admin\ContactoController');
