@@ -8,7 +8,12 @@ class HorarioInstructor extends Model
 {
     protected $table = 'horario_instructors';
 
-    protected $fillable = ['nombre_instructor', 'fecha_inicial', 'fecha_final', 'hora_inicial', 'hora_final'];
+    protected $fillable = ['nombre_instructor', 'fecha_inicial', 'fecha_final', 'hora_inicial', 'hora_final', 'Dia_Posible', 'INSTP_Codigo'];
 
     public $timestamps = false;
+
+    public function instructor()
+    {
+        return $this->belongsTo('App\Instructor');
+    }
 }

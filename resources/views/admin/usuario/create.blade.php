@@ -49,7 +49,6 @@
             <!-- Agregar boton de cancelar -->
             <a class="btn btn-danger" href="{{ route('usuario.index') }}">Cancelar</a>
         {!!Form::close()!!}
-
     </div>
 </section>
 

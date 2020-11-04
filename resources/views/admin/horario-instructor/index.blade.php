@@ -29,9 +29,9 @@
           <table id="example2" class="table table-bordered table-hover">
             <thead>
             <tr class="text-center">
-              <th scope="col">Código</th>
+              <th scope="col">N°</th>
               <th scope="col">Instructor</th>
-              <th scope="col">Fecha Inicial</th>
+              <th scope="col">Dia Posible</th>
               <th scope="col">Hora Inicial</th>
               <th scope="col">Hora Final</th>
               <th scope="col" colspan="2" class="text-center">Acciones</th>
@@ -43,8 +43,8 @@
                 <tr class="text-center">
                   <!--actualizado por marck -->
                   <th scope="row">{{$item+1}}</th>
-                  <td class="text-left">{{$horarioinstructor->nombre_instructor}}</td>
-                  <td>{{$horarioinstructor->fecha_inicial}}</td>
+                  <td class="text-left">{{$horarioinstructor->nombre}}</td>
+                  <td>{{$horarioinstructor->Dia_Posible}}</td>
                   <td>{{$horarioinstructor->hora_inicial}}</td>
                   <td>{{$horarioinstructor->hora_final}}</td>
                   <td><button class="btn btn-info btn-sm">
@@ -69,7 +69,7 @@
             </tbody>
           </table>
 
-          {{ $horarioinstructors->links() }}
+         
         </div>
         <!-- /.card-body -->
       </div>

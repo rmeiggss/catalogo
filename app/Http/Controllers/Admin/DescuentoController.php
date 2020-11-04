@@ -16,8 +16,9 @@ class DescuentoController extends Controller
      */
     public function index()
     {
-        $descuentos = Descuento::latest()->paginate(8);
-
+  /*       $descuentos = descuentos::latest()->paginate(8); */
+        $descuentos = descuentos::all();
+        $descuentos = descuentos::join('curso','curso.INSTP_Codigo','=','descuentos.INSTP_Codigo')->select()->get();
         return view('admin.descuento.index', compact('descuentos'));
     }
 

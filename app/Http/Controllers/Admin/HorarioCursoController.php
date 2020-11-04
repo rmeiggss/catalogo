@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\HorarioCurso;
 use App\Producto;
+use App\Instructor;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -29,7 +30,8 @@ class HorarioCursoController extends Controller
     public function create()
     {
         $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
-        return view("admin.horario-curso.create", compact('productos'));
+        $instructors = Instructor::pluck('nombre', 'nombre');
+        return view("admin.horario-curso.create", compact('productos'), compact('instructors'));
 
     }
 
@@ -46,7 +48,8 @@ class HorarioCursoController extends Controller
             'nombre' => 'required',
             'fecha_inicial' => 'required',
             'hora_ini' => 'required',
-            'hora_fi' => 'required'
+            'hora_fi' => 'required',
+            'nombre_instructor' => 'required',
         ]);
 
         HorarioCurso::create([
@@ -85,8 +88,9 @@ class HorarioCursoController extends Controller
     {
         $horariocurso = HorarioCurso::findOrFail($id);
         $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
+        $instructors = Instructor::pluck('nombre', 'nombre');
 
-        return view("admin.horario-curso.edit", ['horariocurso' => $horariocurso], compact('productos'));
+        return view("admin.horario-curso.edit", ['horariocurso' => $horariocurso], compact('productos'), compact('instructors'));
     }
 
     /**
