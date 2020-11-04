@@ -30,6 +30,13 @@
                 <small class="text-danger">Seleccionar el curso</small>
                 @enderror
             </div>
+            <div class="form-group col-md-6">
+                {!!Form::label('nombre_instructor','Nombre del Instructor')!!}
+                {!!Form::select('nombre_instructor', $instructors, 'null', ['class' => 'form-control', 'placeholder'=>'-Seleccionar Instructor-','id'=>'nombre_instructor']) !!}
+                @error('nombre_instructor')
+                <small class="text-danger">Seleccionar el Instructor</small>
+                @enderror
+        </div>
 
             <div class="form-group col-md-6">
                 {!!Form::label('fecha_inicial','Fecha de Inicio')!!}
@@ -138,7 +145,18 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         {!! Form::label('num_horas', 'Numero de Horas: ') !!}
-                        {!! Form::number('num:horas',null, ['class' => 'form-control','id'=>'num_horas']) !!}
+                        {!! Form::number('num_horas',null, ['class' => 'form-control','id'=>'num_horas']) !!}
+                        @error('hora_fi')
+                        <small class="text-danger">Seleccionar la hora final</small>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        {!! Form::label('num_matriculados', 'Matriculados: ') !!}
+                        {!! Form::number('num_matriculados',null, ['class' => 'form-control','id'=>'num_matriculados']) !!}
                         @error('hora_fi')
                         <small class="text-danger">Seleccionar la hora final</small>
                         @enderror
