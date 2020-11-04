@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -70,10 +71,10 @@ class UsuarioController extends Controller
         $usuario = new User;
         $usuario->name = $request->nombre;
         $usuario->email = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password =  Crypt::encryptString($request->password);
         $usuario->ROL_Codigo = $request->rol;
         $usuario->save();
-        $usuario->roles()->sync([$usuario->ROL_Codigo]);
+/* esto es con la tabla pivote        $usuario->roles()->sync([$usuario->ROL_Codigo]); */
 
         return Redirect::to("/usuario");
     }
@@ -115,7 +116,7 @@ class UsuarioController extends Controller
         $usuario = User::findOrFail($id);
         $usuario->name = $request->nombre;
         $usuario->email = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password =  Crypt::encryptString($request->password);
         $usuario->ROL_Codigo = $request->rol;
         $usuario->save();
         $usuario->roles()->sync([$usuario->ROL_Codigo]);
