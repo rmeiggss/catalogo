@@ -53,21 +53,23 @@ class HorarioCursoController extends Controller
             'nombre_instructor' => 'required',
         ]);
 
-        if ($request->dia_lunes) {
+        $apertura = new AperturaCurso;
+        $apertura->Fecha_Apertura = $request->fecha_inicial;
+        $apertura->Cantidad_Horas = $request->num_horas;
+        $apertura->Matriculados = $request->num_matriculados;
+        $apertura->id_curso = $request->nombre;
+        $apertura->INSTP_Codigo = $request->nombre_instructor;
+        $apertura->save();
 
-            $apertura = new AperturaCurso;
-            $apertura->Fecha_Apertura = $request->fecha_inicial;
-            $apertura->Cantidad_Horas = $request->num_horas;
-            $apertura->Matriculados = $request->num_matriculados;
-            $apertura->id_curso = $request->nombre;
-            $apertura->INSTP_Codigo = $request->nombre_instructor;
-            $apertura->save();
-
+        if ($request->dia_lunes)
+        {
             $horariocurso = new HorarioCurso;
             $horariocurso->Dia_Dictado = $request->dia_lunes;
             $horariocurso->Hora_Inicio = $request->hora_ini_lunes;
             $horariocurso->Hora_Fin = $request->hora_fi_lunes;
             $horariocurso->ID_Apertura = $apertura->ID_Apertura;
+            $horariocurso->id_curso = $request->nombre;
+            $horariocurso->INSTP_Codigo = $request->nombre_instructor;
             $horariocurso->save();
 
 /*             $apertura->horarioApertura()->create([
@@ -85,16 +87,8 @@ class HorarioCursoController extends Controller
             'hora_final' => request('hora_fi'),
         ]); */
 
-        if ($request->dia_martes) {
-
-            $apertura = new AperturaCurso;
-            $apertura->Fecha_Apertura = $request->fecha_inicial;
-            $apertura->Cantidad_Horas = $request->num_horas;
-            $apertura->Matriculados = $request->num_matriculados;
-            $apertura->id_curso = $request->nombre;
-            $apertura->INSTP_Codigo = $request->nombre_instructor;
-            $apertura->save();
-
+        if ($request->dia_martes) 
+        {
             $horariocurso = new HorarioCurso;
             $horariocurso->Dia_Dictado = $request->dia_martes;
             $horariocurso->Hora_Inicio = $request->hora_ini_martes;
@@ -103,11 +97,67 @@ class HorarioCursoController extends Controller
             $horariocurso->id_curso = $request->nombre;
             $horariocurso->INSTP_Codigo = $request->nombre_instructor;
             $horariocurso->save();
+        }
 
-/*             $apertura->horarioApertura()->create([
-                'Dia_Dictado' => request('dia_lunes'),
-            ]); */
-            }
+        if ($request->dia_miercoles) 
+        {
+            $horariocurso = new HorarioCurso;
+            $horariocurso->Dia_Dictado = $request->dia_miercoles;
+            $horariocurso->Hora_Inicio = $request->hora_ini_miercoles;
+            $horariocurso->Hora_Fin = $request->hora_fi_miercoles;
+            $horariocurso->ID_Apertura = $apertura->ID_Apertura;
+            $horariocurso->id_curso = $request->nombre;
+            $horariocurso->INSTP_Codigo = $request->nombre_instructor;
+            $horariocurso->save();
+        }
+
+        if ($request->dia_jueves) 
+        {
+            $horariocurso = new HorarioCurso;
+            $horariocurso->Dia_Dictado = $request->dia_jueves;
+            $horariocurso->Hora_Inicio = $request->hora_ini_jueves;
+            $horariocurso->Hora_Fin = $request->hora_fi_jueves;
+            $horariocurso->ID_Apertura = $apertura->ID_Apertura;
+            $horariocurso->id_curso = $request->nombre;
+            $horariocurso->INSTP_Codigo = $request->nombre_instructor;
+            $horariocurso->save();
+        }
+
+        if ($request->dia_viernes) 
+        {
+            $horariocurso = new HorarioCurso;
+            $horariocurso->Dia_Dictado = $request->dia_viernes;
+            $horariocurso->Hora_Inicio = $request->hora_ini_ivernes;
+            $horariocurso->Hora_Fin = $request->hora_fi_viernes;
+            $horariocurso->ID_Apertura = $apertura->ID_Apertura;
+            $horariocurso->id_curso = $request->nombre;
+            $horariocurso->INSTP_Codigo = $request->nombre_instructor;
+            $horariocurso->save();
+        }
+
+        if ($request->dia_sabado) 
+        {
+            $horariocurso = new HorarioCurso;
+            $horariocurso->Dia_Dictado = $request->dia_sabado;
+            $horariocurso->Hora_Inicio = $request->hora_ini_sabado;
+            $horariocurso->Hora_Fin = $request->hora_fi_sabado;
+            $horariocurso->ID_Apertura = $apertura->ID_Apertura;
+            $horariocurso->id_curso = $request->nombre;
+            $horariocurso->INSTP_Codigo = $request->nombre_instructor;
+            $horariocurso->save();
+        }
+
+        if ($request->dia_domingo) 
+        {
+            $horariocurso = new HorarioCurso;
+            $horariocurso->Dia_Dictado = $request->dia_domingo;
+            $horariocurso->Hora_Inicio = $request->hora_ini_domingo;
+            $horariocurso->Hora_Fin = $request->hora_fi_domingo;
+            $horariocurso->ID_Apertura = $apertura->ID_Apertura;
+            $horariocurso->id_curso = $request->nombre;
+            $horariocurso->INSTP_Codigo = $request->nombre_instructor;
+            $horariocurso->save();
+        }
 
         return Redirect::to("/horario-curso");
     }
