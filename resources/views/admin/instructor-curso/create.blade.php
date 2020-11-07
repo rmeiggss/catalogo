@@ -15,7 +15,7 @@
 
 <section class="content">
 <div class="grid-hor">
-    {!!Form::open(['route'=>'horario-instructor.store','method'=>'POST','class'=>'col-sm-10'])!!}
+    {!!Form::open(['route'=>'instructor-curso.store','method'=>'POST','class'=>'col-sm-10'])!!}
         <div class="form-group col-md-6">
             {!!Form::label('nombre_instructor','Nombre del Instructor')!!}
             {!!Form::select('nombre_instructor', $instructors, 'null', ['class' => 'form-control', 'placeholder'=>'-Seleccionar Instructor-','id'=>'nombre_instructor']) !!}

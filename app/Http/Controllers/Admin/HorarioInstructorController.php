@@ -18,7 +18,7 @@ class HorarioInstructorController extends Controller
     public function index()
     {
         $horarioinstructors = HorarioInstructor::all();
-        $horarioinstructors = HorarioInstructor::join('instructor','instructor.INSTP_Codigo','=','horario_instructors.INSTP_Codigo')->select()->get();
+        $horarioinstructors = HorarioInstructor::join('instructor','instructor.INSTP_Codigo','=','horario_instructor.INSTP_Codigo')->select()->get();
         return view('admin.horario-instructor.index', compact('horarioinstructors'));
     }
 
