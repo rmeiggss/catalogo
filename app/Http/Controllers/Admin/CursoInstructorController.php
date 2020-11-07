@@ -7,6 +7,7 @@ use App\Instructor;
 use App\Producto;
 use Illuminate\Http\Request;
 use Redirect;
+use DB;
 
 class CursoInstructorController extends Controller
 {
@@ -17,9 +18,12 @@ class CursoInstructorController extends Controller
      */
     public function index()
     {
-        $cursoinstructor = CursoInstructor::latest()->paginate(8);
-
-        return view('admin.instructor-curso.index', compact('cursoinstructor'));
+        $cursoinstructors = DB::table('curso_instructor')
+        ->join('curso', 'curso.id_curso', '=', 'curso_instructor.id_curso')
+        ->join('instructor', 'instructor.INSTP_Codigo', '=', 'curso_instructor.INSTP_Codigo')
+        ->select()
+        ->get();
+        return view('admin.instructor-curso.index', compact('cursoinstructors'));
     }
 
     /**
@@ -29,10 +33,9 @@ class CursoInstructorController extends Controller
      */
     public function create()
     {
-        $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
-        $instructors = Instructor::pluck('nombre', 'nombre');
+        $productos = Producto::pluck('CURSOC_Nombre', 'id_curso');
+        $instructors = Instructor::pluck('nombre', 'INSTP_Codigo');
         return view("admin.instructor-curso.create", compact('productos'), compact('instructors'));
-
     }
 
     /**
@@ -43,19 +46,15 @@ class CursoInstructorController extends Controller
      */
     public function store(Request $request)
     {
-        /* Validacion del Formulario */
-        $request->validate([
-            'nombre_instructor' => 'required',
-            'nombre_curso' => 'required',
-        ]);
-
-        HorarioCurso::create([
-            'nombre_instructor' => request('nombre'),
-            'nombre_curso' => request('fecha_inicial'),
-
-        ]);
 
 
+        $curso_instructor = new CursoInstructor;
+        $curso_instructor->id_curso = $request->nombre_curso;
+        $curso_instructor->id_curso = $request->nombre_curso;
+        $curso_instructor->INSTP_Codigo = $request->nombre_instructor;
+        $curso_instructor->save();
+/*         $curso_instructor->instructor()->sync([$curso_instructor->id_curso]);
+        $curso_instructor->curso()->sync([$curso_instructor->INSTP_Codigo]); */
 
         return Redirect::to("/instructor-curso");
     }
@@ -114,7 +113,7 @@ class CursoInstructorController extends Controller
      */
     public function destroy($id)
     {
-        HorarioCurso::destroy($id);
+        CursoInstructor::destroy($id);
         return Redirect::to("/instructor-curso");
     }
 }
