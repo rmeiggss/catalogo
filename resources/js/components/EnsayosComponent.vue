@@ -10,7 +10,7 @@
     <br>
     <div>
         <table class="table table-bordered">
-        	<thead v-show="arrayEnsayos.length">
+            <thead v-show="arrayEnsayos.length">
                 <tr>
                     <th scope="col" class="text-center">Identificador</th>
                     <th scope="col" class="text-center">Nombre del Equipo</th>
@@ -24,14 +24,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="ensayo in arrayEnsayos" :key="k">
-                    <td scope="row" class="text-center" v-text="ensayo.id"></td>
-                    <td class="text-center" v-text="ensayo.nombre_eq"></td>
-                    <td class="text-center" v-text="ensayo.descripcion_eq"></td>
-                    <td class="text-center" v-text="ensayo.cantidad_eq"></td>
-                    <td class="text-center" v-text="ensayo.fabricante_eq"></td>
-                    <td class="text-center" v-text="ensayo.descrip_tec_eq"></td>
-                    <td class="text-center" v-text="ensayo.url_tec_eq"></td>
+                <tr v-for="(ensayo,index) in arrayEnsayos" :key="index">
+                    <td scope="row" class="text-center" v-text="ensayo.CODEP_Codigo"></td>
+                    <td class="text-center" v-text="ensayo.CODEC_Nombre_Equipo"></td>
+                    <td class="text-center" v-text="ensayo.CODEC_Descripcion_Equipo"></td>
+                    <td class="text-center" v-text="ensayo.CODEC_Cantidad"></td>
+                    <td class="text-center" v-text="ensayo.CODEC_Fabricante_Equipo"></td>
+                    <td class="text-center" v-text="ensayo.CODEC_Descripcion_Ficha_Tecnica_Equipo"></td>
+                    <td class="text-center" v-text="ensayo.CODEC_Url_Ficha_Tecnica_Equipo"></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-info btn-sm px-1" data-toggle="modal" data-target="#mimodalnuevaprueba"
                         id="boton_modal" style="border-radius:5px;">
@@ -43,14 +43,14 @@
                                 data-target="#modaleditarequipo">
                             Editar
                         </button>
-                        <button class="btn btn-danger btn-sm m-auto" style="border-radius:5px;" @click="deleteEnsayos(k, ensayo)">
+                        <button class="btn btn-danger btn-sm m-auto" style="border-radius:5px;" @click="deleteEnsayos(index, ensayo)">
                             Eliminar
                         </button>
                     </th>
                 </tr>
             </tbody>
         </table>
-	</div>
+    </div>
 
         <!-- MODAL PARA AGREGAR EQUIPO -->
         <div class="modal fade" id="mimodalequipo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -70,25 +70,25 @@
                             <div class="form-horizontal form-control" style="width:400px;height:900px;margin:0 auto">
                                 <label>Nombre del Equipo:</label>
                                 <br>
-                                <input v-model="nombre_eq" type="text" class="form-control">
+                                <input v-model="CODEC_Nombre_Equipo" type="text" class="form-control">
 
                                 <label>Descripcion del Equipo:</label>
                                 <br>
-                                <textarea v-model="descripcion_eq" style="resize: none" class="form-control"
+                                <textarea v-model="CODEC_Descripcion_Equipo" style="resize: none" class="form-control"
                                           rows="5" cols="5"></textarea>
 
                                 <label>Cantidad de Equipos:</label>
-                                <input class="form-control" type="text" v-model="cantidad_eq">
+                                <input v-model="CODEC_Cantidad" class="form-control" type="text" >
 
                                 <label>Fabricante del Equipo:</label>
-                                <input class="form-control" type="text" v-model="fabricante_eq">
+                                <input v-model="CODEC_Fabricante_Equipo" class="form-control" type="text" >
 
                                 <label>Descripcion Tecnica del Equipo:</label>
-                                <textarea style="resize: none" class="form-control" v-model="descrip_tec_eq"
+                                <textarea v-model="CODEC_Descripcion_Ficha_Tecnica_Equipo" style="resize: none" class="form-control"
                                           rows="5" cols="5"></textarea>
 
                                 <label>URL de la Ficha Tecnica del Equipo:</label>
-                                <textarea style="resize: none" class="form-control" v-model="url_tec_eq"
+                                <textarea v-model="CODEC_Url_Ficha_Tecnica_Equipo" style="resize: none" class="form-control"
                                           rows="5" cols="5"></textarea>
 
                                 <div class="form-group">
@@ -125,31 +125,31 @@
                         </h1>
                         <hr>
                             <div class="form-horizontal form-control" style="width:400px;height:900px;margin:0 auto">
-                                <label for="nombre_eq">Nombre del Equipo:</label>
+                                <label>Nombre del Equipo:</label>
                                 <br>
-                                <input type="text" name="nombre_eq" class="form-control" v-model="fillEnsayos.nombre_eq">
+                                <input v-model="this.arrayEnsayos.CODEC_Nombre_Equipo" type="text" class="form-control">
 
                                 <label>Descripcion del Equipo:</label>
                                 <br>
-                                <textarea v-model="fillEnsayos.descripcion_eq" name="descripcion_eq" style="resize: none"
+                                <textarea v-model="CODEC_Descripcion_Equipo" style="resize: none"
                                           class="form-control" rows="5" cols="5"></textarea>
 
                                 <label>Cantidad de Equipos:</label>
                                 <br>
-                                <input class="form-control" type="text" v-model="cantidad_eq" value="">
+                                <input v-model="CODEC_Cantidad" class="form-control" type="text" >
 
                                 <label>Fabricante del Equipo:</label>
                                 <br>
-                                <input class="form-control" type="text" v-model="fabricante_eq" value="">
+                                <input v-model="CODEC_Fabricante_Equipo" class="form-control" type="text" >
 
                                 <label>Descripcion Tecnica del Equipo:</label>
                                 <br>
-                                <textarea style="resize: none" class="form-control" v-model="descrip_tec_eq"
+                                <textarea v-model="CODEC_Descripcion_Ficha_Tecnica_Equipo" style="resize: none" class="form-control"
                                           rows="5" cols="5"></textarea>
 
                                 <label>URL de la Ficha Tecnica del Equipo:</label>
                                 <br>
-                                <textarea style="resize: none" class="form-control" v-model="url_tec_eq"
+                                <textarea v-model="CODEC_Url_Ficha_Tecnica_Equipo" style="resize: none" class="form-control"
                                           rows="5" cols="5"></textarea>
 
                                 <div class="form-group">
@@ -159,7 +159,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button @click="editarEnsayos(ensayo)" class="btn btn-primary btn-lg m-auto" data-dismiss="modal">
+                                <button @click="editEnsayos(index, ensayo)" class="btn btn-primary btn-lg m-auto" data-dismiss="modal">
                                     Editar
                                 </button>
                             </div>
@@ -186,28 +186,21 @@
                 <div class="container">
                 <h1 style="text-align: center;color:black;font-size:30px;"><b>Agregar una Prueba al Equipo</b></h1>
                 <hr>
-                <div class="form-horizontal form-control" style="width:400px;height:650px;margin:0 auto">
+                <div class="form-horizontal form-control" style="width:400px;height:550px;margin:0 auto">
                 Descripcion de la Prueba a Realizar
                 <br>
-                <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
+                <textarea style="resize: none" class="form-control" rows="5" cols="5"></textarea>
                 Norma Asociada a la Prueba:
                 <br>
-                <input class="form-control" type="text" name="" id="primero" />
+                <input class="form-control" type="text" id="primero" />
                 Descripcion de la Norma:
                 <br>
-                <textarea style="resize: none" class="form-control" name="" rows="5" cols="5">Escribir algo...</textarea>
+                <textarea style="resize: none" class="form-control" rows="5" cols="5"></textarea>
+
                 <div class="form-group">
                     <label for="ejemplo_archivo_1">Adjuntar un archivo de la descripcion de la Norma Tecnica</label>
                     <input type="file" id="ejemplo_archivo_1">
                 </div>
-                Estado de la Norma:
-                <br>
-                <select class="form-control">
-                    <option value="volvo">La norma se describio en el formulario</option>
-                    <option value="saab">La norma se envio como archivo en el formulario</option>
-                    <option value="saab">La norma se describio y se envio como archivo en el formulario</option>
-                    <option value="saab">La norma no se envio en el formulario</option>
-                </select>
 
                 <br>
                 </div>
@@ -231,46 +224,38 @@
     export default {
        data: function() {
             return {
-                id: 1,
-                nombre_eq: "",
-                descripcion_eq: "",
-                fabricante_eq: "",
-                descrip_tec_eq: "",
-                arch_descrip_eq: "",
-                cantidad_eq: "",
-                url_tec_eq: "",
+                CODEP_Codigo: 1,
+                CODEC_Nombre_Equipo: "",
+                CODEC_Descripcion_Equipo: "",
+                CODEC_Fabricante_Equipo: "",
+                CODEC_Descripcion_Ficha_Tecnica_Equipo: "",
+                CODEC_Archivo_Descripcion_Equipo: "",
+                CODEC_Cantidad: "",
+                CODEC_Url_Ficha_Tecnica_Equipo: "",
                 arrayEnsayos: [],
-                fillEnsayos: {
-                    'nombre_eq': '',
-                    'descripcion_eq': '',
-                    'cantidad_eq': '',
-                    'fabricante_eq': '',
-                    'descrip_tec_eq': '',
-                    'arch_descrip_eq': '',
-                    'url_tec_eq': '',
-                },
+                fillEnsayos: [],
             }
         },
         methods: {
             getEnsayos (){
                 this.arrayEnsayos.push({
-                    id: this.id,
-                    nombre_eq: this.nombre_eq,
-                    descripcion_eq: this.descripcion_eq,
-                    cantidad_eq: this.cantidad_eq,
-                    fabricante_eq: this.fabricante_eq,
-                    descrip_tec_eq: this.descrip_tec_eq,
-                    arch_descrip_eq: this.arch_descrip_eq,
-                    url_tec_eq: this.url_tec_eq,
+                    CODEP_Codigo: this.CODEP_Codigo,
+                    CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
+                    CODEC_Descripcion_Equipo: this.CODEC_Descripcion_Equipo,
+                    CODEC_Cantidad: this.CODEC_Cantidad,
+                    CODEC_Fabricante_Equipo: this.CODEC_Fabricante_Equipo,
+                    CODEC_Descripcion_Ficha_Tecnica_Equipo: this.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+                    CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
+                    CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo,
                 });
-                this.id = this.id + 1;
-                this.nombre_eq = "";
-                this.descripcion_eq = "";
-                this.fabricante_eq = "";
-                this.descrip_tec_eq = "";
-                this.arch_descrip_eq = "";
-                this.cantidad_eq = "";
-                this.url_tec_eq = "";
+                this.CODEP_Codigo = this.CODEP_Codigo + 1;
+                this.CODEC_Nombre_Equipo = "";
+                this.CODEC_Descripcion_Equipo = "";
+                this.CODEC_Fabricante_Equipo = "";
+                this.CODEC_Descripcion_Ficha_Tecnica_Equipo = "";
+                this.CODEC_Archivo_Descripcion_Equipo = "";
+                this.CODEC_Cantidad = "";
+                this.CODEC_Url_Ficha_Tecnica_Equipo = "";
             },
             deleteEnsayos (index, ensayo) {
                 var index = this.arrayEnsayos.indexOf(ensayo);
@@ -278,15 +263,17 @@
                     this.arrayEnsayos.splice(index, 1);
                 }
             },
-            editarEnsayos (ensayo) {
-                this.fillEnsayos.nombre_eq = ensayo.nombre_eq;
-                this.fillEnsayos.descripcion_eq = ensayo.descripcion_eq;
-                this.fillEnsayos.cantidad_eq = ensayo.cantidad_eq;
-                this.fillEnsayos.fabricante_eq = ensayo.fabricante_eq;
-                this.fillEnsayos.arch_descrip_eq = ensayo.arch_descrip_eq;
-                this.fillEnsayos.url_tec_eq = ensayo.url_tec_eq;
-                this.fillEnsayos.descrip_tec_eq = ensayo.descrip_tec_eq;
-                $('#modaleditarequipo').modal('show');
+            editEnsayos (index, ensayo) {
+                this.fillEnsayos.push({
+                    CODEP_Codigo: this.CODEP_Codigo,
+                    CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
+                    CODEC_Descripcion_Equipo: this.CODEC_Descripcion_Equipo,
+                    CODEC_Cantidad: this.CODEC_Cantidad,
+                    CODEC_Fabricante_Equipo: this.CODEC_Fabricante_Equipo,
+                    CODEC_Descripcion_Ficha_Tecnica_Equipo: this.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+                    CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
+                    CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo,
+                });
             },
         },
     }

@@ -6,8 +6,8 @@
 
         <!-- Cabecera fila 1 -->
         <input name="_method" type="hidden" value="PATCH">
-        <input name="_token" type="hidden" v-model="token">   
-        <input name="id_cotizacion" type="hidden" v-model="cotizacion.COTIP_Codigo">   
+        <input name="_token" type="hidden" v-model="token">
+        <input name="id_cotizacion" type="hidden" v-model="cotizacion.COTIP_Codigo">
         <div class="row row-sm invoice-info">
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
@@ -107,7 +107,7 @@
               <table class="table float-right">
                 <tr>
                   <td class="text-right">
-                    <span class="mr-2">Subtotal S/.</span> 
+                    <span class="mr-2">Subtotal S/.</span>
                     <input type="text" class="form-control-sm w-25" v-model="setSubTotal" name="subtotal" style="text-align: right;"></td>
                 </tr>
                 <tr>
@@ -156,7 +156,7 @@
                                   Costo
                                   <br>
                                   <input class="form-control" v-model.number="prueba.Costo" ref="costo_prueba"/>
-                                </div>                                    
+                                </div>
                               </div>
                               <div class="row">
                                 Descripcion de la Norma:
@@ -164,10 +164,10 @@
                                 <textarea style="resize: none" class="form-control" rows="2" cols="5" v-model="prueba.Descripcion_Norma"></textarea>
                                 <span v-if="prueba.id_prueba_a_realizar>0">
                                   <input class="btn btn-default btn-sm" type="button"  value="Actualizar" @click="updatePrueba()"/>
-                                </span>                                    
+                                </span>
                                 <span v-else>
                                   <input class="btn btn-default btn-sm" type="button"  value="Agregar" @click="addPrueba()"/>
-                                </span>                                
+                                </span>
                               </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                         </div>
                         <div class="row float-right pb-2">
                           <button type="button" class="btn btn-warning" data-dismiss="modal" @click="closePruebas()">Cerrar</button>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
               </div>
@@ -207,7 +207,7 @@
         <!--Botones-->
         <div class="row text-left">
             <div class="col text-left">
-                <a class="btn btn-info" @click="updateCotizacion()">Editar</a>              
+                <a class="btn btn-info" @click="updateCotizacion()">Editar</a>
                 <a class="btn btn-danger" href="/cotizacion">Cancelar</a>
             </div>
         </div>
@@ -227,18 +227,18 @@
               equipo:[],
               prueba:[],
               equipos : [],
-              pruebas:[],                
+              pruebas:[],
               contactos:[],
               usuarios:[],
               saveData:null,
               idxEquipo:null,
-              idxPrueba:null                
+              idxPrueba:null
             }
         },
         props:{
             codigo:String,
             token:String
-        }, 
+        },
         created(){
             this.getEquipos(this.codigo);
             this.getCotizacion(this.codigo);
@@ -261,10 +261,10 @@
           },
           computedAction:function(){
             return '/cotizacion/'+this.codigo;
-          }          
+          }
         },
         methods:{
-            /*Equipos*/ 
+            /*Equipos*/
             getEquipos(id){
                 var url = '/cotizaciondetalle/'+id+'/list';
                 axios.get(url).then(response=>{
@@ -273,16 +273,16 @@
             },
             addEquipo(){
               let fila = {
-                CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",pruebas:[]};              
+                CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",pruebas:[]};
               this.equipos.push(fila);
             },
             editEquipo(index){
               this.idxEquipo = index;
               this.equipo = this.equipos[index];
-            },            
+            },
             deleteEquipo(index){
               this.equipos.splice(index, 1);
-            },   
+            },
             /*Pruebas */
             addPrueba(){
               let _this = this;
@@ -290,7 +290,7 @@
                 CODEP_Codigo:this.equipo.CODEP_Codigo,
                 Descripcion_Prueba:this.prueba.Descripcion_Prueba,
                 Descripcion_Norma:this.prueba.Descripcion_Norma,
-                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,             
+                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,
                 Costo:this.prueba.Costo
               };
               if(typeof this.prueba.Descripcion_Prueba == 'undefined'){
@@ -304,13 +304,13 @@
               else{
                 let url = '/prueba/store';
                 axios.post(url,datos).then(function(response){
-                  _this.prueba = [];   
-                  _this.getPruebas(datos.CODEP_Codigo);               
+                  _this.prueba = [];
+                  _this.getPruebas(datos.CODEP_Codigo);
                 }).catch(function(error){
                   console.log(error);
                 });
               }
-            }, 
+            },
             getPruebas(id){
               var url = '/prueba/'+id+'/list';
               axios.get(url).then(response=>{
@@ -322,7 +322,7 @@
               this.idxPrueba = indice;
               this.prueba = this.equipo.pruebas[indice];
               console.log(this.prueba);
-            }, 
+            },
             updatePrueba(indice){
               let _this = this;
               let url   = "/prueba/update";
@@ -331,14 +331,14 @@
                 CODEP_Codigo:this.equipo.CODEP_Codigo,
                 Descripcion_Prueba:this.prueba.Descripcion_Prueba,
                 Descripcion_Norma:this.prueba.Descripcion_Norma,
-                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,             
+                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,
                 Costo:this.prueba.Costo
               };
               axios.put(url,datos).then(function(response){
-                _this.prueba = [];   
-                _this.getPruebas(datos.CODEP_Codigo);   
+                _this.prueba = [];
+                _this.getPruebas(datos.CODEP_Codigo);
                 //this.prueba = [];
-                //this.idxPrueba = null;                
+                //this.idxPrueba = null;
               }).catch(function(error){
                 console.log(error);
               });
@@ -355,7 +355,7 @@
               });
             },
             closePruebas(){
-              this.prueba = []; 
+              this.prueba = [];
             },
             /*Cotizaciones */
             getCotizacion(id){
@@ -366,7 +366,7 @@
                     this.cotizacion = resultado;
                     console.log(resultado);
                 });
-            },            
+            },
             updateCotizacion(){
               let url = '/cotizacion/update';
               axios.put(url,{

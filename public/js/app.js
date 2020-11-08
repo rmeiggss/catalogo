@@ -2788,7 +2788,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.prueba = [];
 
         _this.getPruebas(datos.CODEP_Codigo); //this.prueba = [];
-        //this.idxPrueba = null;                
+        //this.idxPrueba = null;
 
       })["catch"](function (error) {
         console.log(error);
@@ -3094,56 +3094,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      id: 1,
-      nombre_eq: "",
-      descripcion_eq: "",
-      fabricante_eq: "",
-      descrip_tec_eq: "",
-      arch_descrip_eq: "",
-      cantidad_eq: "",
-      url_tec_eq: "",
+      CODEP_Codigo: 1,
+      CODEC_Nombre_Equipo: "",
+      CODEC_Descripcion_Equipo: "",
+      CODEC_Fabricante_Equipo: "",
+      CODEC_Descripcion_Ficha_Tecnica_Equipo: "",
+      CODEC_Archivo_Descripcion_Equipo: "",
+      CODEC_Cantidad: "",
+      CODEC_Url_Ficha_Tecnica_Equipo: "",
       arrayEnsayos: [],
-      fillEnsayos: {
-        'nombre_eq': '',
-        'descripcion_eq': '',
-        'cantidad_eq': '',
-        'fabricante_eq': '',
-        'descrip_tec_eq': '',
-        'arch_descrip_eq': '',
-        'url_tec_eq': ''
-      }
+      fillEnsayos: []
     };
   },
   methods: {
     getEnsayos: function getEnsayos() {
       this.arrayEnsayos.push({
-        id: this.id,
-        nombre_eq: this.nombre_eq,
-        descripcion_eq: this.descripcion_eq,
-        cantidad_eq: this.cantidad_eq,
-        fabricante_eq: this.fabricante_eq,
-        descrip_tec_eq: this.descrip_tec_eq,
-        arch_descrip_eq: this.arch_descrip_eq,
-        url_tec_eq: this.url_tec_eq
+        CODEP_Codigo: this.CODEP_Codigo,
+        CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
+        CODEC_Descripcion_Equipo: this.CODEC_Descripcion_Equipo,
+        CODEC_Cantidad: this.CODEC_Cantidad,
+        CODEC_Fabricante_Equipo: this.CODEC_Fabricante_Equipo,
+        CODEC_Descripcion_Ficha_Tecnica_Equipo: this.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+        CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
+        CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo
       });
-      this.id = this.id + 1;
-      this.nombre_eq = "";
-      this.descripcion_eq = "";
-      this.fabricante_eq = "";
-      this.descrip_tec_eq = "";
-      this.arch_descrip_eq = "";
-      this.cantidad_eq = "";
-      this.url_tec_eq = "";
+      this.CODEP_Codigo = this.CODEP_Codigo + 1;
+      this.CODEC_Nombre_Equipo = "";
+      this.CODEC_Descripcion_Equipo = "";
+      this.CODEC_Fabricante_Equipo = "";
+      this.CODEC_Descripcion_Ficha_Tecnica_Equipo = "";
+      this.CODEC_Archivo_Descripcion_Equipo = "";
+      this.CODEC_Cantidad = "";
+      this.CODEC_Url_Ficha_Tecnica_Equipo = "";
     },
     deleteEnsayos: function deleteEnsayos(index, ensayo) {
       var index = this.arrayEnsayos.indexOf(ensayo);
@@ -3152,15 +3137,17 @@ __webpack_require__.r(__webpack_exports__);
         this.arrayEnsayos.splice(index, 1);
       }
     },
-    editarEnsayos: function editarEnsayos(ensayo) {
-      this.fillEnsayos.nombre_eq = ensayo.nombre_eq;
-      this.fillEnsayos.descripcion_eq = ensayo.descripcion_eq;
-      this.fillEnsayos.cantidad_eq = ensayo.cantidad_eq;
-      this.fillEnsayos.fabricante_eq = ensayo.fabricante_eq;
-      this.fillEnsayos.arch_descrip_eq = ensayo.arch_descrip_eq;
-      this.fillEnsayos.url_tec_eq = ensayo.url_tec_eq;
-      this.fillEnsayos.descrip_tec_eq = ensayo.descrip_tec_eq;
-      $('#modaleditarequipo').modal('show');
+    editEnsayos: function editEnsayos(index, ensayo) {
+      this.fillEnsayos.push({
+        CODEP_Codigo: this.CODEP_Codigo,
+        CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
+        CODEC_Descripcion_Equipo: this.CODEC_Descripcion_Equipo,
+        CODEC_Cantidad: this.CODEC_Cantidad,
+        CODEC_Fabricante_Equipo: this.CODEC_Fabricante_Equipo,
+        CODEC_Descripcion_Ficha_Tecnica_Equipo: this.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+        CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
+        CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo
+      });
     }
   }
 });
@@ -41651,42 +41638,52 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.arrayEnsayos, function(ensayo) {
-            return _c("tr", { key: _vm.k }, [
+          _vm._l(_vm.arrayEnsayos, function(ensayo, index) {
+            return _c("tr", { key: index }, [
               _c("td", {
                 staticClass: "text-center",
                 attrs: { scope: "row" },
-                domProps: { textContent: _vm._s(ensayo.id) }
+                domProps: { textContent: _vm._s(ensayo.CODEP_Codigo) }
               }),
               _vm._v(" "),
               _c("td", {
                 staticClass: "text-center",
-                domProps: { textContent: _vm._s(ensayo.nombre_eq) }
+                domProps: { textContent: _vm._s(ensayo.CODEC_Nombre_Equipo) }
               }),
               _vm._v(" "),
               _c("td", {
                 staticClass: "text-center",
-                domProps: { textContent: _vm._s(ensayo.descripcion_eq) }
+                domProps: {
+                  textContent: _vm._s(ensayo.CODEC_Descripcion_Equipo)
+                }
               }),
               _vm._v(" "),
               _c("td", {
                 staticClass: "text-center",
-                domProps: { textContent: _vm._s(ensayo.cantidad_eq) }
+                domProps: { textContent: _vm._s(ensayo.CODEC_Cantidad) }
               }),
               _vm._v(" "),
               _c("td", {
                 staticClass: "text-center",
-                domProps: { textContent: _vm._s(ensayo.fabricante_eq) }
+                domProps: {
+                  textContent: _vm._s(ensayo.CODEC_Fabricante_Equipo)
+                }
               }),
               _vm._v(" "),
               _c("td", {
                 staticClass: "text-center",
-                domProps: { textContent: _vm._s(ensayo.descrip_tec_eq) }
+                domProps: {
+                  textContent: _vm._s(
+                    ensayo.CODEC_Descripcion_Ficha_Tecnica_Equipo
+                  )
+                }
               }),
               _vm._v(" "),
               _c("td", {
                 staticClass: "text-center",
-                domProps: { textContent: _vm._s(ensayo.url_tec_eq) }
+                domProps: {
+                  textContent: _vm._s(ensayo.CODEC_Url_Ficha_Tecnica_Equipo)
+                }
               }),
               _vm._v(" "),
               _vm._m(1, true),
@@ -41716,7 +41713,7 @@ var render = function() {
                     staticStyle: { "border-radius": "5px" },
                     on: {
                       click: function($event) {
-                        return _vm.deleteEnsayos(_vm.k, ensayo)
+                        return _vm.deleteEnsayos(index, ensayo)
                       }
                     }
                   },
@@ -41779,19 +41776,19 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.nombre_eq,
-                            expression: "nombre_eq"
+                            value: _vm.CODEC_Nombre_Equipo,
+                            expression: "CODEC_Nombre_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: { type: "text" },
-                        domProps: { value: _vm.nombre_eq },
+                        domProps: { value: _vm.CODEC_Nombre_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.nombre_eq = $event.target.value
+                            _vm.CODEC_Nombre_Equipo = $event.target.value
                           }
                         }
                       }),
@@ -41805,20 +41802,20 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.descripcion_eq,
-                            expression: "descripcion_eq"
+                            value: _vm.CODEC_Descripcion_Equipo,
+                            expression: "CODEC_Descripcion_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         staticStyle: { resize: "none" },
                         attrs: { rows: "5", cols: "5" },
-                        domProps: { value: _vm.descripcion_eq },
+                        domProps: { value: _vm.CODEC_Descripcion_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.descripcion_eq = $event.target.value
+                            _vm.CODEC_Descripcion_Equipo = $event.target.value
                           }
                         }
                       }),
@@ -41830,19 +41827,19 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.cantidad_eq,
-                            expression: "cantidad_eq"
+                            value: _vm.CODEC_Cantidad,
+                            expression: "CODEC_Cantidad"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: { type: "text" },
-                        domProps: { value: _vm.cantidad_eq },
+                        domProps: { value: _vm.CODEC_Cantidad },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.cantidad_eq = $event.target.value
+                            _vm.CODEC_Cantidad = $event.target.value
                           }
                         }
                       }),
@@ -41854,19 +41851,19 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fabricante_eq,
-                            expression: "fabricante_eq"
+                            value: _vm.CODEC_Fabricante_Equipo,
+                            expression: "CODEC_Fabricante_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: { type: "text" },
-                        domProps: { value: _vm.fabricante_eq },
+                        domProps: { value: _vm.CODEC_Fabricante_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.fabricante_eq = $event.target.value
+                            _vm.CODEC_Fabricante_Equipo = $event.target.value
                           }
                         }
                       }),
@@ -41878,20 +41875,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.descrip_tec_eq,
-                            expression: "descrip_tec_eq"
+                            value: _vm.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+                            expression: "CODEC_Descripcion_Ficha_Tecnica_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         staticStyle: { resize: "none" },
                         attrs: { rows: "5", cols: "5" },
-                        domProps: { value: _vm.descrip_tec_eq },
+                        domProps: {
+                          value: _vm.CODEC_Descripcion_Ficha_Tecnica_Equipo
+                        },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.descrip_tec_eq = $event.target.value
+                            _vm.CODEC_Descripcion_Ficha_Tecnica_Equipo =
+                              $event.target.value
                           }
                         }
                       }),
@@ -41905,20 +41905,21 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.url_tec_eq,
-                            expression: "url_tec_eq"
+                            value: _vm.CODEC_Url_Ficha_Tecnica_Equipo,
+                            expression: "CODEC_Url_Ficha_Tecnica_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         staticStyle: { resize: "none" },
                         attrs: { rows: "5", cols: "5" },
-                        domProps: { value: _vm.url_tec_eq },
+                        domProps: { value: _vm.CODEC_Url_Ficha_Tecnica_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.url_tec_eq = $event.target.value
+                            _vm.CODEC_Url_Ficha_Tecnica_Equipo =
+                              $event.target.value
                           }
                         }
                       }),
@@ -41986,9 +41987,7 @@ var render = function() {
                       }
                     },
                     [
-                      _c("label", { attrs: { for: "nombre_eq" } }, [
-                        _vm._v("Nombre del Equipo:")
-                      ]),
+                      _c("label", [_vm._v("Nombre del Equipo:")]),
                       _vm._v(" "),
                       _c("br"),
                       _vm._v(" "),
@@ -41997,21 +41996,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fillEnsayos.nombre_eq,
-                            expression: "fillEnsayos.nombre_eq"
+                            value: this.arrayEnsayos.CODEC_Nombre_Equipo,
+                            expression: "this.arrayEnsayos.CODEC_Nombre_Equipo"
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", name: "nombre_eq" },
-                        domProps: { value: _vm.fillEnsayos.nombre_eq },
+                        attrs: { type: "text" },
+                        domProps: {
+                          value: this.arrayEnsayos.CODEC_Nombre_Equipo
+                        },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.fillEnsayos,
-                              "nombre_eq",
+                              this.arrayEnsayos,
+                              "CODEC_Nombre_Equipo",
                               $event.target.value
                             )
                           }
@@ -42027,24 +42028,20 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fillEnsayos.descripcion_eq,
-                            expression: "fillEnsayos.descripcion_eq"
+                            value: _vm.CODEC_Descripcion_Equipo,
+                            expression: "CODEC_Descripcion_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         staticStyle: { resize: "none" },
-                        attrs: { name: "descripcion_eq", rows: "5", cols: "5" },
-                        domProps: { value: _vm.fillEnsayos.descripcion_eq },
+                        attrs: { rows: "5", cols: "5" },
+                        domProps: { value: _vm.CODEC_Descripcion_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(
-                              _vm.fillEnsayos,
-                              "descripcion_eq",
-                              $event.target.value
-                            )
+                            _vm.CODEC_Descripcion_Equipo = $event.target.value
                           }
                         }
                       }),
@@ -42058,19 +42055,19 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.cantidad_eq,
-                            expression: "cantidad_eq"
+                            value: _vm.CODEC_Cantidad,
+                            expression: "CODEC_Cantidad"
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", value: "" },
-                        domProps: { value: _vm.cantidad_eq },
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.CODEC_Cantidad },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.cantidad_eq = $event.target.value
+                            _vm.CODEC_Cantidad = $event.target.value
                           }
                         }
                       }),
@@ -42084,19 +42081,19 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fabricante_eq,
-                            expression: "fabricante_eq"
+                            value: _vm.CODEC_Fabricante_Equipo,
+                            expression: "CODEC_Fabricante_Equipo"
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", value: "" },
-                        domProps: { value: _vm.fabricante_eq },
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.CODEC_Fabricante_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.fabricante_eq = $event.target.value
+                            _vm.CODEC_Fabricante_Equipo = $event.target.value
                           }
                         }
                       }),
@@ -42110,20 +42107,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.descrip_tec_eq,
-                            expression: "descrip_tec_eq"
+                            value: _vm.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+                            expression: "CODEC_Descripcion_Ficha_Tecnica_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         staticStyle: { resize: "none" },
                         attrs: { rows: "5", cols: "5" },
-                        domProps: { value: _vm.descrip_tec_eq },
+                        domProps: {
+                          value: _vm.CODEC_Descripcion_Ficha_Tecnica_Equipo
+                        },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.descrip_tec_eq = $event.target.value
+                            _vm.CODEC_Descripcion_Ficha_Tecnica_Equipo =
+                              $event.target.value
                           }
                         }
                       }),
@@ -42139,20 +42139,21 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.url_tec_eq,
-                            expression: "url_tec_eq"
+                            value: _vm.CODEC_Url_Ficha_Tecnica_Equipo,
+                            expression: "CODEC_Url_Ficha_Tecnica_Equipo"
                           }
                         ],
                         staticClass: "form-control",
                         staticStyle: { resize: "none" },
                         attrs: { rows: "5", cols: "5" },
-                        domProps: { value: _vm.url_tec_eq },
+                        domProps: { value: _vm.CODEC_Url_Ficha_Tecnica_Equipo },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.url_tec_eq = $event.target.value
+                            _vm.CODEC_Url_Ficha_Tecnica_Equipo =
+                              $event.target.value
                           }
                         }
                       }),
@@ -42169,7 +42170,7 @@ var render = function() {
                         attrs: { "data-dismiss": "modal" },
                         on: {
                           click: function($event) {
-                            return _vm.editarEnsayos(_vm.ensayo)
+                            return _vm.editEnsayos(_vm.index, _vm.ensayo)
                           }
                         }
                       },
@@ -42420,7 +42421,7 @@ var staticRenderFns = [
                       staticClass: "form-horizontal form-control",
                       staticStyle: {
                         width: "400px",
-                        height: "650px",
+                        height: "550px",
                         margin: "0 auto"
                       }
                     },
@@ -42430,15 +42431,11 @@ var staticRenderFns = [
                       ),
                       _c("br"),
                       _vm._v(" "),
-                      _c(
-                        "textarea",
-                        {
-                          staticClass: "form-control",
-                          staticStyle: { resize: "none" },
-                          attrs: { name: "", rows: "5", cols: "5" }
-                        },
-                        [_vm._v("Escribir algo...")]
-                      ),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        staticStyle: { resize: "none" },
+                        attrs: { rows: "5", cols: "5" }
+                      }),
                       _vm._v(
                         "\r\n                Norma Asociada a la Prueba:\r\n                "
                       ),
@@ -42446,22 +42443,18 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("input", {
                         staticClass: "form-control",
-                        attrs: { type: "text", name: "", id: "primero" }
+                        attrs: { type: "text", id: "primero" }
                       }),
                       _vm._v(
                         "\r\n                Descripcion de la Norma:\r\n                "
                       ),
                       _c("br"),
                       _vm._v(" "),
-                      _c(
-                        "textarea",
-                        {
-                          staticClass: "form-control",
-                          staticStyle: { resize: "none" },
-                          attrs: { name: "", rows: "5", cols: "5" }
-                        },
-                        [_vm._v("Escribir algo...")]
-                      ),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        staticStyle: { resize: "none" },
+                        attrs: { rows: "5", cols: "5" }
+                      }),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "ejemplo_archivo_1" } }, [
@@ -42473,32 +42466,6 @@ var staticRenderFns = [
                         _c("input", {
                           attrs: { type: "file", id: "ejemplo_archivo_1" }
                         })
-                      ]),
-                      _vm._v(
-                        "\r\n                Estado de la Norma:\r\n                "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("select", { staticClass: "form-control" }, [
-                        _c("option", { attrs: { value: "volvo" } }, [
-                          _vm._v("La norma se describio en el formulario")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "saab" } }, [
-                          _vm._v(
-                            "La norma se envio como archivo en el formulario"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "saab" } }, [
-                          _vm._v(
-                            "La norma se describio y se envio como archivo en el formulario"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "saab" } }, [
-                          _vm._v("La norma no se envio en el formulario")
-                        ])
                       ]),
                       _vm._v(" "),
                       _c("br")
@@ -55006,7 +54973,7 @@ Vue.component('createcontacto-component', __webpack_require__(/*! ./components/C
 Vue.component('editcotizacion-component', __webpack_require__(/*! ./components/EditCotizacionComponent.vue */ "./resources/js/components/EditCotizacionComponent.vue")["default"]);
 Vue.component('editcontacto-component', __webpack_require__(/*! ./components/EditContactoComponent.vue */ "./resources/js/components/EditContactoComponent.vue")["default"]);
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('ensayos-component', __webpack_require__(/*! ./components/EnsayosComponent.vue */ "./resources/js/components/EnsayosComponent.vue")["default"]);
+Vue.component('ensayos', __webpack_require__(/*! ./components/EnsayosComponent.vue */ "./resources/js/components/EnsayosComponent.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -55628,8 +55595,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

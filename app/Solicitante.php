@@ -14,4 +14,13 @@ class Solicitante extends Model
 
     public $timestamps = false;
 
+    public function contacto()
+    {
+    	return $this->hasMany('App\Contacto', 'SOLIP_Codigo');
+    }
+
+    public function tipo_solicitante()
+    {
+    	return $this->belongsTo('App\TipoSolicitante.php', 'TIPSOLIP_Codigo');
+    }
 }

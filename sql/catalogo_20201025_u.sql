@@ -39,8 +39,8 @@ DELETE FROM `apertura_curso`;
 -- Volcando estructura para tabla catalogo.asesoria
 CREATE TABLE IF NOT EXISTS `asesoria` (
   `id_asesoria` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `ASESORIA_Nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ASESORIA_Descripcion` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ASESORIA_Nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ASESORIA_Descripcion` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_asesoria`)
@@ -409,10 +409,10 @@ DELETE FROM `permiso`;
 CREATE TABLE IF NOT EXISTS `prueba_equipo` (
   `id_prueba_a_realizar` int(11) NOT NULL AUTO_INCREMENT,
   `CODEP_Codigo` int(11) DEFAULT NULL,
-  `Descripcion_Prueba` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `Norma_Asoc_Prueba` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `Descripcion_Norma` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `Arch_Norma_Tecnica` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `Descripcion_Prueba` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Norma_Asoc_Prueba` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Descripcion_Norma` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Arch_Norma_Tecnica` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `Costo` decimal(7,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -488,7 +488,7 @@ CREATE TABLE IF NOT EXISTS `servicio_academico` (
   `created_at` timestamp NULL DEFAULT NULL,
   `update_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_servicio_acad`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla catalogo.servicio_academico: ~0 rows (aproximadamente)
 DELETE FROM `servicio_academico`;
