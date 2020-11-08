@@ -13,4 +13,13 @@ class Instructor extends Model
     protected $table = 'instructor';
 
     protected $fillable = ['nombre', 'celular', 'email'];
+
+    public function horarioInstructor()
+    {
+        return $this->hasMany('App\HorarioInstructor');
+    }
+
+    public function curso(){
+        return $this->belongsToMany('App\Producto');
+    }
 }

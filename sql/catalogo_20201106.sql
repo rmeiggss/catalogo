@@ -1,303 +1,298 @@
 -- --------------------------------------------------------
--- Host:                         localhost
--- Versión del servidor:         8.0.17 - MySQL Community Server - GPL
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.4.13-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             9.3.0.4984
+-- HeidiSQL Versión:             11.0.0.5919
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Volcando estructura de base de datos para catalogo
-CREATE DATABASE IF NOT EXISTS `catalogo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `catalogo`;
 
+-- Volcando estructura de base de datos para catalogo
+CREATE DATABASE IF NOT EXISTS `catalogo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `catalogo`;
 
 -- Volcando estructura para tabla catalogo.apertura_curso
 CREATE TABLE IF NOT EXISTS `apertura_curso` (
   `ID_Apertura` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha_Apertura` date DEFAULT NULL,
   `Cantidad_Horas` int(11) DEFAULT NULL,
-  `Matriculados` int(11) NOT NULL DEFAULT '0',
-  `INSTP_Codigo` int(11) NOT NULL DEFAULT '0',
-  `id_curso` int(11) DEFAULT NULL,
+  `Matriculados` int(11) NOT NULL DEFAULT 0,
+  `id_curso` int(11) NOT NULL,
+  `INSTP_Codigo` int(11) NOT NULL,
   PRIMARY KEY (`ID_Apertura`),
-  KEY `FK_apertura_curso_curso` (`id_curso`),
   KEY `FK_apertura_curso_instructor` (`INSTP_Codigo`),
-  CONSTRAINT `FK_apertura_curso_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`),
-  CONSTRAINT `FK_apertura_curso_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_apertura_curso_curso` (`id_curso`),
+  CONSTRAINT `FK_apertura_curso_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_apertura_curso_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.apertura_curso: ~0 rows (aproximadamente)
-DELETE FROM `apertura_curso`;
+-- Volcando datos para la tabla catalogo.apertura_curso: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `apertura_curso` DISABLE KEYS */;
+REPLACE INTO `apertura_curso` (`ID_Apertura`, `Fecha_Apertura`, `Cantidad_Horas`, `Matriculados`, `id_curso`, `INSTP_Codigo`) VALUES
+	(11, '2020-11-27', 11, 7, 20, 14),
+	(12, '2020-12-10', 11, 10, 20, 13);
 /*!40000 ALTER TABLE `apertura_curso` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.asesoria
 CREATE TABLE IF NOT EXISTS `asesoria` (
   `id_asesoria` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `ASESORIA_Nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ASESORIA_Descripcion` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `ASESORIA_Nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ASESORIA_Descripcion` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_asesoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.asesoria: ~2 rows (aproximadamente)
-DELETE FROM `asesoria`;
 /*!40000 ALTER TABLE `asesoria` DISABLE KEYS */;
-INSERT INTO `asesoria` (`id_asesoria`, `ASESORIA_Nombre`, `ASESORIA_Descripcion`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `asesoria` (`id_asesoria`, `ASESORIA_Nombre`, `ASESORIA_Descripcion`, `created_at`, `updated_at`) VALUES
 	(3, 'Android  con Kotlin', '22', NULL, NULL),
 	(4, 'Android  con Kotlin', 'dsfdsf', NULL, NULL);
 /*!40000 ALTER TABLE `asesoria` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.contacto
 CREATE TABLE IF NOT EXISTS `contacto` (
   `id_contacto` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_contacto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `correo_contacto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `celular_contacto` char(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nombre_contacto` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correo_contacto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `celular_contacto` char(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `SOLIP_Codigo` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_contacto`),
   KEY `FK_contacto_solicitante` (`SOLIP_Codigo`),
   CONSTRAINT `FK_contacto_solicitante` FOREIGN KEY (`SOLIP_Codigo`) REFERENCES `solicitante` (`SOLIP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.contacto: ~3 rows (aproximadamente)
-DELETE FROM `contacto`;
 /*!40000 ALTER TABLE `contacto` DISABLE KEYS */;
-INSERT INTO `contacto` (`id_contacto`, `nombre_contacto`, `correo_contacto`, `celular_contacto`, `SOLIP_Codigo`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `contacto` (`id_contacto`, `nombre_contacto`, `correo_contacto`, `celular_contacto`, `SOLIP_Codigo`, `created_at`, `updated_at`) VALUES
 	(1, 'Carlos Ramirez', 'carlos.ramirez@uni.pe', '99665523', 239, NULL, NULL),
 	(2, 'Alvaro Celis', 'alvaro.celis@uni.pe', '95863256', 240, NULL, NULL),
 	(3, 'Luz Peñafiel', NULL, '23234', 240, NULL, NULL);
 /*!40000 ALTER TABLE `contacto` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.cotizacion
 CREATE TABLE IF NOT EXISTS `cotizacion` (
   `COTIP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
   `TIPOCOP_Codigo` int(11) DEFAULT NULL,
   `id_contacto` int(11) DEFAULT NULL,
-  `COTIC_Numero` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `COTIC_Mensaje_Director` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `COTIC_Mensaje_Personal` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `COTIC_Numero` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COTIC_Mensaje_Director` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COTIC_Mensaje_Personal` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `COTIC_SubTotal` decimal(7,2) DEFAULT NULL,
   `COTIC_Igv` decimal(7,2) DEFAULT NULL,
   `COTIC_Total` decimal(7,2) DEFAULT NULL,
   `COTIC_Fecha_Cotizacion` datetime DEFAULT NULL,
   `COTIC_Fecha_Atencion` datetime DEFAULT NULL,
   `COTIC_FechaModificacion` datetime DEFAULT NULL,
-  `COTIC_FechaRegistro` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `COTIC_Correo1` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `COTIC_Correo2` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `COTIC_Correo3` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `COTIC_Correo4` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Archivo_de_Pago` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `COTIC_FechaRegistro` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `COTIC_Correo1` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COTIC_Correo2` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COTIC_Correo3` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COTIC_Correo4` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Archivo_de_Pago` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`COTIP_Codigo`),
   KEY `fk_cotizacion_tipocotizacion_idx` (`TIPOCOP_Codigo`),
   KEY `FK_cotizacion_contacto` (`id_contacto`),
   CONSTRAINT `fk_contacto_cotizacion` FOREIGN KEY (`id_contacto`) REFERENCES `contacto` (`id_contacto`),
   CONSTRAINT `fk_cotizacion_tipocotizacion` FOREIGN KEY (`TIPOCOP_Codigo`) REFERENCES `tipocotizacion` (`TIPOCOP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.cotizacion: ~2 rows (aproximadamente)
-DELETE FROM `cotizacion`;
 /*!40000 ALTER TABLE `cotizacion` DISABLE KEYS */;
-INSERT INTO `cotizacion` (`COTIP_Codigo`, `TIPOCOP_Codigo`, `id_contacto`, `COTIC_Numero`, `COTIC_Mensaje_Director`, `COTIC_Mensaje_Personal`, `COTIC_SubTotal`, `COTIC_Igv`, `COTIC_Total`, `COTIC_Fecha_Cotizacion`, `COTIC_Fecha_Atencion`, `COTIC_FechaModificacion`, `COTIC_FechaRegistro`, `COTIC_Correo1`, `COTIC_Correo2`, `COTIC_Correo3`, `COTIC_Correo4`, `Archivo_de_Pago`) VALUES
+REPLACE INTO `cotizacion` (`COTIP_Codigo`, `TIPOCOP_Codigo`, `id_contacto`, `COTIC_Numero`, `COTIC_Mensaje_Director`, `COTIC_Mensaje_Personal`, `COTIC_SubTotal`, `COTIC_Igv`, `COTIC_Total`, `COTIC_Fecha_Cotizacion`, `COTIC_Fecha_Atencion`, `COTIC_FechaModificacion`, `COTIC_FechaRegistro`, `COTIC_Correo1`, `COTIC_Correo2`, `COTIC_Correo3`, `COTIC_Correo4`, `Archivo_de_Pago`) VALUES
 	(18, 1, 1, '123', '2', NULL, 12.00, 21.00, NULL, NULL, NULL, NULL, '2020-09-15 18:43:44', NULL, NULL, NULL, NULL, NULL),
 	(19, NULL, 1, '12', NULL, NULL, NULL, 4.32, 28.32, '2020-08-10 00:00:00', NULL, NULL, '2020-09-15 18:46:34', NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `cotizacion` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.cotizacion_capacitacion
 CREATE TABLE IF NOT EXISTS `cotizacion_capacitacion` (
   `COCAP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `COTIP_Codigo` int(11) NOT NULL DEFAULT '0',
+  `COTIP_Codigo` int(11) NOT NULL DEFAULT 0,
   `id_curso` int(11) DEFAULT NULL,
   `COCAC_Cantidad` int(11) DEFAULT NULL,
-  `COCAC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `COCAC_FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp(),
   `COCAC_FechaModificacion` datetime DEFAULT NULL,
   PRIMARY KEY (`COCAP_Codigo`),
   KEY `fk_cotizacioncapac_curso_idx` (`id_curso`),
   KEY `FK_cotizacion_capacitacion_cotizacion` (`COTIP_Codigo`),
   CONSTRAINT `FK_cotizacion_capacitacion_cotizacion` FOREIGN KEY (`COTIP_Codigo`) REFERENCES `cotizacion` (`COTIP_Codigo`),
   CONSTRAINT `fk_cotizacioncapac_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.cotizacion_capacitacion: ~0 rows (aproximadamente)
-DELETE FROM `cotizacion_capacitacion`;
 /*!40000 ALTER TABLE `cotizacion_capacitacion` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cotizacion_capacitacion` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.cotizacion_detalle
 CREATE TABLE IF NOT EXISTS `cotizacion_detalle` (
   `CODEP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `COTIP_Codigo` int(11) NOT NULL DEFAULT '0',
-  `CODEC_Nombre_Equipo` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CODEC_Descripcion_Equipo` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CODEC_Fabricante_Equipo` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CODEC_Descripcion_Ficha_Tecnica_Equipo` text COLLATE utf8mb4_general_ci,
-  `CODEC_Url_Ficha_Tecnica_Equipo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `CODEC_Archivo_Descripcion_Equipo` text COLLATE utf8mb4_general_ci,
-  `CODEC_FlagEstado` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `COTIP_Codigo` int(11) NOT NULL DEFAULT 0,
+  `CODEC_Nombre_Equipo` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CODEC_Descripcion_Equipo` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CODEC_Fabricante_Equipo` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CODEC_Descripcion_Ficha_Tecnica_Equipo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CODEC_Url_Ficha_Tecnica_Equipo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CODEC_Archivo_Descripcion_Equipo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CODEC_FlagEstado` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `CODEC_Costo` decimal(7,2) DEFAULT NULL,
   `CODEC_Cantidad` int(11) DEFAULT NULL,
   `CODEC_SubTotal` decimal(7,2) DEFAULT NULL,
-  `CODEC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CODEC_FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp(),
   `CODEC_FechaModificacion` datetime DEFAULT NULL,
   PRIMARY KEY (`CODEP_Codigo`),
   KEY `fk_cotizacion_cotizaciondetalle` (`COTIP_Codigo`),
   CONSTRAINT `fk_cotizacion_cotizaciondetalle` FOREIGN KEY (`COTIP_Codigo`) REFERENCES `cotizacion` (`COTIP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.cotizacion_detalle: ~0 rows (aproximadamente)
-DELETE FROM `cotizacion_detalle`;
+-- Volcando datos para la tabla catalogo.cotizacion_detalle: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `cotizacion_detalle` DISABLE KEYS */;
-INSERT INTO `cotizacion_detalle` (`CODEP_Codigo`, `COTIP_Codigo`, `CODEC_Nombre_Equipo`, `CODEC_Descripcion_Equipo`, `CODEC_Fabricante_Equipo`, `CODEC_Descripcion_Ficha_Tecnica_Equipo`, `CODEC_Url_Ficha_Tecnica_Equipo`, `CODEC_Archivo_Descripcion_Equipo`, `CODEC_FlagEstado`, `CODEC_Costo`, `CODEC_Cantidad`, `CODEC_SubTotal`, `CODEC_FechaRegistro`, `CODEC_FechaModificacion`) VALUES
+REPLACE INTO `cotizacion_detalle` (`CODEP_Codigo`, `COTIP_Codigo`, `CODEC_Nombre_Equipo`, `CODEC_Descripcion_Equipo`, `CODEC_Fabricante_Equipo`, `CODEC_Descripcion_Ficha_Tecnica_Equipo`, `CODEC_Url_Ficha_Tecnica_Equipo`, `CODEC_Archivo_Descripcion_Equipo`, `CODEC_FlagEstado`, `CODEC_Costo`, `CODEC_Cantidad`, `CODEC_SubTotal`, `CODEC_FechaRegistro`, `CODEC_FechaModificacion`) VALUES
 	(3, 19, '.hjk', 'm.hjk', 'hjk', NULL, NULL, NULL, NULL, 2.00, 12, 24.00, '2020-09-15 18:46:34', NULL);
 /*!40000 ALTER TABLE `cotizacion_detalle` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.curso
 CREATE TABLE IF NOT EXISTS `curso` (
   `id_curso` int(11) NOT NULL AUTO_INCREMENT,
-  `CURSOC_Nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CURSOC_Descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `CURSOC_Costo` decimal(7,2) DEFAULT '0.00',
-  `CURSOC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
+  `CURSOC_Nombre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CURSOC_Descripcion` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CURSOC_Costo` decimal(7,2) DEFAULT 0.00,
+  `CURSOC_FlagEstado` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_curso`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.curso: ~2 rows (aproximadamente)
-DELETE FROM `curso`;
+-- Volcando datos para la tabla catalogo.curso: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` (`id_curso`, `CURSOC_Nombre`, `CURSOC_Descripcion`, `CURSOC_Costo`, `CURSOC_FlagEstado`) VALUES
-	(19, 'Alta tensión', 'try', 54.00, '1'),
-	(20, 'Sistemas de potencia', 'try', 54.00, '1');
+REPLACE INTO `curso` (`id_curso`, `CURSOC_Nombre`, `CURSOC_Descripcion`, `CURSOC_Costo`, `CURSOC_FlagEstado`, `created_at`) VALUES
+	(19, 'Alta tensión', 'try', 54.00, '1', NULL),
+	(20, 'Sistemas de potencia', 'try', 54.00, '1', NULL),
+	(21, 'Máster en API RESTful con PHP 7+', 'Crea full rest Api con php', 69.00, '1', NULL);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.curso_instructor
 CREATE TABLE IF NOT EXISTS `curso_instructor` (
-  `id_curso_instructor` int(11) NOT NULL,
+  `id_curso_instructor` int(11) NOT NULL AUTO_INCREMENT,
   `INSTP_Codigo` int(11) NOT NULL,
   `id_curso` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_curso_instructor`),
   KEY `FK_curso_instructor_curso` (`id_curso`),
   KEY `FK_curso_instructor_instructor` (`INSTP_Codigo`),
-  CONSTRAINT `FK_curso_instructor_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`),
-  CONSTRAINT `FK_curso_instructor_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_curso_instructor_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_curso_instructor_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.curso_instructor: ~0 rows (aproximadamente)
-DELETE FROM `curso_instructor`;
+-- Volcando datos para la tabla catalogo.curso_instructor: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `curso_instructor` DISABLE KEYS */;
+REPLACE INTO `curso_instructor` (`id_curso_instructor`, `INSTP_Codigo`, `id_curso`, `created_at`) VALUES
+	(48, 15, 21, '2020-11-06 15:28:52'),
+	(49, 14, 19, '2020-11-06 16:25:01'),
+	(50, 14, 20, '2020-11-06 18:31:19');
 /*!40000 ALTER TABLE `curso_instructor` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.descuentos
 CREATE TABLE IF NOT EXISTS `descuentos` (
   `id_descuento` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_curso` int(11) NOT NULL,
-  `cantidad_min` int(11) NOT NULL DEFAULT '0',
-  `cantidad_max` int(11) NOT NULL DEFAULT '0',
-  `descuento` int(11) NOT NULL DEFAULT '0',
+  `cantidad_min` int(11) NOT NULL DEFAULT 0,
+  `cantidad_max` int(11) NOT NULL DEFAULT 0,
+  `descuento` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_descuento`),
   KEY `FK_descuentos_curso` (`id_curso`),
-  CONSTRAINT `FK_descuentos_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_descuentos_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.descuentos: ~0 rows (aproximadamente)
-DELETE FROM `descuentos`;
 /*!40000 ALTER TABLE `descuentos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `descuentos` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.failed_jobs: ~0 rows (aproximadamente)
-DELETE FROM `failed_jobs`;
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.form_asesoria
 CREATE TABLE IF NOT EXISTS `form_asesoria` (
   `ID_Form_Asesoria` int(11) NOT NULL,
-  `Nombre_Empresa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Nombre_Contacto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Correo_Electronico_Contacto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Celular_Contacto` char(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Descripcion_Asesoria` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Fecha_Registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Nombre_Empresa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nombre_Contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Correo_Electronico_Contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Celular_Contacto` char(9) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Descripcion_Asesoria` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Fecha_Registro` timestamp NOT NULL DEFAULT current_timestamp(),
   `id_asesoria` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`ID_Form_Asesoria`),
   KEY `FK_form_asesoria_asesoria` (`id_asesoria`),
   CONSTRAINT `FK_form_asesoria_asesoria` FOREIGN KEY (`id_asesoria`) REFERENCES `asesoria` (`id_asesoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.form_asesoria: ~0 rows (aproximadamente)
-DELETE FROM `form_asesoria`;
 /*!40000 ALTER TABLE `form_asesoria` DISABLE KEYS */;
 /*!40000 ALTER TABLE `form_asesoria` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.form_servicio_academico
 CREATE TABLE IF NOT EXISTS `form_servicio_academico` (
   `ID_Solic_Servicio_Academico` int(11) NOT NULL AUTO_INCREMENT,
-  `Universidad_Procedencia` text COLLATE utf8mb4_general_ci,
-  `Nombre_Contacto` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Email_Contacto` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Celular_Contacto` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Descripcion_Servicio_Academico` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Universidad_Procedencia` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Nombre_Contacto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Email_Contacto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Celular_Contacto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Descripcion_Servicio_Academico` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Fecha_Registro` timestamp NULL DEFAULT NULL,
-  `id_servicio_acad` int(11) NOT NULL DEFAULT '0',
+  `id_servicio_acad` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ID_Solic_Servicio_Academico`),
   KEY `FK_form_servicio_academico_servicio_academico` (`id_servicio_acad`),
   CONSTRAINT `FK_form_servicio_academico_servicio_academico` FOREIGN KEY (`id_servicio_acad`) REFERENCES `servicio_academico` (`id_servicio_acad`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.form_servicio_academico: ~0 rows (aproximadamente)
-DELETE FROM `form_servicio_academico`;
 /*!40000 ALTER TABLE `form_servicio_academico` DISABLE KEYS */;
 /*!40000 ALTER TABLE `form_servicio_academico` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.horario_apertura_curso
 CREATE TABLE IF NOT EXISTS `horario_apertura_curso` (
   `ID_Horario_apertura_curso` int(11) NOT NULL AUTO_INCREMENT,
-  `Dia_Dictado` date DEFAULT NULL,
-  `Hora_Inicio` int(11) DEFAULT NULL,
-  `Hora_Fin` int(11) DEFAULT NULL,
+  `Dia_Dictado` char(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Hora_Inicio` time DEFAULT NULL,
+  `Hora_Fin` time DEFAULT NULL,
   `ID_Apertura` int(11) DEFAULT NULL,
+  `id_curso` int(11) DEFAULT NULL,
+  `INSTP_Codigo` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ID_Horario_apertura_curso`),
   KEY `FK_horario_apertura_curso_apertura_curso` (`ID_Apertura`),
-  CONSTRAINT `FK_horario_apertura_curso_apertura_curso` FOREIGN KEY (`ID_Apertura`) REFERENCES `apertura_curso` (`ID_Apertura`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `FK_horario_apertura_curso_curso` (`id_curso`),
+  KEY `FK_horario_apertura_curso_instructor` (`INSTP_Codigo`),
+  CONSTRAINT `FK_horario_apertura_curso_apertura_curso` FOREIGN KEY (`ID_Apertura`) REFERENCES `apertura_curso` (`ID_Apertura`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_horario_apertura_curso_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_horario_apertura_curso_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.horario_apertura_curso: ~0 rows (aproximadamente)
-DELETE FROM `horario_apertura_curso`;
+-- Volcando datos para la tabla catalogo.horario_apertura_curso: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `horario_apertura_curso` DISABLE KEYS */;
+REPLACE INTO `horario_apertura_curso` (`ID_Horario_apertura_curso`, `Dia_Dictado`, `Hora_Inicio`, `Hora_Fin`, `ID_Apertura`, `id_curso`, `INSTP_Codigo`, `created_at`) VALUES
+	(6, 'Lunes', '23:51:00', '23:51:00', 11, 20, 14, NULL),
+	(7, 'Martes', '03:51:00', '02:51:00', 12, 20, 13, NULL);
 /*!40000 ALTER TABLE `horario_apertura_curso` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.horario_instructor
 CREATE TABLE IF NOT EXISTS `horario_instructor` (
@@ -310,84 +305,75 @@ CREATE TABLE IF NOT EXISTS `horario_instructor` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_horario_instructor`),
   KEY `FK_horario_instructor_instructor` (`INSTP_Codigo`),
-  CONSTRAINT `FK_horario_instructor_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_horario_instructor_instructor` FOREIGN KEY (`INSTP_Codigo`) REFERENCES `instructor` (`INSTP_Codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.horario_instructor: ~0 rows (aproximadamente)
-DELETE FROM `horario_instructor`;
 /*!40000 ALTER TABLE `horario_instructor` DISABLE KEYS */;
 /*!40000 ALTER TABLE `horario_instructor` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.instructor
 CREATE TABLE IF NOT EXISTS `instructor` (
   `INSTP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `celular` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `INSTC_FlagEstado` char(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1',
+  `nombre` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `celular` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `INSTC_FlagEstado` char(1) CHARACTER SET latin1 NOT NULL DEFAULT '1',
   `INSTC_FechaModificacion` datetime DEFAULT NULL,
-  `INSTC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `INSTC_FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`INSTP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.instructor: ~2 rows (aproximadamente)
-DELETE FROM `instructor`;
+-- Volcando datos para la tabla catalogo.instructor: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `instructor` DISABLE KEYS */;
-INSERT INTO `instructor` (`INSTP_Codigo`, `nombre`, `celular`, `email`, `INSTC_FlagEstado`, `INSTC_FechaModificacion`, `INSTC_FechaRegistro`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `instructor` (`INSTP_Codigo`, `nombre`, `celular`, `email`, `INSTC_FlagEstado`, `INSTC_FechaModificacion`, `INSTC_FechaRegistro`, `created_at`, `updated_at`) VALUES
 	(13, 'Sandoval', '454566', 'sandoval.peru@uni.pe', '1', NULL, '2020-09-14 23:52:04', NULL, NULL),
-	(14, 'Android  con Kotlin', '234234', 'martin_trujillo1105@hotmail.com', '1', NULL, '2020-09-15 00:30:12', NULL, NULL);
+	(14, 'VIctor Robles', '234234', 'martin_trujillo1105@hotmail.com', '1', NULL, '2020-09-15 00:30:12', NULL, NULL),
+	(15, 'Fazt', '9665566998', 'pepoyo@gmail.com', '1', NULL, '2020-11-06 13:15:41', NULL, NULL);
 /*!40000 ALTER TABLE `instructor` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.menu
 CREATE TABLE IF NOT EXISTS `menu` (
   `MENU_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `MENU_Codigo_Padre` int(11) NOT NULL DEFAULT '0',
-  `MENU_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `MENU_Url` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `MENU_Orden` int(11) NOT NULL DEFAULT '1',
-  `MENU_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `MENU_Codigo_Padre` int(11) NOT NULL DEFAULT 0,
+  `MENU_Descripcion` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `MENU_Url` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `MENU_Orden` int(11) NOT NULL DEFAULT 1,
+  `MENU_FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `MENU_FechaModificacion` datetime DEFAULT NULL,
-  `MENU_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
+  `MENU_FlagEstado` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
   PRIMARY KEY (`MENU_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.menu: ~0 rows (aproximadamente)
-DELETE FROM `menu`;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.migrations: ~0 rows (aproximadamente)
-DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.password_resets: ~0 rows (aproximadamente)
-DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.permiso
 CREATE TABLE IF NOT EXISTS `permiso` (
@@ -395,73 +381,65 @@ CREATE TABLE IF NOT EXISTS `permiso` (
   `ROL_Codigo` int(11) NOT NULL,
   `MENU_Codigo` int(11) NOT NULL,
   `COMPP_Codigo` int(11) NOT NULL,
-  `PERM_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
+  `PERM_FlagEstado` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
   PRIMARY KEY (`PERM_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.permiso: ~0 rows (aproximadamente)
-DELETE FROM `permiso`;
 /*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
 /*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.prueba_equipo
 CREATE TABLE IF NOT EXISTS `prueba_equipo` (
   `id_prueba_a_realizar` int(11) NOT NULL AUTO_INCREMENT,
   `CODEP_Codigo` int(11) DEFAULT NULL,
-  `Descripcion_Prueba` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `Norma_Asoc_Prueba` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `Descripcion_Norma` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `Arch_Norma_Tecnica` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Descripcion_Prueba` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Norma_Asoc_Prueba` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Descripcion_Norma` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Arch_Norma_Tecnica` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Costo` decimal(7,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_prueba_a_realizar`),
   KEY `FK_prueba_equipo_cotizacion_detalle` (`CODEP_Codigo`),
   CONSTRAINT `FK_prueba_equipo_cotizacion_detalle` FOREIGN KEY (`CODEP_Codigo`) REFERENCES `cotizacion_detalle` (`CODEP_Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.prueba_equipo: ~0 rows (aproximadamente)
-DELETE FROM `prueba_equipo`;
 /*!40000 ALTER TABLE `prueba_equipo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `prueba_equipo` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.rol
 CREATE TABLE IF NOT EXISTS `rol` (
   `ROL_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `ROL_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ROL_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ROL_Descripcion` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ROL_FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `ROL_FechaModificacion` datetime DEFAULT NULL,
-  `ROL_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
+  `ROL_FlagEstado` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
   PRIMARY KEY (`ROL_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.rol: ~3 rows (aproximadamente)
-DELETE FROM `rol`;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` (`ROL_Codigo`, `ROL_Descripcion`, `ROL_FechaRegistro`, `ROL_FechaModificacion`, `ROL_FlagEstado`) VALUES
+REPLACE INTO `rol` (`ROL_Codigo`, `ROL_Descripcion`, `ROL_FechaRegistro`, `ROL_FechaModificacion`, `ROL_FlagEstado`) VALUES
 	(1, 'Administrador', '2020-06-23 23:27:22', NULL, '1'),
 	(2, 'Cotizador', '2020-07-09 21:17:29', NULL, '1'),
 	(3, 'Asistente', '2020-06-23 23:27:22', NULL, '1');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.roles: ~0 rows (aproximadamente)
-DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.role_user
 CREATE TABLE IF NOT EXISTS `role_user` (
@@ -471,44 +449,40 @@ CREATE TABLE IF NOT EXISTS `role_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.role_user: ~0 rows (aproximadamente)
-DELETE FROM `role_user`;
 /*!40000 ALTER TABLE `role_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `role_user` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.servicio_academico
 CREATE TABLE IF NOT EXISTS `servicio_academico` (
   `id_servicio_acad` int(11) NOT NULL AUTO_INCREMENT,
-  `SERVICIOAC_Nombre` varchar(255) DEFAULT NULL,
-  `SERVICIOAC_Descripcion` mediumtext,
+  `SERVICIOAC_Nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SERVICIOAC_Descripcion` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `SERVICIOAC_Costo` decimal(10,0) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `update_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_servicio_acad`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.servicio_academico: ~0 rows (aproximadamente)
-DELETE FROM `servicio_academico`;
 /*!40000 ALTER TABLE `servicio_academico` DISABLE KEYS */;
 /*!40000 ALTER TABLE `servicio_academico` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.solicitante
 CREATE TABLE IF NOT EXISTS `solicitante` (
   `SOLIP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
   `TIPSOLIP_Codigo` int(11) DEFAULT NULL,
-  `UBIGP_Codigo` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_Nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_Ruc` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_Direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_Telefono` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SOLIC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
+  `UBIGP_Codigo` char(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SOLIC_Nombre` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SOLIC_Ruc` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SOLIC_Direccion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SOLIC_Telefono` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SOLIC_Email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `SOLIC_FlagEstado` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
   `SOLIC_FechaModificacion` datetime DEFAULT NULL,
-  `SOLIC_FechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `SOLIC_FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`SOLIP_Codigo`),
@@ -516,73 +490,66 @@ CREATE TABLE IF NOT EXISTS `solicitante` (
   KEY `fk_tiposolicitante_solicitante_idx` (`TIPSOLIP_Codigo`),
   CONSTRAINT `fk_tiposolicitante_solicitante` FOREIGN KEY (`TIPSOLIP_Codigo`) REFERENCES `tiposolicitante` (`TIPSOLIP_Codigo`),
   CONSTRAINT `fk_ubigeo_solicitante` FOREIGN KEY (`UBIGP_Codigo`) REFERENCES `ubigeo` (`UBIGP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.solicitante: ~4 rows (aproximadamente)
-DELETE FROM `solicitante`;
 /*!40000 ALTER TABLE `solicitante` DISABLE KEYS */;
-INSERT INTO `solicitante` (`SOLIP_Codigo`, `TIPSOLIP_Codigo`, `UBIGP_Codigo`, `SOLIC_Nombre`, `SOLIC_Ruc`, `SOLIC_Direccion`, `SOLIC_Telefono`, `SOLIC_Email`, `SOLIC_FlagEstado`, `SOLIC_FechaModificacion`, `SOLIC_FechaRegistro`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `solicitante` (`SOLIP_Codigo`, `TIPSOLIP_Codigo`, `UBIGP_Codigo`, `SOLIC_Nombre`, `SOLIC_Ruc`, `SOLIC_Direccion`, `SOLIC_Telefono`, `SOLIC_Email`, `SOLIC_FlagEstado`, `SOLIC_FechaModificacion`, `SOLIC_FechaRegistro`, `created_at`, `updated_at`) VALUES
 	(239, 2, '010104', 'INDUSTRIAS FERV S.A.C.', '20170652976', 'AV. LOS ALAMOS MZA. F LOTE. 12 LOT. SEMI RUSTICA CHILLON  - LIMA - PUENTE PIEDRA', '+51957595320', 'carlos2@uni.pe', NULL, NULL, '2020-09-14 22:24:54', NULL, NULL),
 	(240, 2, '010104', 'ABB', '10400918185', 'ewwe', '+51957595320', 'carlos.perez@uni.pe', NULL, NULL, '2020-09-14 22:35:44', NULL, NULL),
 	(241, 2, '010104', 'LOS ANDES SERVICIOS CORPORATIVOS SAC', '20424295036', 'ewwe', '+51957595320', 'carlos.perez@uni.pe', NULL, NULL, '2020-09-15 14:49:09', NULL, NULL),
 	(243, 2, '010104', 'PROMELSA S.A.', '12312312312', 'ertert', '23423', 'info@promelsa.com.pe', NULL, NULL, '2020-09-15 16:36:26', NULL, NULL);
 /*!40000 ALTER TABLE `solicitante` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.tipocotizacion
 CREATE TABLE IF NOT EXISTS `tipocotizacion` (
   `TIPOCOP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPOCOC_Descripcion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `TIPOCOC_Descripcion` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TIPOCOP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.tipocotizacion: ~3 rows (aproximadamente)
-DELETE FROM `tipocotizacion`;
 /*!40000 ALTER TABLE `tipocotizacion` DISABLE KEYS */;
-INSERT INTO `tipocotizacion` (`TIPOCOP_Codigo`, `TIPOCOC_Descripcion`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `tipocotizacion` (`TIPOCOP_Codigo`, `TIPOCOC_Descripcion`, `created_at`, `updated_at`) VALUES
 	(1, 'De Ensayo', NULL, NULL),
 	(2, 'De Calibraciones', NULL, NULL),
 	(3, 'De Capacitaciones', NULL, NULL);
 /*!40000 ALTER TABLE `tipocotizacion` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.tiposolicitante
 CREATE TABLE IF NOT EXISTS `tiposolicitante` (
   `TIPSOLIP_Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPSOLIC_Descripcion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `TIPSOLIC_Descripcion` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TIPSOLIP_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.tiposolicitante: ~2 rows (aproximadamente)
-DELETE FROM `tiposolicitante`;
 /*!40000 ALTER TABLE `tiposolicitante` DISABLE KEYS */;
-INSERT INTO `tiposolicitante` (`TIPSOLIP_Codigo`, `TIPSOLIC_Descripcion`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `tiposolicitante` (`TIPSOLIP_Codigo`, `TIPSOLIC_Descripcion`, `created_at`, `updated_at`) VALUES
 	(1, 'Persona Natural', NULL, NULL),
 	(2, 'Persona Jurídica', NULL, NULL);
 /*!40000 ALTER TABLE `tiposolicitante` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.ubigeo
 CREATE TABLE IF NOT EXISTS `ubigeo` (
-  `UBIGP_Codigo` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `UBIGC_CodDpto` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `UBIGC_CodProv` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `UBIGC_CodDist` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `UBIGC_Descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `UBIGC_FechaRegistro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UBIGP_Codigo` char(6) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `UBIGC_CodDpto` char(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `UBIGC_CodProv` char(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `UBIGC_CodDist` char(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `UBIGC_Descripcion` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `UBIGC_FechaRegistro` timestamp NULL DEFAULT current_timestamp(),
   `UBIGC_FechaModificacion` datetime DEFAULT NULL,
-  `UBIGC_FlagEstado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1',
+  `UBIGC_FlagEstado` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
   PRIMARY KEY (`UBIGP_Codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.ubigeo: ~2,055 rows (aproximadamente)
-DELETE FROM `ubigeo`;
 /*!40000 ALTER TABLE `ubigeo` DISABLE KEYS */;
-INSERT INTO `ubigeo` (`UBIGP_Codigo`, `UBIGC_CodDpto`, `UBIGC_CodProv`, `UBIGC_CodDist`, `UBIGC_Descripcion`, `UBIGC_FechaRegistro`, `UBIGC_FechaModificacion`, `UBIGC_FlagEstado`) VALUES
+REPLACE INTO `ubigeo` (`UBIGP_Codigo`, `UBIGC_CodDpto`, `UBIGC_CodProv`, `UBIGC_CodDist`, `UBIGC_Descripcion`, `UBIGC_FechaRegistro`, `UBIGC_FechaModificacion`, `UBIGC_FlagEstado`) VALUES
 	('000000', '00', '00', '00', '::Seleccione::', '2010-12-14 21:13:48', NULL, '1'),
 	('010000', '01', '00', '00', 'AMAZONAS', '2010-12-13 22:59:32', NULL, '1'),
 	('010100', '01', '01', '00', 'CHACHAPOYAS', '2010-12-13 22:59:32', NULL, '1'),
@@ -2640,47 +2607,47 @@ INSERT INTO `ubigeo` (`UBIGP_Codigo`, `UBIGC_CodDpto`, `UBIGC_CodProv`, `UBIGC_C
 	('250401', '25', '04', '01', 'PURUS', '2010-12-13 22:59:32', NULL, '1');
 /*!40000 ALTER TABLE `ubigeo` ENABLE KEYS */;
 
-
 -- Volcando estructura para tabla catalogo.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ROL_Codigo` int(11) DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `FK_users_rol` (`ROL_Codigo`),
   CONSTRAINT `FK_users_rol` FOREIGN KEY (`ROL_Codigo`) REFERENCES `rol` (`ROL_Codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla catalogo.users: ~2 rows (aproximadamente)
-DELETE FROM `users`;
+-- Volcando datos para la tabla catalogo.users: ~5 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `ROL_Codigo`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+REPLACE INTO `users` (`id`, `ROL_Codigo`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(6, 1, 'Martin Trujillo Bustamante', 'martin.trujillo@uni.pe', NULL, '$2y$10$l4MY6hm3RouXwKlVTQwN5.pyyxmfZSqIFccF05zovY26lpxYTLoM6', NULL, '2020-09-14 22:21:18', '2020-09-15 16:19:17'),
-	(7, 1, 'Edward Figueroa', 'edward.figueroa@uni.pe', NULL, '$2y$10$p1jtAToBllIz8S7jb0bfW.LHhdH8dubiVF3b0QApy3GZtCm04l9z2', NULL, '2020-09-15 16:21:18', '2020-09-15 16:21:18');
+	(7, 1, 'Edward Figueroa', 'edward.figueroa@uni.pe', NULL, '$2y$10$p1jtAToBllIz8S7jb0bfW.LHhdH8dubiVF3b0QApy3GZtCm04l9z2', NULL, '2020-09-15 16:21:18', '2020-09-15 16:21:18'),
+	(8, 1, 'Diego', 'reshinger@gmail.com', NULL, '$2y$10$xWEKuWVJmpDd.UA3SENcz.Qi6dMFabIui9lfVbLDkAx4QSjzvZMF6', NULL, '2020-11-04 15:38:57', '2020-11-04 15:38:57'),
+	(9, 2, 'Pier', 'Black@gmail.com', NULL, 'qweasdzxc', NULL, '2020-11-04 17:01:20', '2020-11-04 17:01:20'),
+	(10, 1, 'Laravel 8', 'panaca@gmail.com', NULL, 'eyJpdiI6Ik5GVTB4TEx1SGlsdWZ6MklxU25CQnc9PSIsInZhbHVlIjoiZ2J0Ykl3d3hBUENuZmRTc0w0UWNqUT09IiwibWFjIjoiNGM1MmRiM2RhZTQzNjU3Zjk5OGEzYTQxMDYyZDU5MTQ3N2QxZDE2NDlkMzMzNGYzMDhlNTUzMDM4YjZjNDFmNSJ9', NULL, '2020-11-04 17:31:18', '2020-11-04 17:31:18');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-
 
 -- Volcando estructura para tabla catalogo.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `last_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `first_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla catalogo.usuario: ~0 rows (aproximadamente)
-DELETE FROM `usuario`;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

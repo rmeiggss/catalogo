@@ -32,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','ROL_Codigo'
+        'name', 'email', 'password','ROL_Codigo', 'id'
     ];
 
     /**
@@ -53,9 +53,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
+/*  Esto  es con la tabla pivote   public function roles(){
         return $this->belongsToMany('App\Role');
+    } */
+
+    public function roles()
+    {
+        return $this->belongsTo('App\Role');
     }
+
+    public function asignarRol($role)
+    {
+        $this->roles()->sync($role, false);
+    }
+
+    public function titenRol()
+    {
+        return $this->roles->flatten()->pluck('name')->unique();
+    }
+    
 
     public function hasAnyRole($roles){
         if(is_array($roles)){
@@ -78,6 +94,6 @@ class User extends Authenticatable
             return true;
         }
         return false;
-    }    
+    } 
 
 }

@@ -34,8 +34,8 @@
               <th scope="col">Rol</th>
               <!-- <th scope="col">Editar</th>
               <th scope="col">Eliminar</th> -->
-              <th scope="col">Fecha de creacion</th>
-              <th scope="col" class ="no-exportar">Acciones</th>
+              <th scope="col" colspan="2" class="text-center">Acciones</th>
+<!--               <th scope="col" class ="no-exportar">Acciones</th> -->
            </tr>
             </thead>
             <tbody>
