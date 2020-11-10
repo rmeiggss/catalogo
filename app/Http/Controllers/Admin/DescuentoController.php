@@ -17,8 +17,8 @@ class DescuentoController extends Controller
     public function index()
     {
   /*       $descuentos = descuentos::latest()->paginate(8); */
-        $descuentos = descuentos::all();
-        $descuentos = descuentos::join('curso','curso.INSTP_Codigo','=','descuentos.INSTP_Codigo')->select()->get();
+        $descuentos = Descuento::all();
+        $descuentos = Descuento::join('curso','curso.id_curso','=','descuentos.id_curso')->select()->get();
         return view('admin.descuento.index', compact('descuentos'));
     }
 
@@ -29,7 +29,7 @@ class DescuentoController extends Controller
      */
     public function create()
     {
-        $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
+        $productos = Producto::pluck('CURSOC_Nombre', 'id_curso');
 
         return view("admin.descuento.create", compact('productos'));
     }
@@ -51,7 +51,7 @@ class DescuentoController extends Controller
         ]);
 
         Descuento::create([
-            'nombre_curso' => request('nombre'),
+            'id_curso' => request('nombre'),
             'cantidad_min' => request('cant_min'),
             'cantidad_max' => request('cant_max'),
             'descuento' => request('descuento'),
@@ -80,7 +80,7 @@ class DescuentoController extends Controller
     public function edit($id)
     {
         $descuento = Descuento::findOrFail($id);
-        $productos = Producto::pluck('CURSOC_Nombre', 'CURSOC_Nombre');
+        $productos = Producto::pluck('CURSOC_Nombre', 'id_nombre');
 
         return view("admin.descuento.edit", ['descuento' => $descuento], compact('productos'));
     }
