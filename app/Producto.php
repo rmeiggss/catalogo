@@ -14,7 +14,8 @@ class Producto extends Model
 
    public $timestamps = false;
 
-   public function instructor(){
+   public function instructor()
+   {
       return $this->belongsToMany('App\Instructor');
    }
 
