@@ -10,7 +10,14 @@ class Prueba extends Model
 
     protected $table = 'prueba_equipo';
 
-    protected $fillable = ['CODEP_Codigo','Descripcion_Prueba', 'Norma_Asoc_Prueba', 'Descripcion_Norma','Costo'];
+    protected $fillable = [
+        'CODEP_Codigo',
+        'Descripcion_Prueba', 
+        'Norma_Asoc_Prueba', 
+        'Descripcion_Norma',
+        'Costo',
+        'Arch_Norma_Tecnica'
+    ];
 
     public $timestamps = false;
 }

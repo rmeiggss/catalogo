@@ -29,6 +29,19 @@ class CotizacionDetalleController extends Controller
 
     }
 
+    public function delete($id)
+    {
+        Prueba::where('CODEP_Codigo',$id)->delete();
+        $result = CotizacionDetalle::where('CODEP_Codigo',$id)->delete();     
+        if($result){
+            return response()->json(['message'=>'Equipo y pruebas borrado']);        
+        }  
+        else{
+            return response()->json(['message'=>'Ocurrio un error']);        
+        }
+        
+    }
+
     public function destroy($id)
     {
         CotizacionDetalle::destroy($id);

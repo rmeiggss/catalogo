@@ -2188,6 +2188,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2198,6 +2204,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pruebas: [],
       contactos: [],
       usuarios: [],
+      solicitantes: [],
       saveData: null,
       idxEquipo: null,
       idxPrueba: null
@@ -2209,6 +2216,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.listarContactos();
     this.listarUsuarios();
+    this.listarSolicitantes();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2237,6 +2245,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         CODEC_Fabricante: "",
         CODEC_Cantidad: "",
         CODEC_PrecioUnitario: "",
+        CODEC_Descripcion_Ficha_Tecnica_Equipo: "",
         pruebas: []
       };
       this.equipos.push(fila);
@@ -2330,6 +2339,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get(url).then(function (response) {
         _this2.usuarios = response.data;
         console.log(_this2.cotizacion);
+      });
+    },
+    listarSolicitantes: function listarSolicitantes() {
+      var _this3 = this;
+
+      var url = '/solicitante/list';
+      axios.get(url).then(function (response) {
+        _this3.solicitantes = response.data;
+        console.log(_this3.cotizacion);
       });
     }
   }
@@ -2654,6 +2672,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2664,9 +2688,11 @@ __webpack_require__.r(__webpack_exports__);
       pruebas: [],
       contactos: [],
       usuarios: [],
+      solicitantes: [],
       saveData: null,
       idxEquipo: null,
-      idxPrueba: null
+      idxPrueba: null,
+      file: ''
     };
   },
   props: {
@@ -2678,6 +2704,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getCotizacion(this.codigo);
     this.listarContactos();
     this.listarUsuarios();
+    this.listarSolicitantes();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2726,20 +2753,32 @@ __webpack_require__.r(__webpack_exports__);
       this.equipo = this.equipos[index];
     },
     deleteEquipo: function deleteEquipo(index) {
-      this.equipos.splice(index, 1);
+      var _this = this;
+
+      var idequipo = this.equipos[index].CODEP_Codigo;
+      var url = '/cotizaciondetalle/delete/' + idequipo;
+      axios["delete"](url).then(function (response) {
+        this.equipos.splice(index, 1); //_this.getEquipos(_this.codigo);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
 
     /*Pruebas */
+    onChangeFileUpload: function onChangeFileUpload() {
+      this.file = this.$refs.file.files[0];
+    },
     addPrueba: function addPrueba() {
       var _this = this;
 
-      var datos = {
-        CODEP_Codigo: this.equipo.CODEP_Codigo,
-        Descripcion_Prueba: this.prueba.Descripcion_Prueba,
-        Descripcion_Norma: this.prueba.Descripcion_Norma,
-        Norma_Asoc_Prueba: this.prueba.Norma_Asoc_Prueba,
-        Costo: this.prueba.Costo
-      };
+      var codequipo = this.equipo.CODEP_Codigo;
+      var formData = new FormData();
+      formData.append("CODEP_Codigo", this.equipo.CODEP_Codigo);
+      formData.append("Descripcion_Prueba", this.prueba.Descripcion_Prueba);
+      formData.append("Descripcion_Norma", this.prueba.Descripcion_Norma);
+      formData.append("Norma_Asoc_Prueba", this.prueba.Norma_Asoc_Prueba);
+      formData.append("Costo", this.prueba.Costo);
+      formData.append("Archivo", this.file);
 
       if (typeof this.prueba.Descripcion_Prueba == 'undefined') {
         this.$refs.descripcion_prueba.focus();
@@ -2749,10 +2788,15 @@ __webpack_require__.r(__webpack_exports__);
         alert("Debe ingresar un costo");
       } else {
         var url = '/prueba/store';
-        axios.post(url, datos).then(function (response) {
+        axios.post(url, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (response) {
+          _this.file = '';
           _this.prueba = [];
 
-          _this.getPruebas(datos.CODEP_Codigo);
+          _this.getPruebas(codequipo);
         })["catch"](function (error) {
           console.log(error);
         });
@@ -2763,33 +2807,49 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/prueba/' + id + '/list';
       axios.get(url).then(function (response) {
-        _this3.equipo.pruebas = response.data;
-        console.log(_this3.equipo);
+        _this3.equipo.pruebas = response.data; //console.log(this.equipo);
       });
     },
     editPrueba: function editPrueba(indice) {
-      this.idxPrueba = indice;
-      this.prueba = this.equipo.pruebas[indice];
-      console.log(this.prueba);
+      var _this4 = this;
+
+      this.idxPrueba = indice; //this.prueba    = this.equipo.pruebas[indice];
+
+      var idprueba = this.equipo.pruebas[indice].id_prueba_a_realizar;
+      var url = '/prueba/' + idprueba + '/get';
+      axios.get(url).then(function (response) {
+        _this4.prueba = response.data;
+        document.getElementById('file_back').innerHTML = response.data.Arch_Norma_Tecnica;
+        console.log(_this4.prueba);
+      });
     },
     updatePrueba: function updatePrueba(indice) {
       var _this = this;
 
       var url = "/prueba/update";
-      var datos = {
-        id_prueba_a_realizar: this.prueba.id_prueba_a_realizar,
-        CODEP_Codigo: this.equipo.CODEP_Codigo,
-        Descripcion_Prueba: this.prueba.Descripcion_Prueba,
-        Descripcion_Norma: this.prueba.Descripcion_Norma,
-        Norma_Asoc_Prueba: this.prueba.Norma_Asoc_Prueba,
-        Costo: this.prueba.Costo
-      };
-      axios.put(url, datos).then(function (response) {
+      var codequipo = this.equipo.CODEP_Codigo;
+      var formData = new FormData();
+      formData.append("id_prueba_a_realizar", this.prueba.id_prueba_a_realizar);
+      formData.append("CODEP_Codigo", this.equipo.CODEP_Codigo);
+      formData.append("Descripcion_Prueba", this.prueba.Descripcion_Prueba);
+      formData.append("Descripcion_Norma", this.prueba.Descripcion_Norma);
+      formData.append("Norma_Asoc_Prueba", this.prueba.Norma_Asoc_Prueba);
+      formData.append("Costo", this.prueba.Costo);
+      formData.append("Archivo", this.file);
+      formData.append("ArchivoAnt", document.getElementById('file_back').innerHTML);
+      formData.append('_method', 'PUT');
+      axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        _this.file = '';
         _this.prueba = [];
 
-        _this.getPruebas(datos.CODEP_Codigo); //this.prueba = [];
-        //this.idxPrueba = null;                
+        _this.getPruebas(codequipo);
 
+        _this.idxPrueba = null;
+        document.getElementById('file_back').innerHTML = '';
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2812,13 +2872,13 @@ __webpack_require__.r(__webpack_exports__);
 
     /*Cotizaciones */
     getCotizacion: function getCotizacion(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       var url = '/cotizacion/' + id + '/get';
       axios.get(url).then(function (response) {
         var resultado = response.data;
         resultado.COTIC_Fecha = resultado.COTIC_Fecha.split(' ')[0];
-        _this4.cotizacion = resultado;
+        _this5.cotizacion = resultado;
         console.log(resultado);
       });
     },
@@ -2842,20 +2902,28 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     listarContactos: function listarContactos() {
-      var _this5 = this;
+      var _this6 = this;
 
       var url = '/contacto/list';
       axios.get(url).then(function (response) {
-        _this5.contactos = response.data;
+        _this6.contactos = response.data;
       });
     },
     listarUsuarios: function listarUsuarios() {
-      var _this6 = this;
+      var _this7 = this;
 
       var url = '/usuario/list';
       axios.get(url).then(function (response) {
-        _this6.usuarios = response.data;
-        console.log(_this6.cotizacion);
+        _this7.usuarios = response.data;
+      });
+    },
+    listarSolicitantes: function listarSolicitantes() {
+      var _this8 = this;
+
+      var url = '/solicitante/list';
+      axios.get(url).then(function (response) {
+        _this8.solicitantes = response.data;
+        console.log(_this8.cotizacion);
       });
     }
   }
@@ -39319,7 +39387,34 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row invoice-info" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+              [_vm._v("Solicitante")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "col-sm-6 form-control-sm",
+                attrs: { name: "contacto" }
+              },
+              _vm._l(_vm.solicitantes, function(solicitante) {
+                return _c(
+                  "option",
+                  {
+                    key: solicitante.SOLIP_Codigo,
+                    domProps: { value: solicitante.SOLIP_Codigo }
+                  },
+                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                )
+              }),
+              0
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4 invoice-col" }, [
           _c("div", { staticClass: "row form-group" }, [
@@ -39373,7 +39468,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(0)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row invoice-info" }, [
@@ -39403,7 +39498,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "col-12 table-responsive" }, [
           _c("table", { staticClass: "table table-striped" }, [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -39559,7 +39654,71 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _vm._m(3, true),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value:
+                              equipo.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+                            expression:
+                              "equipo.CODEC_Descripcion_Ficha_Tecnica_Equipo"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "ficha[]",
+                          autocomplete: "off"
+                        },
+                        domProps: {
+                          value: equipo.CODEC_Descripcion_Ficha_Tecnica_Equipo
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              equipo,
+                              "CODEC_Descripcion_Ficha_Tecnica_Equipo",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: equipo.CODEC_Url,
+                            expression: "equipo.CODEC_Url"
+                          }
+                        ],
+                        staticClass: "form-control-sm w-100",
+                        attrs: {
+                          type: "text",
+                          name: "url[]",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: equipo.CODEC_Url },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(equipo, "CODEC_Url", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2, true),
                     _vm._v(" "),
                     _c("td", [
                       _c(
@@ -39712,7 +39871,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -39891,7 +40050,7 @@ var render = function() {
                         "table",
                         { staticClass: "table table-bordered" },
                         [
-                          _vm._m(5),
+                          _vm._m(4),
                           _vm._v(" "),
                           _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
                             return _c("tr", { key: prueba.indice }, [
@@ -40095,30 +40254,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-          [_vm._v("Solicitante")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "col-sm-6 form-control-sm",
-          attrs: {
-            type: "text",
-            name: "solicitante",
-            id: "solicitante",
-            autocomplete: "off"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
       _c("div", { staticClass: "row form-group" })
     ])
   },
@@ -40130,13 +40265,17 @@ var staticRenderFns = [
       _c("tr", { staticClass: "text-center" }, [
         _c("th", { staticStyle: { width: "5%" } }, [_vm._v("No")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Nombre")]),
+        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Descripcion")]),
+        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Descripcion")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Fabricante")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Ficha")]),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Ficha")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("URL")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Archivo")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Pruebas")]),
         _vm._v(" "),
@@ -40615,7 +40754,34 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row row-sm invoice-info" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "col-sm-4 invoice-col" }, [
+            _c("div", { staticClass: "row form-group" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
+                [_vm._v("Solicitante")]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "col-sm-6 form-control-sm",
+                  attrs: { name: "contacto" }
+                },
+                _vm._l(_vm.solicitantes, function(solicitante) {
+                  return _c(
+                    "option",
+                    {
+                      key: solicitante.SOLIP_Codigo,
+                      domProps: { value: solicitante.SOLIP_Codigo }
+                    },
+                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-4 invoice-col" }, [
             _c("div", { staticClass: "row form-group" }, [
@@ -40670,7 +40836,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(0)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row invoice-info" }, [
@@ -40700,7 +40866,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-12 table-responsive" }, [
             _c("table", { staticClass: "table table-striped table-sm" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -40860,7 +41026,76 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(3, true),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value:
+                                cotdetalle.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+                              expression:
+                                "cotdetalle.CODEC_Descripcion_Ficha_Tecnica_Equipo"
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "text",
+                            name: "ficha[]",
+                            autocomplete: "off"
+                          },
+                          domProps: {
+                            value:
+                              cotdetalle.CODEC_Descripcion_Ficha_Tecnica_Equipo
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_Descripcion_Ficha_Tecnica_Equipo",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: cotdetalle.CODEC_Url,
+                              expression: "cotdetalle.CODEC_Url"
+                            }
+                          ],
+                          staticClass: "form-control-sm w-100",
+                          attrs: {
+                            type: "text",
+                            name: "url[]",
+                            autocomplete: "off"
+                          },
+                          domProps: { value: cotdetalle.CODEC_Url },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                cotdetalle,
+                                "CODEC_Url",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2, true),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -41122,7 +41357,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -41193,7 +41428,17 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("input", {
-                            attrs: { type: "file", id: "ejemplo_archivo_1" }
+                            ref: "file",
+                            attrs: { type: "file", id: "file" },
+                            on: {
+                              change: function($event) {
+                                return _vm.onChangeFileUpload()
+                              }
+                            }
+                          }),
+                          _c("span", {
+                            ref: "file_back",
+                            attrs: { id: "file_back" }
                           })
                         ]),
                         _vm._v(" "),
@@ -41340,7 +41585,7 @@ var render = function() {
                           "table",
                           { staticClass: "table table-bordered table-sm" },
                           [
-                            _vm._m(5),
+                            _vm._m(4),
                             _vm._v(" "),
                             _vm._l(_vm.equipo.pruebas, function(
                               prueba,
@@ -41483,30 +41728,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-          [_vm._v("Solicitante")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "col-sm-6 form-control-sm",
-          attrs: {
-            type: "text",
-            name: "solicitante",
-            id: "solicitante",
-            autocomplete: "off"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-4 invoice-col" }, [
       _c("div", { staticClass: "row form-group" })
     ])
   },
@@ -41518,13 +41739,17 @@ var staticRenderFns = [
       _c("tr", { staticClass: "text-center" }, [
         _c("th", { staticStyle: { width: "5%" } }, [_vm._v("No")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Nombre")]),
+        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "30%" } }, [_vm._v("Descripcion")]),
+        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Descripcion")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Fabricante")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Ficha")]),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Ficha")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("URL")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Archivo")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "5%" } }, [_vm._v("Pruebas")]),
         _vm._v(" "),

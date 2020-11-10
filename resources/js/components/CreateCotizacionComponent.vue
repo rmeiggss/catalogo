@@ -33,7 +33,9 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                <input type="text" name="solicitante" id="solicitante" autocomplete="off" class="col-sm-6 form-control-sm">
+                <select class="col-sm-6 form-control-sm" name="contacto">
+                  <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                </select>
               </div>
           </div>
           <div class="col-sm-4 invoice-col">
@@ -60,15 +62,17 @@
           <table class="table table-striped">
               <thead>
               <tr class="text-center">
-                <th style="width:5%;">No</th>
-                <th style="width:30%;">Nombre</th>
-                <th style="width:30%;">Descripcion</th>
-                <th style="width:10%;">Fabricante</th>
-                <th style="width:5%;">Ficha</th>
-                <th style="width:5%;">Pruebas</th>
-                <th style="width:5%;">Cantidad</th>
-                <th style="width:5%;">P.Unitario</th>
-                <th style="width:5%;">Subtotal</th>
+                  <th style="width:5%;">No</th>
+                  <th style="width:20%;">Nombre</th>
+                  <th style="width:20%;">Descripcion</th>
+                  <th style="width:10%;">Fabricante</th>
+                  <th style="width:10%;">Ficha</th>
+                  <th style="width:10%;">URL</th>
+                  <th style="width:5%;">Archivo</th>
+                  <th style="width:5%;">Pruebas</th>
+                  <th style="width:5%;">Cantidad</th>
+                  <th style="width:5%;">P.Unitario</th>
+                  <th style="width:5%;">Subtotal</th>
               </tr>
               </thead>
                 <tbody>
@@ -80,6 +84,8 @@
                       <td><input type="text" class="form-control-sm w-100" name="nombre[]" v-model="equipo.CODEC_NombreEquipo" autocomplete="off"></td>
                       <td><input type="text" class="form-control-sm w-100" name="descripcion[]" v-model="equipo.CODEC_Descripcion" autocomplete="off"></td>
                       <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="equipo.CODEC_Fabricante" autocomplete="off"></td>
+                      <td><input type="text" class="form-control-sm w-100" name="ficha[]" v-model="equipo.CODEC_Descripcion_Ficha_Tecnica_Equipo" autocomplete="off"></td>
+                      <td><input type="text" class="form-control-sm w-100" name="url[]" v-model="equipo.CODEC_Url" autocomplete="off"></td>  
                       <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                       <td>
                         <button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal" @click="editEquipo(index)">Lista</button>
@@ -216,7 +222,8 @@
               equipos : [],
               pruebas:[],
               contactos:[],
-              usuarios:[],              
+              usuarios:[],  
+              solicitantes:[],            
               saveData:null,
               idxEquipo:null,
               idxPrueba:null
@@ -228,6 +235,7 @@
         created(){
             this.listarContactos();
             this.listarUsuarios();
+            this.listarSolicitantes();
         },        
         mounted() {
             console.log('Component mounted.')
@@ -248,7 +256,7 @@
             /*Equipos*/ 
             addEquipo(){
               let fila = {
-                CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",pruebas:[]};
+                CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",CODEC_Descripcion_Ficha_Tecnica_Equipo:"",pruebas:[]};
               this.equipos.push(fila);
             },
             editEquipo(index){
@@ -339,7 +347,14 @@
                     this.usuarios = response.data;
                     console.log(this.cotizacion);
                 });
-            }                   
+            },
+            listarSolicitantes(){
+              var url = '/solicitante/list';
+              axios.get(url).then(response=>{
+                  this.solicitantes = response.data;
+                  console.log(this.cotizacion);
+              });
+            }                               
         }
     }
 </script>

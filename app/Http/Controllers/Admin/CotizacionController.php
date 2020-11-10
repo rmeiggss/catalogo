@@ -146,7 +146,9 @@ class CotizacionController extends Controller
                             "CODEC_Fabricante"     => $value['CODEC_Fabricante'],
                             "CODEC_Cantidad"       => $value['CODEC_Cantidad'],
                             "CODEC_PrecioUnitario" => $value['CODEC_PrecioUnitario'],
-                            "CODEC_SubTotal"       => $value['CODEC_Cantidad']*$value['CODEC_PrecioUnitario']
+                            "CODEC_SubTotal"       => $value['CODEC_Cantidad']*$value['CODEC_PrecioUnitario'],
+                            "CODEC_Descripcion_Ficha_Tecnica_Equipo" => $value['CODEC_Descripcion_Ficha_Tecnica_Equipo'],
+                            "CODEC_Url"            => $value['CODEC_Url']
                         ]);  
                         $pruebas = $value["pruebas"];
                         //Grabamos las pruebas
@@ -177,51 +179,6 @@ class CotizacionController extends Controller
         }               
         return response()->json(['Se actualizo el registro']);  
     }
-
-   /* public function update(Request $request)
-    {
-        //Actualiza cabecera
-        $id = $request->id_cotizacion;
-        echo $id;
-        $cotizacion = Cotizacion::findOrFail($id);
-        $cotizacion->COTIC_Fecha    = $request->fecha;
-        $cotizacion->id_contacto    = $request->contacto;
-        $cotizacion->USUA_Codigo    = $request->usuario;
-        $cotizacion->COTIC_SubTotal = $request->subtotal;
-        $cotizacion->COTIC_Igv      = $request->igv;
-        $cotizacion->COTIC_Total    = $request->total;
-        $cotizacion->save();
-        //Actualiza detalle
-        if(isset($request->nombre)){
-            if(count($request->nombre)>0){
-                foreach($request->nombre as $item => $value){
-                    $codigodet = $request->codigodet[$item];
-                    if(is_null($codigodet)){//Nuevo
-                        CotizacionDetalle::create([
-                            'COTIP_Codigo'         => $id,
-                            "CODEC_NombreEquipo"   => $request->nombre[$item],
-                            "CODEC_Descripcion"    => $request->descripcion[$item],
-                            "CODEC_Fabricante"     => $request->fabricante[$item],
-                            "CODEC_Cantidad"       => $request->cantidad[$item],
-                            "CODEC_PrecioUnitario" => $request->unitario[$item],
-                            "CODEC_SubTotal"       => $request->subtotaldet[$item]
-                        ]);
-                    }
-                    else{//Editar
-                        $cotizaciondet = CotizacionDetalle::findOrFail($codigodet);
-                        $cotizaciondet->CODEC_NombreEquipo   = $request->nombre[$item];
-                        $cotizaciondet->CODEC_Descripcion    = $request->descripcion[$item];
-                        $cotizaciondet->CODEC_Fabricante     = $request->fabricante[$item];
-                        $cotizaciondet->CODEC_Cantidad       = $request->cantidad[$item];
-                        $cotizaciondet->CODEC_PrecioUnitario = $request->unitario[$item];
-                        $cotizaciondet->CODEC_SubTotal       = $request->subtotaldet[$item];
-                        $cotizaciondet->save();
-                    }
-                }
-            }
-        }
-        return Redirect::to("/cotizacion");
-    }*/
 
     public function delete($id)
     {

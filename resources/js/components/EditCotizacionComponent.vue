@@ -38,7 +38,9 @@
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                <input type="text" name="solicitante" id="solicitante" autocomplete="off" class="col-sm-6 form-control-sm">
+                <select class="col-sm-6 form-control-sm" name="contacto">
+                  <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                </select>
               </div>
           </div>
           <div class="col-sm-4 invoice-col">
@@ -66,10 +68,12 @@
               <thead>
                 <tr class="text-center">
                   <th style="width:5%;">No</th>
-                  <th style="width:30%;">Nombre</th>
-                  <th style="width:30%;">Descripcion</th>
+                  <th style="width:20%;">Nombre</th>
+                  <th style="width:20%;">Descripcion</th>
                   <th style="width:10%;">Fabricante</th>
-                  <th style="width:5%;">Ficha</th>
+                  <th style="width:10%;">Ficha</th>
+                  <th style="width:10%;">URL</th>
+                  <th style="width:5%;">Archivo</th>
                   <th style="width:5%;">Pruebas</th>
                   <th style="width:5%;">Cantidad</th>
                   <th style="width:5%;">P.Unitario</th>
@@ -87,6 +91,8 @@
                   </td>
                   <td><input type="text" class="form-control-sm w-100" name="descripcion[]" v-model="cotdetalle.CODEC_Descripcion" autocomplete="off"></td>
                   <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="cotdetalle.CODEC_Fabricante" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="ficha[]" v-model="cotdetalle.CODEC_Descripcion_Ficha_Tecnica_Equipo" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="url[]" v-model="cotdetalle.CODEC_Url" autocomplete="off"></td>                                    
                   <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                   <td><button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal" @click="editEquipo(index)">Lista</button></td>
                   <td><input type="text" style="text-align: right;" class="form-control-sm w-100" name="cantidad[]" v-model.number="cotdetalle.CODEC_Cantidad" id="cantidad" autocomplete="off"></td>
@@ -143,7 +149,7 @@
                                 <input type="hidden" class="form-control-sm" v-model="equipo.CODEP_Codigo"/>
                                 <textarea style="resize: none" class="form-control" ref="descripcion_prueba" rows="3" cols="5" v-model="prueba.Descripcion_Prueba"></textarea>
                                 <label for="ejemplo_archivo_1">Adjuntar Norma Tecnica</label>
-                                <input type="file" id="ejemplo_archivo_1">
+                                <input type="file" id="file" ref="file"  v-on:change="onChangeFileUpload()"><span id="file_back" ref="file_back"></span>
                             </div>
                             <div class="col-md-6">
                               <div class="row">
@@ -230,9 +236,11 @@
               pruebas:[],                
               contactos:[],
               usuarios:[],
+              solicitantes:[],
               saveData:null,
               idxEquipo:null,
-              idxPrueba:null                
+              idxPrueba:null,
+              file:''            
             }
         },
         props:{
@@ -244,6 +252,7 @@
             this.getCotizacion(this.codigo);
             this.listarContactos();
             this.listarUsuarios();
+            this.listarSolicitantes();
         },
         mounted() {
             console.log('Component mounted.')
@@ -281,18 +290,30 @@
               this.equipo = this.equipos[index];
             },            
             deleteEquipo(index){
-              this.equipos.splice(index, 1);
+              let _this = this;
+              let idequipo = this.equipos[index].CODEP_Codigo;
+              let url = '/cotizaciondetalle/delete/'+idequipo;
+              axios.delete(url).then(function(response){
+                this.equipos.splice(index, 1);
+                //_this.getEquipos(_this.codigo);
+              }).catch(function(error){
+                console.log(error);
+              });
             },   
             /*Pruebas */
+            onChangeFileUpload(){
+              this.file = this.$refs.file.files[0];
+            },
             addPrueba(){
-              let _this = this;
-              let datos = {
-                CODEP_Codigo:this.equipo.CODEP_Codigo,
-                Descripcion_Prueba:this.prueba.Descripcion_Prueba,
-                Descripcion_Norma:this.prueba.Descripcion_Norma,
-                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,             
-                Costo:this.prueba.Costo
-              };
+              let _this  = this;
+              let codequipo = this.equipo.CODEP_Codigo;
+              let formData = new FormData();
+              formData.append("CODEP_Codigo",this.equipo.CODEP_Codigo);
+              formData.append("Descripcion_Prueba",this.prueba.Descripcion_Prueba);
+              formData.append("Descripcion_Norma",this.prueba.Descripcion_Norma);
+              formData.append("Norma_Asoc_Prueba",this.prueba.Norma_Asoc_Prueba);
+              formData.append("Costo",this.prueba.Costo);
+              formData.append("Archivo",this.file);
               if(typeof this.prueba.Descripcion_Prueba == 'undefined'){
                 this.$refs.descripcion_prueba.focus();
                 alert("Debe ingresar una descripcion");
@@ -303,9 +324,13 @@
               }
               else{
                 let url = '/prueba/store';
-                axios.post(url,datos).then(function(response){
+                axios.post(url,
+                  formData,
+                  {headers:{'Content-Type':'multipart/form-data'}}
+                ).then(function(response){
+                  _this.file   = '';
                   _this.prueba = [];   
-                  _this.getPruebas(datos.CODEP_Codigo);               
+                  _this.getPruebas(codequipo);               
                 }).catch(function(error){
                   console.log(error);
                 });
@@ -315,30 +340,43 @@
               var url = '/prueba/'+id+'/list';
               axios.get(url).then(response=>{
                 this.equipo.pruebas = response.data;
-                console.log(this.equipo);
+                //console.log(this.equipo);
               });
             },
             editPrueba(indice){
               this.idxPrueba = indice;
-              this.prueba = this.equipo.pruebas[indice];
-              console.log(this.prueba);
+              //this.prueba    = this.equipo.pruebas[indice];
+              let idprueba   = this.equipo.pruebas[indice].id_prueba_a_realizar;
+              let url = '/prueba/'+idprueba+'/get';
+              axios.get(url).then(response=>{
+                this.prueba = response.data;
+                document.getElementById('file_back').innerHTML = response.data.Arch_Norma_Tecnica;
+                console.log(this.prueba);
+              });
             }, 
             updatePrueba(indice){
               let _this = this;
               let url   = "/prueba/update";
-              let datos = {
-                id_prueba_a_realizar:this.prueba.id_prueba_a_realizar,
-                CODEP_Codigo:this.equipo.CODEP_Codigo,
-                Descripcion_Prueba:this.prueba.Descripcion_Prueba,
-                Descripcion_Norma:this.prueba.Descripcion_Norma,
-                Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,             
-                Costo:this.prueba.Costo
-              };
-              axios.put(url,datos).then(function(response){
+              let codequipo = this.equipo.CODEP_Codigo;
+              let formData = new FormData();
+              formData.append("id_prueba_a_realizar",this.prueba.id_prueba_a_realizar);
+              formData.append("CODEP_Codigo",this.equipo.CODEP_Codigo);
+              formData.append("Descripcion_Prueba",this.prueba.Descripcion_Prueba);
+              formData.append("Descripcion_Norma",this.prueba.Descripcion_Norma);
+              formData.append("Norma_Asoc_Prueba",this.prueba.Norma_Asoc_Prueba);
+              formData.append("Costo",this.prueba.Costo);
+              formData.append("Archivo",this.file);
+              formData.append("ArchivoAnt",document.getElementById('file_back').innerHTML);
+              formData.append('_method', 'PUT'); 
+              axios.post(url,
+                formData,
+                {headers:{'Content-Type':'multipart/form-data'}}
+              ).then(function(response){
+                _this.file   = '';
                 _this.prueba = [];   
-                _this.getPruebas(datos.CODEP_Codigo);   
-                //this.prueba = [];
-                //this.idxPrueba = null;                
+                _this.getPruebas(codequipo);   
+                _this.idxPrueba = null;   
+                document.getElementById('file_back').innerHTML = '';             
               }).catch(function(error){
                 console.log(error);
               });
@@ -396,8 +434,14 @@
                 var url = '/usuario/list';
                 axios.get(url).then(response=>{
                     this.usuarios = response.data;
-                    console.log(this.cotizacion);
                 });
+            },
+            listarSolicitantes(){
+              var url = '/solicitante/list';
+              axios.get(url).then(response=>{
+                  this.solicitantes = response.data;
+                  console.log(this.cotizacion);
+              });
             }
         }
     }

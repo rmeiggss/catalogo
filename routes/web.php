@@ -33,7 +33,10 @@ Route::get('/cotizacion/{cotizacion}/edit','Admin\CotizacionController@edit');
 Route::put("/cotizacion/update",'Admin\CotizacionController@update')->name('updateCotizacion');
 
 Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
+Route::delete('/cotizaciondetalle/delete/{id}','Admin\CotizacionDetalleController@delete');
+
 Route::get('/prueba/{cotizaciondetalle}/list', 'Admin\PruebaController@list');
+Route::get('/prueba/{codprueba}/get', 'Admin\PruebaController@get');
 Route::post('/prueba/store', 'Admin\PruebaController@store');
 Route::delete("/prueba/delete/{id}","Admin\PruebaController@delete")->name("delPrueba");
 Route::put("/prueba/update",'Admin\PruebaController@update')->name('updatePrueba');
