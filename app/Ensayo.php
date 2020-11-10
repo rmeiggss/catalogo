@@ -14,6 +14,8 @@ class Ensayo extends Model
     //protected $keyType = 'int';
 
     protected $fillable = [
+
+        'COTIP_Codigo',
     	'CODEC_Nombre_Equipo',
     	'CODEC_Descripcion_Equipo',
         'CODEC_Fabricante_Equipo',
@@ -24,5 +26,9 @@ class Ensayo extends Model
         'CODEC_FlagEstado',
         'CODEC_Cantidad',
     ];
+
+    public function cotizacion(){
+        return $this->belongsTo('App\Cotizacion','COTIP_Codigo');
+    }
 
 }

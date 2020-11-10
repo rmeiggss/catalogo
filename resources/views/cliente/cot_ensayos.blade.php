@@ -44,7 +44,7 @@ Universidad Nacional de Ingeniería')
                 float:left;
                 padding:1rem 0.5rem;
             }
-
+            /*
             td {
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -56,7 +56,7 @@ Universidad Nacional de Ingeniería')
                 table-layout:fixed;
                 width: 100%;
             }
-
+            */
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -106,7 +106,7 @@ Universidad Nacional de Ingeniería')
                 <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
                     Nombre del Solicitante:
                     <br>
-                    <input class="form-control" type="text" name="SOLIC_Nombre" id="SOLIC_Nombre" />
+                    <input class="form-control" type="text" name="SOLIC_Nombre" id="SOLIC_Nombre"/>
                     Tipo de Solicitante:
                     <br>
 
@@ -171,6 +171,13 @@ Universidad Nacional de Ingeniería')
                     <br>
                 </div>
             </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div id="app">
+            <ensayos></ensayos>
         </div>
 
         <br>

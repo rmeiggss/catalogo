@@ -3094,6 +3094,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3138,16 +3145,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     editEnsayos: function editEnsayos(index, ensayo) {
+      /*
       this.fillEnsayos.push({
-        CODEP_Codigo: this.CODEP_Codigo,
-        CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
-        CODEC_Descripcion_Equipo: this.CODEC_Descripcion_Equipo,
-        CODEC_Cantidad: this.CODEC_Cantidad,
-        CODEC_Fabricante_Equipo: this.CODEC_Fabricante_Equipo,
-        CODEC_Descripcion_Ficha_Tecnica_Equipo: this.CODEC_Descripcion_Ficha_Tecnica_Equipo,
-        CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
-        CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo
+          CODEP_Codigo: this.CODEP_Codigo,
+          CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
+          CODEC_Descripcion_Equipo: this.CODEC_Descripcion_Equipo,
+          CODEC_Cantidad: this.CODEC_Cantidad,
+          CODEC_Fabricante_Equipo: this.CODEC_Fabricante_Equipo,
+          CODEC_Descripcion_Ficha_Tecnica_Equipo: this.CODEC_Descripcion_Ficha_Tecnica_Equipo,
+          CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
+          CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo,
       });
+      */
     }
   }
 });
@@ -41688,6 +41697,8 @@ var render = function() {
               _vm._v(" "),
               _vm._m(1, true),
               _vm._v(" "),
+              _vm._m(2, true),
+              _vm._v(" "),
               _c("th", { staticClass: "text-center" }, [
                 _c(
                   "button",
@@ -41695,6 +41706,7 @@ var render = function() {
                     staticClass: "btn btn-warning btn-sm m-auto",
                     staticStyle: { "border-radius": "5px" },
                     attrs: {
+                      type: "button",
                       "data-toggle": "modal",
                       "data-target": "#modaleditarequipo"
                     }
@@ -41748,11 +41760,11 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "container" }, [
-                  _vm._m(3),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
@@ -41924,7 +41936,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(5)
                     ]
                   ),
                   _vm._v(" "),
@@ -41968,11 +41980,11 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "container" }, [
-                  _vm._m(6),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
@@ -42158,29 +42170,11 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(7)
+                      _vm._m(8)
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-lg m-auto",
-                        attrs: { "data-dismiss": "modal" },
-                        on: {
-                          click: function($event) {
-                            return _vm.editEnsayos(_vm.index, _vm.ensayo)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                                    Editar\r\n                                "
-                        )
-                      ]
-                    )
-                  ])
+                  _vm._m(9)
                 ])
               ])
             ])
@@ -42189,7 +42183,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(8)
+    _vm._m(10)
   ])
 }
 var staticRenderFns = [
@@ -42231,6 +42225,10 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
+        _vm._v("Listado de Pruebas")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
         _vm._v("Acciones")
       ])
     ])
@@ -42243,8 +42241,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-info btn-sm px-1",
-          staticStyle: { "border-radius": "5px" },
+          staticClass: "btn btn-info btn-sm",
           attrs: {
             type: "button",
             "data-toggle": "modal",
@@ -42255,6 +42252,30 @@ var staticRenderFns = [
         [
           _vm._v(
             "\r\n                            Prueba\r\n                        "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-dark btn-sm text-white m-auto",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#mimodallistaprueba",
+            id: "boton_modal"
+          }
+        },
+        [
+          _vm._v(
+            "\r\n                            Listado\r\n                        "
           )
         ]
       )
@@ -42352,6 +42373,25 @@ var staticRenderFns = [
       _c("label", [_vm._v("Adjuntar un archivo de la descripcion del equipo")]),
       _vm._v(" "),
       _c("input", { attrs: { type: "file" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-lg m-auto",
+          attrs: { "data-dismiss": "modal" }
+        },
+        [
+          _vm._v(
+            "\r\n                                    Editar\r\n                                "
+          )
+        ]
+      )
     ])
   },
   function() {

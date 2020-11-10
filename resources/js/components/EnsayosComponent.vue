@@ -20,6 +20,7 @@
                     <th scope="col" class="text-center">Descripcion Ficha Tecnica</th>
                     <th scope="col" class="text-center">URL Ficha Tecnica</th>
                     <th scope="col" class="text-center">Nueva Prueba</th>
+                    <th scope="col" class="text-center">Listado de Pruebas</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -33,13 +34,19 @@
                     <td class="text-center" v-text="ensayo.CODEC_Descripcion_Ficha_Tecnica_Equipo"></td>
                     <td class="text-center" v-text="ensayo.CODEC_Url_Ficha_Tecnica_Equipo"></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-info btn-sm px-1" data-toggle="modal" data-target="#mimodalnuevaprueba"
-                        id="boton_modal" style="border-radius:5px;">
+                       <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#mimodalnuevaprueba"
+                               id="boton_modal">
                             Prueba
                         </button>
                     </td>
+                    <td>
+                        <button type="button" class="btn btn-dark btn-sm text-white m-auto" data-toggle="modal"
+                            data-target="#mimodallistaprueba" id="boton_modal">
+                            Listado
+                        </button>
+                    </td>
                     <th class="text-center">
-                        <button class="btn btn-warning btn-sm m-auto" style="border-radius:5px;" data-toggle="modal"
+                        <button type="button" class="btn btn-warning btn-sm m-auto" style="border-radius:5px;" data-toggle="modal"
                                 data-target="#modaleditarequipo">
                             Editar
                         </button>
@@ -159,7 +166,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button @click="editEnsayos(index, ensayo)" class="btn btn-primary btn-lg m-auto" data-dismiss="modal">
+                                <button class="btn btn-primary btn-lg m-auto" data-dismiss="modal">
                                     Editar
                                 </button>
                             </div>
@@ -264,6 +271,7 @@
                 }
             },
             editEnsayos (index, ensayo) {
+                /*
                 this.fillEnsayos.push({
                     CODEP_Codigo: this.CODEP_Codigo,
                     CODEC_Nombre_Equipo: this.CODEC_Nombre_Equipo,
@@ -274,6 +282,7 @@
                     CODEC_Archivo_Descripcion_Equipo: this.CODEC_Archivo_Descripcion_Equipo,
                     CODEC_Url_Ficha_Tecnica_Equipo: this.CODEC_Url_Ficha_Tecnica_Equipo,
                 });
+                */
             },
         },
     }

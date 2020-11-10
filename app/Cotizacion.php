@@ -36,4 +36,8 @@ class Cotizacion extends Model
     {
     	return $this->belongsTo('App\TipoCotizacion.php', 'TIPOCOP_Codigo');
     }
+
+    public function ensayo(){
+        return $this->hasMany('App\Ensayo','COTIP_Codigo');
+    }
 }

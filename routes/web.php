@@ -65,7 +65,7 @@ Route::resource('servicioac','Admin\ServicioAcademicoController');
 
 // CREACIÓN PARA LA RUTA DE EQUIPOS ENSAYOS
 
-Route::resource('/cot_ensayos', 'Cliente\EnsayoController');
+Route::resource('cot_ensayos', 'Cliente\EnsayoController');
 
 
 // --------------------------------------------
