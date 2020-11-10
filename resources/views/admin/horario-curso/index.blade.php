@@ -31,7 +31,7 @@
             <tr>
               <th scope="col">Codigo</th>
               <th scope="col">Nombre del Curso</th>
-              <th scope="col">Dias</th>
+              <th scope="col">Dia de Dictado</th>
               <th scope="col">Hora Inicial</th>
               <th scope="col">Hora Final</th>
               <th scope="col" colspan="2" class="text-center">Acciones</th>
@@ -42,8 +42,8 @@
                 <tr>
                   <!--actualizado por marck -->
                   <th scope="row">{{$item+1}}</th>
-                  <td>{{$horariocurso->Nombre_Curso}}</td>
-                  <td>{{$horariocurso->Nombre_del_Dia}}</td>
+                  <td>{{$horariocurso->CURSOC_Nombre}}</td>
+                  <td>{{$horariocurso->Dia_Dictado}}</td>
                   <td>{{$horariocurso->Hora_Inicio}}</td>
                   <td>{{$horariocurso->Hora_Fin}}</td>
                   <td><button class="btn btn-info">
@@ -68,7 +68,7 @@
             </tbody>
           </table>
 
-          {{ $horariocursos->links() }}
+
         </div>
         <!-- /.card-body -->
       </div>

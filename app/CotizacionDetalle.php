@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CotizacionDetalle extends Model
 {
     protected $primaryKey = 'CODEP_Codigo';
-    
+
     protected $table = 'cotizacion_detalle';
     
     protected $fillable = [

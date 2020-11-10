@@ -44,7 +44,7 @@ Universidad Nacional de Ingeniería')
                 float:left;
                 padding:1rem 0.5rem;
             }
-
+            /*
             td {
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -56,7 +56,7 @@ Universidad Nacional de Ingeniería')
                 table-layout:fixed;
                 width: 100%;
             }
-
+            */
             .nav li a {
                 background-color:#800404;
                 color:#fff;
@@ -98,35 +98,43 @@ Universidad Nacional de Ingeniería')
         <h1 style="text-align: center;font-size:65px;color:black;">Formulario de Solicitud de Ensayo</h1>
         <hr>
 
-
+<form method="POST" action="{{ route('cot_ensayos.store') }}">
+    @csrf
         <div id="crud_equipos" class="row">
             <div class="col-sm-6 border" style="padding-bottom: 8px;padding-top: 8px;">
                 <h4 style="text-align: center;color:black;">Empresa Solicitante</h4>
                 <div class="form-horizontal form-control" style="width:500px;height:705px;margin:0 auto">
                     Nombre del Solicitante:
                     <br>
-                    <input class="form-control" type="text" name="nombre_solic" id="nombre_solic" />
+                    <input class="form-control" type="text" name="SOLIC_Nombre" id="SOLIC_Nombre"/>
                     Tipo de Solicitante:
                     <br>
-                    <select class="form-control" name="tipo_solic">
-                        <option value="volvo">Persona Juridica</option>
-                        <option value="saab">Persona Natural</option>
+
+                    <select class="form-control" name="SOLIC_id" id="SOLIC_id">
+                            <option value=""> --- Escoja el tipo de solicitante --- </option>
+                            <option value="1">Persona Natural</option>
+                            <option value="2">Persona Jurídica</option>
                     </select>
+
                     RUC del Solicitante:
                     <br>
-                    <input class="form-control" type="text" name="ruc_solic" id="ruc_solic" />
+                    <input class="form-control" type="text" name="SOLIC_Ruc" id="SOLIC_Ruc" />
+
                     Direccion del Solicitante:
                     <br>
-                    <input class="form-control" type="text" name="direc_solic" id="direc_solic" />
+                    <input class="form-control" type="text" name="SOLIC_Direccion" id="SOLIC_Direccion" />
+
                     Telefono del Solicitante:
-                    <input class="form-control" type="text" name="celular_solic" id="celular_solic" />
+                    <input class="form-control" type="text" name="SOLIC_Telefono" id="SOLIC_Telefono" />
+
                     Email del Solicitante:
-                    <input class="form-control" type="text" name="email_solic" id="email_solic" />
+                    <input class="form-control" type="text" name="SOLIC_Email" id="SOLIC_Email" />
+
                     Nombre del Departamento:
                     <br>
                     <select class="form-control" name="depart_solic">
-                        <option value="volvo">Lima</option>
-                        <option value="saab">Arequipa</option>
+                        <option value="Lima">Lima</option>
+                        <option value="Arequipa">Arequipa</option>
                     </select>
                     Nombre de la Provincia:
                     <br>
@@ -150,19 +158,26 @@ Universidad Nacional de Ingeniería')
                     Nombre del Contacto:
                     <br>
                     <input class="form-control" type="text" name="nombre_contacto" id="nombre_contacto">
+
                     Correo Electronico del Contacto:
                     <br>
-                    <input class="form-control" type="text" name="email_contacto" id="email_contacto">
+                    <input class="form-control" type="text" name="correo_contacto" id="correo_contacto">
+
                     Celular del Contacto:
                     <br>
                     <input class="form-control" type="text" name="celular_contacto" id="celular_contacto">
+                    <br>
+
                     <br>
                 </div>
             </div>
         </div>
 
-        <div id="app" class="mr-3 ml-3">
-            <ensayos-component></ensayos-component>
+        <br>
+        <br>
+
+        <div id="app">
+            <ensayos></ensayos>
         </div>
 
         <br>
@@ -179,10 +194,10 @@ Universidad Nacional de Ingeniería')
                     <div class="form-horizontal form-control" style="height:150px;margin-left:10px;margin-right:0px;">
                         Correo #1:
                         <br>
-                        <input class="form-control" type="text" name="correo1" id="correo1" />
+                        <input class="form-control" type="text" name="COTIC_Correo1" id="COTIC_Correo1" />
                         Correo #2:
                         <br>
-                        <input class="form-control" type="text" name="correo2" id="correo2" />
+                        <input class="form-control" type="text" name="COTIC_Correo2" id="COTIC_Correo2" />
                     </div>
                 </div>
 
@@ -191,10 +206,10 @@ Universidad Nacional de Ingeniería')
                     <div class="form-horizontal form-control" style="height:150px;margin-left:0px;margin-right:0px">
                         Correo #3:
                         <br>
-                        <input class="form-control" type="text" name="correo3" id="correo3" />
+                        <input class="form-control" type="text" name="COTIC_Correo3" id="COTIC_Correo3" />
                         Correo #4:
                         <br>
-                        <input class="form-control" type="text" name="correo4" id="correo4" />
+                        <input class="form-control" type="text" name="COTIC_Correo4" id="COTIC_Correo4" />
                     </div>
                 </div>
 
@@ -212,12 +227,12 @@ Universidad Nacional de Ingeniería')
         <br>
 
     <center>
-        <button type="submit" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#"
-                id="boton_modal" style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
+        <button type="submit" class="btn btn-outline-success btn-lg edward" data-toggle="modal" data-target="#" id="boton_modal"
+                style="width:40%;font-size:45px;height:60px;text-transform: capitalize;">
             Solicitar Cotización
         </button>
     </center>
-
+</form>
 
         <br>
         <br>

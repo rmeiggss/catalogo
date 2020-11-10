@@ -11,9 +11,18 @@ class CursoInstructor extends Model
 
    protected $table = 'curso_instructor';
 
-   protected $fillable = ['INSTP_Codigo','id_curso'];
+   protected $fillable = ['id_curso', 'INSTP_Codigo','id_curso_instructor'];
 
    public $timestamps = null;
+
+   
+   public function instructor(){
+      return $this->belongsToMany('App\Instructor');
+   }
+
+   public function curso(){
+      return $this->belongsToMany('App\Producto');
+  }
 
 }
 

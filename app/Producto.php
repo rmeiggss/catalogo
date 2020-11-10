@@ -13,4 +13,21 @@ class Producto extends Model
    protected $fillable = ['CURSOC_Nombre','CURSOC_Costo','CURSOC_Descripcion'];
 
    public $timestamps = false;
+
+   public function instructor()
+   {
+      return $this->belongsToMany('App\Instructor');
+   }
+
+   public function aperturaCurso()
+   {
+       return $this->hasMany('App\HorarioInstructor');
+   }
+
+   public function descuento()
+   {
+       return $this->hasMany('App\Descuento');
+   }
 }
+
+

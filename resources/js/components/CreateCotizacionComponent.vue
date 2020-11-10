@@ -2,7 +2,7 @@
   <!--Form content-->
   <div class="invoice p-3 mb-3">
       <form ref="form">
-        <input name="_token" type="hidden" v-model="token">   
+        <input name="_token" type="hidden" v-model="token">
         <!-- Cabecera fila 1 -->
         <div class="row invoice-info">
           <div class="col-sm-4 invoice-col">
@@ -18,7 +18,7 @@
                 <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
                 <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha">
             </div>
-          </div>                            
+          </div>
           <div class="col-sm-4 invoice-col">
               <div class="row form-group">
                 <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
@@ -51,10 +51,10 @@
 
             </div>
           </div>
-        </div>                        
+        </div>
         <!-- /Cabecera fila 2 -->
 
-        <!--Detalle Cotizacion--> 
+        <!--Detalle Cotizacion-->
         <div class="row invoice-info">
           <label class="col-sm-2 col-form-label col-form-label-sm">Agregar</label>
           <a href="#" @click="addEquipo()"><i class="fas fa-plus form-control-sm" id="agregar"></i></a>
@@ -126,14 +126,14 @@
                                       Costo
                                       <br>
                                       <input class="form-control" v-model="prueba.Costo" />
-                                    </div>                                    
+                                    </div>
                                   </div>
                                   <div class="row">
                                     Descripcion de la Norma:
                                     <br>
                                     <textarea style="resize: none" class="form-control" rows="2" cols="5" v-model="prueba.Descripcion_Norma"></textarea>
                                     <input class="btn btn-default btn-sm" type="button"  value="Agregar" @click="addPrueba()"/>
-                                    <input class="btn btn-default btn-sm" type="button"  value="Actualizar" @click="updatePrueba()"/>                                    
+                                    <input class="btn btn-default btn-sm" type="button"  value="Actualizar" @click="updatePrueba()"/>
                                   </div>
                                 </div>
                             </div>
@@ -194,13 +194,13 @@
             </div>
           </div>
         </div>
-        <!--/Subtotales--> 
+        <!--/Subtotales-->
 
-        <!--Botones-->                        
+        <!--Botones-->
         <div class="row text-left">
             <div class="col text-left">
               <a class="btn btn-info" @click="addCotizacion()">Agregar</a>
-              <a class="btn btn-danger" href="/cotizacion">Cancelar</a>  
+              <a class="btn btn-danger" href="/cotizacion">Cancelar</a>
             </div>
         </div>
         <!--/Botones-->
@@ -209,7 +209,7 @@
       <!--/Form content-->
 
     </div>
-  
+
 </template>
 
 <script>
@@ -231,7 +231,7 @@
         },
         props:{
             token:String
-        },          
+        },
         created(){
             this.listarContactos();
             this.listarUsuarios();
@@ -253,7 +253,7 @@
           }
         },
         methods:{
-            /*Equipos*/ 
+            /*Equipos*/
             addEquipo(){
               let fila = {
                 CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",CODEC_Descripcion_Ficha_Tecnica_Equipo:"",pruebas:[]};
@@ -271,31 +271,31 @@
             deleteEquipo(index){
               this.equipos.splice(index, 1);
             },
-            /*Pruebas*/ 
+            /*Pruebas*/
             addPrueba(){
               let fila = {
                 Descripcion_Prueba:this.prueba.Descripcion_Prueba,
                 Descripcion_Norma:this.prueba.Descripcion_Norma,
                 Norma_Asoc_Prueba:this.prueba.Norma_Asoc_Prueba,
-                Descripcion_Prueba:this.prueba.Descripcion_Prueba,                
+                Descripcion_Prueba:this.prueba.Descripcion_Prueba,
                 Costo:this.prueba.Costo
               };
               this.equipo.pruebas.push(fila);
               //console.log(JSON.stringify(this.equipo));
               this.prueba = [];
-            },   
+            },
             editPrueba(indice){
               this.idxPrueba = indice;
               this.prueba = this.equipo.pruebas[indice];
-            }, 
+            },
             updatePrueba(){
               this.prueba = [];
               this.idxPrueba = null;
             },
             deletePrueba(indice){
               this.equipo.pruebas.splice(indice, 1);
-            },    
-            /*Cotizaciones */ 
+            },
+            /*Cotizaciones */
             addCotizacion(){
               let url = '/cotizacion/store';
               if(typeof this.cotizacion.COTIC_Fecha == 'undefined'){
@@ -308,14 +308,14 @@
               else if(typeof this.cotizacion.id_contacto == 'undefined'){
                 this.$refs.contacto.focus();
                 alert("Debe seleccionar un contacto");
-              }   
+              }
               else if(typeof this.cotizacion.USUA_Codigo == 'undefined'){
                 this.$refs.usuario.focus();
                 alert("Debe seleccionar un usuario");
-              }    
+              }
               else if(this.equipos.length==0){
                 alert("Debe ingresar al menos 1 equipo");
-              }                                          
+              }
               else{
                 console.log(this.equipos);
                 axios.post(url,{
@@ -355,6 +355,7 @@
                   console.log(this.cotizacion);
               });
             }                               
+
         }
     }
 </script>

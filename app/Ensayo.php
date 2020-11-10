@@ -6,18 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ensayo extends Model
 {
-    protected $table = 'equipos';
+    protected $table = 'cotizacion_detalle';
+    protected $primaryKey = 'CODEP_Codigo';
+
+    //public $incrementing = false;
+
+    //protected $keyType = 'int';
 
     protected $fillable = [
-        'id'
-    	'nombre_eq',
-    	'descripcion_eq',
-        'fabricante_eq',
-        'descrip_tec_eq',
-        'url_tec_eq',
-        'costo',
-        'estado_tec_eq',
-        'cantidad_eq',
+
+        'COTIP_Codigo',
+    	'CODEC_Nombre_Equipo',
+    	'CODEC_Descripcion_Equipo',
+        'CODEC_Fabricante_Equipo',
+        'CODEC_Descripcion_Ficha_Tecnica_Equipo',
+        'CODEC_Url_Ficha_Tecnica_Equipo',
+        'CODEC_Costo',
+        'CODEC_Archivo_Descripcion_Equipo',
+        'CODEC_FlagEstado',
+        'CODEC_Cantidad',
     ];
+
+    public function cotizacion(){
+        return $this->belongsTo('App\Cotizacion','COTIP_Codigo');
+    }
 
 }

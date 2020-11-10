@@ -36,12 +36,12 @@
             </tr>
             </thead>
             <tbody>
-              @forelse($cursoinstructor as $item=>$cursoinstructor)
+              @forelse($cursoinstructors as $item=>$cursoinstructor)
                 <tr>
                   <!--actualizado por marck -->
                   <th scope="row">{{$item+1}}</th>
-                  <td>{{$cursoinstructor->nombre_curso}}</td>
-                  <td>{{$cursoinstructor->nombre_instructor}}</td>
+                  <td>{{$cursoinstructor->CURSOC_Nombre}}</td>
+                  <td>{{$cursoinstructor->nombre}}</td>
                   <td><button class="btn btn-info">
                     <a class="text-light" href="{{ route('instructor-curso.edit', $cursoinstructor->id_curso_instructor) }}">
                       Editar
@@ -63,8 +63,8 @@
     <!-- Termina listado -->
             </tbody>
           </table>
-
-          {{ $cursoinstructor->links() }}
+          
+ 
         </div>
         <!-- /.card-body -->
       </div>

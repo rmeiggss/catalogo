@@ -1,67 +1,78 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cliente;
+use App\Http\Controllers\Controller;
 
 use App\Ensayo;
+use App\Solicitante;
+use App\Contacto;
+use App\Cotizacion;
+use App\TipoSolicitante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Redirect,Response;
+
 
 class EnsayoController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $ensayo = Ensayo::all();
-        return $ensayo;
-        //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
+
     }
 
     public function store(Request $request)
     {
-        $ensayo = new Ensayo();
-        $ensayo->id = $request->id;
-        $ensayo->nombre_eq = $request->nombre_eq;
-        $ensayo->descripcion_eq = $request->descripcion_eq;
-        $ensayo->cantidad_eq = $request->cantidad_eq;
-        $ensayo->fabricante_eq = $request->fabricante_eq;
-        $ensayo->descrip_tec_eq = $request->descrip_tec_eq;
-        $ensayo->url_tec_eq = $request->url_tec_eq;
-        $ensayo->arch_descrip_eq = $request->arch_descrip_eq;
-        $ensayo->estado_tec_eq = $request->estado_tec_eq;
+        // Guardamos la tabla "solicitante"
+        $solicitante = new Solicitante();
+        $solicitante->TIPSOLIP_Codigo = $request->SOLIC_id;
+        $solicitante->SOLIC_Nombre = $request->SOLIC_Nombre;
+        $solicitante->SOLIC_Ruc = $request->SOLIC_Ruc;
+        $solicitante->SOLIC_Direccion = $request->SOLIC_Direccion;
+        $solicitante->SOLIC_Telefono = $request->SOLIC_Telefono;
+        $solicitante->SOLIC_Email = $request->SOLIC_Email;
+        $solicitante->save();
 
-        $ensayo->save();
-        //Esta función guardará las tareas que enviaremos mediante vuejs
+        // Enlace de la tabla 'solicitante' con la tabla 'contacto'
+        $contacto = $solicitante->contacto()->create([
+            'nombre_contacto' => request('nombre_contacto'),
+            'correo_contacto' => request('correo_contacto'),
+            'celular_contacto' => request('celular_contacto'),
+        ]);
+
+        // Enlace de la tabla 'contacto' con la tabla 'cotizacion'
+        $cotizacion = $contacto->cotizacion()->create([
+            'TIPOCOP_Codigo' => '1',
+            'COTIC_Correo2' => request('COTIC_Correo2'),
+            'COTIC_Correo3' => request('COTIC_Correo3'),
+            'COTIC_Correo4' => request('COTIC_Correo4'),
+            'COTIC_Correo1' => request('COTIC_Correo1'),
+        ]);
+
+        // Enlace de la tabla 'cotizacion_detalle' con la tabla 'cotizacion'
+        /*
+        $ensayo = $cotizacion->ensayo()->create([
+            'CODEC_Nombre_Equipo' => request('CODEC_Nombre_Equipo'),
+            'CODEC_Descripcion_Equipo' => request('CODEC_Descripcion_Equipo'),
+            'CODEC_Fabricante_Equipo' => request('CODEC_Fabricante_Equipo'),
+            'CODEC_Descripcion_Ficha_Tecnica_Equipo' => request('CODEC_Descripcion_Ficha_Tecnica_Equipo'),
+            'CODEC_Url_Ficha_Tecnica_Equipo' => request('CODEC_Url_Ficha_Tecnica_Equipo'),
+            'CODEC_Costo' => request('CODEC_Costo'),
+            'CODEC_Archivo_Descripcion_Equipo' => request('CODEC_Archivo_Descripcion_Equipo'),
+            'CODEC_Cantidad' => request('CODEC_Cantidad'),
+        ]);
+        */
+
+        return redirect()->route('cot_ensayos');
+
     }
-    public function show(Request $request)
+
+    public function edit($id)
     {
-        $ensayo = Ensayo::findOrFail($request->id);
-        return $ensayo;
-        //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
-    }
-
-    public function update(Request $request)
-    {
-        $ensayo = Ensayo::findOrFail($request->id);
-
-        $ensayo->id = $request->id;
-        $ensayo->nombre_eq = $request->nombre_eq;
-        $ensayo->descripcion_eq = $request->descripcion_eq;
-        $ensayo->cantidad_eq = $request->cantidad_eq;
-        $ensayo->fabricante_eq = $request->fabricante_eq;
-        $ensayo->descrip_tec_eq = $request->descrip_tec_eq;
-        $ensayo->url_tec_eq = $request->url_tec_eq;
-        $ensayo->arch_descrip_eq = $request->arch_descrip_eq;
-        $ensayo->estado_tec_eq = $request->estado_tec_eq;
-
-        $ensayo->save();
-
-        return $ensayo;
-        //Esta función actualizará la tarea que hayamos seleccionado
 
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $ensayo = Ensayo::destroy($request->id);
-        return $ensayo;
-        //Esta función obtendra el id de la tarea que hayamos seleccionado y la borrará de nuestra BD
+
     }
 }

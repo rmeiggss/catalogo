@@ -14,7 +14,7 @@
             <!-- actualizado por marck, usando ELOQUENT -->
             <a class="btn btn-info" href="{{ route('curso.create') }}">Agregar Curso</a>
             <!-- <a class="btn btn-dark" href="{{ route('cursos.pdf') }}">Generar Reporte</a> -->
-            <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('cursos.pdf') }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
+            <!-- <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('cursos.pdf') }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -37,7 +37,7 @@
                   <th scope="col">Nombre</th>
                   <th scope="col">Descripcion</th>
                   <th scope="col">Costo</th>
-                  <th scope="col" class="text-center">Ver</th>
+                  <!-- th scope="col" class="text-center">Ver</th> -->
                   <th scope="col" colspan="2" class="text-center">Acciones</th>
                 </tr>
                 </thead>
@@ -49,10 +49,10 @@
                     <td class="text-left">{{$cur->CURSOC_Nombre}}</td>
                     <td class="text-left">{{$cur->CURSOC_Descripcion}}</td>
                     <td class="text-right">{{$cur->CURSOC_Costo}}</td>
-                    <td class="text-center">
+<!--                     <td class="text-center">
                       <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar PDF" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-pdf" style="color:red; font-size:30px; cursor:pointer;"></i></a>
                       <a class="btn" data-toggle="tooltip" data-placement="bottom" title="Generar EXCEL" href="{{ route('curso.show', $cur->id_curso) }}"><i class="far fa-file-excel" style="color:green; font-size:30px; cursor:pointer;"></i></a>
-                    </td>
+                    </td> -->
                     <td>
                       <button class="btn btn-info">
                         <a class="text-light" href="{{ route('curso.edit', $cur->id_curso) }}">

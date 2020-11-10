@@ -33,7 +33,6 @@
               <th scope="col">Codigo</th>
               <th scope="col">Nombre</th>
               <th scope="col">Descripcion</th>
-              <th scope="col">Costo</th>
               <th scope="col" colspan="2" class="text-center">Acciones</th>
             </tr>
             </thead>
@@ -44,7 +43,6 @@
                 <th scope="row">{{$item+1}}</th>
                 <td class="text-left">{{$prod->ASESORIA_Nombre}}</td>
                 <td class="text-left">{{$prod->ASESORIA_Descripcion}}</td>
-                <td class="text-right">{{$prod->ASESORIA_Costo}}</td>
                 <td><button class="btn btn-info">
                   <a class="text-light" href="{{ route('asesoria.edit', $prod->id) }}">
                     Editar

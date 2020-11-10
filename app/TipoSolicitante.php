@@ -13,4 +13,9 @@ class TipoSolicitante extends Model
     protected $fillable = ['TIPSOLIC_Descripcion'];
 
     public $timestamps = false;
+
+    public function solicitante()
+    {
+    	return $this->hasMany('App\Solicitante', 'TIPSOLIP_Codigo');
+    }
 }

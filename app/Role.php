@@ -8,9 +8,13 @@ class Role extends Model
 {
     protected $table = 'rol';
 
-    protected $fillable = ['ROL_Descripcion'];
+    protected $fillable = ['ROL_Codigo', 'Rol_Descripcion'];
 
     public $timestamps = false;
+/*  esto es con role_use pivote   public function users(){
+        return $this->belongsToMany('App\User');
+    } */
+
     public function users(){
         return $this->belongsToMany('App\User');
     }

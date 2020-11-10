@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "barryvdh/laravel-dompdf": "^0.8.7",
+        "dompdf/dompdf": "^0.8.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -19,7 +20,7 @@
         "laravelcollective/html": "^6.1",
         "nesbot/carbon": "^2.40",
         "yajra/laravel-datatables": "1.5",
-        "yajra/laravel-datatables-oracle": "^9.11"
+        "yajra/laravel-datatables-oracle": "7.*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
