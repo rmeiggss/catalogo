@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Descuento extends Model
 {
+
     protected $table = 'descuentos';
 
-    protected $fillable = ['nombre_curso', 'cantidad_min', 'cantidad_max', 'costo', 'descuento', 'id_curso'];
+    protected $primaryKey = 'id_descuento';
+
+    protected $fillable = ['id_curso', 'cantidad_min', 'cantidad_max', 'descuento'];
 
     public $timestamps = false;
 

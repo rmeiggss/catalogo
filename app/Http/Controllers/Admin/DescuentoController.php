@@ -79,10 +79,10 @@ class DescuentoController extends Controller
      */
     public function edit($id)
     {
-        $descuento = Descuento::findOrFail($id);
-        $productos = Producto::pluck('CURSOC_Nombre', 'id_nombre');
-
-        return view("admin.descuento.edit", ['descuento' => $descuento], compact('productos'));
+        $productos = Producto::pluck('CURSOC_Nombre', 'id_curso');
+        $descuento = Descuento::findOrFail($id);   
+            
+        return view("admin.descuento.edit", ['descuento' => $descuento, 'productos'=>$productos]);
     }
 
     /**
@@ -96,7 +96,7 @@ class DescuentoController extends Controller
     {
         $descuento = Descuento::findOrFail($id);
 
-        $descuento->nombre_curso = $request->nombre;
+        $descuento->id_curso = $request->nombre;
         $descuento->cantidad_min = $request->cant_min;
         $descuento->cantidad_max = $request->cant_max;
         $descuento->descuento = $request->descuento;

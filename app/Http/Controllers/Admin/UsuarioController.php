@@ -119,7 +119,7 @@ class UsuarioController extends Controller
         $usuario->password =  Crypt::encryptString($request->password);
         $usuario->ROL_Codigo = $request->rol;
         $usuario->save();
-        $usuario->roles()->sync([$usuario->ROL_Codigo]);
+/*         $usuario->roles()->sync([$usuario->ROL_Codigo]); */
         return Redirect::to("/usuario");
     }
     

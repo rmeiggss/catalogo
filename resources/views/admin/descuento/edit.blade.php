@@ -16,11 +16,11 @@
 <section class="content">
 <div class="grid-hor">
 
-    {!!Form::model($descuento, ['route'=>['descuento.update', $descuento->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
+    {!!Form::model($descuento, ['route'=>['descuento.update', $descuento->id_descuento],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
         <div class="form-group">
             {!!Form::label('nombre','Nombre')!!}
-            {!!Form::select('nombre', $productos, $descuento->nombre_curso, ['class' => 'form-control', 'placeholder'=>'-Seleccionar Curso-','id'=>'nombre']) !!}
+            {!!Form::select('nombre', $productos, $descuento->id_curso, ['class' => 'form-control', 'placeholder'=>'-Seleccionar Curso-','id'=>'nombre']) !!}
         </div>
 
         <div class="form-group">
@@ -31,11 +31,6 @@
         <div class="form-group">
         {!!Form::label('cant_max','Cantidad Máxima')!!}
             {!!Form::text('cant_max', $descuento->cantidad_max,['class'=>'form-control','id'=>'cant_max'])!!}
-        </div>
-
-        <div class="form-group">
-        {!!Form::label('costo','Costo')!!}
-            {!!Form::text('costo', $descuento->costo,['class'=>'form-control','id'=>'costo'])!!}
         </div>
 
         <div class="form-group">
