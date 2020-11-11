@@ -61,7 +61,7 @@ class CotizacionController extends Controller
         $objCotizacion = [
             'id_contacto'    => $request->contacto,
             'COTIC_Numero'   => $request->numero,
-            'COTIC_Fecha'    => $request->fecha,
+            'COTIC_Fecha_Cotizacion' => $request->fecha,
             'USUA_Codigo'    => $request->usuario,
             'COTIC_SubTotal' => $request->subtotal,
             'COTIC_Igv'      => $request->igv,
@@ -78,13 +78,13 @@ class CotizacionController extends Controller
             if(count($request->equipos)>0){
                 foreach($request->equipos as $item=>$value){
                     $equipo = CotizacionDetalle::create([
-                        'COTIP_Codigo'         => $cot->COTIP_Codigo,
-                        "CODEC_NombreEquipo"   => $value["CODEC_NombreEquipo"],
-                        "CODEC_Descripcion"    => $value["CODEC_Descripcion"],
-                        "CODEC_Fabricante"     => $value["CODEC_Fabricante"],
-                        "CODEC_Cantidad"       => $value["CODEC_Cantidad"],
-                        "CODEC_PrecioUnitario" => $value["CODEC_PrecioUnitario"],
-                        "CODEC_SubTotal"       => $value["CODEC_Cantidad"]*$value["CODEC_PrecioUnitario"]
+                        'COTIP_Codigo'             => $cot->COTIP_Codigo,
+                        "CODEC_Nombre_Equipo"      => $value["CODEC_Nombre_Equipo"],
+                        "CODEC_Descripcion_Equipo" => $value["CODEC_Descripcion_Equipo"],
+                        "CODEC_Fabricante_Equipo"  => $value["CODEC_Fabricante_Equipo"],
+                        "CODEC_Cantidad"           => $value["CODEC_Cantidad"],
+                        "CODEC_Costo"              => $value["CODEC_Costo"],
+                        "CODEC_SubTotal"           => $value["CODEC_Cantidad"]*$value["CODEC_Costo"]
                     ]);
                     $pruebas = $value["pruebas"];
                     //Grabamos las pruebas
@@ -126,7 +126,7 @@ class CotizacionController extends Controller
         //Actualiza cabecera
         $id = $request->id_cotizacion;
         $cotizacion = Cotizacion::findOrFail($id);
-        $cotizacion->COTIC_Fecha    = $request->fecha;
+        $cotizacion->COTIC_Fecha_Cotizacion  = $request->fecha;
         $cotizacion->id_contacto    = $request->contacto;
         $cotizacion->USUA_Codigo    = $request->usuario;
         $cotizacion->COTIC_SubTotal = $request->subtotal;
@@ -140,15 +140,15 @@ class CotizacionController extends Controller
                     $codigodet = $value['CODEP_Codigo'];
                     if(is_null($codigodet)){//Nuevo
                         $equipo = CotizacionDetalle::create([
-                            'COTIP_Codigo'         => $id,
-                            "CODEC_NombreEquipo"   => $value['CODEC_NombreEquipo'],
-                            "CODEC_Descripcion"    => $value['CODEC_Descripcion'],
-                            "CODEC_Fabricante"     => $value['CODEC_Fabricante'],
-                            "CODEC_Cantidad"       => $value['CODEC_Cantidad'],
-                            "CODEC_PrecioUnitario" => $value['CODEC_PrecioUnitario'],
-                            "CODEC_SubTotal"       => $value['CODEC_Cantidad']*$value['CODEC_PrecioUnitario'],
+                            'COTIP_Codigo'             => $id,
+                            "CODEC_Nombre_Equipo"      => $value['CODEC_Nombre_Equipo'],
+                            "CODEC_Descripcion_Equipo" => $value['CODEC_Descripcion_Equipo'],
+                            "CODEC_Fabricante_Equipo"  => $value['CODEC_Fabricante_Equipo'],
+                            "CODEC_Cantidad"           => $value['CODEC_Cantidad'],
+                            "CODEC_Costo"              => $value['CODEC_Costo'],
+                            "CODEC_SubTotal"           => $value['CODEC_Cantidad']*$value['CODEC_Costo'],
                             "CODEC_Descripcion_Ficha_Tecnica_Equipo" => $value['CODEC_Descripcion_Ficha_Tecnica_Equipo'],
-                            "CODEC_Url"            => $value['CODEC_Url']
+                            "CODEC_Url_Ficha_Tecnica_Equipo"  => $value['CODEC_Url_Ficha_Tecnica_Equipo']
                         ]);  
                         $pruebas = $value["pruebas"];
                         //Grabamos las pruebas
@@ -166,12 +166,12 @@ class CotizacionController extends Controller
                     }
                     else{//Editar
                         $cotizaciondet = CotizacionDetalle::findOrFail($codigodet);
-                        $cotizaciondet->CODEC_NombreEquipo   = $value['CODEC_NombreEquipo'];
-                        $cotizaciondet->CODEC_Descripcion    = $value['CODEC_Descripcion'];
-                        $cotizaciondet->CODEC_Fabricante     = $value['CODEC_Fabricante'];
-                        $cotizaciondet->CODEC_Cantidad       = $value['CODEC_Cantidad'];
-                        $cotizaciondet->CODEC_PrecioUnitario = $value['CODEC_PrecioUnitario'];
-                        $cotizaciondet->CODEC_SubTotal       = $value['CODEC_SubTotal'];
+                        $cotizaciondet->CODEC_Nombre_Equipo      = $value['CODEC_Nombre_Equipo'];
+                        $cotizaciondet->CODEC_Descripcion_Equipo = $value['CODEC_Descripcion_Equipo'];
+                        $cotizaciondet->CODEC_Fabricante_Equipo  = $value['CODEC_Fabricante_Equipo'];
+                        $cotizaciondet->CODEC_Cantidad           = $value['CODEC_Cantidad'];
+                        $cotizaciondet->CODEC_Costo              = $value['CODEC_Costo'];
+                        $cotizaciondet->CODEC_SubTotal           = $value['CODEC_SubTotal'];
                         $cotizaciondet->save();
                     }
                 }

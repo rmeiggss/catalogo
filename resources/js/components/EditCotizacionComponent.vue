@@ -87,17 +87,17 @@
                     <input type="hidden" name="codigodet[]" v-model="cotdetalle.CODEP_Codigo" class="form-control-sm">
                   </td>
                   <td>
-                    <input type="text" class="form-control-sm w-100" name="nombre[]" v-model="cotdetalle.CODEC_NombreEquipo" autocomplete="off">
+                    <input type="text" class="form-control-sm w-100" name="nombre[]" v-model="cotdetalle.CODEC_Nombre_Equipo" autocomplete="off">
                   </td>
-                  <td><input type="text" class="form-control-sm w-100" name="descripcion[]" v-model="cotdetalle.CODEC_Descripcion" autocomplete="off"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="cotdetalle.CODEC_Fabricante" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="descripcion[]" v-model="cotdetalle.CODEC_Descripcion_Equipo" autocomplete="off"></td>
+                  <td><input type="text" class="form-control-sm w-100" name="fabricante[]" v-model="cotdetalle.CODEC_Fabricante_Equipo" autocomplete="off"></td>
                   <td><input type="text" class="form-control-sm w-100" name="ficha[]" v-model="cotdetalle.CODEC_Descripcion_Ficha_Tecnica_Equipo" autocomplete="off"></td>
-                  <td><input type="text" class="form-control-sm w-100" name="url[]" v-model="cotdetalle.CODEC_Url" autocomplete="off"></td>                                    
+                  <td><input type="text" class="form-control-sm w-100" name="url[]" v-model="cotdetalle.CODEC_Url_Ficha_Tecnica_Equipo" autocomplete="off"></td>                                    
                   <td class="pb-0 mb-0"><i class="far fa-file-pdf" style="color:red;font-size: 23px;"></i></td>
                   <td><button type="button" class="btn btn-outline-success btn-lg btn-sm" data-toggle="modal" data-target="#exampleModal" @click="editEquipo(index)">Lista</button></td>
                   <td><input type="text" style="text-align: right;" class="form-control-sm w-100" name="cantidad[]" v-model.number="cotdetalle.CODEC_Cantidad" id="cantidad" autocomplete="off"></td>
-                  <td><input type="text" style="text-align: right;" class="form-control-sm w-100" name="unitario[]" v-model.number="cotdetalle.CODEC_PrecioUnitario" autocomplete="off"></td>
-                  <td><input type="text" style="text-align: right;" class="form-control-sm w-100" name="subtotaldet[]" :value="(cotdetalle.CODEC_Cantidad*cotdetalle.CODEC_PrecioUnitario).toFixed(2)" readonly="readonly" autocomplete="off"></td>
+                  <td><input type="text" style="text-align: right;" class="form-control-sm w-100" name="unitario[]" v-model.number="cotdetalle.CODEC_Costo" autocomplete="off"></td>
+                  <td><input type="text" style="text-align: right;" class="form-control-sm w-100" name="subtotaldet[]" :value="(cotdetalle.CODEC_Cantidad*cotdetalle.CODEC_Costo).toFixed(2)" readonly="readonly" autocomplete="off"></td>
                 </tr>
               </tbody>
             </table>
@@ -137,7 +137,7 @@
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="myModalLabel">Pruebas del Equipo :: {{equipo.CODEC_NombreEquipo}}</h5>
+                  <h5 class="modal-title" id="myModalLabel">Pruebas del Equipo :: {{equipo.CODEC_Nombre_Equipo}}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -260,7 +260,7 @@
         computed:{
           setSubTotal:function(){
             var suma = 0;
-            return this.equipos.reduce((suma,cotdetalle)=>suma+(cotdetalle.CODEC_PrecioUnitario*cotdetalle.CODEC_Cantidad),0);
+            return this.equipos.reduce((suma,cotdetalle)=>suma+(cotdetalle.CODEC_Costo*cotdetalle.CODEC_Cantidad),0);
           },
           setIgv:function(){
             return (Number(this.setSubTotal)*0.18).toFixed(2);
@@ -282,7 +282,7 @@
             },
             addEquipo(){
               let fila = {
-                CODEP_Codigo:"",CODEC_NombreEquipo:"",CODEC_Descripcion:"",CODEC_Fabricante:"",CODEC_Cantidad:"",CODEC_PrecioUnitario:"",pruebas:[]};
+                CODEP_Codigo:"",CODEC_Nombre_Equipo:"",CODEC_Descripcion_Equipo:"",CODEC_Fabricante_Equipo:"",CODEC_Cantidad:"",CODEC_Costo:"",CODEC_Url_Ficha_Tecnica_Equipo:"",CODEC_Descripcion_Ficha_Tecnica_Equipo:"",pruebas:[]};
               this.equipos.push(fila);
             },
             editEquipo(index){
@@ -401,7 +401,7 @@
                 var url = '/cotizacion/'+id+'/get';
                 axios.get(url).then(response=>{
                     let resultado   = response.data;
-                    resultado.COTIC_Fecha = resultado.COTIC_Fecha.split(' ')[0];
+                    resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
                     this.cotizacion = resultado;
                     console.log(resultado);
                 });

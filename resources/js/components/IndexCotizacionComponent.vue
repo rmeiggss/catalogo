@@ -23,7 +23,7 @@
                 <td>{{cotizacion.COTIP_Codigo}}</td>
                 <td>{{cotizacion.COTIC_Numero}}</td>
                 <td>{{cotizacion.SOLIC_Nombre}}</td>
-                <td>{{cotizacion.COTIC_Fecha.split(' ')[0]}}</td>
+                <td>{{cotizacion.COTIC_Fecha_Cotizacion.split(' ')[0]}}</td>
                 <td class="text-right">{{cotizacion.COTIC_Total}}</td>
                 <td>
                   <button class="btn btn-info" @click="btnEditar(cotizacion.COTIP_Codigo)">Editar</button>

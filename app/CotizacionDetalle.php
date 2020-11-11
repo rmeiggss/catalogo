@@ -11,13 +11,13 @@ class CotizacionDetalle extends Model
     protected $table = 'cotizacion_detalle';
     
     protected $fillable = [
-        'CODEC_NombreEquipo', 
-        'CODEC_Descripcion', 
-        'CODEC_Fabricante', 
-        'CODEC_Url', 
+        'CODEC_Nombre_Equipo', 
+        'CODEC_Descripcion_Equipo', 
+        'CODEC_Fabricante_Equipo', 
+        'CODEC_Url_Ficha_Tecnica_Equipo', 
         'CODEC_Cantidad',
         'CODEC_SubTotal',
-        'CODEC_PrecioUnitario',
+        'CODEC_Costo',
         'COTIP_Codigo',
         'CODEC_Descripcion_Ficha_Tecnica_Equipo',
         'CODEC_Archivo_Descripcion_Equipo'

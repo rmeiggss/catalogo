@@ -2713,7 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
     setSubTotal: function setSubTotal() {
       var suma = 0;
       return this.equipos.reduce(function (suma, cotdetalle) {
-        return suma + cotdetalle.CODEC_PrecioUnitario * cotdetalle.CODEC_Cantidad;
+        return suma + cotdetalle.CODEC_Costo * cotdetalle.CODEC_Cantidad;
       }, 0);
     },
     setIgv: function setIgv() {
@@ -2739,11 +2739,13 @@ __webpack_require__.r(__webpack_exports__);
     addEquipo: function addEquipo() {
       var fila = {
         CODEP_Codigo: "",
-        CODEC_NombreEquipo: "",
-        CODEC_Descripcion: "",
-        CODEC_Fabricante: "",
+        CODEC_Nombre_Equipo: "",
+        CODEC_Descripcion_Equipo: "",
+        CODEC_Fabricante_Equipo: "",
         CODEC_Cantidad: "",
-        CODEC_PrecioUnitario: "",
+        CODEC_Costo: "",
+        CODEC_Url_Ficha_Tecnica_Equipo: "",
+        CODEC_Descripcion_Ficha_Tecnica_Equipo: "",
         pruebas: []
       };
       this.equipos.push(fila);
@@ -2877,7 +2879,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/cotizacion/' + id + '/get';
       axios.get(url).then(function (response) {
         var resultado = response.data;
-        resultado.COTIC_Fecha = resultado.COTIC_Fecha.split(' ')[0];
+        resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
         _this5.cotizacion = resultado;
         console.log(resultado);
       });
@@ -40932,8 +40934,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_NombreEquipo,
-                              expression: "cotdetalle.CODEC_NombreEquipo"
+                              value: cotdetalle.CODEC_Nombre_Equipo,
+                              expression: "cotdetalle.CODEC_Nombre_Equipo"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -40942,7 +40944,7 @@ var render = function() {
                             name: "nombre[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_NombreEquipo },
+                          domProps: { value: cotdetalle.CODEC_Nombre_Equipo },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -40950,7 +40952,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 cotdetalle,
-                                "CODEC_NombreEquipo",
+                                "CODEC_Nombre_Equipo",
                                 $event.target.value
                               )
                             }
@@ -40964,8 +40966,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_Descripcion,
-                              expression: "cotdetalle.CODEC_Descripcion"
+                              value: cotdetalle.CODEC_Descripcion_Equipo,
+                              expression: "cotdetalle.CODEC_Descripcion_Equipo"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -40974,7 +40976,9 @@ var render = function() {
                             name: "descripcion[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_Descripcion },
+                          domProps: {
+                            value: cotdetalle.CODEC_Descripcion_Equipo
+                          },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -40982,7 +40986,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 cotdetalle,
-                                "CODEC_Descripcion",
+                                "CODEC_Descripcion_Equipo",
                                 $event.target.value
                               )
                             }
@@ -40996,8 +41000,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_Fabricante,
-                              expression: "cotdetalle.CODEC_Fabricante"
+                              value: cotdetalle.CODEC_Fabricante_Equipo,
+                              expression: "cotdetalle.CODEC_Fabricante_Equipo"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -41006,7 +41010,9 @@ var render = function() {
                             name: "fabricante[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_Fabricante },
+                          domProps: {
+                            value: cotdetalle.CODEC_Fabricante_Equipo
+                          },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -41014,7 +41020,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 cotdetalle,
-                                "CODEC_Fabricante",
+                                "CODEC_Fabricante_Equipo",
                                 $event.target.value
                               )
                             }
@@ -41065,8 +41071,9 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: cotdetalle.CODEC_Url,
-                              expression: "cotdetalle.CODEC_Url"
+                              value: cotdetalle.CODEC_Url_Ficha_Tecnica_Equipo,
+                              expression:
+                                "cotdetalle.CODEC_Url_Ficha_Tecnica_Equipo"
                             }
                           ],
                           staticClass: "form-control-sm w-100",
@@ -41075,7 +41082,9 @@ var render = function() {
                             name: "url[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_Url },
+                          domProps: {
+                            value: cotdetalle.CODEC_Url_Ficha_Tecnica_Equipo
+                          },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -41083,7 +41092,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 cotdetalle,
-                                "CODEC_Url",
+                                "CODEC_Url_Ficha_Tecnica_Equipo",
                                 $event.target.value
                               )
                             }
@@ -41158,8 +41167,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model.number",
-                              value: cotdetalle.CODEC_PrecioUnitario,
-                              expression: "cotdetalle.CODEC_PrecioUnitario",
+                              value: cotdetalle.CODEC_Costo,
+                              expression: "cotdetalle.CODEC_Costo",
                               modifiers: { number: true }
                             }
                           ],
@@ -41170,7 +41179,7 @@ var render = function() {
                             name: "unitario[]",
                             autocomplete: "off"
                           },
-                          domProps: { value: cotdetalle.CODEC_PrecioUnitario },
+                          domProps: { value: cotdetalle.CODEC_Costo },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -41178,7 +41187,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 cotdetalle,
-                                "CODEC_PrecioUnitario",
+                                "CODEC_Costo",
                                 _vm._n($event.target.value)
                               )
                             },
@@ -41201,8 +41210,7 @@ var render = function() {
                           },
                           domProps: {
                             value: (
-                              cotdetalle.CODEC_Cantidad *
-                              cotdetalle.CODEC_PrecioUnitario
+                              cotdetalle.CODEC_Cantidad * cotdetalle.CODEC_Costo
                             ).toFixed(2)
                           }
                         })
@@ -41348,7 +41356,7 @@ var render = function() {
                       [
                         _vm._v(
                           "Pruebas del Equipo :: " +
-                            _vm._s(_vm.equipo.CODEC_NombreEquipo)
+                            _vm._s(_vm.equipo.CODEC_Nombre_Equipo)
                         )
                       ]
                     ),
@@ -42976,7 +42984,11 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(cotizacion.SOLIC_Nombre))]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(_vm._s(cotizacion.COTIC_Fecha.split(" ")[0]))
+                        _vm._v(
+                          _vm._s(
+                            cotizacion.COTIC_Fecha_Cotizacion.split(" ")[0]
+                          )
+                        )
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-right" }, [
@@ -55860,8 +55872,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\marck\Documents\laravel\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Apache24\htdocs\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

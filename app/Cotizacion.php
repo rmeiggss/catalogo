@@ -18,7 +18,7 @@ class Cotizacion extends Model
 	    'USUA_Codigo',
 	    'COTIC_Igv',
 	    'COTIC_Total',
-	    'COTIC_Fecha',
+	    'COTIC_Fecha_Cotizacion',
 	    'COTIC_Correo1',
 	    'COTIC_Correo2',
 	    'COTIC_Correo3',
