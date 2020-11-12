@@ -48,12 +48,12 @@
                   <td>{{$horarioinstructor->hora_inicial}}</td>
                   <td>{{$horarioinstructor->hora_final}}</td>
                   <td><button class="btn btn-info btn-sm">
-                    <a class="text-light" href="{{ route('horario-instructor.edit', $horarioinstructor->id) }}">
+                    <a class="text-light" href="{{ route('horario-instructor.edit', $horarioinstructor->id_horario_instructor) }}">             
                       Editar
                     </a></button></td>
                   <td>
                     <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-                    {!!Form::open(['route'=>['horario-instructor.destroy',$horarioinstructor->id],'method'=>'DELETE'])!!}
+                    {!!Form::open(['route'=>['horario-instructor.destroy',$horarioinstructor->id_horario_instructor],'method'=>'DELETE'])!!}
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         {!!Form::submit('Eliminar',
