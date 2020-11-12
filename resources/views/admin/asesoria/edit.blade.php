@@ -17,7 +17,7 @@
     <section class="content">
         <div class="grid-hor">
 
-            {!!Form::model($asesorialabs, ['route'=>['asesoria.update', $asesorialabs->id],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
+            {!!Form::model($asesorialabs, ['route'=>['asesoria.update', $asesorialabs->id_asesoria],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
                 <div class="form-group">
                     {!!Form::label('nombre','Nombre')!!}

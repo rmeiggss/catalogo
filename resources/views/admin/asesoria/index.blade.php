@@ -44,12 +44,12 @@
                 <td class="text-left">{{$prod->ASESORIA_Nombre}}</td>
                 <td class="text-left">{{$prod->ASESORIA_Descripcion}}</td>
                 <td><button class="btn btn-info">
-                  <a class="text-light" href="{{ route('asesoria.edit', $prod->id) }}">
+                  <a class="text-light" href="{{ route('asesoria.edit', $prod->id_asesoria) }}">
                     Editar
                   </a></button></td>
                 <td>
                   <!-- $prod-> (debe señalar al "ID") - fijado por marck -->
-                  {!!Form::open(['route'=>['asesoria.destroy',$prod->id],'method'=>'DELETE'])!!}
+                  {!!Form::open(['route'=>['asesoria.destroy',$prod->id_asesoria],'method'=>'DELETE'])!!}
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
                       {!!Form::submit('Eliminar',

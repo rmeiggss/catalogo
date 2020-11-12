@@ -3398,6 +3398,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -42984,11 +42985,7 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(cotizacion.SOLIC_Nombre))]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            cotizacion.COTIC_Fecha_Cotizacion.split(" ")[0]
-                          )
-                        )
+                        _vm._v(_vm._s(cotizacion.COTIC_Fecha_Cotizacion))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-right" }, [

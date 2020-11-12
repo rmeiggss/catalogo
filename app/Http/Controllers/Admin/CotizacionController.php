@@ -146,6 +146,8 @@ class CotizacionController extends Controller
                             "CODEC_Fabricante_Equipo"  => $value['CODEC_Fabricante_Equipo'],
                             "CODEC_Cantidad"           => $value['CODEC_Cantidad'],
                             "CODEC_Costo"              => $value['CODEC_Costo'],
+                            "CODEC_Descripcion_Ficha_Tecnica_Equipo"              => $value['CODEC_Descripcion_Ficha_Tecnica_Equipo'],
+                            "CODEC_Url_Ficha_Tecnica_Equipo"              => $value['CODEC_Url_Ficha_Tecnica_Equipo'],
                             "CODEC_SubTotal"           => $value['CODEC_Cantidad']*$value['CODEC_Costo'],
                             "CODEC_Descripcion_Ficha_Tecnica_Equipo" => $value['CODEC_Descripcion_Ficha_Tecnica_Equipo'],
                             "CODEC_Url_Ficha_Tecnica_Equipo"  => $value['CODEC_Url_Ficha_Tecnica_Equipo']
@@ -169,6 +171,8 @@ class CotizacionController extends Controller
                         $cotizaciondet->CODEC_Nombre_Equipo      = $value['CODEC_Nombre_Equipo'];
                         $cotizaciondet->CODEC_Descripcion_Equipo = $value['CODEC_Descripcion_Equipo'];
                         $cotizaciondet->CODEC_Fabricante_Equipo  = $value['CODEC_Fabricante_Equipo'];
+                        $cotizaciondet->CODEC_Descripcion_Ficha_Tecnica_Equipo  = $value['CODEC_Descripcion_Ficha_Tecnica_Equipo'];
+                        $cotizaciondet->CODEC_Url_Ficha_Tecnica_Equipo  = $value['CODEC_Url_Ficha_Tecnica_Equipo'];
                         $cotizaciondet->CODEC_Cantidad           = $value['CODEC_Cantidad'];
                         $cotizaciondet->CODEC_Costo              = $value['CODEC_Costo'];
                         $cotizaciondet->CODEC_SubTotal           = $value['CODEC_SubTotal'];

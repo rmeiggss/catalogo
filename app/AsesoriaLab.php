@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AsesoriaLab extends Model
 {
-   // protected $primaryKey = 'ASESORIA_Codigo';
+   protected $primaryKey = 'id_asesoria';
 
    protected $table = 'asesoria';
 

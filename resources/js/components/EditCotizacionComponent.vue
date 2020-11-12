@@ -282,7 +282,15 @@
             },
             addEquipo(){
               let fila = {
-                CODEP_Codigo:"",CODEC_Nombre_Equipo:"",CODEC_Descripcion_Equipo:"",CODEC_Fabricante_Equipo:"",CODEC_Cantidad:"",CODEC_Costo:"",CODEC_Url_Ficha_Tecnica_Equipo:"",CODEC_Descripcion_Ficha_Tecnica_Equipo:"",pruebas:[]};
+                CODEP_Codigo:"",
+                CODEC_Nombre_Equipo:"",
+                CODEC_Descripcion_Equipo:"",
+                CODEC_Fabricante_Equipo:"",
+                CODEC_Cantidad:"",
+                CODEC_Costo:"",
+                CODEC_Url_Ficha_Tecnica_Equipo:"",
+                CODEC_Descripcion_Ficha_Tecnica_Equipo:"",
+                pruebas:[]};
               this.equipos.push(fila);
             },
             editEquipo(index){
