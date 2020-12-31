@@ -1,7 +1,7 @@
 /node_modules
-/public/js/app.js
-/public/hot
-/public/storage
+# /public/js/app.js
+# /public/hot
+# /public/storage
 /storage/*.key
 /vendor
 /.history
@@ -23,11 +23,11 @@ composer.lock
 .env
 .env
 .env
-/public/upload
+# /public/upload
 /.vs
 /bootstrap
 /.vs/slnx.sqlite
 /.vs/catalogo-lab-electricidad/config/applicationhost.config
 /.vs/slnx.sqlite-journal
 
-public/
+# public/
