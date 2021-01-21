@@ -9,27 +9,27 @@
           <h3>Empresa Solicitante</h3>
           <table class="table">
             <tr>
-              <td>Nombre del Solicitante:</td>
+              <td>Nombre:</td>
               <td>{{ solicitante.SOLIC_Nombre }}</td>
             </tr>
             <tr>
-              <td>Tipo del Solicitante:</td>
+              <td>Tipo:</td>
               <td>{{ solicitante.tiposSolicitanteDescripcion }}</td>
             </tr>
             <tr>
-              <td>RUC del Solicitante:</td>
+              <td>RUC:</td>
               <td>{{ solicitante.SOLIC_Ruc }}</td>
             </tr>
             <tr>
-              <td>Direccion del Solicitante:</td>
+              <td>Direccion:</td>
               <td>{{ solicitante.SOLIC_Direccion }}</td>
             </tr>
             <tr>
-              <td>Telefono del Solicitante:</td>
+              <td>Telefono:</td>
               <td>{{ solicitante.SOLIC_Telefono }}</td>
             </tr>
             <tr>
-              <td>Email del Solicitante:</td>
+              <td>Email:</td>
               <td>{{ solicitante.SOLIC_Email }}</td>
             </tr>
             <tr>
@@ -167,27 +167,27 @@
           <h3>Empresa Solicitante</h3>
           <table class="table">
             <tr>
-              <td>Nombre del Solicitante:</td>
+              <td>Nombre:</td>
               <td>{{ solicitante.SOLIC_Nombre }}</td>
             </tr>
             <tr>
-              <td>Tipo del Solicitante:</td>
+              <td>Tipo:</td>
               <td>{{ solicitante.tiposSolicitanteDescripcion }}</td>
             </tr>
             <tr>
-              <td>RUC del Solicitante:</td>
+              <td>RUC:</td>
               <td>{{ solicitante.SOLIC_Ruc }}</td>
             </tr>
             <tr>
-              <td>Direccion del Solicitante:</td>
+              <td>Direccion:</td>
               <td>{{ solicitante.SOLIC_Direccion }}</td>
             </tr>
             <tr>
-              <td>Telefono del Solicitante:</td>
+              <td>Telefono:</td>
               <td>{{ solicitante.SOLIC_Telefono }}</td>
             </tr>
             <tr>
-              <td>Email del Solicitante:</td>
+              <td>Email:</td>
               <td>{{ solicitante.SOLIC_Email }}</td>
             </tr>
             <tr>
@@ -283,27 +283,27 @@
           <h3>Empresa Solicitante</h3>
           <table class="table">
             <tr>
-              <td>Nombre del Solicitante:</td>
+              <td>Nombre:</td>
               <td>{{ solicitante.SOLIC_Nombre }}</td>
             </tr>
             <tr>
-              <td>Tipo del Solicitante:</td>
+              <td>Tipo:</td>
               <td>{{ solicitante.tiposSolicitanteDescripcion }}</td>
             </tr>
             <tr>
-              <td>RUC del Solicitante:</td>
+              <td>RUC:</td>
               <td>{{ solicitante.SOLIC_Ruc }}</td>
             </tr>
             <tr>
-              <td>Direccion del Solicitante:</td>
+              <td>Direccion:</td>
               <td>{{ solicitante.SOLIC_Direccion }}</td>
             </tr>
             <tr>
-              <td>Telefono del Solicitante:</td>
+              <td>Telefono:</td>
               <td>{{ solicitante.SOLIC_Telefono }}</td>
             </tr>
             <tr>
-              <td>Email del Solicitante:</td>
+              <td>Email:</td>
               <td>{{ solicitante.SOLIC_Email }}</td>
             </tr>
             <tr>

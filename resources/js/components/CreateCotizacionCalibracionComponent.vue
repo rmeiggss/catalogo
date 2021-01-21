@@ -7,9 +7,9 @@
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto">
-                           <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="seleccionarContacto()">
+                            <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
                         </select>
                     </div>
                 </div>
@@ -31,9 +31,9 @@
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                        <select class="col-sm-6 form-control-sm" name="contacto">
-                            <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                        <select v-model="contactoSelected" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="seleccionarSolicitante()">
+                           <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                         </select>
                     </div>
                 </div>
@@ -215,7 +215,9 @@
                 idxEquipo: null,
                 SubTotal: '0.00',
                 Igv: '0.00',
-                Total: '0.00'
+                Total: '0.00',
+                solicitanteSelected: null,
+                contactoSelected: null
             };
         },
         props: {
@@ -328,10 +330,11 @@
             },
             addCotizacion() {
                 let url = '/calibracion/store';
-                if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
+                if (typeof this.contactoSelected == "undefined" || this.contactoSelected == '' || this.contactoSelected == null) {
                     this.$refs.contacto.focus();
                     this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+                    this.$refs.fecha.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
                     this.$refs.numero.focus();
@@ -364,7 +367,7 @@
                                 }
                             };
                             let formData = new FormData();
-                            formData.append('contacto', this.cotizacion.id_contacto);
+                            formData.append('contacto', this.contactoSelected);
                             formData.append('fecha', this.cotizacion.COTIC_Fecha);
                             formData.append('numero', this.cotizacion.COTIC_Numero);
                             formData.append('usuario', this.cotizacion.USUA_Codigo);
@@ -450,7 +453,7 @@
                 });
             },
             irAListado() {
-                this.mostrarMensajeConfirmacion('¿Está seguro de abortar el registro?', 'Si, abortar', 'No, permanecer').then((result) => {
+                this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then((result) => {
                     if (result.isConfirmed) {
                         location.href = '/calibracion';
                     }
@@ -538,7 +541,19 @@
             },
             setTotal() {
                 this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
-            }
+            },
+            seleccionarSolicitante(){
+                var url = '/contacto/solicitante/get/' + this.contactoSelected
+                    axios.get(url).then(response => {
+                        this.solicitanteSelected = response.data.SOLIP_Codigo
+                    });
+            },
+            seleccionarContacto(){
+                var url = '/solicitante/contacto/get/' + this.solicitanteSelected
+                    axios.get(url).then(response => {
+                        this.contactoSelected = response.data.id_contacto;
+                    });
+            },
         }
     }
 </script>

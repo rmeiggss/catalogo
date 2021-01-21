@@ -9,32 +9,32 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-form-label" for="SOLIC_Nombre">Nombre del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Nombre">Nombre<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Nombre" ref="SOLIC_Nombre" v-model="solicitante.SOLIC_Nombre" maxlength="100" />
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label">Tipo de Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label">Tipo<span class="text-danger ml-1">*</span></label>
                                 <select v-model="solicitante.TIPSOLIP_Codigo" class="form-control" name="TIPSOLIP_Codigo" ref="TIPSOLIP_Codigo" id="TIPSOLIP_Codigo" >
-                                    <option value="">Seleccione un tipo de solicitante</option>
+                                    <option value="">Seleccione un tipo </option>
                                     <option v-for="tipoSolicitante in tiposSolicitante" v-bind:value="tipoSolicitante.TIPSOLIP_Codigo" v-bind:key="tipoSolicitante.TIPSOLIP_Codigo">{{ tipoSolicitante.TIPSOLIC_Descripcion }}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label">RUC del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label">RUC<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Ruc" ref="SOLIC_Ruc" v-model="solicitante.SOLIC_Ruc" maxlength="11" @keypress="restringirSoloNumerosEnteros($event)" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-5">
-                                <label class="col-form-label" for="SOLIC_Direccion">Dirección del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Direccion">Dirección<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Direccion" ref="SOLIC_Direccion" v-model="solicitante.SOLIC_Direccion" maxlength="255" />
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label" for="SOLIC_Telefono">Teléfono del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Telefono">Teléfono<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Telefono" ref="SOLIC_Telefono" v-model="solicitante.SOLIC_Telefono" maxlength="100" @keypress="restringirSoloNumerosEnteros($event)" />
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="col-form-label" for="SOLIC_Email">Email del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Email">Email<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="email" name="SOLIC_Email" ref="SOLIC_Email" v-model="solicitante.SOLIC_Email" maxlength="255" />
                             </div>
                         </div>
@@ -106,7 +106,7 @@
         <div class="row">
             <div class="col-sm-11 mx-auto text-left">
                 <button type="button" class="btn btn-success btn-sm px-4 pt-2" @click="openNewEquipo">
-                    <span class="font-weight-bold">Nuevo Equipo</span>&nbsp;&nbsp;
+                    <span class="font-weight-bold">Equipos a ensayar</span>&nbsp;&nbsp;
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </div>
@@ -400,16 +400,18 @@
                                     <!--th class="text-center">Costo</th-->
                                     <th class="text-center">Acciones</th>
                                 </tr>
-                                <tr v-for="(prueba, indice) in equipo.pruebas" :key="prueba.indice">
-                                    <td class="text-center">{{ indice + 1 }}</td>
-                                    <td class="text-left">{{ prueba.Descripcion_Prueba }}</td>
-                                    <td class="text-left">{{ prueba.Norma_Asoc_Prueba }}</td>
-                                    <!--td class="text-right">{{ prueba.Costo }}</td-->
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-outline-primary btn-sm" @click="editPrueba(indice)"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" @click="deletePrueba(indice)" :disabled="idxPrueba != null"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                <template v-if="pruebas.length > 0">
+                                    <tr v-for="(prueba, indice) in equipo.pruebas" :key="prueba.indice">
+                                        <td class="text-center">{{ indice + 1 }}</td>
+                                        <td class="text-left">{{ prueba.Descripcion_Prueba }}</td>
+                                        <td class="text-left">{{ prueba.Norma_Asoc_Prueba }}</td>
+                                        <!--td class="text-right">{{ prueba.Costo }}</td-->
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" @click="editPrueba(indice)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-outline-danger btn-sm" @click="deletePrueba(indice)" :disabled="idxPrueba != null"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        </td>
+                                    </tr>
+                                </template>
                             </table>
                         </div>
                     </div>
@@ -527,7 +529,7 @@
                 let regexpEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                 let regexpRuc = /^[0-9]{11}$/;
 				if (typeof this.solicitante.SOLIC_Nombre == "undefined" || this.solicitante.SOLIC_Nombre.trim() == '') {
-					this.$refs.SOLIC_Nombre.focus();
+					this.$refs.SOLIC_Nombre.focus();                    
                     this.mostrarMensajeInformacion('¡Debe ingresar el nombre del solicitante!', 'warning');
                     return false;
                 } else if (typeof this.solicitante.TIPSOLIP_Codigo == "undefined" || this.solicitante.TIPSOLIP_Codigo == '') {
@@ -642,13 +644,17 @@
                 } else {
                     this.solicitante.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
                     let emailEnvioCotizacion = $('#txt-emails-envio-cotizacion').val().split(',');
+                    if (emailEnvioCotizacion[0] == '')
+                    {
+                        this.mostrarMensajeInformacion('¡Debe ingresar por lo menos un correo electrónico!', 'warning');
+                        return false;
+                    }
                     this.cotizacion.COTIC_Correo1 = (emailEnvioCotizacion[0] != undefined && emailEnvioCotizacion[0] != null) ? emailEnvioCotizacion[0] : '';
                     this.cotizacion.COTIC_Correo2 = (emailEnvioCotizacion[1] != undefined && emailEnvioCotizacion[1] != null) ? emailEnvioCotizacion[1] : '';
                     this.cotizacion.COTIC_Correo3 = (emailEnvioCotizacion[2] != undefined && emailEnvioCotizacion[2] != null) ? emailEnvioCotizacion[2] : '';
                     this.cotizacion.COTIC_Correo4 = (emailEnvioCotizacion[3] != undefined && emailEnvioCotizacion[3] != null) ? emailEnvioCotizacion[3] : '';
                     this.mostrarMensajeConfirmacion('¿Está seguro de registrar la cotización?', 'Si, registrar', 'No, cancelar').then((result) => {
                         if (result.isConfirmed) {
-
                             const config = {
                                 headers: {
                                     'content-type': 'multipart/form-data',
@@ -657,25 +663,29 @@
                             };
                             let formData = new FormData();
 
+                            var now_date = new Date();
+                            now_date.setHours(now_date.getHours() - 6);
+
                             /*solicitante */
-                            formData.append('SOLIC_Direccion', this.solicitante.SOLIC_Direccion);
-                            formData.append('SOLIC_Email', this.solicitante.SOLIC_Email);
-                            formData.append('SOLIC_Nombre', this.solicitante.SOLIC_Nombre);
-                            formData.append('SOLIC_Ruc', this.solicitante.SOLIC_Ruc);
-                            formData.append('SOLIC_Telefono', this.solicitante.SOLIC_Telefono);
-                            formData.append('TIPSOLIP_Codigo', this.solicitante.TIPSOLIP_Codigo);
-                            formData.append('UBIGP_Codigo', this.solicitante.UBIGP_Codigo);
+                            formData.append('solicitante[SOLIC_Direccion]', this.solicitante.SOLIC_Direccion);
+                            formData.append('solicitante[SOLIC_Email]', this.solicitante.SOLIC_Email);
+                            formData.append('solicitante[SOLIC_Nombre]', this.solicitante.SOLIC_Nombre);
+                            formData.append('solicitante[SOLIC_Ruc]', this.solicitante.SOLIC_Ruc);
+                            formData.append('solicitante[SOLIC_Telefono]', this.solicitante.SOLIC_Telefono);
+                            formData.append('solicitante[TIPSOLIP_Codigo]', this.solicitante.TIPSOLIP_Codigo);
+                            formData.append('solicitante[UBIGP_Codigo]', this.solicitante.UBIGP_Codigo);
 
                             /*contacto*/
-                            formData.append('celular_contacto', this.contacto.celular_contacto);
-                            formData.append('correo_contacto', this.contacto.correo_contacto);
-                            formData.append('nombre_contacto', this.contacto.nombre_contacto);
+                            formData.append('contacto[celular_contacto]', this.contacto.celular_contacto);
+                            formData.append('contacto[correo_contacto]', this.contacto.correo_contacto);
+                            formData.append('contacto[nombre_contacto]', this.contacto.nombre_contacto);
 
                             /*cotizacion */
-                            formData.append('COTIC_Correo1', this.cotizacion.COTIC_Correo1);
-                            formData.append('COTIC_Correo2', this.cotizacion.COTIC_Correo2);
-                            formData.append('COTIC_Correo3', this.cotizacion.COTIC_Correo3);
-                            formData.append('COTIC_Correo4', this.cotizacion.COTIC_Correo4);
+                            formData.append('cotizacion[COTIC_Correo1]', this.cotizacion.COTIC_Correo1);
+                            formData.append('cotizacion[COTIC_Correo2]', this.cotizacion.COTIC_Correo2);
+                            formData.append('cotizacion[COTIC_Correo3]', this.cotizacion.COTIC_Correo3);
+                            formData.append('cotizacion[COTIC_Correo4]', this.cotizacion.COTIC_Correo4);
+                            formData.append('cotizacion[COTIC_Fecha_Cotizacion]', now_date.toJSON().slice(0,10).replace(/-/g,'-'));
 
                             /*equipos */
                             this.equipos.forEach((equipo, i) => {
@@ -733,6 +743,7 @@
                     });
                 }
             },
+
             openNewEquipo() {
                 $('#modal-nuevo-equipo').modal();
                 this.equipo = {};
@@ -892,6 +903,7 @@
                 this.idxEquipo = index;
                 // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
                 this.equipo = this.equipos[index];
+                this.pruebas = this.equipos[index].pruebas;
                 $("#file").val('');
                 $('#archivoFichaTecnica').val('');
             },
@@ -975,9 +987,6 @@
                 Object.assign(this.prueba, this.equipo.pruebas[index]);
                 // this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
             },
-            deletePrueba(index) {
-                console.log('elimina un prueba')
-            },
             updatePruebas() {
                 this.equipos[this.idxEquipo] = this.equipo;
                 this.equipo = {};
@@ -986,7 +995,11 @@
                 $('#modal-lista-pruebas').modal('hide');
             },
             deletePrueba(index) {
-                this.equipo.pruebas.splice(index, 1);
+                this.mostrarMensajeConfirmacion('¿Está seguro que desea eliminar la prueba?', 'Si, eliminar', 'No, cancelar').then((result) => {
+                    if (result.isConfirmed) {
+                        this.equipo.pruebas.splice(index, 1);
+                    }
+                });
             },
             listarTiposSolicitante() {
                 var url = '/tiposolicitante/list';

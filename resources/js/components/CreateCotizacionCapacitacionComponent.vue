@@ -7,23 +7,23 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 			<!-- Cabecera fila 1 -->
 			<div class="row invoice-info">
 				<div class="col-sm-4 invoice-col">
-					<div class="row form-group">
-						<label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-						<select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto">
-		                    <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
+                    <div class="row form-group">
+						<label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="seleccionarContacto()">
+		                    <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-sm-4 invoice-col">
 					<div class="row form-group">
 						<label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
-						<input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha">
+						<input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" ref="fecha" />
 					</div>
 				</div>
 				<div class="col-sm-4 invoice-col">
 					<div class="row form-group">
 						<label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-						<input v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero" ref="numero">
+						<input v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" name="numero" ref="numero" />
 					</div>
 				</div>
 			</div>
@@ -31,10 +31,10 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 			<!-- Cabecera fila 2 -->
 			<div class="row invoice-info">
 				<div class="col-sm-4 invoice-col">
-					<div class="row form-group">
-						<label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-						<select class="col-sm-6 form-control-sm" name="contacto">
-		                    <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                    <div class="row form-group">
+						<label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                        <select v-model="contactoSelected" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="seleccionarSolicitante()">
+		                    <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
 						</select>
 					</div>
 				</div>
@@ -170,7 +170,9 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 				contactos: [],
 				usuarios: [],
 				solicitantes: [],
-				saveData: null
+                saveData: null,
+                solicitanteSelected: null,
+                contactoSelected: null
 			}
 		},
 		props: {
@@ -239,10 +241,11 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 			},
 			addCotizacion() {
 				let url = '/capacitacion/store';
-				if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
+				if (typeof this.contactoSelected == "undefined" || this.contactoSelected == '' || this.contactoSelected == null) {
 					this.$refs.contacto.focus();
 					this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
 				} else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+					this.$refs.fecha.focus();
 					this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
 				} else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
 					this.$refs.numero.focus();
@@ -266,7 +269,7 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 								'display': 'inline-block'
 							});
 							axios.post(url, {
-								contacto: this.cotizacion.id_contacto,
+								contacto: this.contactoSelected,
 								fecha: this.cotizacion.COTIC_Fecha,
 								numero: this.cotizacion.COTIC_Numero,
 								usuario: this.cotizacion.USUA_Codigo,
@@ -330,7 +333,7 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 				});
 			},
 			irAListado() {
-				this.mostrarMensajeConfirmacion('¿Está seguro de abortar el registro?', 'Si, abortar', 'No, permanecer').then((result) => {
+				this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then((result) => {
 					if (result.isConfirmed) {
 						location.href = '/capacitacion';
 					}
@@ -420,7 +423,19 @@ import { ElementScrollController, OptionChangeHandler, BusinessHoursInput } from
 					capacitacion.COCAC_Descuento_Porcentaje = 0;
 					capacitacion.COCAC_Descuento_Moneda_Real = 0;
 				}
-			},
+            },
+            seleccionarSolicitante(){
+                var url = '/contacto/solicitante/get/' + this.contactoSelected
+                    axios.get(url).then(response => {
+                        this.solicitanteSelected = response.data.SOLIP_Codigo;
+                    });
+            },
+            seleccionarContacto(){
+                var url = '/solicitante/contacto/get/' + this.solicitanteSelected
+                    axios.get(url).then(response => {
+                        this.contactoSelected = response.data.id_contacto;
+                    });
+            },
 			realizarCalculosDeCapacitacion(e, index) {
 				let capacitacion = this.capacitaciones[index];
 				let controlActual = e.target;

@@ -12,16 +12,16 @@
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto">
-                           <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="seleccionarContacto()">
+                            <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo" >{{ solicitante.SOLIC_Nombre }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
-                        <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" />
+                        <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" ref="fecha" />
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
@@ -36,9 +36,9 @@
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                        <select class="col-sm-6 form-control-sm" name="contacto">
-                            <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                        <select v-model="contactoSelected" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="seleccionarSolicitante()">
+                           <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                         </select>
                     </div>
                 </div>
@@ -272,6 +272,7 @@
                             </div>
                         </div>
                         <div class="container mt-4">
+                            <!--p>{{ pruebas.length }}</p-->
                             <table class="table table-bordered table-sm">
                                 <tr>
                                     <th class="text-center">Item</th>
@@ -280,18 +281,21 @@
                                     <th class="text-center">Costo</th>
                                     <th class="text-center">Acciones</th>
                                 </tr>
-                                <tr v-for="(prueba, indice) in equipo.pruebas" :key="prueba.indice">
-                                    <td class="text-center">
-                                        {{ indice + 1 }}
-                                    </td>
-                                    <td class="text-left">{{ prueba.Descripcion_Prueba }}</td>
-                                    <td class="text-left">{{ prueba.Norma_Asoc_Prueba }}</td>
-                                    <td class="text-right">{{ (parseFloat(prueba.Costo)).toFixed(2) }}</td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-outline-primary btn-sm" @click="editPrueba(indice)"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" @click="deletePrueba(indice)" :disabled="idxPrueba != null"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                <!--tr v-for="(prueba, indice) in equipo.pruebas" :key="prueba.indice"-->
+                                <template v-if="pruebas.length > 0">
+                                    <tr v-for="(prueba, indice) in equipo.pruebas" :key="prueba.indice">
+                                        <td class="text-center">
+                                            {{ indice + 1 }}
+                                        </td>
+                                        <td class="text-left">{{ prueba.Descripcion_Prueba }}</td>
+                                        <td class="text-left">{{ prueba.Norma_Asoc_Prueba }}</td>
+                                        <td class="text-right">{{ (parseFloat(prueba.Costo)).toFixed(2) }}</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" @click="editPrueba(indice)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-outline-danger btn-sm" @click="deletePrueba(indice)" :disabled="idxPrueba != null"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        </td>
+                                    </tr>
+                                </template>
                             </table>
                         </div>
                     </div>
@@ -329,7 +333,9 @@
                 idxPrueba: null,
                 SubTotal: '0.00',
                 Igv: '0.00',
-                Total: '0.00'
+                Total: '0.00',
+                solicitanteSelected: null,
+                contactoSelected: null
             };
         },
         props: {
@@ -383,11 +389,11 @@
                 this.prueba = {};
                 this.idxEquipo = index;
                 this.equipo = this.equipos[index];
+                this.pruebas = this.equipos[index].pruebas;
                 $('#file').val('');
                 $('#archivoFichaTecnica').val('');
             },
             editEquipo(index) {
-                debugger
                 $('#modal-ficha-tecnica').modal();
                 this.idxEquipo = index;
                 // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
@@ -574,14 +580,19 @@
                 }
             },
             deletePrueba(index) {
-                this.equipo.pruebas.splice(index, 1);
+                this.mostrarMensajeConfirmacion('¿Está seguro que desea eliminar la prueba?', 'Si, eliminar', 'No, cancelar').then((result) => {
+                    if (result.isConfirmed) {
+                        this.equipo.pruebas.splice(index, 1);
+                    }
+                });
             },
             addCotizacion() {
                 let url = "/cotizacion/store";
-                if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
+                if (typeof this.contactoSelected == "undefined" || this.contactoSelected == '' || this.contactoSelected == null) {
                     this.$refs.contacto.focus();
                     this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+                    this.$refs.fecha.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
                     this.$refs.numero.focus();
@@ -605,7 +616,6 @@
 					this.mostrarMensajeInformacion('¡Debe ingresar la cantidad en todos los equipos!', 'warning');
                 } else {
                     this.mostrarMensajeConfirmacion('¿Está seguro de registrar la cotización?', 'Si, registrar', 'No, cancelar').then((result) => {
-                        debugger
                         if (result.isConfirmed) {
                             const config = {
                                 headers: {
@@ -614,7 +624,7 @@
                                 }
                             };
                             let formData = new FormData();
-                            formData.append('contacto', this.cotizacion.id_contacto);
+                            formData.append('contacto', this.contactoSelected);
                             formData.append('fecha', this.cotizacion.COTIC_Fecha);
                             formData.append('numero', this.cotizacion.COTIC_Numero);
                             formData.append('usuario', this.cotizacion.USUA_Codigo);
@@ -698,8 +708,20 @@
                     this.solicitantes = response.data;
                 });
             },
+            seleccionarSolicitante(){
+                var url = '/contacto/solicitante/get/' + this.contactoSelected
+                    axios.get(url).then(response => {
+                        this.solicitanteSelected = response.data.SOLIP_Codigo
+                    });
+            },
+            seleccionarContacto(){
+                var url = '/solicitante/contacto/get/' + this.solicitanteSelected
+                    axios.get(url).then(response => {
+                        this.contactoSelected = response.data.id_contacto;
+                    });
+            },
             irAListado() {
-                this.mostrarMensajeConfirmacion('¿Está seguro de abortar el registro?', 'Si, abortar', 'No, permanecer').then((result) => {
+                this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then((result) => {
                     if (result.isConfirmed) {
                         location.href = '/cotizacion';
                     }

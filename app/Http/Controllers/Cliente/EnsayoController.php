@@ -44,9 +44,10 @@ class EnsayoController extends Controller
             'COTIC_Correo2' => request('COTIC_Correo2'),
             'COTIC_Correo3' => request('COTIC_Correo3'),
             'COTIC_Correo4' => request('COTIC_Correo4'),
-            'COTIC_Correo1' => request('COTIC_Correo1'),
+            'COTIC_Correo1' => request('COTIC_Correo1')
+            // 'COTIC_Fecha_Cotizacion' => request('COTIC_Fecha_Cotizacion')
         ]);
-        
+
         print_r($request->all());
         die();
         // Enlace de la tabla 'cotizacion_detalle' con la tabla 'cotizacion'

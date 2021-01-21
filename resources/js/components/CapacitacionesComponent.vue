@@ -9,32 +9,32 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-form-label" for="SOLIC_Nombre">Nombre del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Nombre">Nombre<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Nombre" ref="SOLIC_Nombre" v-model="solicitante.SOLIC_Nombre" maxlength="100" />
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label">Tipo de Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label">Tipo<span class="text-danger ml-1">*</span></label>
                                 <select v-model="solicitante.TIPSOLIP_Codigo" class="form-control" name="TIPSOLIP_Codigo" ref="TIPSOLIP_Codigo" id="TIPSOLIP_Codigo">
-                                    <option value="">Seleccione un tipo de solicitante</option>
+                                    <option value="">Seleccione un tipo</option>
                                     <option v-for="tipoSolicitante in tiposSolicitante" v-bind:value="tipoSolicitante.TIPSOLIP_Codigo" v-bind:key="tipoSolicitante.TIPSOLIP_Codigo">{{ tipoSolicitante.TIPSOLIC_Descripcion }}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label">RUC del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label">RUC<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Ruc" ref="SOLIC_Ruc" v-model="solicitante.SOLIC_Ruc" maxlength="11" @keypress="restringirSoloNumerosEnteros($event)" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-5">
-                                <label class="col-form-label" for="SOLIC_Direccion">Dirección del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Direccion">Dirección<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Direccion" ref="SOLIC_Direccion" v-model="solicitante.SOLIC_Direccion" maxlength="255" />
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label" for="SOLIC_Telefono">Teléfono del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Telefono">Teléfono<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="text" name="SOLIC_Telefono" ref="SOLIC_Telefono" v-model="solicitante.SOLIC_Telefono" maxlength="100" @keypress="restringirSoloNumerosEnteros($event)" />
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="col-form-label" for="SOLIC_Email">Email del Solicitante<span class="text-danger ml-1">*</span></label>
+                                <label class="col-form-label" for="SOLIC_Email">Email<span class="text-danger ml-1">*</span></label>
                                 <input class="form-control" type="email" name="SOLIC_Email" ref="SOLIC_Email" v-model="solicitante.SOLIC_Email" maxlength="255" />
                             </div>
                         </div>
@@ -126,6 +126,10 @@
                                 <th scope="col" class="h6 text-white text-center font-weight-normal">Descripcion del Curso</th>
                                 <th scope="col" class="h6 text-white text-center font-weight-normal">Cantidad de Inscritos</th>
                                 <th scope="col" class="h6 text-white text-center font-weight-normal">Acciones</th>
+                                <th style="display: none;"></th>
+                                <th style="display: none;"></th>
+                                <th style="display: none;"></th>
+                                <th style="display: none;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -133,14 +137,19 @@
                                 <td class="text-center" v-text="capacitacion.CURSOC_Nombre"></td>
                                 <td class="text-center" v-text="capacitacion.CURSOC_Descripcion"></td>
                                 <td class="text-center" v-text="capacitacion.COCAC_Cantidad"></td>
-                                <th class="text-center">
+                                <td class="text-center">
                                     <button type="button" class="btn btn-outline-warning btn-sm m-auto" title="Editar capacitación" @click="editCapacitacion(index)">
                                         <i class="fa fa-edit ml-0" aria-hidden="true"></i>
                                     </button>
                                     <button type="button" class="btn btn-outline-danger btn-sm m-auto" @click="deleteCapacitacion(index)" title="Eliminar Capacitación">
                                         <i class="fa fa-trash ml-0" aria-hidden="true"></i>
                                     </button>
-                                </th>
+                                </td>
+                                <td style="display: none;" v-text="capacitacion.COCAC_Costo_Curso_Original"></td>
+                                <td style="display: none;" v-text="capacitacion.COCAC_Descuento_Porcentaje"></td>
+                                <td style="display: none;" v-text="capacitacion.COCAC_Descuento_Moneda_Real"></td>
+                                <td style="display: none;" v-text="capacitacion.COCAC_SubTotal"></td>
+                                <td style="display: none;" v-text="capacitacion.COCAC_SubTotal_Descontado"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -174,7 +183,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control-sm w-100 text-left" name="cantidad[]" ref="cantidadest" v-model.number="capacitacion.COCAC_Cantidad"
-										autocomplete="off" @keypress="restringirSoloNumerosEnteros($event)"  />
+										autocomplete="off" @focusout="getDescuento(capacitacion.id_curso)" @keypress="restringirSoloNumerosEnteros($event)"  />
                                 </div>
                             </div>
                             <div class="row form-group mb-2">
@@ -248,7 +257,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control-sm w-100 text-left" name="cantidad[]" ref="cantidadedit" v-model.number="capacitacion.COCAC_Cantidad"
-										autocomplete="off" @keypress="restringirSoloNumerosEnteros($event)"  />
+										autocomplete="off" @focusout="getDescuento(capacitacion.id_curso)" @keypress="restringirSoloNumerosEnteros($event)"  />
                                 </div>
                             </div>
                             <div class="row form-group mb-2">
@@ -327,6 +336,9 @@
 </template>
 
 <script>
+    $(document).ready(function(){
+        // $('.curso').val('0');
+    });
     export default {
         data: function() {
             return {
@@ -492,12 +504,21 @@
 	                this.$refs.celular_contacto.focus();
 					this.mostrarMensajeInformacion('¡Debe ingresar el celular del contacto!', 'warning');
                 } else {
+                    var now_date = new Date();
+                    now_date.setHours(now_date.getHours() - 6);
+
                     this.solicitante.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
                     let emailEnvioCotizacion = $('#txt-emails-envio-cotizacion').val().split(',');
+                    if (emailEnvioCotizacion[0] == '')
+                    {
+                        this.mostrarMensajeInformacion('¡Debe ingresar por lo menos un correo electrónico!', 'warning');
+                        return false;
+                    }                    
                     this.cotizacion.COTIC_Correo1 = (emailEnvioCotizacion[0] != undefined && emailEnvioCotizacion[0] != null) ? emailEnvioCotizacion[0] : '';
                     this.cotizacion.COTIC_Correo2 = (emailEnvioCotizacion[1] != undefined && emailEnvioCotizacion[1] != null) ? emailEnvioCotizacion[1] : '';
                     this.cotizacion.COTIC_Correo3 = (emailEnvioCotizacion[2] != undefined && emailEnvioCotizacion[2] != null) ? emailEnvioCotizacion[2] : '';
                     this.cotizacion.COTIC_Correo4 = (emailEnvioCotizacion[3] != undefined && emailEnvioCotizacion[3] != null) ? emailEnvioCotizacion[3] : '';
+                    this.cotizacion.COTIC_Fecha_Cotizacion = now_date.toJSON().slice(0,10).replace(/-/g,'-');
                     this.mostrarMensajeConfirmacion('¿Está seguro de registrar la capacitación?', 'Si, registrar', 'No, cancelar').then((result) => {
                         if (result.isConfirmed) {
                             $('#btn-registrar-cotizacion-capacitacion').attr('disabled', true);
@@ -541,6 +562,8 @@
             openNewCapacitacion() {
                 $('#modal-nueva-capacitacion').modal();
                 this.capacitacion = {};
+                this.capacitacion.id_curso = 0;
+                this.capacitacion.COCAC_Costo_Curso_Original = 0;
             },
             addCapacitacion() {
                 if (typeof this.capacitacion.id_curso == "undefined") {
@@ -573,7 +596,12 @@
                             COCAC_Cantidad: this.capacitacion.COCAC_Cantidad,
                             COCAC_Detalle_Curso_Cotizar: (this.capacitacion.COCAC_Detalle_Curso_Cotizar === undefined) ? '' : this.capacitacion.COCAC_Detalle_Curso_Cotizar.trim(),
                             COCAC_Horario_Tentativo_Curso: (this.capacitacion.COCAC_Horario_Tentativo_Curso === undefined) ? '' : this.capacitacion.COCAC_Horario_Tentativo_Curso.trim(),
-                            COCAC_Lugar_Capacitacion: this.capacitacion.COCAC_Lugar_Capacitacion
+                            COCAC_Lugar_Capacitacion: this.capacitacion.COCAC_Lugar_Capacitacion,
+                            COCAC_Costo_Curso_Original: this.capacitacion.COCAC_Costo_Curso_Original,
+                            COCAC_Descuento_Porcentaje: this.capacitacion.COCAC_Descuento_Porcentaje,
+                            COCAC_Descuento_Moneda_Real: this.capacitacion.COCAC_Descuento_Moneda_Real,
+                            COCAC_SubTotal: this.capacitacion.COCAC_SubTotal,
+                            COCAC_SubTotal_Descontado: this.capacitacion.COCAC_SubTotal_Descontado
                         });
 					});
                 }
@@ -642,7 +670,7 @@
                     }
                 });
             },
-            seleccionarCurso(index)
+            seleccionarCurso(e)
             {
                 let idCurso = this.capacitacion.id_curso;
                 if (idCurso == 0)
@@ -651,6 +679,32 @@
                 {
                     this.capacitacion.COCAC_Detalle_Curso_Cotizar = '';
                     $('.detalle-curso-cotizar').prop('readonly', true);
+                }
+                this.getCurso(idCurso);
+                this.getDescuento(idCurso);
+            },
+            getCurso(idCurso) {
+                let url = '/curso/' + idCurso;
+                axios.get(url).then((response) => {
+                    this.capacitacion.COCAC_Costo_Curso_Original = response.data.CURSOC_Costo;
+                });
+            },
+            getDescuento(idCurso) {
+                if (idCurso != 0 && this.capacitacion.COCAC_Cantidad != 0) {
+                    let url = '/curso/' + idCurso + '/descuento';
+                    axios.get(url).then((response) => {
+                        let descuento = $(response.data).filter((i, descuento) => ((descuento.id_curso) == idCurso && (this.capacitacion.COCAC_Cantidad >= descuento.cantidad_min && this.capacitacion.COCAC_Cantidad <= descuento.cantidad_max)));
+                        this.capacitacion.COCAC_Descuento_Porcentaje = (descuento.length != 0) ? descuento[0].descuento : 0;
+                        let subTotal = parseFloat(this.capacitacion.COCAC_Cantidad) * parseFloat(this.capacitacion.COCAC_Costo_Curso_Original);
+                        this.capacitacion.COCAC_Descuento_Moneda_Real = ((subTotal * parseFloat(this.capacitacion.COCAC_Descuento_Porcentaje)) / 100).toFixed(2);
+                        this.capacitacion.COCAC_SubTotal = subTotal;
+                        this.capacitacion.COCAC_SubTotal_Descontado = (subTotal - parseFloat(this.capacitacion.COCAC_Descuento_Moneda_Real)).toFixed(2);
+                    });
+                } else {
+                    this.capacitacion.COCAC_Descuento_Porcentaje = 0;
+                    this.capacitacion.COCAC_Descuento_Moneda_Real = '0.00';
+                    this.capacitacion.COCAC_SubTotal = '0.00';
+                    this.capacitacion.COCAC_SubTotal_Descontado = '0.00';
                 }
             },
             listarTiposSolicitante() {

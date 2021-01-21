@@ -9,22 +9,24 @@
             <div class="row row-sm invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto">
-                           <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="seleccionarContacto()">
+                            <option v-for="solicitante in solicitantes"
+                            v-bind:value="solicitante.SOLIP_Codigo"
+                            v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
-                        <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" readonly="readonly">
+                        <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" ref="fecha" />
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                        <input type="text" v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" readonly="readonly" style="text-align: right;">
+                        <input type="text" v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" ref="numero" style="text-align: right;" />
                     </div>
                 </div>
             </div>
@@ -33,9 +35,9 @@
             <div class="row row-sm invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                        <select class="col-sm-6 form-control-sm" name="contacto">
-                            <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="seleccionarSolicitante()">
+                           <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                         </select>
                     </div>
                 </div>
@@ -218,7 +220,9 @@
                 file: '',
                 SubTotal: '0.00',
                 Igv: '0.00',
-                Total: '0.00'
+                Total: '0.00',
+
+                solicitanteSelected: null,
             };
         },
         props: {
@@ -353,8 +357,11 @@
                 var url = '/cotizacion/' + id + '/get';
                 axios.get(url).then(response => {
                     let resultado = response.data;
-                    resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
+
+                    resultado.COTIC_Fecha = (resultado.COTIC_Fecha_Cotizacion??resultado.COTIC_FechaRegistro).split(' ')[0];
                     this.cotizacion = resultado;
+                    this.solicitanteSelected = resultado.SOLIP_Codigo;
+
                 });
             },
             updateCotizacion(equipos) {
@@ -363,6 +370,7 @@
                     this.$refs.contacto.focus();
                     this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+                    this.$refs.fecha.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
                     this.$refs.numero.focus();
@@ -484,7 +492,7 @@
                 });
             },
             irAListado() {
-                this.mostrarMensajeConfirmacion('¿Está seguro de abortar la actualización?', 'Si, abortar', 'No, permanecer').then((result) => {
+                this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then((result) => {
                     if (result.isConfirmed) {
                         location.href = '/calibracion';
                     }
@@ -572,7 +580,19 @@
             },
             setTotal() {
                 this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
-            }
+            },
+            seleccionarSolicitante(){
+                var url = '/contacto/solicitante/get/' + this.cotizacion.id_contacto
+                    axios.get(url).then(response => {
+                        this.solicitanteSelected = response.data.SOLIP_Codigo;
+                    });
+            },
+            seleccionarContacto(){
+                var url = '/solicitante/contacto/get/' + this.solicitanteSelected
+                    axios.get(url).then(response => {
+                        this.cotizacion.id_contacto = response.data.id_contacto;
+                    });
+            },
         }
     }
 </script>

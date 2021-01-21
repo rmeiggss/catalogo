@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Redirect;
 
 class SolicitanteController extends Controller
-{	
+{
     public function index()
     {
         //$solicitantes = Solicitante::latest()->paginate(8);
@@ -20,12 +20,12 @@ class SolicitanteController extends Controller
     public function list(){
         return Solicitante::all();
     }
-    
+
     public function create(){
         $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');
         return view('admin.solicitante.create',compact('tiposolicitante'));
     }
-    
+
     public function store(Request $request){
 
         /* Validacion del Formulario */
@@ -52,13 +52,13 @@ class SolicitanteController extends Controller
         ]);
         return Redirect::to("/solicitante");
     }
-    
+
     public function edit($id){
-        $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');        
+        $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');
         $solicitante = Solicitante::findOrFail($id);
         return view("admin.solicitante.edit",['solicitante' => $solicitante,'tiposolicitante'=>$tiposolicitante]);
     }
-    
+
     public function update(Request $request,$id){
         $solicitante = Solicitante::findOrFail($id);
         $solicitante->TIPSOLIP_Codigo = $request->tipo;
@@ -78,7 +78,17 @@ class SolicitanteController extends Controller
         $tiposSolicitantes = TipoSolicitante::all();
         return $tiposSolicitantes;
     }
-    
+
+    public function getContacto($id){
+        $contacto =
+        Solicitante::leftJoin('contacto', 'contacto.SOLIP_Codigo', '=', 'solicitante.SOLIP_Codigo')
+        ->select('contacto.id_contacto')
+        ->where('solicitante.SOLIP_Codigo', $id)
+        ->firstOrFail();
+
+        return $contacto;
+    }
+
     public function destroy($id){
         Solicitante::destroy($id);
         return Redirect::to("/solicitante");

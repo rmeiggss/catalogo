@@ -76,7 +76,7 @@ class ContactoController extends Controller
 
     public function get($id){
         return Contacto::findOrFail($id);
-    }    
+    }
 
     /**
      * Update the specified resource in storage.
@@ -106,5 +106,16 @@ class ContactoController extends Controller
     {
         Contacto::destroy($id);
         return response()->json(['message'=>'Contacto borrado']);
+    }
+
+
+    public function getSolicitante($id){
+        $solicitante =
+        Contacto::leftJoin('solicitante', 'solicitante.SOLIP_Codigo', '=', 'contacto.SOLIP_Codigo')
+        ->select('solicitante.SOLIP_Codigo')
+        ->where('contacto.id_contacto', $id)
+        ->firstOrFail();
+
+        return $solicitante;
     }
 }

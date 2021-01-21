@@ -2433,6 +2433,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.solicitante.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
         var emailEnvioCotizacion = $('#txt-emails-envio-cotizacion').val().split(',');
+
+        if (emailEnvioCotizacion[0] == '') {
+          this.mostrarMensajeInformacion('¡Debe ingresar por lo menos un correo electrónico!', 'warning');
+          return false;
+        }
+
         this.cotizacion.COTIC_Correo1 = emailEnvioCotizacion[0] != undefined && emailEnvioCotizacion[0] != null ? emailEnvioCotizacion[0] : '';
         this.cotizacion.COTIC_Correo2 = emailEnvioCotizacion[1] != undefined && emailEnvioCotizacion[1] != null ? emailEnvioCotizacion[1] : '';
         this.cotizacion.COTIC_Correo3 = emailEnvioCotizacion[2] != undefined && emailEnvioCotizacion[2] != null ? emailEnvioCotizacion[2] : '';
@@ -2446,26 +2452,29 @@ __webpack_require__.r(__webpack_exports__);
               }
             };
             var formData = new FormData();
+            var now_date = new Date();
+            now_date.setHours(now_date.getHours() - 6);
             /*solicitante */
 
-            formData.append('SOLIC_Direccion', _this2.solicitante.SOLIC_Direccion);
-            formData.append('SOLIC_Email', _this2.solicitante.SOLIC_Email);
-            formData.append('SOLIC_Nombre', _this2.solicitante.SOLIC_Nombre);
-            formData.append('SOLIC_Ruc', _this2.solicitante.SOLIC_Ruc);
-            formData.append('SOLIC_Telefono', _this2.solicitante.SOLIC_Telefono);
-            formData.append('TIPSOLIP_Codigo', _this2.solicitante.TIPSOLIP_Codigo);
-            formData.append('UBIGP_Codigo', _this2.solicitante.UBIGP_Codigo);
+            formData.append('solicitante[SOLIC_Direccion]', _this2.solicitante.SOLIC_Direccion);
+            formData.append('solicitante[SOLIC_Email]', _this2.solicitante.SOLIC_Email);
+            formData.append('solicitante[SOLIC_Nombre]', _this2.solicitante.SOLIC_Nombre);
+            formData.append('solicitante[SOLIC_Ruc]', _this2.solicitante.SOLIC_Ruc);
+            formData.append('solicitante[SOLIC_Telefono]', _this2.solicitante.SOLIC_Telefono);
+            formData.append('solicitante[TIPSOLIP_Codigo]', _this2.solicitante.TIPSOLIP_Codigo);
+            formData.append('solicitante[UBIGP_Codigo]', _this2.solicitante.UBIGP_Codigo);
             /*contacto*/
 
-            formData.append('celular_contacto', _this2.contacto.celular_contacto);
-            formData.append('correo_contacto', _this2.contacto.correo_contacto);
-            formData.append('nombre_contacto', _this2.contacto.nombre_contacto);
+            formData.append('contacto[celular_contacto]', _this2.contacto.celular_contacto);
+            formData.append('contacto[correo_contacto]', _this2.contacto.correo_contacto);
+            formData.append('contacto[nombre_contacto]', _this2.contacto.nombre_contacto);
             /*cotizacion */
 
-            formData.append('COTIC_Correo1', _this2.cotizacion.COTIC_Correo1);
-            formData.append('COTIC_Correo2', _this2.cotizacion.COTIC_Correo2);
-            formData.append('COTIC_Correo3', _this2.cotizacion.COTIC_Correo3);
-            formData.append('COTIC_Correo4', _this2.cotizacion.COTIC_Correo4);
+            formData.append('cotizacion[COTIC_Correo1]', _this2.cotizacion.COTIC_Correo1);
+            formData.append('cotizacion[COTIC_Correo2]', _this2.cotizacion.COTIC_Correo2);
+            formData.append('cotizacion[COTIC_Correo3]', _this2.cotizacion.COTIC_Correo3);
+            formData.append('cotizacion[COTIC_Correo4]', _this2.cotizacion.COTIC_Correo4);
+            formData.append('cotizacion[COTIC_Fecha_Cotizacion]', now_date.toJSON().slice(0, 10).replace(/-/g, '-'));
             /*equipos */
 
             _this2.equipos.forEach(function (equipo, i) {
@@ -2587,7 +2596,9 @@ __webpack_require__.r(__webpack_exports__);
     editEquipo: function editEquipo(index) {
       $('#modal-editar-equipo').modal();
       this.idxEquipo = index;
-      this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+      this.equipo = {};
+      Object.assign(this.equipo, this.equipos[index]); // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+
       $("#file").val('');
       $('#archivoFichaTecnica').val('');
     },
@@ -3113,6 +3124,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+$(document).ready(function () {// $('.curso').val('0');
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3280,12 +3302,21 @@ __webpack_require__.r(__webpack_exports__);
         this.$refs.celular_contacto.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar el celular del contacto!', 'warning');
       } else {
+        var now_date = new Date();
+        now_date.setHours(now_date.getHours() - 6);
         this.solicitante.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
         var emailEnvioCotizacion = $('#txt-emails-envio-cotizacion').val().split(',');
+
+        if (emailEnvioCotizacion[0] == '') {
+          this.mostrarMensajeInformacion('¡Debe ingresar por lo menos un correo electrónico!', 'warning');
+          return false;
+        }
+
         this.cotizacion.COTIC_Correo1 = emailEnvioCotizacion[0] != undefined && emailEnvioCotizacion[0] != null ? emailEnvioCotizacion[0] : '';
         this.cotizacion.COTIC_Correo2 = emailEnvioCotizacion[1] != undefined && emailEnvioCotizacion[1] != null ? emailEnvioCotizacion[1] : '';
         this.cotizacion.COTIC_Correo3 = emailEnvioCotizacion[2] != undefined && emailEnvioCotizacion[2] != null ? emailEnvioCotizacion[2] : '';
         this.cotizacion.COTIC_Correo4 = emailEnvioCotizacion[3] != undefined && emailEnvioCotizacion[3] != null ? emailEnvioCotizacion[3] : '';
+        this.cotizacion.COTIC_Fecha_Cotizacion = now_date.toJSON().slice(0, 10).replace(/-/g, '-');
         this.mostrarMensajeConfirmacion('¿Está seguro de registrar la capacitación?', 'Si, registrar', 'No, cancelar').then(function (result) {
           if (result.isConfirmed) {
             $('#btn-registrar-cotizacion-capacitacion').attr('disabled', true);
@@ -3329,6 +3360,8 @@ __webpack_require__.r(__webpack_exports__);
     openNewCapacitacion: function openNewCapacitacion() {
       $('#modal-nueva-capacitacion').modal();
       this.capacitacion = {};
+      this.capacitacion.id_curso = 0;
+      this.capacitacion.COCAC_Costo_Curso_Original = 0;
     },
     addCapacitacion: function addCapacitacion() {
       var _this3 = this;
@@ -3362,7 +3395,12 @@ __webpack_require__.r(__webpack_exports__);
             COCAC_Cantidad: _this3.capacitacion.COCAC_Cantidad,
             COCAC_Detalle_Curso_Cotizar: _this3.capacitacion.COCAC_Detalle_Curso_Cotizar === undefined ? '' : _this3.capacitacion.COCAC_Detalle_Curso_Cotizar.trim(),
             COCAC_Horario_Tentativo_Curso: _this3.capacitacion.COCAC_Horario_Tentativo_Curso === undefined ? '' : _this3.capacitacion.COCAC_Horario_Tentativo_Curso.trim(),
-            COCAC_Lugar_Capacitacion: _this3.capacitacion.COCAC_Lugar_Capacitacion
+            COCAC_Lugar_Capacitacion: _this3.capacitacion.COCAC_Lugar_Capacitacion,
+            COCAC_Costo_Curso_Original: _this3.capacitacion.COCAC_Costo_Curso_Original,
+            COCAC_Descuento_Porcentaje: _this3.capacitacion.COCAC_Descuento_Porcentaje,
+            COCAC_Descuento_Moneda_Real: _this3.capacitacion.COCAC_Descuento_Moneda_Real,
+            COCAC_SubTotal: _this3.capacitacion.COCAC_SubTotal,
+            COCAC_SubTotal_Descontado: _this3.capacitacion.COCAC_SubTotal_Descontado
           });
         });
       }
@@ -3432,48 +3470,80 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    seleccionarCurso: function seleccionarCurso(index) {
+    seleccionarCurso: function seleccionarCurso(e) {
       var idCurso = this.capacitacion.id_curso;
       if (idCurso == 0) $('.detalle-curso-cotizar').prop('readonly', false);else {
         this.capacitacion.COCAC_Detalle_Curso_Cotizar = '';
         $('.detalle-curso-cotizar').prop('readonly', true);
       }
+      this.getCurso(idCurso);
+      this.getDescuento(idCurso);
+    },
+    getCurso: function getCurso(idCurso) {
+      var _this6 = this;
+
+      var url = '/curso/' + idCurso;
+      axios.get(url).then(function (response) {
+        _this6.capacitacion.COCAC_Costo_Curso_Original = response.data.CURSOC_Costo;
+      });
+    },
+    getDescuento: function getDescuento(idCurso) {
+      var _this7 = this;
+
+      if (idCurso != 0 && this.capacitacion.COCAC_Cantidad != 0) {
+        var url = '/curso/' + idCurso + '/descuento';
+        axios.get(url).then(function (response) {
+          var descuento = $(response.data).filter(function (i, descuento) {
+            return descuento.id_curso == idCurso && _this7.capacitacion.COCAC_Cantidad >= descuento.cantidad_min && _this7.capacitacion.COCAC_Cantidad <= descuento.cantidad_max;
+          });
+          _this7.capacitacion.COCAC_Descuento_Porcentaje = descuento.length != 0 ? descuento[0].descuento : 0;
+          var subTotal = parseFloat(_this7.capacitacion.COCAC_Cantidad) * parseFloat(_this7.capacitacion.COCAC_Costo_Curso_Original);
+          _this7.capacitacion.COCAC_Descuento_Moneda_Real = (subTotal * parseFloat(_this7.capacitacion.COCAC_Descuento_Porcentaje) / 100).toFixed(2);
+          _this7.capacitacion.COCAC_SubTotal = subTotal;
+          _this7.capacitacion.COCAC_SubTotal_Descontado = (subTotal - parseFloat(_this7.capacitacion.COCAC_Descuento_Moneda_Real)).toFixed(2);
+        });
+      } else {
+        this.capacitacion.COCAC_Descuento_Porcentaje = 0;
+        this.capacitacion.COCAC_Descuento_Moneda_Real = '0.00';
+        this.capacitacion.COCAC_SubTotal = '0.00';
+        this.capacitacion.COCAC_SubTotal_Descontado = '0.00';
+      }
     },
     listarTiposSolicitante: function listarTiposSolicitante() {
-      var _this6 = this;
+      var _this8 = this;
 
       var url = '/tiposolicitante/list';
       axios.get(url).then(function (response) {
-        _this6.tiposSolicitante = response.data;
-        _this6.solicitante.TIPSOLIP_Codigo = '';
+        _this8.tiposSolicitante = response.data;
+        _this8.solicitante.TIPSOLIP_Codigo = '';
       });
     },
     listarDepartamentos: function listarDepartamentos() {
-      var _this7 = this;
+      var _this9 = this;
 
       var url = '/departamento/list';
       axios.get(url).then(function (response) {
-        _this7.departamentos = response.data;
-        _this7.ubigeo.UBIGC_CodDpto = '';
-        _this7.ubigeo.UBIGC_CodProv = '';
-        _this7.ubigeo.UBIGC_CodDist = '';
+        _this9.departamentos = response.data;
+        _this9.ubigeo.UBIGC_CodDpto = '';
+        _this9.ubigeo.UBIGC_CodProv = '';
+        _this9.ubigeo.UBIGC_CodDist = '';
       });
     },
     listarCursos: function listarCursos() {
-      var _this8 = this;
+      var _this10 = this;
 
       var url = '/curso/list';
       axios.get(url).then(function (response) {
-        _this8.cursos = response.data;
+        _this10.cursos = response.data;
       });
     },
     listarProvincias: function listarProvincias() {
-      var _this9 = this;
+      var _this11 = this;
 
       if (this.ubigeo.UBIGC_CodDpto != '') {
         var url = '/provincia/' + this.ubigeo.UBIGC_CodDpto + '/list';
         axios.get(url).then(function (response) {
-          _this9.provincias = response.data;
+          _this11.provincias = response.data;
         });
       } else {
         this.provincias = [];
@@ -3484,12 +3554,12 @@ __webpack_require__.r(__webpack_exports__);
       this.ubigeo.UBIGC_CodDist = '';
     },
     listarDistritos: function listarDistritos() {
-      var _this10 = this;
+      var _this12 = this;
 
       if (this.ubigeo.UBIGC_CodProv != '') {
         var url = '/distrito/' + this.ubigeo.UBIGC_CodDpto + '/' + this.ubigeo.UBIGC_CodProv + '/list';
         axios.get(url).then(function (response) {
-          _this10.distritos = response.data;
+          _this12.distritos = response.data;
         });
       } else this.distritos = [];
 
@@ -3846,7 +3916,9 @@ __webpack_require__.r(__webpack_exports__);
       idxEquipo: null,
       SubTotal: '0.00',
       Igv: '0.00',
-      Total: '0.00'
+      Total: '0.00',
+      solicitanteSelected: null,
+      contactoSelected: null
     };
   },
   props: {
@@ -3896,7 +3968,9 @@ __webpack_require__.r(__webpack_exports__);
     editEquipo: function editEquipo(index) {
       $('#modal-ficha-tecnica').modal();
       this.idxEquipo = index;
-      this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+      this.equipo = {};
+      Object.assign(this.equipo, this.equipos[index]); // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+
       $("#file").val('');
       $('#archivoFichaTecnica').val('');
     },
@@ -3960,10 +4034,11 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/calibracion/store';
 
-      if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
+      if (typeof this.contactoSelected == "undefined" || this.contactoSelected == '' || this.contactoSelected == null) {
         this.$refs.contacto.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+        this.$refs.fecha.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
         this.$refs.numero.focus();
@@ -4007,7 +4082,7 @@ __webpack_require__.r(__webpack_exports__);
               }
             };
             var formData = new FormData();
-            formData.append('contacto', _this2.cotizacion.id_contacto);
+            formData.append('contacto', _this2.contactoSelected);
             formData.append('fecha', _this2.cotizacion.COTIC_Fecha);
             formData.append('numero', _this2.cotizacion.COTIC_Numero);
             formData.append('usuario', _this2.cotizacion.USUA_Codigo);
@@ -4098,7 +4173,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     irAListado: function irAListado() {
-      this.mostrarMensajeConfirmacion('¿Está seguro de abortar el registro?', 'Si, abortar', 'No, permanecer').then(function (result) {
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then(function (result) {
         if (result.isConfirmed) {
           location.href = '/calibracion';
         }
@@ -4181,6 +4256,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     setTotal: function setTotal() {
       this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
+    },
+    seleccionarSolicitante: function seleccionarSolicitante() {
+      var _this6 = this;
+
+      var url = '/contacto/solicitante/get/' + this.contactoSelected;
+      axios.get(url).then(function (response) {
+        _this6.solicitanteSelected = response.data.SOLIP_Codigo;
+      });
+    },
+    seleccionarContacto: function seleccionarContacto() {
+      var _this7 = this;
+
+      var url = '/solicitante/contacto/get/' + this.solicitanteSelected;
+      axios.get(url).then(function (response) {
+        _this7.contactoSelected = response.data.id_contacto;
+      });
     }
   }
 });
@@ -4367,7 +4458,9 @@ __webpack_require__.r(__webpack_exports__);
       contactos: [],
       usuarios: [],
       solicitantes: [],
-      saveData: null
+      saveData: null,
+      solicitanteSelected: null,
+      contactoSelected: null
     };
   },
   props: {
@@ -4438,10 +4531,11 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/capacitacion/store';
 
-      if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
+      if (typeof this.contactoSelected == "undefined" || this.contactoSelected == '' || this.contactoSelected == null) {
         this.$refs.contacto.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+        this.$refs.fecha.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
         this.$refs.numero.focus();
@@ -4471,7 +4565,7 @@ __webpack_require__.r(__webpack_exports__);
               'display': 'inline-block'
             });
             axios.post(url, {
-              contacto: _this2.cotizacion.id_contacto,
+              contacto: _this2.contactoSelected,
               fecha: _this2.cotizacion.COTIC_Fecha,
               numero: _this2.cotizacion.COTIC_Numero,
               usuario: _this2.cotizacion.USUA_Codigo,
@@ -4541,7 +4635,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     irAListado: function irAListado() {
-      this.mostrarMensajeConfirmacion('¿Está seguro de abortar el registro?', 'Si, abortar', 'No, permanecer').then(function (result) {
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then(function (result) {
         if (result.isConfirmed) {
           location.href = '/capacitacion';
         }
@@ -4637,6 +4731,22 @@ __webpack_require__.r(__webpack_exports__);
         capacitacion.COCAC_Descuento_Porcentaje = 0;
         capacitacion.COCAC_Descuento_Moneda_Real = 0;
       }
+    },
+    seleccionarSolicitante: function seleccionarSolicitante() {
+      var _this8 = this;
+
+      var url = '/contacto/solicitante/get/' + this.contactoSelected;
+      axios.get(url).then(function (response) {
+        _this8.solicitanteSelected = response.data.SOLIP_Codigo;
+      });
+    },
+    seleccionarContacto: function seleccionarContacto() {
+      var _this9 = this;
+
+      var url = '/solicitante/contacto/get/' + this.solicitanteSelected;
+      axios.get(url).then(function (response) {
+        _this9.contactoSelected = response.data.id_contacto;
+      });
     },
     realizarCalculosDeCapacitacion: function realizarCalculosDeCapacitacion(e, index) {
       var capacitacion = this.capacitaciones[index];
@@ -4975,6 +5085,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 $(document).ready(function () {
   $('.costo-prueba').on("cut copy paste", function (e) {
     e.preventDefault();
@@ -4996,7 +5110,9 @@ $(document).ready(function () {
       idxPrueba: null,
       SubTotal: '0.00',
       Igv: '0.00',
-      Total: '0.00'
+      Total: '0.00',
+      solicitanteSelected: null,
+      contactoSelected: null
     };
   },
   props: {
@@ -5049,11 +5165,11 @@ $(document).ready(function () {
       this.prueba = {};
       this.idxEquipo = index;
       this.equipo = this.equipos[index];
+      this.pruebas = this.equipos[index].pruebas;
       $('#file').val('');
       $('#archivoFichaTecnica').val('');
     },
     editEquipo: function editEquipo(index) {
-      debugger;
       $('#modal-ficha-tecnica').modal();
       this.idxEquipo = index; // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
 
@@ -5210,7 +5326,8 @@ $(document).ready(function () {
     },
     editPrueba: function editPrueba(index) {
       this.idxPrueba = index;
-      this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
+      this.prueba = {};
+      Object.assign(this.prueba, this.equipo.pruebas[index]); // this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
     },
     updatePrueba: function updatePrueba() {
       if (this.validatePrueba('actualiza')) {
@@ -5232,17 +5349,24 @@ $(document).ready(function () {
       }
     },
     deletePrueba: function deletePrueba(index) {
-      this.equipo.pruebas.splice(index, 1);
+      var _this2 = this;
+
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea eliminar la prueba?', 'Si, eliminar', 'No, cancelar').then(function (result) {
+        if (result.isConfirmed) {
+          _this2.equipo.pruebas.splice(index, 1);
+        }
+      });
     },
     addCotizacion: function addCotizacion() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "/cotizacion/store";
 
-      if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
+      if (typeof this.contactoSelected == "undefined" || this.contactoSelected == '' || this.contactoSelected == null) {
         this.$refs.contacto.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+        this.$refs.fecha.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
         this.$refs.numero.focus();
@@ -5278,8 +5402,6 @@ $(document).ready(function () {
         this.mostrarMensajeInformacion('¡Debe ingresar la cantidad en todos los equipos!', 'warning');
       } else {
         this.mostrarMensajeConfirmacion('¿Está seguro de registrar la cotización?', 'Si, registrar', 'No, cancelar').then(function (result) {
-          debugger;
-
           if (result.isConfirmed) {
             var config = {
               headers: {
@@ -5288,12 +5410,12 @@ $(document).ready(function () {
               }
             };
             var formData = new FormData();
-            formData.append('contacto', _this2.cotizacion.id_contacto);
-            formData.append('fecha', _this2.cotizacion.COTIC_Fecha);
-            formData.append('numero', _this2.cotizacion.COTIC_Numero);
-            formData.append('usuario', _this2.cotizacion.USUA_Codigo);
+            formData.append('contacto', _this3.contactoSelected);
+            formData.append('fecha', _this3.cotizacion.COTIC_Fecha);
+            formData.append('numero', _this3.cotizacion.COTIC_Numero);
+            formData.append('usuario', _this3.cotizacion.USUA_Codigo);
 
-            _this2.equipos.forEach(function (equipo, i) {
+            _this3.equipos.forEach(function (equipo, i) {
               var _equipo$CODEC_Url_Fic;
 
               formData.append("equipos[".concat(i, "][COTIP_Codigo]"), equipo.COTIP_Codigo);
@@ -5319,9 +5441,9 @@ $(document).ready(function () {
               });
             });
 
-            formData.append('subtotal', _this2.SubTotal);
-            formData.append('igv', _this2.Igv);
-            formData.append('total', _this2.Total);
+            formData.append('subtotal', _this3.SubTotal);
+            formData.append('igv', _this3.Igv);
+            formData.append('total', _this3.Total);
             $('#btn-registrar-cotizacion-ensayo').attr('disabled', true);
             $('#btn-registrar-cotizacion-ensayo > img').css({
               'display': 'inline-block'
@@ -5356,31 +5478,47 @@ $(document).ready(function () {
       }
     },
     listarContactos: function listarContactos() {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = '/contacto/list';
       axios.get(url).then(function (response) {
-        _this3.contactos = response.data;
+        _this4.contactos = response.data;
       });
     },
     listarUsuarios: function listarUsuarios() {
-      var _this4 = this;
+      var _this5 = this;
 
       var url = '/usuario/list';
       axios.get(url).then(function (response) {
-        _this4.usuarios = response.data;
+        _this5.usuarios = response.data;
       });
     },
     listarSolicitantes: function listarSolicitantes() {
-      var _this5 = this;
+      var _this6 = this;
 
       var url = '/solicitante/list';
       axios.get(url).then(function (response) {
-        _this5.solicitantes = response.data;
+        _this6.solicitantes = response.data;
+      });
+    },
+    seleccionarSolicitante: function seleccionarSolicitante() {
+      var _this7 = this;
+
+      var url = '/contacto/solicitante/get/' + this.contactoSelected;
+      axios.get(url).then(function (response) {
+        _this7.solicitanteSelected = response.data.SOLIP_Codigo;
+      });
+    },
+    seleccionarContacto: function seleccionarContacto() {
+      var _this8 = this;
+
+      var url = '/solicitante/contacto/get/' + this.solicitanteSelected;
+      axios.get(url).then(function (response) {
+        _this8.contactoSelected = response.data.id_contacto;
       });
     },
     irAListado: function irAListado() {
-      this.mostrarMensajeConfirmacion('¿Está seguro de abortar el registro?', 'Si, abortar', 'No, permanecer').then(function (result) {
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then(function (result) {
         if (result.isConfirmed) {
           location.href = '/cotizacion';
         }
@@ -5770,6 +5908,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5784,7 +5924,8 @@ __webpack_require__.r(__webpack_exports__);
       file: '',
       SubTotal: '0.00',
       Igv: '0.00',
-      Total: '0.00'
+      Total: '0.00',
+      solicitanteSelected: null
     };
   },
   props: {
@@ -5858,7 +5999,9 @@ __webpack_require__.r(__webpack_exports__);
     editEquipo: function editEquipo(index) {
       $('#modal-ficha-tecnica').modal();
       this.idxEquipo = index;
-      this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+      this.equipo = {};
+      Object.assign(this.equipo, this.equipos[index]); // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+
       $("#file").val('');
       $('#archivoFichaTecnica').val('');
     },
@@ -5926,9 +6069,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/cotizacion/' + id + '/get';
       axios.get(url).then(function (response) {
+        var _resultado$COTIC_Fech;
+
         var resultado = response.data;
-        resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
+        resultado.COTIC_Fecha = ((_resultado$COTIC_Fech = resultado.COTIC_Fecha_Cotizacion) !== null && _resultado$COTIC_Fech !== void 0 ? _resultado$COTIC_Fech : resultado.COTIC_FechaRegistro).split(' ')[0];
         _this3.cotizacion = resultado;
+        _this3.solicitanteSelected = resultado.SOLIP_Codigo;
       });
     },
     updateCotizacion: function updateCotizacion(equipos) {
@@ -5940,6 +6086,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$refs.contacto.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+        this.$refs.fecha.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
         this.$refs.numero.focus();
@@ -6079,7 +6226,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     irAListado: function irAListado() {
-      this.mostrarMensajeConfirmacion('¿Está seguro de abortar la actualización?', 'Si, abortar', 'No, permanecer').then(function (result) {
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then(function (result) {
         if (result.isConfirmed) {
           location.href = '/calibracion';
         }
@@ -6162,6 +6309,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     setTotal: function setTotal() {
       this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
+    },
+    seleccionarSolicitante: function seleccionarSolicitante() {
+      var _this8 = this;
+
+      var url = '/contacto/solicitante/get/' + this.cotizacion.id_contacto;
+      axios.get(url).then(function (response) {
+        _this8.solicitanteSelected = response.data.SOLIP_Codigo;
+      });
+    },
+    seleccionarContacto: function seleccionarContacto() {
+      var _this9 = this;
+
+      var url = '/solicitante/contacto/get/' + this.solicitanteSelected;
+      axios.get(url).then(function (response) {
+        _this9.cotizacion.id_contacto = response.data.id_contacto;
+      });
     }
   }
 });
@@ -6336,6 +6499,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+$(document).ready(function () {});
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6346,7 +6512,8 @@ __webpack_require__.r(__webpack_exports__);
       usuarios: [],
       solicitantes: [],
       saveData: null,
-      file: ''
+      file: '',
+      solicitanteSelected: null
     };
   },
   props: {
@@ -6388,10 +6555,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/cotizacion/' + id + '/get';
       axios.get(url).then(function (response) {
+        var _resultado$COTIC_Fech;
+
         var resultado = response.data;
-        resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
+        resultado.COTIC_Fecha = ((_resultado$COTIC_Fech = resultado.COTIC_Fecha_Cotizacion) !== null && _resultado$COTIC_Fech !== void 0 ? _resultado$COTIC_Fech : resultado.COTIC_FechaRegistro).split(' ')[0];
         _this2.cotizacion = resultado;
-        console.log(resultado);
+        _this2.solicitanteSelected = resultado.SOLIP_Codigo;
       });
     },
     getCapacitaciones: function getCapacitaciones(id) {
@@ -6399,7 +6568,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/cotizacioncapacitacion/' + id + '/list';
       axios.get(url).then(function (response) {
-        _this3.capacitaciones = response.data;
+        _this3.capacitaciones = response.data; // this.setearValoresIniciales();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -6457,6 +6626,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$refs.contacto.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+        this.$refs.fecha.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
         this.$refs.numero.focus();
@@ -6558,7 +6728,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     irAListado: function irAListado() {
-      this.mostrarMensajeConfirmacion('¿Está seguro de abortar la actualización?', 'Si, abortar', 'No, permanecer').then(function (result) {
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then(function (result) {
         if (result.isConfirmed) {
           location.href = '/capacitacion';
         }
@@ -6612,12 +6782,12 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    getInfoCurso: function getInfoCurso(e, index) {
+    getInfoCurso: function getInfoCurso(index) {
       this.$refs.cantidad[index].disabled = false;
       this.$refs.costo[index].disabled = false;
       this.$refs.cantidad[index].focus();
       this.getCurso(index);
-      this.getDescuento(e, index);
+      this.getDescuento(index);
     },
     getCurso: function getCurso(index) {
       var capacitacion = this.capacitaciones[index];
@@ -6630,7 +6800,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    getDescuento: function getDescuento(e, index) {
+    getDescuento: function getDescuento(index) {
       var _this10 = this;
 
       var capacitacion = this.capacitaciones[index];
@@ -6648,16 +6818,15 @@ __webpack_require__.r(__webpack_exports__);
           capacitacion.COCAC_Descuento_Porcentaje = descuento.length != 0 ? descuento[0].descuento : 0;
           capacitacion.COCAC_Descuento_Moneda_Real = capacitacion.COCAC_SubTotal * capacitacion.COCAC_Descuento_Porcentaje / 100;
 
-          _this10.realizarCalculosDeCapacitacion(e, index);
+          _this10.realizarCalculosDeCapacitacion(index);
         });
       } else {
         capacitacion.COCAC_Descuento_Porcentaje = 0;
         capacitacion.COCAC_Descuento_Moneda_Real = 0;
       }
     },
-    realizarCalculosDeCapacitacion: function realizarCalculosDeCapacitacion(e, index) {
+    realizarCalculosDeCapacitacion: function realizarCalculosDeCapacitacion(index) {
       var capacitacion = this.capacitaciones[index];
-      var controlActual = e.target;
       var cantidad = isNaN(parseInt(capacitacion.COCAC_Cantidad)) ? 0 : parseInt(capacitacion.COCAC_Cantidad);
       var costo = isNaN(parseFloat(capacitacion.COCAC_Costo_Curso_Original)) ? 0 : parseFloat(capacitacion.COCAC_Costo_Curso_Original);
       capacitacion.COCAC_Costo_Curso_Original = this.formatearDecimalesAModelo(capacitacion.COCAC_Costo_Curso_Original);
@@ -6668,7 +6837,31 @@ __webpack_require__.r(__webpack_exports__);
     formatearDecimalesAModelo: function formatearDecimalesAModelo(value) {
       value = isNaN(parseFloat(value)) ? '0.00' : parseFloat(value).toFixed(2);
       return value;
-    }
+    },
+    seleccionarSolicitante: function seleccionarSolicitante() {
+      var _this11 = this;
+
+      var url = '/contacto/solicitante/get/' + this.cotizacion.id_contacto;
+      axios.get(url).then(function (response) {
+        _this11.solicitanteSelected = response.data.SOLIP_Codigo;
+      });
+    },
+    seleccionarContacto: function seleccionarContacto() {
+      var _this12 = this;
+
+      var url = '/solicitante/contacto/get/' + this.solicitanteSelected;
+      axios.get(url).then(function (response) {
+        _this12.cotizacion.id_contacto = response.data.id_contacto;
+      });
+    } // setearValoresIniciales: function() {
+    //     this.capacitaciones.forEach((capacitacion, index) => {
+    //         capacitacion.COCAC_Descuento_Moneda_Real = '0.00';
+    //         capacitacion.COCAC_Descuento_Porcentaje = '0';
+    //         capacitacion.COCAC_SubTotal_Descontado = '0.00';
+    //         this.getDescuento(index);
+    //     });
+    // }
+
   }
 });
 
@@ -6683,6 +6876,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7019,7 +7217,8 @@ $(document).ready(function () {
       file: '',
       SubTotal: '0.00',
       Igv: '0.00',
-      Total: '0.00'
+      Total: '0.00',
+      solicitanteSelected: null
     };
   },
   props: {
@@ -7096,13 +7295,16 @@ $(document).ready(function () {
       this.prueba = {};
       this.idxEquipo = index;
       this.equipo = this.equipos[index];
+      this.pruebas = this.equipos[index].pruebas;
       $('#file').val('');
       $('#archivoFichaTecnica').val('');
     },
     editEquipo: function editEquipo(index) {
       $('#modal-ficha-tecnica').modal();
       this.idxEquipo = index;
-      this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+      this.equipo = {};
+      Object.assign(this.equipo, this.equipos[index]); // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+
       $("#file").val('');
       $('#archivoFichaTecnica').val('');
     },
@@ -7264,7 +7466,8 @@ $(document).ready(function () {
     },
     editPrueba: function editPrueba(index) {
       this.idxPrueba = index;
-      this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
+      this.prueba = {};
+      Object.assign(this.prueba, this.equipo.pruebas[index]); // this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
     },
     updatePrueba: function updatePrueba() {
       if (this.validatePrueba('actualiza')) {
@@ -7286,20 +7489,29 @@ $(document).ready(function () {
       }
     },
     deletePrueba: function deletePrueba(index) {
-      this.equipo.pruebas.splice(index, 1);
+      var _this4 = this;
+
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea eliminar la prueba?', 'Si, eliminar', 'No, cancelar').then(function (result) {
+        if (result.isConfirmed) {
+          _this4.equipo.pruebas.splice(index, 1);
+        }
+      });
     },
     getCotizacion: function getCotizacion(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       var url = '/cotizacion/' + id + '/get';
       axios.get(url).then(function (response) {
+        var _resultado$COTIC_Fech;
+
         var resultado = response.data;
-        resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
-        _this4.cotizacion = resultado;
+        resultado.COTIC_Fecha = ((_resultado$COTIC_Fech = resultado.COTIC_Fecha_Cotizacion) !== null && _resultado$COTIC_Fech !== void 0 ? _resultado$COTIC_Fech : resultado.COTIC_FechaRegistro).split(' ')[0];
+        _this5.cotizacion = resultado;
+        _this5.solicitanteSelected = resultado.SOLIP_Codigo;
       });
     },
     updateCotizacion: function updateCotizacion() {
-      var _this5 = this;
+      var _this6 = this;
 
       var url = '/cotizacion/update';
 
@@ -7307,11 +7519,12 @@ $(document).ready(function () {
         this.$refs.contacto.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
       } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+        this.$refs.fecha.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
-      } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
+      } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '' || this.cotizacion.COTIC_Numero == null) {
         this.$refs.numero.focus();
         this.mostrarMensajeInformacion('¡Debe ingresar el número!', 'warning');
-      } else if (typeof this.cotizacion.USUA_Codigo == "undefined" || this.cotizacion.USUA_Codigo == '') {
+      } else if (typeof this.cotizacion.USUA_Codigo == "undefined" || this.cotizacion.USUA_Codigo == '' || this.cotizacion.USUA_Codigo == null) {
         this.$refs.usuario.focus();
         this.mostrarMensajeInformacion('¡Debe seleccionar un usuario!', 'warning');
       } else if (this.equipos.length == 0) {
@@ -7343,7 +7556,6 @@ $(document).ready(function () {
       } else {
         this.mostrarMensajeConfirmacion('¿Está seguro de actualizar la cotización?', 'Si, actualizar', 'No, cancelar').then(function (result) {
           if (result.isConfirmed) {
-            debugger;
             var config = {
               headers: {
                 'content-type': 'multipart/form-data',
@@ -7351,13 +7563,13 @@ $(document).ready(function () {
               }
             };
             var formData = new FormData();
-            formData.append('id_cotizacion', _this5.cotizacion.COTIP_Codigo);
-            formData.append('contacto', _this5.cotizacion.id_contacto);
-            formData.append('fecha', _this5.cotizacion.COTIC_Fecha);
-            formData.append('numero', _this5.cotizacion.COTIC_Numero);
-            formData.append('usuario', _this5.cotizacion.USUA_Codigo);
+            formData.append('id_cotizacion', _this6.cotizacion.COTIP_Codigo);
+            formData.append('contacto', _this6.cotizacion.id_contacto);
+            formData.append('fecha', _this6.cotizacion.COTIC_Fecha);
+            formData.append('numero', _this6.cotizacion.COTIC_Numero);
+            formData.append('usuario', _this6.cotizacion.USUA_Codigo);
 
-            _this5.equipos.forEach(function (equipo, i) {
+            _this6.equipos.forEach(function (equipo, i) {
               var _equipo$CODEC_Url_Fic;
 
               formData.append("equipos[".concat(i, "][CODEP_Codigo]"), equipo.CODEP_Codigo == undefined ? null : equipo.CODEP_Codigo);
@@ -7386,9 +7598,9 @@ $(document).ready(function () {
               });
             });
 
-            formData.append('subtotal', _this5.SubTotal);
-            formData.append('igv', _this5.Igv);
-            formData.append('total', _this5.Total);
+            formData.append('subtotal', _this6.SubTotal);
+            formData.append('igv', _this6.Igv);
+            formData.append('total', _this6.Total);
             formData.append('_method', 'PUT');
             $('#btn-actualizar-cotizacion-ensayo').attr('disabled', true);
             $('#btn-actualizar-cotizacion-ensayo > img').css({
@@ -7424,31 +7636,31 @@ $(document).ready(function () {
       }
     },
     listarContactos: function listarContactos() {
-      var _this6 = this;
+      var _this7 = this;
 
       var url = '/contacto/list';
       axios.get(url).then(function (response) {
-        _this6.contactos = response.data;
+        _this7.contactos = response.data;
       });
     },
     listarUsuarios: function listarUsuarios() {
-      var _this7 = this;
+      var _this8 = this;
 
       var url = '/usuario/list';
       axios.get(url).then(function (response) {
-        _this7.usuarios = response.data;
+        _this8.usuarios = response.data;
       });
     },
     listarSolicitantes: function listarSolicitantes() {
-      var _this8 = this;
+      var _this9 = this;
 
       var url = '/solicitante/list';
       axios.get(url).then(function (response) {
-        _this8.solicitantes = response.data;
+        _this9.solicitantes = response.data;
       });
     },
     irAListado: function irAListado() {
-      this.mostrarMensajeConfirmacion('¿Está seguro de abortar la actualización?', 'Si, abortar', 'No, permanecer').then(function (result) {
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then(function (result) {
         if (result.isConfirmed) {
           location.href = '/cotizacion';
         }
@@ -7531,6 +7743,22 @@ $(document).ready(function () {
     },
     setTotal: function setTotal() {
       this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
+    },
+    seleccionarSolicitante: function seleccionarSolicitante() {
+      var _this10 = this;
+
+      var url = '/contacto/solicitante/get/' + this.cotizacion.id_contacto;
+      axios.get(url).then(function (response) {
+        _this10.solicitanteSelected = response.data.SOLIP_Codigo;
+      });
+    },
+    seleccionarContacto: function seleccionarContacto() {
+      var _this11 = this;
+
+      var url = '/solicitante/contacto/get/' + this.solicitanteSelected;
+      axios.get(url).then(function (response) {
+        _this11.cotizacion.id_contacto = response.data.id_contacto;
+      });
     }
   }
 });
@@ -7546,10 +7774,8 @@ $(document).ready(function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _methods;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
 //
 //
 //
@@ -8046,7 +8272,7 @@ $(document).ready(function () {
     this.listarTiposSolicitante();
     this.listarDepartamentos();
   },
-  methods: (_methods = {
+  methods: {
     CloseWindow: function CloseWindow(value) {
       console.log(value);
     },
@@ -8195,6 +8421,12 @@ $(document).ready(function () {
       } else {
         this.solicitante.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
         var emailEnvioCotizacion = $('#txt-emails-envio-cotizacion').val().split(',');
+
+        if (emailEnvioCotizacion[0] == '') {
+          this.mostrarMensajeInformacion('¡Debe ingresar por lo menos un correo electrónico!', 'warning');
+          return false;
+        }
+
         this.cotizacion.COTIC_Correo1 = emailEnvioCotizacion[0] != undefined && emailEnvioCotizacion[0] != null ? emailEnvioCotizacion[0] : '';
         this.cotizacion.COTIC_Correo2 = emailEnvioCotizacion[1] != undefined && emailEnvioCotizacion[1] != null ? emailEnvioCotizacion[1] : '';
         this.cotizacion.COTIC_Correo3 = emailEnvioCotizacion[2] != undefined && emailEnvioCotizacion[2] != null ? emailEnvioCotizacion[2] : '';
@@ -8208,26 +8440,29 @@ $(document).ready(function () {
               }
             };
             var formData = new FormData();
+            var now_date = new Date();
+            now_date.setHours(now_date.getHours() - 6);
             /*solicitante */
 
-            formData.append('SOLIC_Direccion', _this2.solicitante.SOLIC_Direccion);
-            formData.append('SOLIC_Email', _this2.solicitante.SOLIC_Email);
-            formData.append('SOLIC_Nombre', _this2.solicitante.SOLIC_Nombre);
-            formData.append('SOLIC_Ruc', _this2.solicitante.SOLIC_Ruc);
-            formData.append('SOLIC_Telefono', _this2.solicitante.SOLIC_Telefono);
-            formData.append('TIPSOLIP_Codigo', _this2.solicitante.TIPSOLIP_Codigo);
-            formData.append('UBIGP_Codigo', _this2.solicitante.UBIGP_Codigo);
+            formData.append('solicitante[SOLIC_Direccion]', _this2.solicitante.SOLIC_Direccion);
+            formData.append('solicitante[SOLIC_Email]', _this2.solicitante.SOLIC_Email);
+            formData.append('solicitante[SOLIC_Nombre]', _this2.solicitante.SOLIC_Nombre);
+            formData.append('solicitante[SOLIC_Ruc]', _this2.solicitante.SOLIC_Ruc);
+            formData.append('solicitante[SOLIC_Telefono]', _this2.solicitante.SOLIC_Telefono);
+            formData.append('solicitante[TIPSOLIP_Codigo]', _this2.solicitante.TIPSOLIP_Codigo);
+            formData.append('solicitante[UBIGP_Codigo]', _this2.solicitante.UBIGP_Codigo);
             /*contacto*/
 
-            formData.append('celular_contacto', _this2.contacto.celular_contacto);
-            formData.append('correo_contacto', _this2.contacto.correo_contacto);
-            formData.append('nombre_contacto', _this2.contacto.nombre_contacto);
+            formData.append('contacto[celular_contacto]', _this2.contacto.celular_contacto);
+            formData.append('contacto[correo_contacto]', _this2.contacto.correo_contacto);
+            formData.append('contacto[nombre_contacto]', _this2.contacto.nombre_contacto);
             /*cotizacion */
 
-            formData.append('COTIC_Correo1', _this2.cotizacion.COTIC_Correo1);
-            formData.append('COTIC_Correo2', _this2.cotizacion.COTIC_Correo2);
-            formData.append('COTIC_Correo3', _this2.cotizacion.COTIC_Correo3);
-            formData.append('COTIC_Correo4', _this2.cotizacion.COTIC_Correo4);
+            formData.append('cotizacion[COTIC_Correo1]', _this2.cotizacion.COTIC_Correo1);
+            formData.append('cotizacion[COTIC_Correo2]', _this2.cotizacion.COTIC_Correo2);
+            formData.append('cotizacion[COTIC_Correo3]', _this2.cotizacion.COTIC_Correo3);
+            formData.append('cotizacion[COTIC_Correo4]', _this2.cotizacion.COTIC_Correo4);
+            formData.append('cotizacion[COTIC_Fecha_Cotizacion]', now_date.toJSON().slice(0, 10).replace(/-/g, '-'));
             /*equipos */
 
             _this2.equipos.forEach(function (equipo, i) {
@@ -8359,7 +8594,9 @@ $(document).ready(function () {
     editEquipo: function editEquipo(index) {
       $('#modal-editar-equipo').modal();
       this.idxEquipo = index;
-      this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+      this.equipo = {};
+      Object.assign(this.equipo, this.equipos[index]); // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
+
       $("#file").val('');
       $('#archivoFichaTecnica').val('');
     },
@@ -8440,6 +8677,7 @@ $(document).ready(function () {
       this.idxEquipo = index; // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
 
       this.equipo = this.equipos[index];
+      this.pruebas = this.equipos[index].pruebas;
       $("#file").val('');
       $('#archivoFichaTecnica').val('');
     },
@@ -8517,10 +8755,8 @@ $(document).ready(function () {
     },
     editPrueba: function editPrueba(index) {
       this.idxPrueba = index;
-      this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
-    },
-    deletePrueba: function deletePrueba(index) {
-      console.log('elimina un prueba');
+      this.prueba = {};
+      Object.assign(this.prueba, this.equipo.pruebas[index]); // this.prueba = JSON.parse(JSON.stringify(this.equipo.pruebas[index]));
     },
     updatePruebas: function updatePruebas() {
       this.equipos[this.idxEquipo] = this.equipo;
@@ -8528,110 +8764,129 @@ $(document).ready(function () {
       this.idxEquipo = null;
       this.idxPrueba = null;
       $('#modal-lista-pruebas').modal('hide');
-    }
-  }, _defineProperty(_methods, "deletePrueba", function deletePrueba(index) {
-    this.equipo.pruebas.splice(index, 1);
-  }), _defineProperty(_methods, "listarTiposSolicitante", function listarTiposSolicitante() {
-    var _this4 = this;
+    },
+    deletePrueba: function deletePrueba(index) {
+      var _this4 = this;
 
-    var url = '/tiposolicitante/list';
-    axios.get(url).then(function (response) {
-      _this4.tiposSolicitante = response.data;
-      _this4.solicitante.TIPSOLIP_Codigo = '';
-    });
-  }), _defineProperty(_methods, "listarDepartamentos", function listarDepartamentos() {
-    var _this5 = this;
-
-    var url = '/departamento/list';
-    axios.get(url).then(function (response) {
-      _this5.departamentos = response.data;
-      _this5.ubigeo.UBIGC_CodDpto = '';
-      _this5.ubigeo.UBIGC_CodProv = '';
-      _this5.ubigeo.UBIGC_CodDist = '';
-    });
-  }), _defineProperty(_methods, "listarProvincias", function listarProvincias() {
-    var _this6 = this;
-
-    if (this.ubigeo.UBIGC_CodDpto != '') {
-      var url = '/provincia/' + this.ubigeo.UBIGC_CodDpto + '/list';
-      axios.get(url).then(function (response) {
-        _this6.provincias = response.data;
+      this.mostrarMensajeConfirmacion('¿Está seguro que desea eliminar la prueba?', 'Si, eliminar', 'No, cancelar').then(function (result) {
+        if (result.isConfirmed) {
+          _this4.equipo.pruebas.splice(index, 1);
+        }
       });
-    } else {
-      this.provincias = [];
-      this.distritos = [];
-    }
+    },
+    listarTiposSolicitante: function listarTiposSolicitante() {
+      var _this5 = this;
 
-    this.ubigeo.UBIGC_CodProv = '';
-    this.ubigeo.UBIGC_CodDist = '';
-  }), _defineProperty(_methods, "listarDistritos", function listarDistritos() {
-    var _this7 = this;
-
-    if (this.ubigeo.UBIGC_CodProv != '') {
-      var url = '/distrito/' + this.ubigeo.UBIGC_CodDpto + '/' + this.ubigeo.UBIGC_CodProv + '/list';
+      var url = '/tiposolicitante/list';
       axios.get(url).then(function (response) {
-        _this7.distritos = response.data;
+        _this5.tiposSolicitante = response.data;
+        _this5.solicitante.TIPSOLIP_Codigo = '';
       });
-    } else this.distritos = [];
+    },
+    listarDepartamentos: function listarDepartamentos() {
+      var _this6 = this;
 
-    this.ubigeo.UBIGC_CodDist = '';
-  }), _defineProperty(_methods, "mostrarMensajeInformacion", function mostrarMensajeInformacion(titulo, icono) {
-    var swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-primary'
-      },
-      buttonsStyling: false
-    });
-    swalWithBootstrapButtons.fire({
-      title: titulo,
-      icon: icono,
-      confirmButtonText: 'Aceptar',
-      allowOutsideClick: false
-    });
-  }), _defineProperty(_methods, "mostrarMensajeConfirmacion", function mostrarMensajeConfirmacion(titulo, textoConfirma, textoCancela) {
-    var swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-primary margin-button-confirm-swal',
-        cancelButton: 'btn btn-danger margin-button-confirm-swal'
-      },
-      buttonsStyling: false
-    });
-    return swalWithBootstrapButtons.fire({
-      title: titulo,
-      text: '',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: textoConfirma,
-      cancelButtonText: textoCancela,
-      reverseButtons: false,
-      allowOutsideClick: false
-    });
-  }), _defineProperty(_methods, "restringirSoloNumerosEnteros", function restringirSoloNumerosEnteros(e) {
-    var regex = new RegExp('^[0-9]+$');
-    var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+      var url = '/departamento/list';
+      axios.get(url).then(function (response) {
+        _this6.departamentos = response.data;
+        _this6.ubigeo.UBIGC_CodDpto = '';
+        _this6.ubigeo.UBIGC_CodProv = '';
+        _this6.ubigeo.UBIGC_CodDist = '';
+      });
+    },
+    listarProvincias: function listarProvincias() {
+      var _this7 = this;
 
-    if (!regex.test(key)) {
-      e.preventDefault();
-      return false;
+      if (this.ubigeo.UBIGC_CodDpto != '') {
+        var url = '/provincia/' + this.ubigeo.UBIGC_CodDpto + '/list';
+        axios.get(url).then(function (response) {
+          _this7.provincias = response.data;
+        });
+      } else {
+        this.provincias = [];
+        this.distritos = [];
+      }
+
+      this.ubigeo.UBIGC_CodProv = '';
+      this.ubigeo.UBIGC_CodDist = '';
+    },
+    listarDistritos: function listarDistritos() {
+      var _this8 = this;
+
+      if (this.ubigeo.UBIGC_CodProv != '') {
+        var url = '/distrito/' + this.ubigeo.UBIGC_CodDpto + '/' + this.ubigeo.UBIGC_CodProv + '/list';
+        axios.get(url).then(function (response) {
+          _this8.distritos = response.data;
+        });
+      } else this.distritos = [];
+
+      this.ubigeo.UBIGC_CodDist = '';
+    },
+    mostrarMensajeInformacion: function mostrarMensajeInformacion(titulo, icono) {
+      var swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: titulo,
+        icon: icono,
+        confirmButtonText: 'Aceptar',
+        allowOutsideClick: false
+      });
+    },
+    mostrarMensajeConfirmacion: function mostrarMensajeConfirmacion(titulo, textoConfirma, textoCancela) {
+      var swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-primary margin-button-confirm-swal',
+          cancelButton: 'btn btn-danger margin-button-confirm-swal'
+        },
+        buttonsStyling: false
+      });
+      return swalWithBootstrapButtons.fire({
+        title: titulo,
+        text: '',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: textoConfirma,
+        cancelButtonText: textoCancela,
+        reverseButtons: false,
+        allowOutsideClick: false
+      });
+    },
+    restringirSoloNumerosEnteros: function restringirSoloNumerosEnteros(e) {
+      var regex = new RegExp('^[0-9]+$');
+      var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+
+      if (!regex.test(key)) {
+        e.preventDefault();
+        return false;
+      }
+    },
+    restringirSoloNumerosDecimales: function restringirSoloNumerosDecimales(e) {
+      if (!(e.which >= 48 && e.which <= 57 || e.which == 40 || e.which == 41 || e.which == 32 || e.which == 8 || e.which == 0 || e.which == 46)) {
+        e.preventDefault();
+        return false;
+      }
+    },
+    formatearDecimales: function formatearDecimales(e, control) {
+      control.value = isNaN(parseFloat(control.value)) ? '0.00' : parseFloat(control.value).toFixed(2);
+    },
+    setSubTotal: function setSubTotal() {
+      var suma = 0;
+      this.equipos.forEach(function (equipo, index) {
+        if (isNaN(equipo.CODEC_SubTotal) || equipo.CODEC_SubTotal < 0 || equipo.CODEC_SubTotal == '') suma += 0;else suma += parseFloat(equipo.CODEC_SubTotal);
+      });
+      this.SubTotal = suma.toFixed(2);
+    },
+    setIgv: function setIgv() {
+      this.Igv = (Number(this.SubTotal) * 0.18).toFixed(2);
+    },
+    setTotal: function setTotal() {
+      this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
     }
-  }), _defineProperty(_methods, "restringirSoloNumerosDecimales", function restringirSoloNumerosDecimales(e) {
-    if (!(e.which >= 48 && e.which <= 57 || e.which == 40 || e.which == 41 || e.which == 32 || e.which == 8 || e.which == 0 || e.which == 46)) {
-      e.preventDefault();
-      return false;
-    }
-  }), _defineProperty(_methods, "formatearDecimales", function formatearDecimales(e, control) {
-    control.value = isNaN(parseFloat(control.value)) ? '0.00' : parseFloat(control.value).toFixed(2);
-  }), _defineProperty(_methods, "setSubTotal", function setSubTotal() {
-    var suma = 0;
-    this.equipos.forEach(function (equipo, index) {
-      if (isNaN(equipo.CODEC_SubTotal) || equipo.CODEC_SubTotal < 0 || equipo.CODEC_SubTotal == '') suma += 0;else suma += parseFloat(equipo.CODEC_SubTotal);
-    });
-    this.SubTotal = suma.toFixed(2);
-  }), _defineProperty(_methods, "setIgv", function setIgv() {
-    this.Igv = (Number(this.SubTotal) * 0.18).toFixed(2);
-  }), _defineProperty(_methods, "setTotal", function setTotal() {
-    this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
-  }), _methods)
+  }
 });
 
 /***/ }),
@@ -8821,7 +9076,13 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/calibracion/list';
       axios.get(url).then(function (response) {
-        _this2.cotizaciones = response.data; //console.log(this.cotizaciones);
+        var data = response.data;
+        $.each(data, function (key, value) {
+          var fechaCotizacionFormateada = value.COTIC_Fecha_Cotizacion != null ? value.COTIC_Fecha_Cotizacion.split(' ')[0] : value.COTIC_Fecha_Cotizacion;
+
+          _this2.$set(value, 'COTIC_Fecha_Cotizacion', fechaCotizacionFormateada);
+        });
+        _this2.cotizaciones = data;
       });
     },
     btnBorrar: function btnBorrar(cotizacion, indice) {
@@ -8916,7 +9177,13 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/capacitacion/list';
       axios.get(url).then(function (response) {
-        _this2.cotizaciones = response.data; //console.log(this.cotizaciones);
+        var data = response.data;
+        $.each(data, function (key, value) {
+          var fechaCotizacionFormateada = value.COTIC_Fecha_Cotizacion != null ? value.COTIC_Fecha_Cotizacion.split(' ')[0] : value.COTIC_Fecha_Cotizacion;
+
+          _this2.$set(value, 'COTIC_Fecha_Cotizacion', fechaCotizacionFormateada);
+        });
+        _this2.cotizaciones = data;
       });
     },
     btnBorrar: function btnBorrar(cotizacion, indice) {
@@ -9011,7 +9278,13 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '/cotizacion/list';
       axios.get(url).then(function (response) {
-        _this2.cotizaciones = response.data; //console.log(this.cotizaciones);
+        var data = response.data;
+        $.each(data, function (key, value) {
+          var fechaCotizacionFormateada = value.COTIC_Fecha_Cotizacion != null ? value.COTIC_Fecha_Cotizacion.split(' ')[0] : value.COTIC_Fecha_Cotizacion;
+
+          _this2.$set(value, 'COTIC_Fecha_Cotizacion', fechaCotizacionFormateada);
+        });
+        _this2.cotizaciones = data;
       });
     },
     btnBorrar: function btnBorrar(cotizacion, indice) {
@@ -49588,7 +49861,7 @@ var render = function() {
                     },
                     [
                       _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Seleccione un tipo de solicitante")
+                        _vm._v("Seleccione un tipo")
                       ]),
                       _vm._v(" "),
                       _vm._l(_vm.tiposSolicitante, function(tipoSolicitante) {
@@ -50094,7 +50367,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "font-weight-bold" }, [
-                _vm._v("Nuevo Equipo")
+                _vm._v("Equipos a calibrar")
               ]),
               _vm._v("  \n                "),
               _c("i", {
@@ -51003,7 +51276,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Nombre" } },
       [
-        _vm._v("Nombre del Solicitante"),
+        _vm._v("Nombre"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -51013,7 +51286,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "col-form-label" }, [
-      _vm._v("Tipo de Solicitante"),
+      _vm._v("Tipo"),
       _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
     ])
   },
@@ -51022,7 +51295,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "col-form-label" }, [
-      _vm._v("RUC del Solicitante"),
+      _vm._v("RUC"),
       _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
     ])
   },
@@ -51034,7 +51307,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Direccion" } },
       [
-        _vm._v("Dirección del Solicitante"),
+        _vm._v("Dirección"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -51047,7 +51320,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Telefono" } },
       [
-        _vm._v("Teléfono del Solicitante"),
+        _vm._v("Teléfono"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -51060,7 +51333,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Email" } },
       [
-        _vm._v("Email del Solicitante"),
+        _vm._v("Email"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -51506,7 +51779,7 @@ var render = function() {
                     },
                     [
                       _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Seleccione un tipo de solicitante")
+                        _vm._v("Seleccione un tipo")
                       ]),
                       _vm._v(" "),
                       _vm._l(_vm.tiposSolicitante, function(tipoSolicitante) {
@@ -52076,7 +52349,7 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("th", { staticClass: "text-center" }, [
+                        _c("td", { staticClass: "text-center" }, [
                           _c(
                             "button",
                             {
@@ -52122,7 +52395,50 @@ var render = function() {
                               })
                             ]
                           )
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { display: "none" },
+                          domProps: {
+                            textContent: _vm._s(
+                              capacitacion.COCAC_Costo_Curso_Original
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { display: "none" },
+                          domProps: {
+                            textContent: _vm._s(
+                              capacitacion.COCAC_Descuento_Porcentaje
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { display: "none" },
+                          domProps: {
+                            textContent: _vm._s(
+                              capacitacion.COCAC_Descuento_Moneda_Real
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { display: "none" },
+                          domProps: {
+                            textContent: _vm._s(capacitacion.COCAC_SubTotal)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { display: "none" },
+                          domProps: {
+                            textContent: _vm._s(
+                              capacitacion.COCAC_SubTotal_Descontado
+                            )
+                          }
+                        })
                       ])
                     }),
                     0
@@ -52243,6 +52559,9 @@ var render = function() {
                           },
                           domProps: { value: _vm.capacitacion.COCAC_Cantidad },
                           on: {
+                            focusout: function($event) {
+                              return _vm.getDescuento(_vm.capacitacion.id_curso)
+                            },
                             keypress: function($event) {
                               return _vm.restringirSoloNumerosEnteros($event)
                             },
@@ -52559,6 +52878,9 @@ var render = function() {
                           },
                           domProps: { value: _vm.capacitacion.COCAC_Cantidad },
                           on: {
+                            focusout: function($event) {
+                              return _vm.getDescuento(_vm.capacitacion.id_curso)
+                            },
                             keypress: function($event) {
                               return _vm.restringirSoloNumerosEnteros($event)
                             },
@@ -52885,7 +53207,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Nombre" } },
       [
-        _vm._v("Nombre del Solicitante"),
+        _vm._v("Nombre"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -52895,7 +53217,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "col-form-label" }, [
-      _vm._v("Tipo de Solicitante"),
+      _vm._v("Tipo"),
       _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
     ])
   },
@@ -52904,7 +53226,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "col-form-label" }, [
-      _vm._v("RUC del Solicitante"),
+      _vm._v("RUC"),
       _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
     ])
   },
@@ -52916,7 +53238,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Direccion" } },
       [
-        _vm._v("Dirección del Solicitante"),
+        _vm._v("Dirección"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -52929,7 +53251,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Telefono" } },
       [
-        _vm._v("Teléfono del Solicitante"),
+        _vm._v("Teléfono"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -52942,7 +53264,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Email" } },
       [
-        _vm._v("Email del Solicitante"),
+        _vm._v("Email"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -53099,7 +53421,15 @@ var staticRenderFns = [
             attrs: { scope: "col" }
           },
           [_vm._v("Acciones")]
-        )
+        ),
+        _vm._v(" "),
+        _c("th", { staticStyle: { display: "none" } }),
+        _vm._v(" "),
+        _c("th", { staticStyle: { display: "none" } }),
+        _vm._v(" "),
+        _c("th", { staticStyle: { display: "none" } }),
+        _vm._v(" "),
+        _c("th", { staticStyle: { display: "none" } })
       ])
     ])
   },
@@ -53499,7 +53829,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-              [_vm._v("Contacto")]
+              [_vm._v("Solicitante")]
             ),
             _vm._v(" "),
             _c(
@@ -53509,39 +53839,41 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.cotizacion.id_contacto,
-                    expression: "cotizacion.id_contacto"
+                    value: _vm.solicitanteSelected,
+                    expression: "solicitanteSelected"
                   }
                 ],
-                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
                 attrs: { name: "contacto" },
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.cotizacion,
-                      "id_contacto",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.solicitanteSelected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.seleccionarContacto()
+                    }
+                  ]
                 }
               },
-              _vm._l(_vm.contactos, function(contacto) {
+              _vm._l(_vm.solicitantes, function(solicitante) {
                 return _c(
                   "option",
                   {
-                    key: contacto.id_contacto,
-                    domProps: { value: contacto.id_contacto }
+                    key: solicitante.SOLIP_Codigo,
+                    domProps: { value: solicitante.SOLIP_Codigo }
                   },
-                  [_vm._v(_vm._s(contacto.nombre_contacto))]
+                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
                 )
               }),
               0
@@ -53634,23 +53966,52 @@ var render = function() {
             _c(
               "label",
               { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-              [_vm._v("Solicitante")]
+              [_vm._v("Contacto")]
             ),
             _vm._v(" "),
             _c(
               "select",
               {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.contactoSelected,
+                    expression: "contactoSelected"
+                  }
+                ],
+                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: { name: "contacto" }
+                attrs: { name: "contacto" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.contactoSelected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.seleccionarSolicitante()
+                    }
+                  ]
+                }
               },
-              _vm._l(_vm.solicitantes, function(solicitante) {
+              _vm._l(_vm.contactos, function(contacto) {
                 return _c(
                   "option",
                   {
-                    key: solicitante.SOLIP_Codigo,
-                    domProps: { value: solicitante.SOLIP_Codigo }
+                    key: contacto.id_contacto,
+                    domProps: { value: contacto.id_contacto }
                   },
-                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                  [_vm._v(_vm._s(contacto.nombre_contacto))]
                 )
               }),
               0
@@ -54492,7 +54853,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-              [_vm._v("Contacto")]
+              [_vm._v("Solicitante")]
             ),
             _vm._v(" "),
             _c(
@@ -54502,39 +54863,41 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.cotizacion.id_contacto,
-                    expression: "cotizacion.id_contacto"
+                    value: _vm.solicitanteSelected,
+                    expression: "solicitanteSelected"
                   }
                 ],
-                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
                 attrs: { name: "contacto" },
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.cotizacion,
-                      "id_contacto",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.solicitanteSelected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.seleccionarContacto()
+                    }
+                  ]
                 }
               },
-              _vm._l(_vm.contactos, function(contacto) {
+              _vm._l(_vm.solicitantes, function(solicitante) {
                 return _c(
                   "option",
                   {
-                    key: contacto.id_contacto,
-                    domProps: { value: contacto.id_contacto }
+                    key: solicitante.SOLIP_Codigo,
+                    domProps: { value: solicitante.SOLIP_Codigo }
                   },
-                  [_vm._v(_vm._s(contacto.nombre_contacto))]
+                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
                 )
               }),
               0
@@ -54559,6 +54922,7 @@ var render = function() {
                   expression: "cotizacion.COTIC_Fecha"
                 }
               ],
+              ref: "fecha",
               staticClass: "col-sm-6 form-control-sm",
               attrs: { type: "date", autocomplete: "off", name: "fecha" },
               domProps: { value: _vm.cotizacion.COTIC_Fecha },
@@ -54622,23 +54986,52 @@ var render = function() {
             _c(
               "label",
               { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-              [_vm._v("Solicitante")]
+              [_vm._v("Contacto")]
             ),
             _vm._v(" "),
             _c(
               "select",
               {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.contactoSelected,
+                    expression: "contactoSelected"
+                  }
+                ],
+                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: { name: "contacto" }
+                attrs: { name: "contacto" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.contactoSelected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.seleccionarSolicitante()
+                    }
+                  ]
+                }
               },
-              _vm._l(_vm.solicitantes, function(solicitante) {
+              _vm._l(_vm.contactos, function(contacto) {
                 return _c(
                   "option",
                   {
-                    key: solicitante.SOLIP_Codigo,
-                    domProps: { value: solicitante.SOLIP_Codigo }
+                    key: contacto.id_contacto,
+                    domProps: { value: contacto.id_contacto }
                   },
-                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                  [_vm._v(_vm._s(contacto.nombre_contacto))]
                 )
               }),
               0
@@ -54717,7 +55110,7 @@ var render = function() {
             }
           },
           [
-            _vm._v("\n\t\t\t\tCapacitación  "),
+            _vm._v("\n\t\t\t\t\tCapacitación  "),
             _c("i", {
               staticClass: "fa fa-plus",
               attrs: { "aria-hidden": "true" }
@@ -55259,7 +55652,7 @@ var render = function() {
               }
             },
             [
-              _vm._v("\n\t\t\t\t\tRegistrar  "),
+              _vm._v("\n\t\t\t\t\t\tRegistrar  "),
               _c("i", {
                 staticClass: "fa fa-save",
                 attrs: { "aria-hidden": "true" }
@@ -55284,7 +55677,7 @@ var render = function() {
               }
             },
             [
-              _vm._v("\n\t\t\t\t\tIr al listado  "),
+              _vm._v("\n\t\t\t\t\t\tIr al listado  "),
               _c("i", {
                 staticClass: "fa fa-arrow-left",
                 attrs: { "aria-hidden": "true" }
@@ -55390,7 +55783,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-              [_vm._v("Contacto")]
+              [_vm._v("Solicitante")]
             ),
             _vm._v(" "),
             _c(
@@ -55400,39 +55793,41 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.cotizacion.id_contacto,
-                    expression: "cotizacion.id_contacto"
+                    value: _vm.solicitanteSelected,
+                    expression: "solicitanteSelected"
                   }
                 ],
-                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
                 attrs: { name: "contacto" },
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.cotizacion,
-                      "id_contacto",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.solicitanteSelected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.seleccionarContacto()
+                    }
+                  ]
                 }
               },
-              _vm._l(_vm.contactos, function(contacto) {
+              _vm._l(_vm.solicitantes, function(solicitante) {
                 return _c(
                   "option",
                   {
-                    key: contacto.id_contacto,
-                    domProps: { value: contacto.id_contacto }
+                    key: solicitante.SOLIP_Codigo,
+                    domProps: { value: solicitante.SOLIP_Codigo }
                   },
-                  [_vm._v(_vm._s(contacto.nombre_contacto))]
+                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
                 )
               }),
               0
@@ -55457,6 +55852,7 @@ var render = function() {
                   expression: "cotizacion.COTIC_Fecha"
                 }
               ],
+              ref: "fecha",
               staticClass: "col-sm-6 form-control-sm",
               attrs: { type: "date", autocomplete: "off", name: "fecha" },
               domProps: { value: _vm.cotizacion.COTIC_Fecha },
@@ -55525,23 +55921,52 @@ var render = function() {
             _c(
               "label",
               { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-              [_vm._v("Solicitante")]
+              [_vm._v("Contacto")]
             ),
             _vm._v(" "),
             _c(
               "select",
               {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.contactoSelected,
+                    expression: "contactoSelected"
+                  }
+                ],
+                ref: "contacto",
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: { name: "contacto" }
+                attrs: { name: "contacto" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.contactoSelected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.seleccionarSolicitante()
+                    }
+                  ]
+                }
               },
-              _vm._l(_vm.solicitantes, function(solicitante) {
+              _vm._l(_vm.contactos, function(contacto) {
                 return _c(
                   "option",
                   {
-                    key: solicitante.SOLIP_Codigo,
-                    domProps: { value: solicitante.SOLIP_Codigo }
+                    key: contacto.id_contacto,
+                    domProps: { value: contacto.id_contacto }
                   },
-                  [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                  [_vm._v(_vm._s(contacto.nombre_contacto))]
                 )
               }),
               0
@@ -56589,72 +57014,78 @@ var render = function() {
                     [
                       _vm._m(7),
                       _vm._v(" "),
-                      _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
-                        return _c("tr", { key: prueba.indice }, [
-                          _c("td", { staticClass: "text-center" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(indice + 1) +
-                                "\n                                "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-left" }, [
-                            _vm._v(_vm._s(prueba.Descripcion_Prueba))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-left" }, [
-                            _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-right" }, [
-                            _vm._v(_vm._s(parseFloat(prueba.Costo).toFixed(2)))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-center" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-outline-primary btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editPrueba(indice)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-edit",
-                                  attrs: { "aria-hidden": "true" }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-outline-danger btn-sm",
-                                attrs: {
-                                  type: "button",
-                                  disabled: _vm.idxPrueba != null
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.deletePrueba(indice)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-trash",
-                                  attrs: { "aria-hidden": "true" }
-                                })
-                              ]
-                            )
-                          ])
-                        ])
-                      })
+                      _vm.pruebas.length > 0
+                        ? _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
+                            return _c("tr", { key: prueba.indice }, [
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(indice + 1) +
+                                    "\n                                    "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-left" }, [
+                                _vm._v(_vm._s(prueba.Descripcion_Prueba))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-left" }, [
+                                _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _vm._v(
+                                  _vm._s(parseFloat(prueba.Costo).toFixed(2))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-primary btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editPrueba(indice)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-edit",
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm",
+                                    attrs: {
+                                      type: "button",
+                                      disabled: _vm.idxPrueba != null
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletePrueba(indice)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash",
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ])
+                          })
+                        : _vm._e()
                     ],
                     2
                   )
@@ -57086,7 +57517,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Contacto")]
+                [_vm._v("Solicitante")]
               ),
               _vm._v(" "),
               _c(
@@ -57096,41 +57527,41 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.cotizacion.id_contacto,
-                      expression: "cotizacion.id_contacto"
+                      value: _vm.solicitanteSelected,
+                      expression: "solicitanteSelected"
                     }
                   ],
-                  ref: "contacto",
                   staticClass: "col-sm-6 form-control-sm",
                   attrs: { name: "contacto" },
                   on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.cotizacion,
-                        "id_contacto",
-                        $event.target.multiple
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.solicitanteSelected = $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
-                      )
-                    }
+                      },
+                      function($event) {
+                        return _vm.seleccionarContacto()
+                      }
+                    ]
                   }
                 },
-                _vm._l(_vm.contactos, function(contacto) {
+                _vm._l(_vm.solicitantes, function(solicitante) {
                   return _c(
                     "option",
                     {
-                      key: contacto.id_contacto,
-                      domProps: { value: contacto.id_contacto }
+                      key: solicitante.SOLIP_Codigo,
+                      domProps: { value: solicitante.SOLIP_Codigo }
                     },
-                    [_vm._v(_vm._s(contacto.nombre_contacto))]
+                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
                   )
                 }),
                 0
@@ -57155,13 +57586,9 @@ var render = function() {
                     expression: "cotizacion.COTIC_Fecha"
                   }
                 ],
+                ref: "fecha",
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: {
-                  type: "date",
-                  autocomplete: "off",
-                  name: "fecha",
-                  readonly: "readonly"
-                },
+                attrs: { type: "date", autocomplete: "off", name: "fecha" },
                 domProps: { value: _vm.cotizacion.COTIC_Fecha },
                 on: {
                   input: function($event) {
@@ -57193,14 +57620,10 @@ var render = function() {
                     modifiers: { number: true }
                   }
                 ],
+                ref: "numero",
                 staticClass: "col-sm-3 form-control-sm",
                 staticStyle: { "text-align": "right" },
-                attrs: {
-                  type: "text",
-                  maxlength: "11",
-                  autocomplete: "off",
-                  readonly: "readonly"
-                },
+                attrs: { type: "text", maxlength: "11", autocomplete: "off" },
                 domProps: { value: _vm.cotizacion.COTIC_Numero },
                 on: {
                   input: function($event) {
@@ -57228,23 +57651,56 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Solicitante")]
+                [_vm._v("Contacto")]
               ),
               _vm._v(" "),
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cotizacion.id_contacto,
+                      expression: "cotizacion.id_contacto"
+                    }
+                  ],
+                  ref: "contacto",
                   staticClass: "col-sm-6 form-control-sm",
-                  attrs: { name: "contacto" }
+                  attrs: { name: "contacto" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.cotizacion,
+                          "id_contacto",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.seleccionarSolicitante()
+                      }
+                    ]
+                  }
                 },
-                _vm._l(_vm.solicitantes, function(solicitante) {
+                _vm._l(_vm.contactos, function(contacto) {
                   return _c(
                     "option",
                     {
-                      key: solicitante.SOLIP_Codigo,
-                      domProps: { value: solicitante.SOLIP_Codigo }
+                      key: contacto.id_contacto,
+                      domProps: { value: contacto.id_contacto }
                     },
-                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                    [_vm._v(_vm._s(contacto.nombre_contacto))]
                   )
                 }),
                 0
@@ -58124,7 +58580,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Contacto")]
+                [_vm._v("Solicitante")]
               ),
               _vm._v(" "),
               _c(
@@ -58134,40 +58590,41 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.cotizacion.id_contacto,
-                      expression: "cotizacion.id_contacto"
+                      value: _vm.solicitanteSelected,
+                      expression: "solicitanteSelected"
                     }
                   ],
                   staticClass: "col-sm-6 form-control-sm",
                   attrs: { name: "contacto" },
                   on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.cotizacion,
-                        "id_contacto",
-                        $event.target.multiple
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.solicitanteSelected = $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
-                      )
-                    }
+                      },
+                      function($event) {
+                        return _vm.seleccionarContacto()
+                      }
+                    ]
                   }
                 },
-                _vm._l(_vm.contactos, function(contacto) {
+                _vm._l(_vm.solicitantes, function(solicitante) {
                   return _c(
                     "option",
                     {
-                      key: contacto.id_contacto,
-                      domProps: { value: contacto.id_contacto }
+                      key: solicitante.SOLIP_Codigo,
+                      domProps: { value: solicitante.SOLIP_Codigo }
                     },
-                    [_vm._v(_vm._s(contacto.nombre_contacto))]
+                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
                   )
                 }),
                 0
@@ -58192,13 +58649,9 @@ var render = function() {
                     expression: "cotizacion.COTIC_Fecha"
                   }
                 ],
+                ref: "fecha",
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: {
-                  type: "date",
-                  autocomplete: "off",
-                  name: "fecha",
-                  readonly: "readonly"
-                },
+                attrs: { type: "date", autocomplete: "off", name: "fecha" },
                 domProps: { value: _vm.cotizacion.COTIC_Fecha },
                 on: {
                   input: function($event) {
@@ -58229,14 +58682,10 @@ var render = function() {
                     expression: "cotizacion.COTIC_Numero"
                   }
                 ],
+                ref: "numero",
                 staticClass: "col-sm-3 form-control-sm",
                 staticStyle: { "text-align": "right" },
-                attrs: {
-                  type: "text",
-                  maxlength: "11",
-                  autocomplete: "off",
-                  readonly: "readonly"
-                },
+                attrs: { type: "text", maxlength: "11", autocomplete: "off" },
                 domProps: { value: _vm.cotizacion.COTIC_Numero },
                 on: {
                   input: function($event) {
@@ -58261,23 +58710,56 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Solicitante")]
+                [_vm._v("Contacto")]
               ),
               _vm._v(" "),
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cotizacion.id_contacto,
+                      expression: "cotizacion.id_contacto"
+                    }
+                  ],
+                  ref: "contacto",
                   staticClass: "col-sm-6 form-control-sm",
-                  attrs: { name: "contacto" }
+                  attrs: { name: "contacto" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.cotizacion,
+                          "id_contacto",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.seleccionarSolicitante()
+                      }
+                    ]
+                  }
                 },
-                _vm._l(_vm.solicitantes, function(solicitante) {
+                _vm._l(_vm.contactos, function(contacto) {
                   return _c(
                     "option",
                     {
-                      key: solicitante.SOLIP_Codigo,
-                      domProps: { value: solicitante.SOLIP_Codigo }
+                      key: contacto.id_contacto,
+                      domProps: { value: contacto.id_contacto }
                     },
-                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                    [_vm._v(_vm._s(contacto.nombre_contacto))]
                   )
                 }),
                 0
@@ -58458,7 +58940,7 @@ var render = function() {
                                 )
                               },
                               function($event) {
-                                return _vm.getInfoCurso($event, index)
+                                return _vm.getInfoCurso(index)
                               }
                             ]
                           }
@@ -58495,8 +58977,7 @@ var render = function() {
                           type: "text",
                           name: "unitario[]",
                           autocomplete: "off",
-                          disabled: capacitacion.COCAP_Codigo == "",
-                          readonly: ""
+                          disabled: capacitacion.COCAP_Codigo == ""
                         },
                         domProps: {
                           value: capacitacion.COCAC_Costo_Curso_Original
@@ -58506,10 +58987,7 @@ var render = function() {
                             return _vm.restringirSoloNumerosDecimales($event)
                           },
                           focusout: function($event) {
-                            return _vm.realizarCalculosDeCapacitacion(
-                              $event,
-                              index
-                            )
+                            return _vm.realizarCalculosDeCapacitacion(index)
                           },
                           input: function($event) {
                             if ($event.target.composing) {
@@ -58552,7 +59030,7 @@ var render = function() {
                             return _vm.restringirSoloNumerosEnteros($event)
                           },
                           focusout: function($event) {
-                            return _vm.getDescuento($event, index)
+                            return _vm.getDescuento(index)
                           },
                           input: function($event) {
                             if ($event.target.composing) {
@@ -59050,7 +59528,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Contacto")]
+                [_vm._v("Solicitante")]
               ),
               _vm._v(" "),
               _c(
@@ -59060,41 +59538,41 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.cotizacion.id_contacto,
-                      expression: "cotizacion.id_contacto"
+                      value: _vm.solicitanteSelected,
+                      expression: "solicitanteSelected"
                     }
                   ],
-                  ref: "contacto",
                   staticClass: "col-sm-6 form-control-sm",
                   attrs: { name: "contacto" },
                   on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.cotizacion,
-                        "id_contacto",
-                        $event.target.multiple
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.solicitanteSelected = $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
-                      )
-                    }
+                      },
+                      function($event) {
+                        return _vm.seleccionarContacto()
+                      }
+                    ]
                   }
                 },
-                _vm._l(_vm.contactos, function(contacto) {
+                _vm._l(_vm.solicitantes, function(solicitante) {
                   return _c(
                     "option",
                     {
-                      key: contacto.id_contacto,
-                      domProps: { value: contacto.id_contacto }
+                      key: solicitante.SOLIP_Codigo,
+                      domProps: { value: solicitante.SOLIP_Codigo }
                     },
-                    [_vm._v(_vm._s(contacto.nombre_contacto))]
+                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
                   )
                 }),
                 0
@@ -59119,13 +59597,9 @@ var render = function() {
                     expression: "cotizacion.COTIC_Fecha"
                   }
                 ],
+                ref: "fecha",
                 staticClass: "col-sm-6 form-control-sm",
-                attrs: {
-                  type: "date",
-                  autocomplete: "off",
-                  name: "fecha",
-                  readonly: "readonly"
-                },
+                attrs: { type: "date", autocomplete: "off", name: "fecha" },
                 domProps: { value: _vm.cotizacion.COTIC_Fecha },
                 on: {
                   input: function($event) {
@@ -59157,14 +59631,10 @@ var render = function() {
                     modifiers: { number: true }
                   }
                 ],
+                ref: "numero",
                 staticClass: "col-sm-3 form-control-sm",
                 staticStyle: { "text-align": "right" },
-                attrs: {
-                  type: "text",
-                  maxlength: "11",
-                  autocomplete: "off",
-                  readonly: "readonly"
-                },
+                attrs: { type: "text", maxlength: "11", autocomplete: "off" },
                 domProps: { value: _vm.cotizacion.COTIC_Numero },
                 on: {
                   input: function($event) {
@@ -59192,23 +59662,56 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-3 col-form-label col-form-label-sm" },
-                [_vm._v("Solicitante")]
+                [_vm._v("Contacto")]
               ),
               _vm._v(" "),
               _c(
                 "select",
                 {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cotizacion.id_contacto,
+                      expression: "cotizacion.id_contacto"
+                    }
+                  ],
+                  ref: "contacto",
                   staticClass: "col-sm-6 form-control-sm",
-                  attrs: { name: "contacto" }
+                  attrs: { name: "contacto" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.cotizacion,
+                          "id_contacto",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.seleccionarSolicitante()
+                      }
+                    ]
+                  }
                 },
-                _vm._l(_vm.solicitantes, function(solicitante) {
+                _vm._l(_vm.contactos, function(contacto) {
                   return _c(
                     "option",
                     {
-                      key: solicitante.SOLIP_Codigo,
-                      domProps: { value: solicitante.SOLIP_Codigo }
+                      key: contacto.id_contacto,
+                      domProps: { value: contacto.id_contacto }
                     },
-                    [_vm._v(_vm._s(solicitante.SOLIC_Nombre))]
+                    [_vm._v(_vm._s(contacto.nombre_contacto))]
                   )
                 }),
                 0
@@ -60295,98 +60798,105 @@ var render = function() {
                     [
                       _vm._m(7),
                       _vm._v(" "),
-                      _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
-                        return _c("tr", { key: prueba.indice }, [
-                          _c("td", { staticClass: "text-center" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(indice + 1) +
-                                "\n                                    "
-                            ),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: prueba.id_prueba_a_realizar,
-                                  expression: "prueba.id_prueba_a_realizar"
-                                }
-                              ],
-                              staticClass: "form-control-sm w-25",
-                              attrs: { type: "hidden" },
-                              domProps: { value: prueba.id_prueba_a_realizar },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                      _vm.pruebas.length > 0
+                        ? _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
+                            return _c("tr", { key: prueba.indice }, [
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(indice + 1) +
+                                    "\n                                        "
+                                ),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: prueba.id_prueba_a_realizar,
+                                      expression: "prueba.id_prueba_a_realizar"
+                                    }
+                                  ],
+                                  staticClass: "form-control-sm w-25",
+                                  attrs: { type: "hidden" },
+                                  domProps: {
+                                    value: prueba.id_prueba_a_realizar
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        prueba,
+                                        "id_prueba_a_realizar",
+                                        $event.target.value
+                                      )
+                                    }
                                   }
-                                  _vm.$set(
-                                    prueba,
-                                    "id_prueba_a_realizar",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-left" }, [
-                            _vm._v(_vm._s(prueba.Descripcion_Prueba))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-left" }, [
-                            _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-right" }, [
-                            _vm._v(_vm._s(parseFloat(prueba.Costo).toFixed(2)))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-center" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-outline-primary btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editPrueba(indice)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-edit",
-                                  attrs: { "aria-hidden": "true" }
                                 })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-outline-danger btn-sm btn-eliminar-prueba",
-                                attrs: {
-                                  type: "button",
-                                  disabled: _vm.idxPrueba != null
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.deletePrueba(indice)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-trash",
-                                  attrs: { "aria-hidden": "true" }
-                                })
-                              ]
-                            )
-                          ])
-                        ])
-                      })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-left" }, [
+                                _vm._v(_vm._s(prueba.Descripcion_Prueba))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-left" }, [
+                                _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _vm._v(
+                                  _vm._s(parseFloat(prueba.Costo).toFixed(2))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-primary btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editPrueba(indice)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-edit",
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm btn-eliminar-prueba",
+                                    attrs: {
+                                      type: "button",
+                                      disabled: _vm.idxPrueba != null
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deletePrueba(indice)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash",
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ])
+                          })
+                        : _vm._e()
                     ],
                     2
                   )
@@ -60636,7 +61146,7 @@ var render = function() {
                     },
                     [
                       _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Seleccione un tipo de solicitante")
+                        _vm._v("Seleccione un tipo ")
                       ]),
                       _vm._v(" "),
                       _vm._l(_vm.tiposSolicitante, function(tipoSolicitante) {
@@ -61142,7 +61652,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "font-weight-bold" }, [
-                _vm._v("Nuevo Equipo")
+                _vm._v("Equipos a ensayar")
               ]),
               _vm._v("  \n                "),
               _c("i", {
@@ -62201,64 +62711,71 @@ var render = function() {
                       [
                         _vm._m(35),
                         _vm._v(" "),
-                        _vm._l(_vm.equipo.pruebas, function(prueba, indice) {
-                          return _c("tr", { key: prueba.indice }, [
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v(_vm._s(indice + 1))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-left" }, [
-                              _vm._v(_vm._s(prueba.Descripcion_Prueba))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-left" }, [
-                              _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-primary btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.editPrueba(indice)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fa fa-edit",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    type: "button",
-                                    disabled: _vm.idxPrueba != null
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.deletePrueba(indice)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fa fa-trash",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
-                                ]
-                              )
-                            ])
-                          ])
-                        })
+                        _vm.pruebas.length > 0
+                          ? _vm._l(_vm.equipo.pruebas, function(
+                              prueba,
+                              indice
+                            ) {
+                              return _c("tr", { key: prueba.indice }, [
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v(_vm._s(indice + 1))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(prueba.Descripcion_Prueba))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-left" }, [
+                                  _vm._v(_vm._s(prueba.Norma_Asoc_Prueba))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-primary btn-sm",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editPrueba(indice)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-edit",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-danger btn-sm",
+                                      attrs: {
+                                        type: "button",
+                                        disabled: _vm.idxPrueba != null
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deletePrueba(indice)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-trash",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            })
+                          : _vm._e()
                       ],
                       2
                     )
@@ -62408,7 +62925,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Nombre" } },
       [
-        _vm._v("Nombre del Solicitante"),
+        _vm._v("Nombre"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -62418,7 +62935,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "col-form-label" }, [
-      _vm._v("Tipo de Solicitante"),
+      _vm._v("Tipo"),
       _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
     ])
   },
@@ -62427,7 +62944,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { staticClass: "col-form-label" }, [
-      _vm._v("RUC del Solicitante"),
+      _vm._v("RUC"),
       _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
     ])
   },
@@ -62439,7 +62956,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Direccion" } },
       [
-        _vm._v("Dirección del Solicitante"),
+        _vm._v("Dirección"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -62452,7 +62969,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Telefono" } },
       [
-        _vm._v("Teléfono del Solicitante"),
+        _vm._v("Teléfono"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -62465,7 +62982,7 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "SOLIC_Email" } },
       [
-        _vm._v("Email del Solicitante"),
+        _vm._v("Email"),
         _c("span", { staticClass: "text-danger ml-1" }, [_vm._v("*")])
       ]
     )
@@ -63463,13 +63980,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("table", { staticClass: "table" }, [
                   _c("tr", [
-                    _c("td", [_vm._v("Nombre del Solicitante:")]),
+                    _c("td", [_vm._v("Nombre:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Nombre))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Tipo del Solicitante:")]),
+                    _c("td", [_vm._v("Tipo:")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
@@ -63479,25 +63996,25 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("RUC del Solicitante:")]),
+                    _c("td", [_vm._v("RUC:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Ruc))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Direccion del Solicitante:")]),
+                    _c("td", [_vm._v("Direccion:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Direccion))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Telefono del Solicitante:")]),
+                    _c("td", [_vm._v("Telefono:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Telefono))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Email del Solicitante:")]),
+                    _c("td", [_vm._v("Email:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Email))])
                   ]),
@@ -63770,13 +64287,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("table", { staticClass: "table" }, [
                   _c("tr", [
-                    _c("td", [_vm._v("Nombre del Solicitante:")]),
+                    _c("td", [_vm._v("Nombre:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Nombre))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Tipo del Solicitante:")]),
+                    _c("td", [_vm._v("Tipo:")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
@@ -63786,25 +64303,25 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("RUC del Solicitante:")]),
+                    _c("td", [_vm._v("RUC:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Ruc))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Direccion del Solicitante:")]),
+                    _c("td", [_vm._v("Direccion:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Direccion))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Telefono del Solicitante:")]),
+                    _c("td", [_vm._v("Telefono:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Telefono))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Email del Solicitante:")]),
+                    _c("td", [_vm._v("Email:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Email))])
                   ]),
@@ -63989,13 +64506,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("table", { staticClass: "table" }, [
                   _c("tr", [
-                    _c("td", [_vm._v("Nombre del Solicitante:")]),
+                    _c("td", [_vm._v("Nombre:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Nombre))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Tipo del Solicitante:")]),
+                    _c("td", [_vm._v("Tipo:")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
@@ -64005,25 +64522,25 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("RUC del Solicitante:")]),
+                    _c("td", [_vm._v("RUC:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Ruc))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Direccion del Solicitante:")]),
+                    _c("td", [_vm._v("Direccion:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Direccion))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Telefono del Solicitante:")]),
+                    _c("td", [_vm._v("Telefono:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Telefono))])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Email del Solicitante:")]),
+                    _c("td", [_vm._v("Email:")]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(_vm.solicitante.SOLIC_Email))])
                   ]),
@@ -77864,8 +78381,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\proyectos_php\catalogo-lab-electricidad_uni\repositorio_local\catalogo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\proyectos_php\catalogo-lab-electricidad_uni\repositorio_local\catalogo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Projects\Php\catalogo-lab-electricidad\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projects\Php\catalogo-lab-electricidad\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

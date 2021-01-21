@@ -101,6 +101,7 @@ class CalibracionController extends Controller
         $cotizacion = Cotizacion::findOrFail($id);
         $cotizacion->COTIC_Fecha_Cotizacion = $request->fecha;
         $cotizacion->id_contacto            = $request->contacto;
+        $cotizacion->COTIC_Numero           = $request->numero;
         $cotizacion->USUA_Codigo            = $request->usuario;
         $cotizacion->COTIC_SubTotal         = $request->subtotal;
         $cotizacion->COTIC_Igv              = $request->igv;

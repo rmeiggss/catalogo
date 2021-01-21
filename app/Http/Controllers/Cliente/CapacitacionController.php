@@ -47,21 +47,27 @@ class CapacitacionController extends Controller
             'COTIC_Correo2' => $request->cotizacion['COTIC_Correo1'],
             'COTIC_Correo3' => $request->cotizacion['COTIC_Correo2'],
             'COTIC_Correo4' => $request->cotizacion['COTIC_Correo3'],
-            'COTIC_Correo1' => $request->cotizacion['COTIC_Correo4']
+            'COTIC_Correo1' => $request->cotizacion['COTIC_Correo4'],
+            'COTIC_Fecha_Cotizacion' => $request->cotizacion['COTIC_Fecha_Cotizacion']
         ]);
 
-        //Grabamos capacitaciones        
+        //Grabamos capacitaciones
         if (isset($request->capacitaciones)) {
             if (count($request->capacitaciones) > 0) {
                 foreach ($request->capacitaciones as $value) {
                     $capacitacion = Capacitacion::create([
-                        'COTIP_Codigo'                  => $cotizacion->COTIP_Codigo,
-                        'id_curso'                      => $value["id_curso"],
-                        'COCAC_Cantidad'                => $value["COCAC_Cantidad"],
-                        'COCAC_Detalle_Curso_Cotizar'   => $value["COCAC_Detalle_Curso_Cotizar"],
-                        'COCAC_Horario_Tentativo_Curso' => $value["COCAC_Horario_Tentativo_Curso"],
-                        'COCAC_Lugar_Capacitacion'      => $value["COCAC_Lugar_Capacitacion"]
-                    ]);       
+                        'COTIP_Codigo'                      => $cotizacion->COTIP_Codigo,
+                        'id_curso'                          => $value["id_curso"],
+                        'COCAC_Cantidad'                    => $value["COCAC_Cantidad"],
+                        'COCAC_Detalle_Curso_Cotizar'       => $value["COCAC_Detalle_Curso_Cotizar"],
+                        'COCAC_Horario_Tentativo_Curso'     => $value["COCAC_Horario_Tentativo_Curso"],
+                        'COCAC_Lugar_Capacitacion'          => $value["COCAC_Lugar_Capacitacion"],
+                        'COCAC_Costo_Curso_Original'        => $value["COCAC_Costo_Curso_Original"],
+                        'COCAC_Descuento_Porcentaje'        => $value["COCAC_Descuento_Porcentaje"],
+                        'COCAC_Descuento_Moneda_Real'       => $value["COCAC_Descuento_Moneda_Real"],
+                        'COCAC_SubTotal'                    => $value["COCAC_SubTotal"],
+                        'COCAC_SubTotal_Descontado'         => $value["COCAC_SubTotal_Descontado"]
+                    ]);
                 }
             }
         }

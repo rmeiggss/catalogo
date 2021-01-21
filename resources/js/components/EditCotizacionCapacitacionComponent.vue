@@ -9,22 +9,24 @@
             <div class="row row-sm invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto">
-                            <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
+                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="seleccionarContacto()">
+                            <option v-for="solicitante in solicitantes"
+                            v-bind:value="solicitante.SOLIP_Codigo"
+                            v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Fecha</label>
-                        <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" readonly="readonly">
+                        <input type="date" class="col-sm-6 form-control-sm" v-model="cotizacion.COTIC_Fecha" autocomplete="off" name="fecha" ref="fecha" />
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                        <input type="text" v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" readonly="readonly" style="text-align: right;">
+                        <input type="text" v-model="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" ref="numero" style="text-align: right;" />
                     </div>
                 </div>
             </div>
@@ -33,9 +35,9 @@
             <div class="row row-sm invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                        <select class="col-sm-6 form-control-sm" name="contacto">
-                            <option v-for="solicitante in solicitantes" v-bind:value="solicitante.SOLIP_Codigo" v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
+                        <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
+                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="seleccionarSolicitante()">
+                            <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                         </select>
                     </div>
                 </div>
@@ -81,16 +83,16 @@
                                     <input type="hidden" name="codigodet[]" v-model="capacitacion.COCAP_Codigo" class="form-control-sm">
                                 </td>
                                 <td>
-                                    <select v-model="capacitacion.id_curso" class="form-control-sm curso" name="curso" ref="curso" @change="getInfoCurso($event, index)">
+                                    <select v-model="capacitacion.id_curso" class="form-control-sm curso" name="curso" ref="curso" @change="getInfoCurso(index)">
                                         <option v-for="curso in cursos" v-bind:value="curso.id_curso" v-bind:key="curso.id_curso">{{ curso.CURSOC_Nombre }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control-sm w-100 text-right" name="unitario[]" ref="costo" v-model="capacitacion.COCAC_Costo_Curso_Original" autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusout="realizarCalculosDeCapacitacion($event, index)"
-                                        :disabled="capacitacion.COCAP_Codigo == ''" readonly />
+                                    <input type="text" class="form-control-sm w-100 text-right" name="unitario[]" ref="costo" v-model="capacitacion.COCAC_Costo_Curso_Original" autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusout="realizarCalculosDeCapacitacion(index)"
+                                        :disabled="capacitacion.COCAP_Codigo == ''" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control-sm w-100 text-right cantidad" name="cantidad[]" ref="cantidad" v-model.number="capacitacion.COCAC_Cantidad" autocomplete="off" @keypress="restringirSoloNumerosEnteros($event)" @focusout="getDescuento($event, index)"
+                                    <input type="text" class="form-control-sm w-100 text-right cantidad" name="cantidad[]" ref="cantidad" v-model.number="capacitacion.COCAC_Cantidad" autocomplete="off" @keypress="restringirSoloNumerosEnteros($event)" @focusout="getDescuento(index)"
                                         :disabled="capacitacion.COCAP_Codigo == ''" />
                                 </td>
                                 <td>
@@ -158,6 +160,9 @@
 </template>
 
 <script>
+    $(document).ready(function(){
+
+    });
     export default {
         data() {
             return {
@@ -168,7 +173,8 @@
                 usuarios: [],
                 solicitantes: [],
                 saveData: null,
-                file: ''
+                file: '',
+                solicitanteSelected: null
             }
         },
         props: {
@@ -212,15 +218,18 @@
                 var url = '/cotizacion/' + id + '/get';
                 axios.get(url).then(response => {
                     let resultado = response.data;
-                    resultado.COTIC_Fecha = resultado.COTIC_Fecha_Cotizacion.split(' ')[0];
+
+                    resultado.COTIC_Fecha = (resultado.COTIC_Fecha_Cotizacion??resultado.COTIC_FechaRegistro).split(' ')[0];
                     this.cotizacion = resultado;
-                    console.log(resultado);
+                    this.solicitanteSelected = resultado.SOLIP_Codigo;
                 });
+
             },
             getCapacitaciones(id) {
                 var url = '/cotizacioncapacitacion/' + id + '/list';
                 axios.get(url).then(response => {
                     this.capacitaciones = response.data;
+                    // this.setearValoresIniciales();
                 }).catch(error => {
                     console.log(error);
                 });
@@ -270,6 +279,7 @@
                     this.$refs.contacto.focus();
                     this.mostrarMensajeInformacion('¡Debe seleccionar un contacto!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
+                    this.$refs.fecha.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
                 } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
                     this.$refs.numero.focus();
@@ -357,7 +367,7 @@
                 });
             },
             irAListado() {
-                this.mostrarMensajeConfirmacion('¿Está seguro de abortar la actualización?', 'Si, abortar', 'No, permanecer').then((result) => {
+                this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then((result) => {
                     if (result.isConfirmed) {
                         location.href = '/capacitacion';
                     }
@@ -412,12 +422,12 @@
                     return false;
                 }
             },
-            getInfoCurso(e, index) {
+            getInfoCurso(index) {
                 this.$refs.cantidad[index].disabled = false;
                 this.$refs.costo[index].disabled = false;
                 this.$refs.cantidad[index].focus();
                 this.getCurso(index);
-                this.getDescuento(e, index);
+                this.getDescuento(index);
             },
             getCurso(index) {
                 let capacitacion = this.capacitaciones[index];
@@ -429,7 +439,7 @@
                     });
                 }
             },
-            getDescuento(e, index) {
+            getDescuento(index) {
                 let capacitacion = this.capacitaciones[index];
                 let idCurso = capacitacion.id_curso;
                 let cantidad = isNaN(parseInt(capacitacion.COCAC_Cantidad)) ? 0 : parseInt(capacitacion.COCAC_Cantidad);
@@ -441,16 +451,15 @@
                         let descuento = $(response.data).filter((i, descuento) => ((descuento.id_curso) == idCurso && (cantidad >= descuento.cantidad_min && cantidad <= descuento.cantidad_max)));
                         capacitacion.COCAC_Descuento_Porcentaje = (descuento.length != 0) ? descuento[0].descuento : 0;
                         capacitacion.COCAC_Descuento_Moneda_Real = (capacitacion.COCAC_SubTotal * capacitacion.COCAC_Descuento_Porcentaje) / 100;
-                        this.realizarCalculosDeCapacitacion(e, index);
+                        this.realizarCalculosDeCapacitacion(index);
                     });
                 } else {
                     capacitacion.COCAC_Descuento_Porcentaje = 0;
                     capacitacion.COCAC_Descuento_Moneda_Real = 0;
                 }
             },
-            realizarCalculosDeCapacitacion(e, index) {
+            realizarCalculosDeCapacitacion(index) {
                 let capacitacion = this.capacitaciones[index];
-                let controlActual = e.target;
                 let cantidad = isNaN(parseInt(capacitacion.COCAC_Cantidad)) ? 0 : parseInt(capacitacion.COCAC_Cantidad);
                 let costo = isNaN(parseFloat(capacitacion.COCAC_Costo_Curso_Original)) ? 0 : parseFloat(capacitacion.COCAC_Costo_Curso_Original);
                 capacitacion.COCAC_Costo_Curso_Original = this.formatearDecimalesAModelo(capacitacion.COCAC_Costo_Curso_Original);
@@ -461,7 +470,27 @@
             formatearDecimalesAModelo(value) {
                 value = isNaN(parseFloat(value)) ? '0.00' : (parseFloat(value)).toFixed(2);
                 return value;
-            }
+            },
+            seleccionarSolicitante(){
+                var url = '/contacto/solicitante/get/' + this.cotizacion.id_contacto
+                    axios.get(url).then(response => {
+                        this.solicitanteSelected = response.data.SOLIP_Codigo;
+                    });
+            },
+            seleccionarContacto(){
+                var url = '/solicitante/contacto/get/' + this.solicitanteSelected
+                    axios.get(url).then(response => {
+                        this.cotizacion.id_contacto = response.data.id_contacto;
+                    });
+            },
+            // setearValoresIniciales: function() {
+            //     this.capacitaciones.forEach((capacitacion, index) => {
+            //         capacitacion.COCAC_Descuento_Moneda_Real = '0.00';
+            //         capacitacion.COCAC_Descuento_Porcentaje = '0';
+            //         capacitacion.COCAC_SubTotal_Descontado = '0.00';
+            //         this.getDescuento(index);
+            //     });
+            // }
         }
     }
 </script>

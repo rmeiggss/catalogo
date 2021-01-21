@@ -137,7 +137,16 @@ class CotizacionController extends Controller
 
     public function get($id)
     {
-        return Cotizacion::findOrFail($id);
+
+        $cotizacion =
+            Cotizacion
+            ::join('contacto', 'cotizacion.id_contacto', '=', 'contacto.id_contacto')
+            ->join('solicitante', 'contacto.SOLIP_Codigo', '=', 'solicitante.SOLIP_Codigo')
+            ->select('cotizacion.*', 'solicitante.*', 'contacto.*')
+            ->where('cotizacion.COTIP_Codigo', $id)
+            ->firstOrFail();
+
+        return $cotizacion;
     }
 
     public function update(Request $request)
@@ -147,28 +156,29 @@ class CotizacionController extends Controller
         $cotizacion = Cotizacion::findOrFail($id);
         $cotizacion->COTIC_Fecha_Cotizacion = $request->fecha;
         $cotizacion->id_contacto            = $request->contacto;
+        $cotizacion->COTIC_Numero           = $request->numero;
         $cotizacion->USUA_Codigo            = $request->usuario;
         $cotizacion->COTIC_SubTotal         = $request->subtotal;
         $cotizacion->COTIC_Igv              = $request->igv;
         $cotizacion->COTIC_Total            = $request->total;
         $cotizacion->save();
         //Grabamos equipos
-        if(isset($request->equipos)){
+        if (isset($request->equipos)) {
             #region Eliminación de todos los equipos con sus pruebas.
             $equipos = CotizacionDetalle::where('COTIP_Codigo', $id)->get();
-            foreach($equipos as $value){
+            foreach ($equipos as $value) {
                 $equipo = $value->CODEP_Codigo;
-                Prueba::where('CODEP_Codigo',$equipo)->delete();
+                Prueba::where('CODEP_Codigo', $equipo)->delete();
             }
-            CotizacionDetalle::where('COTIP_Codigo',$id)->delete();
-            #endregion 
-            if(count($request->equipos)>0){
-                foreach($request->equipos as $item=>$value){
+            CotizacionDetalle::where('COTIP_Codigo', $id)->delete();
+            #endregion
+            if (count($request->equipos) > 0) {
+                foreach ($request->equipos as $item => $value) {
                     $archivo = $value["tempFile"];
 
                     $file_result_equipo = null;
                     if (isset($archivo) && $archivo != null && $archivo != "null")
-                            $file_result_equipo = FileManager::saveFile($archivo, "I");
+                        $file_result_equipo = FileManager::saveFile($archivo, "I");
                     $equipo = CotizacionDetalle::create([
                         "COTIP_Codigo"                           => $id,
                         "CODEC_Nombre_Equipo"                    => $value["CODEC_Nombre_Equipo"],
@@ -176,18 +186,18 @@ class CotizacionController extends Controller
                         "CODEC_Fabricante_Equipo"                => $value["CODEC_Fabricante_Equipo"],
                         "CODEC_Cantidad"                         => $value["CODEC_Cantidad"],
                         "CODEC_Costo"                            => $value["CODEC_Costo"],
-                        "CODEC_SubTotal"                         => $value["CODEC_Cantidad"]*$value["CODEC_Costo"],
+                        "CODEC_SubTotal"                         => $value["CODEC_Cantidad"] * $value["CODEC_Costo"],
                         "CODEC_Descripcion_Ficha_Tecnica_Equipo" => $value["CODEC_Descripcion_Ficha_Tecnica_Equipo"],
                         "CODEC_Url_Ficha_Tecnica_Equipo"         => $value["CODEC_Url_Ficha_Tecnica_Equipo"],
                         "CODEC_Archivo_Descripcion_Equipo"       => (isset($archivo) && $archivo != null && $archivo != "null") ? $file_result_equipo->getPath() : $value["CODEC_Archivo_Descripcion_Equipo"]
                     ]);
                     $pruebas = $value["pruebas"];
                     //Grabamos las pruebas
-                    if(count($pruebas)>0){
-                        foreach($pruebas as $value2){
+                    if (isset($pruebas) && count($pruebas) > 0) {
+                        foreach ($pruebas as $value2) {
                             $file_result_prueba = null;
                             if (isset($value2["tempFile"]) && $value2["tempFile"] != null && $value2["tempFile"] != "null")
-                                    $file_result_prueba = FileManager::saveFile($value2["tempFile"], "I");
+                                $file_result_prueba = FileManager::saveFile($value2["tempFile"], "I");
                             $pruebas = Prueba::create([
                                 "CODEP_Codigo"       => $equipo->CODEP_Codigo,
                                 "Descripcion_Prueba" => $value2["Descripcion_Prueba"],

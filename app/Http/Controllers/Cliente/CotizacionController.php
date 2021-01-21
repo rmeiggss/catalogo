@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Redirect, Response;
 
-
 class CotizacionController extends Controller
 {
     public function index()
@@ -49,7 +48,8 @@ class CotizacionController extends Controller
             'COTIC_Correo2' => $request->cotizacion['COTIC_Correo1'],
             'COTIC_Correo3' => $request->cotizacion['COTIC_Correo2'],
             'COTIC_Correo4' => $request->cotizacion['COTIC_Correo3'],
-            'COTIC_Correo1' => $request->cotizacion['COTIC_Correo4']
+            'COTIC_Correo1' => $request->cotizacion['COTIC_Correo4'],
+            'COTIC_Fecha_Cotizacion' => $request->cotizacion['COTIC_Fecha_Cotizacion']
         ]);
 
         //Grabamos equipos
@@ -61,15 +61,17 @@ class CotizacionController extends Controller
                         $file_result_equipo = FileManager::saveFile($value["tempFile"], "W");
 
                     $equipo = CotizacionDetalle::create([
-                        'COTIP_Codigo'                           => $cotizacion->COTIP_Codigo,
-                        "CODEC_Nombre_Equipo"                    => $value["CODEC_Nombre_Equipo"],
-                        "CODEC_Descripcion_Equipo"               => $value["CODEC_Descripcion_Equipo"],
-                        "CODEC_Fabricante_Equipo"                => $value["CODEC_Fabricante_Equipo"],
-                        "CODEC_Cantidad"                         => $value["CODEC_Cantidad"],
-                        "CODEC_Descripcion_Ficha_Tecnica_Equipo" => $value["CODEC_Descripcion_Ficha_Tecnica_Equipo"],
-                        "CODEC_Url_Ficha_Tecnica_Equipo"         => $value["CODEC_Url_Ficha_Tecnica_Equipo"],
-                        // "CODEC_Archivo_Descripcion_Equipo"       => $value["CODEC_Archivo_Descripcion_Equipo"],
-                        "CODEC_Archivo_Descripcion_Equipo"       => (isset($value["tempFile"]) && $value["tempFile"] != null && $value["tempFile"] != "null") ? $file_result_equipo->getPath() : null
+                        'COTIP_Codigo'                              => $cotizacion->COTIP_Codigo,
+                        "CODEC_Nombre_Equipo"                       => $value["CODEC_Nombre_Equipo"],
+                        "CODEC_Descripcion_Equipo"                  => $value["CODEC_Descripcion_Equipo"],
+                        "CODEC_Fabricante_Equipo"                   => $value["CODEC_Fabricante_Equipo"],
+                        "CODEC_Cantidad"                            => $value["CODEC_Cantidad"],
+                        "CODEC_Descripcion_Ficha_Tecnica_Equipo"    => $value["CODEC_Descripcion_Ficha_Tecnica_Equipo"],
+                        "CODEC_Url_Ficha_Tecnica_Equipo"            => $value["CODEC_Url_Ficha_Tecnica_Equipo"],
+                        // "CODEC_Archivo_Descripcion_Equipo"          => $value["CODEC_Archivo_Descripcion_Equipo"],
+                        "CODEC_Archivo_Descripcion_Equipo"          => (isset($value["tempFile"]) && $value["tempFile"] != null && $value["tempFile"] != "null") ? $file_result_equipo->getPath() : null,
+                        "CODEC_Costo"                               => '0.00',
+                        "CODEC_SubTotal"                            => '0.00'
                     ]);
                     $pruebas = $value["pruebas"];
                     //Grabamos las pruebas

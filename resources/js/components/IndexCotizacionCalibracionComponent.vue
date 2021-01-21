@@ -10,7 +10,7 @@
           <table id="example2" class="table table-bordered table-hover">
             <thead>
             <tr class="text-center">
-              <th scope="col">Codigo</th>              
+              <th scope="col">Codigo</th>
               <th scope="col">Numero</th>
               <th scope="col">Solicitante</th>
               <th scope="col">Fecha</th>
@@ -57,8 +57,12 @@ export default {
             listar(){
               var url = '/calibracion/list';
               axios.get(url).then(response=>{
-                this.cotizaciones = response.data;
-                //console.log(this.cotizaciones);
+                  let data = response.data;
+                  $.each(data, (key, value) => {
+                      var fechaCotizacionFormateada = value.COTIC_Fecha_Cotizacion != null ? value.COTIC_Fecha_Cotizacion.split(' ')[0] : value.COTIC_Fecha_Cotizacion;
+                      this.$set(value, 'COTIC_Fecha_Cotizacion', fechaCotizacionFormateada);
+                  });
+                  this.cotizaciones = data;
               });
             },
             btnBorrar(cotizacion,indice){
