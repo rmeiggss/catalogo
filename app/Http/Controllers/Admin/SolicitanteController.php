@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
+use App\Contacto;
 use App\Http\Controllers\Controller;
 use App\Solicitante;
 use App\TipoSolicitante;
@@ -10,67 +12,69 @@ class SolicitanteController extends Controller
 {
     public function index()
     {
-        //$solicitantes = Solicitante::latest()->paginate(8);
-
-        $solicitantes = Solicitante::join('tiposolicitante','tiposolicitante.TIPSOLIP_Codigo','=','solicitante.TIPSOLIP_Codigo')->select()->get();
-
-        return view('admin.solicitante.index',compact('solicitantes'));
+        return view('admin.solicitante.index');
     }
 
     public function list(){
-        return Solicitante::all();
+        $solicitantes = Solicitante
+        ::join('tiposolicitante','tiposolicitante.TIPSOLIP_Codigo','=','solicitante.TIPSOLIP_Codigo')
+        ->select()
+        ->orderBy('SOLIP_Codigo', 'ASC')
+        ->get();
+
+        return $solicitantes;
     }
 
     public function create(){
-        $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');
-        return view('admin.solicitante.create',compact('tiposolicitante'));
+        return view('admin.solicitante.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        $solicitante = new Solicitante();
+        $solicitante->TIPSOLIP_Codigo = $request->solicitante['TIPSOLIP_Codigo'];
+        $solicitante->UBIGP_Codigo = $request->solicitante['UBIGP_Codigo'];
+        $solicitante->SOLIC_Nombre = $request->solicitante['SOLIC_Nombre'];
+        $solicitante->SOLIC_Ruc = $request->solicitante['SOLIC_Ruc'];
+        $solicitante->SOLIC_Direccion = $request->solicitante['SOLIC_Direccion'];
+        $solicitante->SOLIC_Telefono = $request->solicitante['SOLIC_Telefono'];
+        $solicitante->SOLIC_Email = $request->solicitante['SOLIC_Email'];
+        $solicitante->SOLIC_FlagEstado = '1';
+        $solicitante->save();
 
-        /* Validacion del Formulario */
-        $request->validate([
-            'tipo' => 'required',
-            'ubigeo' => 'required',
-            'nombre' => 'required',
-            'ruc' => 'required',
-            'direccion' => 'required',
-            'email' => 'required|email',
-            'telefono' => 'required'
-        ]);
-
-        Solicitante::create([
-            'TIPSOLIP_Codigo'  => request('tipo'),
-            'UBIGP_Codigo'     => request('ubigeo'),
-            'SOLIC_Nombre'     => request('nombre'),
-            'SOLIC_Ruc'        => request('ruc'),
-            'SOLIC_Direccion'  => request('direccion'),
-            'SOLIC_Telefono'   => request('telefono'),
-            'SOLIC_Email'      => request('email'),
-            'SOLIC_FlagEstado' => request('estado'),
-            'SOLIC_Contacto'   => request('contacto')
-        ]);
-        return Redirect::to("/solicitante");
+        return response()->json(['¡El solicitante se guardó correctamente!']);
     }
 
     public function edit($id){
-        $tiposolicitante = TipoSolicitante::pluck('TIPSOLIC_Descripcion', 'TIPSOLIP_Codigo');
         $solicitante = Solicitante::findOrFail($id);
-        return view("admin.solicitante.edit",['solicitante' => $solicitante,'tiposolicitante'=>$tiposolicitante]);
+        return view("admin.solicitante.edit",['solicitante' => $solicitante]);
     }
 
-    public function update(Request $request,$id){
-        $solicitante = Solicitante::findOrFail($id);
-        $solicitante->TIPSOLIP_Codigo = $request->tipo;
-        $solicitante->UBIGP_Codigo    = $request->ubigeo;
-        $solicitante->SOLIC_Nombre    = $request->nombre;
-        $solicitante->SOLIC_Ruc       = $request->ruc;
-        $solicitante->SOLIC_Direccion = $request->direccion;
-        $solicitante->SOLIC_Telefono  = $request->telefono;
-        $solicitante->SOLIC_Email     = $request->email;
-        $solicitante->SOLIC_Contacto  = $request->contacto;
+    public function get($id)
+    {
+        $solicitante = Solicitante
+        ::join('ubigeo', 'solicitante.UBIGP_Codigo', '=', 'ubigeo.UBIGP_Codigo')
+        ->select('solicitante.*', 'ubigeo.UBIGC_CodDpto', 'ubigeo.UBIGC_CodProv', 'ubigeo.UBIGC_CodDist')
+        ->findOrFail($id);
+        return $solicitante;
+    }
+
+    public function update(Request $request){
+        $solicitante = Solicitante::findOrFail($request->solicitante['SOLIP_Codigo']);
+
+        $solicitante->TIPSOLIP_Codigo = $request->solicitante['TIPSOLIP_Codigo'];
+        $solicitante->UBIGP_Codigo    = $request->solicitante['UBIGP_Codigo'];
+        $solicitante->SOLIC_Nombre    = $request->solicitante['SOLIC_Nombre'];
+        $solicitante->SOLIC_Ruc       = $request->solicitante['SOLIC_Ruc'];
+        $solicitante->SOLIC_Direccion = $request->solicitante['SOLIC_Direccion'];
+        $solicitante->SOLIC_Telefono  = $request->solicitante['SOLIC_Telefono'];
+        $solicitante->SOLIC_Email     = $request->solicitante['SOLIC_Email'];
+        $solicitante->SOLIC_FlagEstado = '1';
+        $solicitante->UBIGP_Codigo    = $request->solicitante['UBIGP_Codigo'];
+
         $solicitante->save();
-        return redirect::to('/solicitante');
+
+        return response()->json(['¡El solicitante se guardó correctamente!']);
     }
 
     public function listTiposSolicitantes()
@@ -92,5 +96,22 @@ class SolicitanteController extends Controller
     public function destroy($id){
         Solicitante::destroy($id);
         return Redirect::to("/solicitante");
+    }
+
+    public function delete($id){
+        $contacto = Contacto::where('SOLIP_Codigo', '=', $id)->first();
+        if ($contacto != null) {
+            return response()->json([
+                'message' => 'El solicitante ya tiene un contacto, por lo tanto no se puede eliminar',
+                'status' => 'ERROR'
+            ]);
+        }
+
+        $result  = Solicitante::find($id)->delete();
+        if ($result) {
+            return response()->json(['message' => 'Solicitante eliminado!']);
+        } else {
+            return response()->json(['message' => '¡Ocurrió un error!']);
+        }
     }
 }

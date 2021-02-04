@@ -529,7 +529,7 @@
                 let regexpEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                 let regexpRuc = /^[0-9]{11}$/;
 				if (typeof this.solicitante.SOLIC_Nombre == "undefined" || this.solicitante.SOLIC_Nombre.trim() == '') {
-					this.$refs.SOLIC_Nombre.focus();                    
+					this.$refs.SOLIC_Nombre.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar el nombre del solicitante!', 'warning');
                     return false;
                 } else if (typeof this.solicitante.TIPSOLIP_Codigo == "undefined" || this.solicitante.TIPSOLIP_Codigo == '') {

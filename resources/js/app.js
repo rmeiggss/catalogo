@@ -26,6 +26,13 @@ Vue.component('vista-preliminar', require('./components/VistaPreliminarComponent
 Vue.component('window-portal', require('./components/WindowPortalComponent.vue').default);
 // Vue.component('file-upload-component', require('./components/FileUploadComponent.vue').default);
 
+/* Mantenimientos */
+//Solicitante
+Vue.component('createsolicitante-component', require('./components/CreateSolicitanteComponent.vue').default);
+Vue.component('editsolicitante-component', require('./components/EditSolicitanteComponent.vue').default);
+Vue.component('indexsolicitante-component', require('./components/IndexSolicitanteComponent.vue').default);
+
+
 const app = new Vue({
 	el: '#app',
 });

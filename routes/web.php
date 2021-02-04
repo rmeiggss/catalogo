@@ -10,11 +10,19 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::get('/usuario/list','Admin\UsuarioController@list');
+
 Route::get('/solicitante/list','Admin\SolicitanteController@list');
 Route::get('/solicitante/contacto/get/{id}','Admin\SolicitanteController@getContacto');
+Route::post('/solicitante/store', 'Admin\SolicitanteController@store');
+Route::put('/solicitante/update', 'Admin\SolicitanteController@update');
+Route::get('/solicitante/{id_solicitante}/edit','Admin\SolicitanteController@edit');
+Route::get('/solicitante/{id}/get','Admin\SolicitanteController@get');
+Route::delete("/solicitante/{id}","Admin\SolicitanteController@delete");
 Route::get('/tiposolicitante/list','Admin\SolicitanteController@listTiposSolicitantes');
+
 Route::get('/contacto/list','Admin\ContactoController@list');
 Route::get('/contacto/solicitante/get/{id}','Admin\ContactoController@getSolicitante');
+
 Route::get('/curso/list','Admin\CursoController@list');
 Route::get('/curso/{id}', 'Admin\CursoController@get');
 Route::get('/curso/{id}/descuento', 'Admin\CursoController@getDescuentos');
