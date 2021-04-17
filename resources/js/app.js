@@ -1,7 +1,9 @@
+
 require('./bootstrap');
 
 window.Vue = require('vue');
 window.Swal = require('sweetalert2');
+window.moment = require('moment');
 
 Vue.component('indexcontacto-component', require('./components/IndexContactoComponent.vue').default);
 Vue.component('indexcotizacion-component', require('./components/IndexCotizacionComponent.vue').default);
@@ -33,6 +35,29 @@ Vue.component('editsolicitante-component', require('./components/EditSolicitante
 Vue.component('indexsolicitante-component', require('./components/IndexSolicitanteComponent.vue').default);
 
 
+//Usuarios
+Vue.component('indexusuario-component', require('./components/Usuario/IndexUsuarioComponent.vue').default);
+
+//Cursos
+Vue.component('indexcurso-component', require('./components/Cursos/IndexCursosComponent.vue').default);
+Vue.component('curso-component', require('./components/Cursos/CursosComponent.vue').default);
+
+//Descuentos
+Vue.component('indexdescuento-component', require('./components/Descuentos/IndexDescuentosComponent.vue').default);
+Vue.component('descuento-component', require('./components/Descuentos/DescuentosComponent.vue').default);
+
+Vue.component('tags-input', require('./components/TagsInputComponent.vue').default);
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
+
 const app = new Vue({
-	el: '#app',
+    el: '#app',
 });
+
+Vue.directive('focus-on-create', {
+    // Note: using Vue 1. In Vue 2, el would be a parameter
+    bind: function () {
+        Vue.nextTick(() => {
+            this.el.focus();
+        })
+    }
+})

@@ -10,7 +10,7 @@
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Solicitante</label>
-                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="seleccionarContacto()">
+                        <select class="col-sm-6 form-control-sm" name="contacto" v-model="solicitanteSelected" @change="mostrarDatosSolicitante()">
                             <option v-for="solicitante in solicitantes"
                             v-bind:value="solicitante.SOLIP_Codigo"
                             v-bind:key="solicitante.SOLIP_Codigo">{{ solicitante.SOLIC_Nombre }}</option>
@@ -24,33 +24,81 @@
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                    <div class="row form-group">
+                    <div class="row form-group" v-if="mostrarNumeroCotizacion">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Numero</label>
-                        <input type="text" v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" ref="numero" style="text-align: right;" />
+                        <input type="text" v-model.number="cotizacion.COTIC_Numero" class="col-sm-3 form-control-sm" maxlength="11" autocomplete="off" ref="numero" style="text-align: right;">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="chkPedido" id="chkPedido" v-model="cotizacion.COTIC_flag_pedido" />
+                        <label for="chkPedido" class="col-check-label">La cotizacion se transformo en Pedido</label>
                     </div>
                 </div>
             </div>
             <!-- /Cabecera fila 1 -->
-            <!-- Cabecera fila 2 -->
+            <!-- Datos del contacto -->
             <div class="row row-sm invoice-info">
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
                         <label class="col-sm-3 col-form-label col-form-label-sm">Contacto</label>
-                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="seleccionarSolicitante()">
+                        <select v-model="cotizacion.id_contacto" class="col-sm-6 form-control-sm" name="contacto" ref="contacto" @change="mostrarDatosContacto()">
                            <option v-for="contacto in contactos" v-bind:value="contacto.id_contacto" v-bind:key="contacto.id_contacto">{{ contacto.nombre_contacto }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
                     <div class="row form-group">
-                        <label class="col-sm-3 col-form-label col-form-label-sm">Usuario</label>
-                        <select v-model="cotizacion.USUA_Codigo" class="col-sm-6 form-control-sm" name="usuario" ref="usuario">
-                            <option v-for="usuario in usuarios" v-bind:value="usuario.id" v-bind:key="usuario.id">{{ usuario.name }}</option>
+                        <label class="col-sm-auto col-form-label col-form-label-sm" for="correoContacto">Correo contacto: </label>
+                        <input type="text" v-model.number="cotizacion.correo_contacto" id="correoContacto"
+                            class="col-sm-6 form-control-sm" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-4 invoice-col">
+                    <div class="row form-group">
+                        <label class="col-sm-auto col-form-label col-form-label-sm">Celular contacto:</label>
+                        <input type="text" v-model.number="cotizacion.celular_contacto"
+                            class="col-sm-6 form-control-sm" readonly>
+                    </div>
+                </div>
+            </div>
+            <!-- Datos del ubigeo de solicitante -->
+            <div class="row row-sm invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    <div class="row form-group">
+                        <label class="col-sm-auto col-form-label col-form-label-sm" for="UBIGC_CodDpto">Departamento</label>
+                        <select v-model="ubigeo.UBIGC_CodDpto" class="col-sm-6 form-control-sm" id="UBIGC_CodDpto" name="UBIGC_CodDpto" ref="UBIGC_CodDpto" @change="listarProvincias()">
+                            <option value="">Seleccione un Departamento</option>
+                            <option v-for="departamento in departamentos" v-bind:value="departamento.UBIGC_CodDpto" v-bind:key="departamento.UBIGC_CodDpto">{{ departamento.UBIGC_Descripcion }}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-sm-4 invoice-col">
+                    <div class="row form-group">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="UBIGC_CodProv">Provincia</label>
+                        <select v-model="ubigeo.UBIGC_CodProv" class="col-sm-6 form-control-sm" id="UBIGC_CodProv" name="UBIGC_CodProv" ref="UBIGC_CodProv" @change="listarDistritos()">
+                            <option value="">Seleccione una Provincia</option>
+                            <option v-for="provincia in provincias" v-bind:value="provincia.UBIGC_CodProv" v-bind:key="provincia.UBIGC_CodProv">{{ provincia.UBIGC_Descripcion }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                    <div class="row form-group"></div>
+                    <div class="row form-group">
+                        <label class="col-sm-3 col-form-label col-form-label-sm" for="UBIGC_CodDist">Distrito</label>
+                        <select v-model="ubigeo.UBIGC_CodDist" class="col-sm-6 form-control-sm" id="UBIGC_CodDist" name="UBIGC_CodDist" ref="UBIGC_CodDist">
+                            <option value="">Seleccione un Distrito</option>
+                            <option v-for="distrito in distritos" v-bind:value="distrito.UBIGC_CodDist" v-bind:key="distrito.UBIGC_CodDist">{{ distrito.UBIGC_Descripcion }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Correo opcional -->
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="emails">Correos opcionales</label>
+                    <tags-input :values="emailTags" :key="componentKey" placeholder="Ingrese el correo"
+                    typeValidation="email"
+                    :limit="4"
+                    :duplicateValidation="true" />
                 </div>
             </div>
             <!-- /Cabecera fila 2 -->
@@ -71,6 +119,8 @@
                                 <th style="width: 5%;">Costo</th>
                                 <th style="width: 5%;">Cantidad</th>
                                 <th style="width: 5%;">Subtotal</th>
+                                <th style="width: 5%;">Dscto.(%)</th>
+                                <th style="width: 5%;">Subtotal Dscto.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,6 +158,18 @@
                                         v-model.number="(isNaN(cotdetalle.CODEC_SubTotal) || cotdetalle.CODEC_SubTotal == '') ? '0.00' : (parseFloat(cotdetalle.CODEC_SubTotal)).toFixed(2)"
                                         autocomplete="off" readonly="readonly" style="background-color: #2883f5; color: #ffffff;" />
                                 </td>
+                                <td>
+                                    <input type="text" class="form-control-sm w-100 text-right" name="dcto_porcentaje[]"
+                                        v-model.number="cotdetalle.CODEC_dcto_porcentaje"
+                                        autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusout="realizarCalculosDeCalibracion($event, index)"
+                                        style="background-color: rgb(230, 66, 16); color: rgb(255, 255, 255);"
+                                        />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control-sm w-100 text-right" name="dcto_subtotal[]"
+                                        v-model.number="(isNaN(cotdetalle.CODEC_dcto_subtotal) || cotdetalle.CODEC_dcto_subtotal == '' || cotdetalle.CODEC_dcto_subtotal == null) ? (parseFloat(cotdetalle.CODEC_SubTotal)).toFixed(2) : (parseFloat(cotdetalle.CODEC_dcto_subtotal)).toFixed(2)"
+                                        autocomplete="off" readonly style="background-color: rgb(0, 156, 48); color: rgb(255, 255, 255);" />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -121,19 +183,30 @@
                     <div class="table-responsive table-sm">
                         <table class="table float-right">
                             <tr>
-                                <td class="text-right">
+                                <td class="text-right" colspan="2">
                                     <strong class="mr-2">Subtotal S/.</strong>
                                     <input type="text" v-model="SubTotal" name="subtotal" class="form-control-sm w-25 text-right" readonly="readonly" />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-right">
+                                    <strong>Dscto(%)</strong>
+                                    <input type="text" name="subtotal" class="form-control-sm w-50 text-right" v-model="DescuentoPorcentaje"
+                                    @focusout="calcularTotalFinal()">
+                                </td>
+                                <td class="text-right">
+                                    <strong>Subtotal</strong>
+                                    <input type="text" name="subtotal" class="form-control-sm w-50 text-right" v-model="SubtotalDescuento" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right" colspan="2">
                                     <strong class="mr-2">I.G.V. S/. (18%)</strong>
                                     <input type="text" v-model="Igv" name="igv" class="form-control-sm w-25 text-right" readonly="readonly" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-right">
+                                <td class="text-right" colspan="2">
                                     <strong class="mr-2">Total S/.</strong>
                                     <input type="text" v-model="Total" name="total" class="form-control-sm w-25 text-right" readonly="readonly" />
                                 </td>
@@ -151,6 +224,9 @@
                     </button>
                     <button type="button" class="btn btn-danger" @click="irAListado()">
                         Ir al listado&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" id="btn-registrar-cotizacion-ensayo">
+                        Descargar PDF&nbsp;&nbsp;<i class="fa fa-file-pdf" aria-hidden="true"></i>&nbsp;<img :src="'/images/load.gif'" style="display: none; width: 1em;" />
                     </button>
                 </div>
             </div>
@@ -221,54 +297,51 @@
                 SubTotal: '0.00',
                 Igv: '0.00',
                 Total: '0.00',
+                DescuentoPorcentaje: '0.00',
+                DescuentoImporte: '0.00',
+                SubtotalDescuento: '0.00',
 
                 solicitanteSelected: null,
+
+                emailTags: [],
+                componentKey: 0,
+
+                ubigeo: {},
+                departamentos: [],
+                provincias: [],
+                distritos: [],
+
+                mostrarNumeroCotizacion : false
             };
         },
         props: {
             codigo: String,
-            token: String
+            token: String,
+            user: Object
         },
-        created() {
-            this.getEquipos(this.codigo);
-            this.getCotizacion(this.codigo);
-            this.listarContactos();
-            this.listarUsuarios();
+        created: async function() {
+            await this.getEquipos(this.codigo);
+            await this.getCotizacion(this.codigo);
             this.listarSolicitantes();
+            this.listarUsuarios();
         },
         mounted() {
             console.log('Component mounted.');
         },
         computed: {
-            // setSubTotal: function() {
-            //     var suma = 0;
-            //     this.equipos.forEach((equipo, index) => {
-			// 		if (isNaN(equipo.CODEC_SubTotal) || equipo.CODEC_SubTotal < 0 || equipo.CODEC_SubTotal == '')
-			// 			suma += 0;
-			// 		else
-			// 			suma += parseFloat(equipo.CODEC_SubTotal);
-            //     });
-            //     return suma.toFixed(2);
-            // },
-            // setIgv: function() {
-            //     return (Number(this.setSubTotal) * 0.18).toFixed(2);
-            // },
-            // setTotal: function() {
-            //     return (Number(this.setSubTotal) + Number(this.setIgv)).toFixed(2);
-            // },
             computedAction: function() {
                 return '/cotizacion/' + this.codigo;
             }
         },
         methods: {
+            forceRerender() {
+                this.componentKey +=1;
+            },
             /*Equipos*/
             getEquipos(id) {
                 var url = '/cotizaciondetalle/' + id + '/list';
                 axios.get(url).then(response => {
                     this.equipos = response.data;
-                    this.setSubTotal();
-                    this.setIgv();
-                    this.setTotal();
                 }).catch(error => {
                     console.log(error);
                 });
@@ -284,7 +357,10 @@
                     CODEC_SubTotal: "",
                     CODEC_Descripcion_Ficha_Tecnica_Equipo: "",
                     CODEC_Url_Ficha_Tecnica_Equipo: "",
-                    CODEC_Archivo_Descripcion_Equipo: ""
+                    CODEC_Archivo_Descripcion_Equipo: "",
+                    CODEC_dcto_porcentaje: "0.00",
+                    CODEC_dcto_importe: "0.00",
+                    CODEC_dcto_subtotal: "0.00",
                 };
                 this.equipos.push(fila);
             },
@@ -293,7 +369,6 @@
                 this.idxEquipo = index;
                 this.equipo = {};
                 Object.assign(this.equipo, this.equipos[index]);
-                // this.equipo = JSON.parse(JSON.stringify(this.equipos[index]));
                 $("#file").val('');
                 $('#archivoFichaTecnica').val('');
             },
@@ -353,18 +428,28 @@
             onChangeFileUpload() {
                 this.file = this.$refs.file.files[0];
             },
-            getCotizacion(id) {
-                var url = '/cotizacion/' + id + '/get';
-                axios.get(url).then(response => {
-                    let resultado = response.data;
+            getCotizacion: async function(id) {
+                const response = await axios.get(`/cotizacion/${id}/get`);
+                let resultado = response.data;
 
-                    resultado.COTIC_Fecha = (resultado.COTIC_Fecha_Cotizacion??resultado.COTIC_FechaRegistro).split(' ')[0];
-                    this.cotizacion = resultado;
-                    this.solicitanteSelected = resultado.SOLIP_Codigo;
+                resultado.COTIC_Fecha = (resultado.COTIC_Fecha_Cotizacion??resultado.COTIC_FechaRegistro).split(' ')[0];
+                this.cotizacion = resultado;
+                this.solicitanteSelected = resultado.SOLIP_Codigo;
+                this.SubTotal = resultado.COTIC_SubTotal;
+                this.Igv = resultado.COTIC_Igv;
+                this.Total = resultado.COTIC_Total;
+                this.DescuentoImporte = resultado.COTIC_dcto_importe;
+                this.DescuentoPorcentaje = resultado.COTIC_dcto_porcentaje;
+                this.SubtotalDescuento = resultado.COTIC_dcto_subtotal;
 
-                });
+                (resultado.COTIC_Correo1 !== null && resultado.COTIC_Correo1 !== '') ? this.emailTags.push(resultado.COTIC_Correo1) : null;
+                (resultado.COTIC_Correo2 !== null && resultado.COTIC_Correo2 !== '') ? this.emailTags.push(resultado.COTIC_Correo2) : null;
+                (resultado.COTIC_Correo3 !== null && resultado.COTIC_Correo3 !== '') ? this.emailTags.push(resultado.COTIC_Correo3) : null;
+                (resultado.COTIC_Correo4 !== null && resultado.COTIC_Correo4 !== '') ? this.emailTags.push(resultado.COTIC_Correo4) : null;
+
+                this.forceRerender();
             },
-            updateCotizacion(equipos) {
+            updateCotizacion() {
                 let url = '/calibracion/update';
                 if (typeof this.cotizacion.id_contacto == "undefined" || this.cotizacion.id_contacto == '') {
                     this.$refs.contacto.focus();
@@ -372,12 +457,12 @@
                 } else if (typeof this.cotizacion.COTIC_Fecha == "undefined" || this.cotizacion.COTIC_Fecha == '') {
                     this.$refs.fecha.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la fecha!', 'warning');
-                } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
-                    this.$refs.numero.focus();
-                    this.mostrarMensajeInformacion('¡Debe ingresar el número!', 'warning');
-                } else if (typeof this.cotizacion.USUA_Codigo == "undefined" || this.cotizacion.USUA_Codigo == '') {
-                    this.$refs.usuario.focus();
-                    this.mostrarMensajeInformacion('¡Debe seleccionar un usuario!', 'warning');
+                // } else if (typeof this.cotizacion.COTIC_Numero == "undefined" || this.cotizacion.COTIC_Numero == '') {
+                //     this.$refs.numero.focus();
+                //     this.mostrarMensajeInformacion('¡Debe ingresar el número!', 'warning');
+                // } else if (typeof this.cotizacion.USUA_Codigo == "undefined" || this.cotizacion.USUA_Codigo == '') {
+                //     this.$refs.usuario.focus();
+                //     this.mostrarMensajeInformacion('¡Debe seleccionar un usuario!', 'warning');
                 } else if (this.equipos.length == 0) {
                     this.mostrarMensajeInformacion('¡Debe ingresar al menos un equipo!', 'warning');
                 } else if ($(this.equipos).filter((i, equipo) => (equipo.CODEC_Nombre_Equipo.trim() == '')).length != 0) {
@@ -395,6 +480,7 @@
                 } else {
                     this.mostrarMensajeConfirmacion('¿Está seguro de actualizar la cotización?', 'Si, registrar', 'No,     cancelar').then((result) => {
                         if (result.isConfirmed) {
+                            this.cotizacion.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
                             const config = {
                                 headers: {
                                     'content-type': 'multipart/form-data',
@@ -406,7 +492,12 @@
                             formData.append('contacto', this.cotizacion.id_contacto);
                             formData.append('fecha', this.cotizacion.COTIC_Fecha);
                             formData.append('numero', this.cotizacion.COTIC_Numero);
-                            formData.append('usuario', this.cotizacion.USUA_Codigo);
+                            formData.append('usuario', this.user.id);
+                            formData.append('ubigeo', this.cotizacion.UBIGP_Codigo);
+                            this.emailTags.forEach((value, i) => {
+                                formData.append(`correo${i+1}`, value);
+                            });
+
                             this.equipos.forEach((equipo, i) => {
                                 formData.append(`equipos[${i}][CODEP_Codigo]`, equipo.CODEP_Codigo == undefined ? null : equipo.CODEP_Codigo);
                                 formData.append(`equipos[${i}][COTIP_Codigo]`, equipo.COTIP_Codigo);
@@ -419,28 +510,24 @@
                                 formData.append(`equipos[${i}][CODEC_Descripcion_Ficha_Tecnica_Equipo]`, equipo.CODEC_Descripcion_Ficha_Tecnica_Equipo);
                                 formData.append(`equipos[${i}][CODEC_Url_Ficha_Tecnica_Equipo]`, equipo.CODEC_Url_Ficha_Tecnica_Equipo ?? '');
                                 formData.append(`equipos[${i}][CODEC_Archivo_Descripcion_Equipo]`, equipo.CODEC_Archivo_Descripcion_Equipo);
+                                formData.append(`equipos[${i}][CODEC_dcto_porcentaje]`, equipo.CODEC_dcto_porcentaje);
+                                formData.append(`equipos[${i}][CODEC_dcto_importe]`, equipo.CODEC_dcto_importe);
+                                formData.append(`equipos[${i}][CODEC_dcto_subtotal]`, equipo.CODEC_dcto_subtotal);
                                 formData.append(`equipos[${i}][tempFile]`, equipo.archivo === undefined ? null : equipo.archivo);
                             });
+                            formData.append('descuentoPorcentaje', this.DescuentoPorcentaje);
+                            formData.append('descuentoImporte', this.DescuentoImporte);
+                            formData.append('subtotalDescuento', this.SubtotalDescuento);
                             formData.append('subtotal', this.SubTotal);
                             formData.append('igv', this.Igv);
                             formData.append('total', this.Total);
+                            formData.append('COTIC_flag_pedido', this.cotizacion.COTIC_flag_pedido ? 1 : 0);
                             formData.append('_method', 'PUT');
 
                             $('#btn-actualizar-cotizacion-calibracion').attr('disabled', true);
                             $('#btn-actualizar-cotizacion-calibracion > img').css({
                                 'display': 'inline-block'
                             });
-                            // axios.put(url, {
-                            //     id_cotizacion: this.cotizacion.COTIP_Codigo,
-                            //     contacto: this.cotizacion.id_contacto,
-                            //     fecha: this.cotizacion.COTIC_Fecha,
-                            //     numero: this.cotizacion.COTIC_Numero,
-                            //     usuario: this.cotizacion.USUA_Codigo,
-                            //     equipos: this.equipos,
-                            //     subtotal: this.setSubTotal,
-                            //     igv: this.setIgv,
-                            //     total: this.setTotal
-                            // })
                             axios.post(url,
                                 formData, config
                             )
@@ -473,11 +560,20 @@
                     });
                 }
             },
-            listarContactos() {
-                var url = '/contacto/list';
-                axios.get(url).then(response => {
-                    this.contactos = response.data;
-                });
+            seleccionarContacto : async function(){
+                // const response = await axios.get(`/solicitante/contacto/get/${this.solicitanteSelected}`);
+                // this.cotizacion.id_contacto = response.data.id_contacto;
+                if(this.contactos.length == 0){
+                    this.contactoSelected = undefined;
+                    return;
+                }
+                this.cotizacion.id_contacto = this.contactos[0].id_contacto;
+            },
+            mostrarDatosSolicitante: async function() {
+                await this.listarContactos();
+                await this.seleccionarContacto();
+                await this.mostrarDatosContacto();
+                await this.cargarUbigeo();
             },
             listarUsuarios() {
                 var url = '/usuario/list';
@@ -485,11 +581,19 @@
                     this.usuarios = response.data;
                 });
             },
-            listarSolicitantes() {
-                var url = '/solicitante/list';
-                axios.get(url).then(response => {
-                    this.solicitantes = response.data;
-                });
+            listarContactos: async function() {
+                if(this.solicitanteSelected === null || this.solicitanteSelected === '')
+                    return;
+
+                const response = await axios.get(`/contacto/solicitante/list/${this.solicitanteSelected}`);
+                this.contactos = response.data;
+            },
+            listarSolicitantes: async function() {
+                const response = await axios.get('/solicitante/list');
+                this.solicitantes = response.data;
+
+                await this.listarContactos();
+                await this.cargarUbigeo();
             },
             irAListado() {
                 this.mostrarMensajeConfirmacion('¿Está seguro que desea cancelar el registro?', 'Si, cancelar', 'No, permanecer').then((result) => {
@@ -552,11 +656,18 @@
                 let equipo = this.equipos[index];
 				let cantidad = isNaN(parseInt(equipo.CODEC_Cantidad)) ? 0 : parseInt(equipo.CODEC_Cantidad);
 				let costo = isNaN(parseFloat(equipo.CODEC_Costo)) ? 0 : parseFloat(equipo.CODEC_Costo);
+                let subtotal = (cantidad * costo).toFixed(2);
+                let descuento = isNaN(parseFloat(equipo.CODEC_dcto_porcentaje)) ? 0 : parseFloat(equipo.CODEC_dcto_porcentaje);
+                let monto_descuento = (subtotal * descuento) / 100;
+                let subtotal_descontado = descuento > 0 ? (subtotal - monto_descuento).toFixed(2) : subtotal;
+
                 this.equipos[index].CODEC_Costo = this.formatearModeloADecimal(equipo.CODEC_Costo);
-                this.equipos[index].CODEC_SubTotal = isNaN(parseFloat(cantidad * costo)) ? 0 : parseFloat(cantidad * costo);
-                this.setSubTotal();
-                this.setIgv();
-                this.setTotal();
+                this.equipos[index].CODEC_SubTotal = this.formatearModeloADecimal(subtotal);
+                this.equipos[index].CODEC_dcto_porcentaje = this.formatearModeloADecimal(descuento);
+                this.equipos[index].CODEC_dcto_importe = this.formatearModeloADecimal(monto_descuento);
+                this.equipos[index].CODEC_dcto_subtotal = this.formatearModeloADecimal(subtotal_descontado);
+
+                this.calcularTotalFinal();
             },
             formatearModeloADecimal(value) {
 				value = isNaN(parseFloat(value)) ? '0.00' : (parseFloat(value)).toFixed(2);
@@ -568,31 +679,90 @@
             setSubTotal() {
                 var suma = 0;
                 this.equipos.forEach((equipo, index) => {
-					if (isNaN(equipo.CODEC_SubTotal) || equipo.CODEC_SubTotal < 0 || equipo.CODEC_SubTotal == '')
+					if (isNaN(equipo.CODEC_dcto_subtotal) || equipo.CODEC_dcto_subtotal < 0 || equipo.CODEC_dcto_subtotal == '')
 						suma += 0;
 					else
-						suma += parseFloat(equipo.CODEC_SubTotal);
+						suma += parseFloat(equipo.CODEC_dcto_subtotal);
                 });
                 this.SubTotal = (suma).toFixed(2);
             },
+            setDescuento() {
+                let descuentoPorc = isNaN(this.DescuentoPorcentaje) || this.DescuentoPorcentaje === '' ? 0 : parseFloat(this.DescuentoPorcentaje);
+                let montoDescuento = (this.SubTotal * descuentoPorc) / 100;
+                this.DescuentoPorcentaje = (descuentoPorc).toFixed(2);
+                this.DescuentoImporte = (montoDescuento).toFixed(2);
+                this.SubtotalDescuento = descuentoPorc > 0 ? (this.SubTotal - montoDescuento).toFixed(2) : (parseFloat(this.SubTotal)).toFixed(2);
+            },
             setIgv() {
-                this.Igv = (Number(this.SubTotal) * 0.18).toFixed(2);
+                this.Igv = (Number(this.SubtotalDescuento) * 0.18).toFixed(2);
             },
             setTotal() {
-                this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
+                this.Total = (Number(this.SubtotalDescuento) + Number(this.Igv)).toFixed(2);
             },
-            seleccionarSolicitante(){
-                var url = '/contacto/solicitante/get/' + this.cotizacion.id_contacto
-                    axios.get(url).then(response => {
-                        this.solicitanteSelected = response.data.SOLIP_Codigo;
-                    });
+            calcularTotalFinal() {
+                this.setSubTotal();
+                this.setDescuento();
+                this.setIgv();
+                this.setTotal();
             },
-            seleccionarContacto(){
-                var url = '/solicitante/contacto/get/' + this.solicitanteSelected
-                    axios.get(url).then(response => {
-                        this.cotizacion.id_contacto = response.data.id_contacto;
-                    });
+            cargarUbigeo: async function() {
+                const solicitante = this.solicitantes.filter(obj => obj.SOLIP_Codigo == this.solicitanteSelected)[0];
+
+                await this.listarDepartamentos();
+                this.ubigeo.UBIGC_CodDpto = solicitante === undefined ? '' : solicitante.UBIGC_CodDpto;
+                await this.listarProvincias();
+                this.ubigeo.UBIGC_CodProv = solicitante === undefined ? '' : solicitante.UBIGC_CodProv;
+                await this.listarDistritos();
+                this.ubigeo.UBIGC_CodDist = solicitante === undefined ? '' : solicitante.UBIGC_CodDist;
+
+                this.forceRerender();
             },
+            listarDepartamentos : async function() {
+                var url = '/departamento/list';
+                const response = await axios.get(url);
+
+                this.departamentos = response.data;
+
+                this.ubigeo.UBIGC_CodDpto = '';
+                this.ubigeo.UBIGC_CodProv = '';
+                this.ubigeo.UBIGC_CodDist = '';
+            },
+            listarProvincias: async function() {
+                if (this.ubigeo.UBIGC_CodDpto != '') {
+                    var url = `/provincia/${this.ubigeo.UBIGC_CodDpto}/list`;
+                    const response = await axios.get(url);
+                    this.provincias = response.data;
+                } else {
+                    this.provincias = [];
+                    this.distritos = [];
+                }
+
+                this.ubigeo.UBIGC_CodProv = '';
+                this.ubigeo.UBIGC_CodDist = '';
+            },
+            listarDistritos: async function() {
+                if (this.ubigeo.UBIGC_CodProv != '') {
+                    var url = `/distrito/${this.ubigeo.UBIGC_CodDpto}/${this.ubigeo.UBIGC_CodProv}/list`;
+                    const response = await axios.get(url);
+                    this.distritos = response.data;
+                } else{
+                    this.distritos = [];
+                }
+
+                this.ubigeo.UBIGC_CodDist = '';
+            },
+            mostrarDatosContacto() {
+                if(this.cotizacion.id_contacto === '' || this.cotizacion.id_contacto === null || this.cotizacion.id_contacto === undefined){
+                    this.cotizacion.correo_contacto = '';
+                    this.cotizacion.celular_contacto = '';
+                    return;
+                }
+
+                const contacto = this.contactos.filter(obj => obj.id_contacto == this.cotizacion.id_contacto)[0];
+
+                this.cotizacion.correo_contacto = contacto?.correo_contacto;
+                this.cotizacion.celular_contacto = contacto?.celular_contacto;
+            }
         }
     }
 </script>

@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use App\Capacitacion;
 use App\Prueba;
+use App\Cotizacion;
+use App\Capacitacion;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CotizacionCapacitacionController extends Controller
 {
@@ -15,12 +16,12 @@ class CotizacionCapacitacionController extends Controller
         $capacitaciones = Capacitacion::where(
                         ["COTIP_Codigo"=>$id])
                         ->orderBy("COCAP_Codigo")
-                        ->get();   
+                        ->get();
         $objeto = array();
         foreach($capacitaciones as $value){
-            $capacitacion = $value;            
+            $capacitacion = $value;
             array_push($objeto, $capacitacion);
-        }                
+        }
         return $objeto;
     }
 
@@ -30,11 +31,13 @@ class CotizacionCapacitacionController extends Controller
 
     public function delete($id)
     {
-        $result = Capacitacion::where('COCAP_Codigo',$id)->delete();     
+        Capacitacion::where('COTIP_Codigo',$id)->delete();
+        $result  = Cotizacion::find($id)->delete();
+
         if($result)
-            return response()->json(['message'=>'¡La capacitación se actualizó correctamente!']);
+            return response()->json(['message'=>'¡Capacitación eliminada!']);
         else
-            return response()->json(['message'=>'Ocurrio un error']);        
+            return response()->json(['message'=>'Ocurrio un error']);
     }
 
     public function destroy($id)
@@ -45,6 +48,6 @@ class CotizacionCapacitacionController extends Controller
 
     public function destroyById($id){
         Capacitacion::where('COTIP_Codigo',$id)->firstorfail()->delete();
-        return response()->json(['message'=>'Capacitación borrada']); 
+        return response()->json(['message'=>'Capacitación borrada']);
     }
 }

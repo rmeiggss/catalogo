@@ -17,7 +17,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <createcotizacioncapacitacion-component token="{{csrf_token()}}"></createcotizacioncapacitacion-component>
+        <createcotizacioncapacitacion-component
+            token="{{csrf_token()}}"
+            :user="{{ json_encode(Auth::user()) }}"></createcotizacioncapacitacion-component>
       </div>
     </div>
   </div>

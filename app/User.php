@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-   /* 
+   /*
 
     public function authorizeRoles($roles){
         if($this->hasAnyRole($roles)){
@@ -18,11 +18,11 @@ class User extends Authenticatable
         }
         abort(401,'This action is unauthorized');
     }
-    
 
-    * 
 
-    
+    *
+
+
 */
 
 
@@ -32,7 +32,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','ROL_Codigo', 'id'
+        'name',
+        'email',
+        'password',
+        'ROL_Codigo',
+        'id',
+        'flag_activo'
     ];
 
     /**
@@ -71,7 +76,7 @@ class User extends Authenticatable
     {
         return $this->roles->flatten()->pluck('name')->unique();
     }
-    
+
 
     public function hasAnyRole($roles){
         if(is_array($roles)){
@@ -88,12 +93,12 @@ class User extends Authenticatable
         }
         return false;
     }
-    
+
     public function hasRole($role){
         if($this->roles()->where('name',$role)->first()){
             return true;
         }
         return false;
-    } 
+    }
 
 }

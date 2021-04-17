@@ -10,6 +10,7 @@ Route::view('welcome','prueba',['name'=>'Rossmery']);*/
 
 //Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::get('/usuario/list','Admin\UsuarioController@list');
+Route::delete('usuario/{id}', 'Admin\UsuarioController@delete');
 
 Route::get('/solicitante/list','Admin\SolicitanteController@list');
 Route::get('/solicitante/contacto/get/{id}','Admin\SolicitanteController@getContacto');
@@ -22,10 +23,22 @@ Route::get('/tiposolicitante/list','Admin\SolicitanteController@listTiposSolicit
 
 Route::get('/contacto/list','Admin\ContactoController@list');
 Route::get('/contacto/solicitante/get/{id}','Admin\ContactoController@getSolicitante');
+Route::get('/contacto/solicitante/list/{id}','Admin\ContactoController@listBySolicitante');
+Route::post('/contacto','Admin\ContactoController@store');
+Route::put('/contacto','Admin\ContactoController@update');
 
 Route::get('/curso/list','Admin\CursoController@list');
+Route::get('/curso/create', 'Admin\CursoController@create');
+Route::post('/curso', 'Admin\CursoController@store');
+Route::put('/curso', 'Admin\CursoController@update');
+Route::delete('/curso/delete/{id}', 'Admin\CursoController@destroy');
 Route::get('/curso/{id}', 'Admin\CursoController@get');
 Route::get('/curso/{id}/descuento', 'Admin\CursoController@getDescuentos');
+
+Route::post('/descuento', 'Admin\DescuentoController@store');
+Route::delete('/descuento/{id}', 'Admin\DescuentoController@destroy');
+Route::get('/descuento/list', 'Admin\DescuentoController@list');
+
 Route::get('/contacto/{contacto}/get','Admin\ContactoController@get');
 Route::get('/ensayos','WebController@ensayos');
 Route::get('/calibraciones','WebController@calibraciones');
@@ -34,11 +47,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Ruta para crear el pdf
 Route::get('cursos-list-pdf', 'Admin\CursoController@exportPdf')->name('cursos.pdf');
 Route::get('cotizaciones-list-pdf', 'Admin\SolicitanteController@exportPdf')->name('cotizaciones.pdf');
-//Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/authenticate', 'Auth\LoginController@authenticate')->name('authenticate');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::resource('usuario','Admin\UsuarioController');
 
 Route::post('/cotizacion/store', 'Admin\CotizacionController@store');
 Route::get('/cotizacion/list', 'Admin\CotizacionController@list');
+Route::get('/cotizacion/listDatosDashboard', 'Admin\CotizacionController@listDatosDashboard');
 Route::get('/cotizacion/create', 'Admin\CotizacionController@create')->name('createCotizacion');
 Route::get('/cotizacion', 'Admin\CotizacionController@index');
 Route::delete("/cotizacion/delete/{id}","Admin\CotizacionController@delete")->name("delCotizacion");
@@ -77,7 +93,7 @@ Route::resource('contacto','Admin\ContactoController');
 
 Route::post('fileupload','Admin\UploadController@store');
 
-Auth::routes();
+// Auth::routes();
 
 // -------- Rutas de marck --------------------
 
@@ -90,6 +106,7 @@ Route::resource('horario-curso','Admin\HorarioCursoController');
 Route::resource('horario-instructor','Admin\HorarioInstructorController');
 Route::resource('instructor-curso','Admin\CursoInstructorController');
 Route::resource('descuento','Admin\DescuentoController');
+
 // -------- Rutas de diego --------------------
 Route::resource('servicioac','Admin\ServicioAcademicoController');
 
@@ -112,6 +129,8 @@ Route::get('/distrito/{idDepartamento}/{idProvincia}/list','Cliente\UbigeoContro
 Route::post('/cotizacion-ensayo-web/store', 'Cliente\CotizacionController@store');
 Route::post('/cotizacion-calibracion-web/store', 'Cliente\CalibracionController@store');
 Route::post('/cotizacion-capacitacion-web/store', 'Cliente\CapacitacionController@store');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // --------------------------------------------
 

@@ -11,12 +11,13 @@
           <!-- /.login-logo -->
           <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg"><strong>INICIO DE SESION</strong></p>
+                <p class="login-box-msg"><strong>Iniciar Sesión</strong></p>
 
-              <form method="POST" action="{{ route('login') }}">
+              <form method="POST" action="{{ route('authenticate') }}">
+                {{-- <form method="POST"> --}}
                 @csrf
                 <div class="input-group mb-3">
-                
+
                 </div>
                 <div class="input-group mb-3">
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -39,7 +40,7 @@
                     <div class="icheck-primary">
                       <input type="checkbox" name="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                       <label for="remember">
-                        {{ __('Remember Me') }}
+                        {{ __('Recordarme') }}
                       </label>
                     </div>
                   </div>
@@ -52,13 +53,14 @@
               </form>
 
               <!-- /.social-auth-links -->
-
+            @if (!true)
               <p class="mb-1">
                 <a href="{{ route('password.request') }}">{{ __('Olvido su contraseña') }}</a>
               </p>
               <p class="mb-0">
                 <a href="{{ route('register') }}" class="text-center">{{ __('Registrar un nuevo miembro') }}</a>
               </p>
+            @endif
             </div>
             <!-- /.login-card-body -->
           </div>

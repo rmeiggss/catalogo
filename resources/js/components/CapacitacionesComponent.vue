@@ -505,7 +505,6 @@
 					this.mostrarMensajeInformacion('¡Debe ingresar el celular del contacto!', 'warning');
                 } else {
                     var now_date = new Date();
-                    now_date.setHours(now_date.getHours() - 6);
 
                     this.solicitante.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
                     let emailEnvioCotizacion = $('#txt-emails-envio-cotizacion').val().split(',');
@@ -513,12 +512,12 @@
                     {
                         this.mostrarMensajeInformacion('¡Debe ingresar por lo menos un correo electrónico!', 'warning');
                         return false;
-                    }                    
+                    }
                     this.cotizacion.COTIC_Correo1 = (emailEnvioCotizacion[0] != undefined && emailEnvioCotizacion[0] != null) ? emailEnvioCotizacion[0] : '';
                     this.cotizacion.COTIC_Correo2 = (emailEnvioCotizacion[1] != undefined && emailEnvioCotizacion[1] != null) ? emailEnvioCotizacion[1] : '';
                     this.cotizacion.COTIC_Correo3 = (emailEnvioCotizacion[2] != undefined && emailEnvioCotizacion[2] != null) ? emailEnvioCotizacion[2] : '';
                     this.cotizacion.COTIC_Correo4 = (emailEnvioCotizacion[3] != undefined && emailEnvioCotizacion[3] != null) ? emailEnvioCotizacion[3] : '';
-                    this.cotizacion.COTIC_Fecha_Cotizacion = now_date.toJSON().slice(0,10).replace(/-/g,'-');
+                    this.cotizacion.COTIC_Fecha_Cotizacion = moment(new Date()).format('yyyy-MM-DD');
                     this.mostrarMensajeConfirmacion('¿Está seguro de registrar la capacitación?', 'Si, registrar', 'No, cancelar').then((result) => {
                         if (result.isConfirmed) {
                             $('#btn-registrar-cotizacion-capacitacion').attr('disabled', true);

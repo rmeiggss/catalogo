@@ -6,7 +6,7 @@
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row titulo-vista">
-			<h5>Editar Cotización de Capacitación</h5>
+			<h5>Editar Cotización de Capacitación - {{ $cotizacion->COTIP_Codigo}}</h5>
 		</div>
 	</div>
 </section>
@@ -16,7 +16,10 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<editcotizacioncapacitacion-component codigo="{{$cotizacion->COTIP_Codigo}}" token="{{csrf_token()}}"></editcotizacioncapacitacion-component>
+				<editcotizacioncapacitacion-component
+                    codigo="{{$cotizacion->COTIP_Codigo}}"
+                    token="{{csrf_token()}}"
+                    :user="{{ json_encode(Auth::user()) }}"></editcotizacioncapacitacion-component>
 			</div>
 		</div>
 	</div>

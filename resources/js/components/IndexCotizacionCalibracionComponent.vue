@@ -11,8 +11,8 @@
             <thead>
             <tr class="text-center">
               <th scope="col">Codigo</th>
-              <th scope="col">Numero</th>
               <th scope="col">Solicitante</th>
+              <th scope="col">Usuario</th>
               <th scope="col">Fecha</th>
               <th scope="col">Total S/.</th>
               <th scope="col" colspan="2">Acciones</th>
@@ -21,9 +21,8 @@
             <tbody>
               <tr v-for="(cotizacion,indice) of cotizaciones" :key="cotizacion.COTIP_Codigo" class="text-center">
                 <td>{{cotizacion.COTIP_Codigo}}</td>
-                <td>{{cotizacion.COTIC_Numero}}</td>
                 <td>{{cotizacion.SOLIC_Nombre}}</td>
-                <!--td>{{cotizacion.COTIC_Fecha_Cotizacion.split(' ')[0]}}</td-->
+                <td>{{cotizacion.name}}</td>
                 <td>{{cotizacion.COTIC_Fecha_Cotizacion}}</td>
                 <td class="text-right">{{cotizacion.COTIC_Total}}</td>
                 <td>
@@ -69,8 +68,13 @@ export default {
               let _this = this;
               let url = '/cotizacion/delete/'+cotizacion.COTIP_Codigo;
               axios.delete(url).then(function(response){
-                alert(response.data.message);
-                _this.listar();
+                    if (response.data.status !== undefined && response.data.status === 'ERROR') {
+                        Swal.fire({ title: '', text: '"' + response.data.message + '"', icon: 'error', confirmButtonText: 'Aceptar', allowOutsideClick: false });
+                        return;
+                    }
+                    Swal.fire({ title: '', text: '"' + response.data.message + '"', icon: 'success', confirmButtonText: 'Aceptar', allowOutsideClick: false })
+
+                    _this.listar();
               }).catch(function(error){
                 console.log(error);
               });

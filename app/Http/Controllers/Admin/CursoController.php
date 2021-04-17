@@ -36,11 +36,11 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         /* Validacion del Formulario */
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'costo' => 'required'
-        ]);
+        // $request->validate([
+        //     'nombre' => 'required',
+        //     'descripcion' => 'required',
+        //     'costo' => 'required'
+        // ]);
 
         Producto::create([
             'CURSOC_Nombre' => request('nombre'),
@@ -48,14 +48,15 @@ class CursoController extends Controller
             'CURSOC_Costo' => request('costo'),
         ]);
 
-        return Redirect::to("/curso");
+        return response()->json(['¡El curso se guardo con exito!']);
+        // return Redirect::to("/curso");
     }
 
     public function get($id)
     {
         $curso = Producto::where('id_curso', $id)->first();
-        echo $curso;
-    }    
+        return $curso;
+    }
 
     public function show($id)
     {
@@ -71,14 +72,17 @@ class CursoController extends Controller
         return view("admin.curso.edit", ['curso' => $curso]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $producto = Producto::findOrFail($id);
+        $producto = Producto::findOrFail($request->id);
         $producto->CURSOC_Nombre = $request->nombre;
         $producto->CURSOC_Descripcion = $request->descripcion;
         $producto->CURSOC_Costo = $request->costo;
         $producto->save();
-        return Redirect::to("/curso");
+
+        return response()->json(['¡El curso se guardo con exito!']);
+
+        // return Redirect::to("/curso");
     }
 
     public function getDescuentos($id)
@@ -90,6 +94,7 @@ class CursoController extends Controller
     public function destroy($id)
     {
         Producto::destroy($id);
-        return Redirect::to("/curso");
+        return response()->json(['message' =>'¡El curso se elimino con exito!']);
+        // return Redirect::to("/curso");
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="grid-hor">
 
-    <form ref="form" method="POST" :action="computedAction" class="col-sm-10">
+    <form ref="form" method="POST"  class="col-sm-10" @submit.prevent="guardarContacto">
         <input name="_method" type="hidden" value="PATCH">
         <input name="_token" type="hidden" v-model="token">
         <div class="form-group">
@@ -22,7 +22,7 @@
           <label>Celular</label>
           <input type="text" class="form-control" v-model="contacto.celular_contacto" autocomplete="off" name="celular" placeholder="Ingrese el número de celular" maxlength="9">
         </div>
-        <a class="btn btn-info" v-on:click="submit">Editar</a>
+        <button class="btn btn-info" type="submit">Editar</button>
         <a class="btn btn-danger" href="/contacto">Cancelar</a>
     </form>
 
@@ -46,11 +46,6 @@
           this.getContacto(this.codigo);
           this.listarSolicitantes();
         },
-        computed:{
-          computedAction:function(){
-            return '/contacto/'+this.codigo;
-          }
-        },
         methods:{
             listarSolicitantes(){
                 var url = '/solicitante/list';
@@ -65,8 +60,26 @@
                     console.log(this.contacto);
                 });
             },
-            submit() {
-              this.$refs.form.submit();
+            guardarContacto: async function(){
+                try {
+                    let url = "/contacto"
+                    let data = {
+                        id: this.codigo,
+                        solicitante : this.contacto.SOLIP_Codigo,
+                        nombres : this.contacto.nombre_contacto,
+                        correo : this.contacto.correo_contacto,
+                        celular : this.contacto.celular_contacto
+                    }
+
+                    let response = await axios.put(url, data);
+                    Swal.fire({ title: '"' + response.data + '"', icon: 'success', confirmButtonText: 'Aceptar', allowOutsideClick: false })
+                        .then(function() {
+                            location.href = '/contacto';
+                        });
+
+                } catch (error) {
+
+                }
             }
         }
     }

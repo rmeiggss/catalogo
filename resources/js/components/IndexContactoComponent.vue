@@ -4,7 +4,7 @@
         <thead>
         <tr class="text-center">
           <th scope="col">Codigo</th>
-          <th scope="col">Nombres</th>          
+          <th scope="col">Nombres</th>
           <th scope="col">Solicitante</th>
           <th scope="col">Correo</th>
           <th scope="col">Celular</th>
@@ -14,7 +14,7 @@
         <tbody>
           <tr v-for="(contacto,indice) of contactos" :key="contacto.id_contacto" class="text-center">
             <th scope="row">{{contacto.id_contacto}}</th>
-            <td>{{contacto.nombre_contacto}}</td>            
+            <td>{{contacto.nombre_contacto}}</td>
             <td>{{contacto.SOLIC_Nombre}}</td>
             <td>{{contacto.correo_contacto}}</td>
             <td>{{contacto.celular_contacto}}</td>
@@ -51,7 +51,12 @@
             btnBorrar(contacto,indice){
                 var url = '/contacto/'+contacto.id_contacto;
                 axios.delete(url).then(response=>{
-                    //this.result.splice(indice, 1)
+                    if (response.data.status !== undefined && response.data.status === 'ERROR') {
+                        Swal.fire({ title: '', text: '"' + response.data.message + '"', icon: 'error', confirmButtonText: 'Aceptar', allowOutsideClick: false });
+                        return;
+                    }
+                    Swal.fire({ title: '', text: '"' + response.data.message + '"', icon: 'success', confirmButtonText: 'Aceptar', allowOutsideClick: false })
+
                     this.listar();
                 });
             },

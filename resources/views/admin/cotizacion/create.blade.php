@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-
+<link rel="stylesheet" href="{{ asset('css/css-web/jquery.tagsinput.css') }}">
 <!-- Content Header-->
 <section class="content-header">
   <div class="container-fluid">
@@ -17,7 +17,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <createcotizacion-component token="{{csrf_token()}}"></createcotizacion-component>
+        <createcotizacion-component token="{{csrf_token()}}"
+            :user="{{ json_encode(Auth::user()) }}">
+        </createcotizacion-component>
       </div>
     </div>
   </div>

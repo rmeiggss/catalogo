@@ -124,7 +124,7 @@ Universidad Nacional de Ingeniería')
                 alert('no puede ingresar más de 4 correos electrónicos');
             }
         }
-    });    
+    });
 
     $('#ver-emails').on('click', function() {
         let value = $('#txt-emails-envio-cotizacion').val();

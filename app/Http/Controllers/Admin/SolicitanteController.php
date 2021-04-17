@@ -18,8 +18,9 @@ class SolicitanteController extends Controller
     public function list(){
         $solicitantes = Solicitante
         ::join('tiposolicitante','tiposolicitante.TIPSOLIP_Codigo','=','solicitante.TIPSOLIP_Codigo')
-        ->select()
-        ->orderBy('SOLIP_Codigo', 'ASC')
+        ->join('ubigeo', 'ubigeo.UBIGP_Codigo', 'solicitante.UBIGP_Codigo')
+        ->select('solicitante.*', 'tiposolicitante.*', 'ubigeo.UBIGC_CodDist', 'ubigeo.UBIGC_CodDpto', 'ubigeo.UBIGC_CodProv')
+        ->orderBy('solicitante.SOLIP_Codigo', 'ASC')
         ->get();
 
         return $solicitantes;

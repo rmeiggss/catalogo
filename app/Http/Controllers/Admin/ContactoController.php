@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Contacto;
+use App\Cotizacion;
 use App\Role;
 use Illuminate\Http\Request;
 use Redirect;
@@ -20,7 +21,19 @@ class ContactoController extends Controller
     }
 
     public function list(){
-        $contactos = Contacto::join('solicitante','solicitante.SOLIP_Codigo','=','contacto.SOLIP_Codigo')->select()->get();
+        $contactos = Contacto
+        ::join('solicitante','solicitante.SOLIP_Codigo','=','contacto.SOLIP_Codigo')
+        ->select()
+        ->get();
+        return $contactos;
+    }
+    public function listBySolicitante($id){
+        $contactos = Contacto
+        // ::join('solicitante','solicitante.SOLIP_Codigo','=','contacto.SOLIP_Codigo')
+        ::select()
+        ->where('contacto.SOLIP_Codigo', $id)
+        ->get();
+
         return $contactos;
     }
 
@@ -48,7 +61,7 @@ class ContactoController extends Controller
             'correo_contacto'  => $request->correo,
             'celular_contacto' => $request->celular
         ]);
-        return Redirect::to("/contacto");
+        return response()->json(['¡El contacto se guardó correctamente!']);
     }
 
     /**
@@ -85,15 +98,18 @@ class ContactoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $contacto = Contacto::findOrFail($id);
+        $contacto = Contacto::findOrFail($request->id);
+
         $contacto->SOLIP_Codigo     = $request->solicitante;
-        $contacto->nombre_contacto  = $request->nombre;
+        $contacto->nombre_contacto  = $request->nombres;
         $contacto->correo_contacto  = $request->correo;
         $contacto->celular_contacto = $request->celular;
+
         $contacto->save();
-        return Redirect::to("/contacto");
+
+        return response()->json(['¡El contacto se guardó correctamente!']);
     }
 
     /**
@@ -104,8 +120,17 @@ class ContactoController extends Controller
      */
     public function destroy($id)
     {
+        $cotizacion = Cotizacion::where('id_contacto', $id)
+                        ->first();
+        if($cotizacion != null){
+            return response()->json([
+                'message' => 'El contacto ya tiene una o mas cotizaciones, no se puede eliminar.',
+                'status' => 'ERROR'
+            ]);
+        }
+
         Contacto::destroy($id);
-        return response()->json(['message'=>'Contacto borrado']);
+        return response()->json(['message'=>'Contacto eliminado!']);
     }
 
 

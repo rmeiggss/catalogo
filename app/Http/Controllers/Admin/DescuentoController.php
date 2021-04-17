@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Descuento;
-use App\Producto;
-use Illuminate\Http\Request;
 use Redirect;
+use App\Producto;
+use App\Descuento;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class DescuentoController extends Controller
 {
@@ -16,9 +18,9 @@ class DescuentoController extends Controller
      */
     public function index()
     {
-  /*       $descuentos = descuentos::latest()->paginate(8); */
+        /*       $descuentos = descuentos::latest()->paginate(8); */
         $descuentos = Descuento::all();
-        $descuentos = Descuento::join('curso','curso.id_curso','=','descuentos.id_curso')->select()->get();
+        $descuentos = Descuento::join('curso', 'curso.id_curso', '=', 'descuentos.id_curso')->select()->get();
         return view('admin.descuento.index', compact('descuentos'));
     }
 
@@ -42,22 +44,21 @@ class DescuentoController extends Controller
      */
     public function store(Request $request)
     {
-        /* Validacion del Formulario */
-        $request->validate([
-            'nombre' => 'required',
-            'cant_min' => 'required',
-            'cant_max' => 'required',
-            'descuento' => 'required'
-        ]);
+        $descuento_curso = Descuento::where('id_curso', $request->id_curso);
+        if($descuento_curso != null){
+            $descuento_curso->delete();
+        }
 
-        Descuento::create([
-            'id_curso' => request('nombre'),
-            'cantidad_min' => request('cant_min'),
-            'cantidad_max' => request('cant_max'),
-            'descuento' => request('descuento'),
-        ]);
+        foreach ($request->detalleDescuentos as $key => $value) {
+            Descuento::create([
+                'id_curso' => $value["id_curso"],
+                'cantidad_min' => $value["cantidad_min"],
+                'cantidad_max' => $value["cantidad_max"],
+                'descuento' => $value["descuento"],
+            ]);
+        }
 
-        return Redirect::to("/descuento");
+        return response()->json(['¡El descuento se guardo con exito!']);
     }
 
     /**
@@ -79,10 +80,10 @@ class DescuentoController extends Controller
      */
     public function edit($id)
     {
-        $productos = Producto::pluck('CURSOC_Nombre', 'id_curso');
-        $descuento = Descuento::findOrFail($id);   
-            
-        return view("admin.descuento.edit", ['descuento' => $descuento, 'productos'=>$productos]);
+        $productos = Producto::findOrFail($id);
+        // $descuento = Descuento::findOrFail($id);
+
+        return view("admin.descuento.edit", ['curso' => $productos]);
     }
 
     /**
@@ -114,7 +115,18 @@ class DescuentoController extends Controller
      */
     public function destroy($id)
     {
-        Descuento::destroy($id);
-        return Redirect::to("/descuento");
+        Descuento::where('id_curso',$id)
+            ->delete();
+        return response()->json(['message' =>'¡Los descuentos se eliminaron con exito!']);
+        // return Redirect::to("/descuento");
+    }
+
+    public function list()
+    {
+        $descuento = Descuento::leftJoin('curso', 'curso.id_curso', '=', 'descuentos.id_curso')
+            ->select('curso.id_curso', 'curso.CURSOC_Nombre', DB::raw('count(0) as cantidad_descuentos'))
+            ->groupBy('curso.id_curso', 'curso.CURSOC_Nombre')
+            ->get();
+        return $descuento;
     }
 }

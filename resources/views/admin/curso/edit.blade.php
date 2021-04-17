@@ -14,7 +14,14 @@
 </section>
 
 <section class="content">
-  <div class="grid-hor">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <curso-component token="{{csrf_token()}}" :tipo=1 :id={{$curso->id_curso}}></curso-component>
+            </div>
+        </div>
+    </div>
+  {{--  <div class="grid-hor">
 
       {!!Form::model($curso, ['route'=>['curso.update', $curso->id_curso],'method'=>'PATCH', 'class'=>'col-sm-10'])!!}
 
@@ -35,7 +42,7 @@
       <a class="btn btn-danger" href="{{ route('curso.index') }}">Cancelar</a>
 
       {!!Form::close()!!}
-  </div>
+  </div>  --}}
 </section>
 
 @endsection

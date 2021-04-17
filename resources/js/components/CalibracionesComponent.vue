@@ -540,9 +540,6 @@
                             };
                             let formData = new FormData();
 
-                            var now_date = new Date();
-                            now_date.setHours(now_date.getHours() - 6);
-
                             /*solicitante */
                             formData.append('solicitante[SOLIC_Direccion]', this.solicitante.SOLIC_Direccion);
                             formData.append('solicitante[SOLIC_Email]', this.solicitante.SOLIC_Email);
@@ -562,7 +559,7 @@
                             formData.append('cotizacion[COTIC_Correo2]', this.cotizacion.COTIC_Correo2);
                             formData.append('cotizacion[COTIC_Correo3]', this.cotizacion.COTIC_Correo3);
                             formData.append('cotizacion[COTIC_Correo4]', this.cotizacion.COTIC_Correo4);
-                            formData.append('cotizacion[COTIC_Fecha_Cotizacion]', now_date.toJSON().slice(0,10).replace(/-/g,'-'));
+                            formData.append('cotizacion[COTIC_Fecha_Cotizacion]', moment(new Date()).format('yyyy-MM-DD'));
 
                             /*equipos */
                             this.equipos.forEach((equipo, i) => {
