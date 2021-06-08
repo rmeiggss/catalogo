@@ -61,6 +61,7 @@ Route::delete("/cotizacion/delete/{id}","Admin\CotizacionController@delete")->na
 Route::get('/cotizacion/{cotizacion}/get','Admin\CotizacionController@get');
 Route::get('/cotizacion/{cotizacion}/edit','Admin\CotizacionController@edit');
 Route::put("/cotizacion/update",'Admin\CotizacionController@update')->name('updateCotizacion');
+Route::get('/cotizacion/download/{id}', 'Admin\CotizacionController@downloadFileEquipo');
 
 Route::get('/cotizaciondetalle/{cotizacion}/list','Admin\CotizacionDetalleController@list');
 Route::delete('/cotizaciondetalle/delete/{id}','Admin\CotizacionDetalleController@delete');
@@ -86,6 +87,7 @@ Route::get('/prueba/{codprueba}/get', 'Admin\PruebaController@get');
 Route::post('/prueba/store', 'Admin\PruebaController@store');
 Route::delete("/prueba/delete/{id}","Admin\PruebaController@delete")->name("delPrueba");
 Route::put("/prueba/update",'Admin\PruebaController@update')->name('updatePrueba');
+Route::get('/prueba/download/{id}', 'Admin\CotizacionController@downloadFilePrueba');
 
 Route::resource('categoria','Admin\CategoriaController');
 Route::resource('solicitante','Admin\SolicitanteController');

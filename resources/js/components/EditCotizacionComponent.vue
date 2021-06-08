@@ -158,8 +158,8 @@
                                 </td>
 
                                 <td>
-                                    <input type="text" class="form-control-sm w-100 text-right" name="unitario[]"
-                                        v-model.number="equipo.CODEC_Costo" autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusout="realizarCalculosDeEnsayo(index)" />
+                                    <input type="text" class="form-control-sm w-100 text-right" name="unitario" ref="unitario"
+                                        v-model.number="equipo.CODEC_Costo" autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusin="capturarCosto(index)" @focusout="cambiarFlagCostoEquipo(index); realizarCalculosDeEnsayo(index)" />
                                 </td>
                                 <td>
                                     <input type="text" class="form-control-sm w-100 text-right" name="cantidad[]"
@@ -271,8 +271,7 @@
                                 <div class="col-md-3">Archivo (Descripción de equipo)</div>
                                 <div class="col-md-9">
                                     <input type="file" class="form-control" id="archivoFichaTecnica" />
-                                    <!-- <p class="font-weight-bold" id="filePath">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p> -->
-                                    <p class="font-weight-bold">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p>
+                                    <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFileEquipo()">{{equipo.nombre_archivo}}</a></p>
                                 </div>
                             </div>
                         </div>
@@ -315,8 +314,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="file" id="file" ref="file" v-on:change="onChangeFileUpload()">
-                                    <!-- <p class="font-weight-bold" id="filePathPruebas">{{prueba.Arch_Norma_Tecnica}}</p> -->
-                                    <p class="font-weight-bold">{{prueba.Arch_Norma_Tecnica}}</p>
+                                    <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFilePruebas();">{{prueba.nombre_archivo}}</a> </p>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -385,6 +383,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" @click="updateEquipo()">
                             Aceptar&nbsp;&nbsp;<i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" @click="cancelUpdateEquipo()">
+                            Cancelar&nbsp;&nbsp;<i class="fa fa-ban" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
@@ -462,7 +463,21 @@
             getEquipos(id) {
                 var url = '/cotizaciondetalle/' + id + '/list';
                 axios.get(url).then(response => {
-                    this.equipos = response.data;
+                    let equiposResponse = response.data;
+                    for (let index = 0; index < equiposResponse.length; index++) {
+                        equiposResponse[index].flagCostoPrueba = false;
+                        equiposResponse[index].flagCostoEquipo = false;
+
+                        //artificio para saber si tiene flagcostoprueba o flahcostoequipo
+                        if(equiposResponse[index].pruebas.length > 0
+                            && equiposResponse[index].pruebas.filter(p => Number(p.Costo) !== 0).length != 0){
+                                equiposResponse[index].flagCostoPrueba = true;
+                            }
+                        else if (Number(equiposResponse[index].CODEC_Costo) !== 0){
+                            equiposResponse[index].flagCostoEquipo = true;
+                        }
+                    }
+                    this.equipos = equiposResponse;
                 }).catch(error => {
                     console.log(error);
                 });
@@ -482,7 +497,10 @@
                     CODEC_dcto_porcentaje: "0.00",
                     CODEC_dcto_importe: "0.00",
                     CODEC_dcto_subtotal: "0.00",
-                    pruebas: []
+                    pruebas: [],
+                    flagCostoPrueba: false,
+                    flagCostoEquipo: false,
+                    CODEC_Costo_anterior: "0.00"
                 };
                 this.equipos.push(fila);
             },
@@ -504,28 +522,40 @@
                 $('#archivoFichaTecnica').val('');
             },
             updateEquipo() {
-                var pruebasConCosto = true;
-                var totalCostoPruebas = 0;
-                if (this.equipo.pruebas.length > 0)
+                let totalCostoPruebas = 0;
+                this.equipo.pruebas.forEach(e => {
+                    totalCostoPruebas += e.Costo !== undefined ? parseFloat(e.Costo) : '0.00';
+                });
+                this.equipo.flagCostoPrueba = false;
+
+                if (this.equipo.pruebas.length > 0 && !this.equipo.flagCostoEquipo)
                 {
-                    let i;
-                    for (i = 0; i< this.equipo.pruebas.length; i++)
-                    {
-                        if (this.equipo.pruebas[i].Costo !== undefined && parseFloat(this.equipo.pruebas[i].Costo) != 0)
-                            totalCostoPruebas += parseFloat(this.equipo.pruebas[i].Costo);
-                        else
-                        {
-                            pruebasConCosto = false;
-                            break;
-                        }
+                    if(!this.equipo.flagCostoEquipo && totalCostoPruebas !== 0){
+                        this.equipo.flagCostoPrueba = true;
+                    }else{
+                        this.equipo.flagCostoPrueba = false;
                     }
                 }
+
+                if(!this.equipo.flagCostoPrueba && Number(totalCostoPruebas) == 0 && !this.equipo.flagCostoEquipo){
+                    this.equipos[this.idxEquipo].CODEC_Costo = (totalCostoPruebas).toFixed(2);
+                }
+
+                this.equipos[this.idxEquipo].CODEC_Costo = this.equipo.flagCostoPrueba ? (totalCostoPruebas).toFixed(2) : this.equipos[this.idxEquipo].CODEC_Costo;
                 this.equipos[this.idxEquipo] = this.equipo;
-                this.equipos[this.idxEquipo].CODEC_Costo = (pruebasConCosto) ? (totalCostoPruebas).toFixed(2) : '0.00';
                 this.realizarCalculosDeEnsayo(this.idxEquipo);
                 this.equipo = {};
                 this.idxEquipo = null;
                 this.idxPrueba = null;
+                $('#modal-pruebas').modal('hide');
+            },
+            cancelUpdateEquipo() {
+                this.prueba = {};
+                this.pruebas = [];
+                this.equipo = {};
+                this.idxEquipo = null;
+                this.idxPrueba = null;
+                $('#file').val('');
                 $('#modal-pruebas').modal('hide');
             },
             updateFichaEquipo() {
@@ -547,6 +577,8 @@
                 if(fileUploadedArray.length > 0){
                     this.equipo.archivo = fileUploadedArray[0];
                     this.equipo.CODEC_Archivo_Descripcion_Equipo = fileUploadedArray[0].name;
+                    this.equipo.nombre_archivo = fileUploadedArray[0].name;
+                    this.equipo.nuevoArchivo = true;
 
                     this.equipos[this.idxEquipo] = this.equipo;
                     this.equipo = {};
@@ -598,7 +630,10 @@
                 this.$refs.descripcion_prueba.focus();
             },
             validatePrueba(tipoOperacion) {
-                if (typeof this.prueba.Descripcion_Prueba === 'undefined' || this.prueba.Descripcion_Prueba.trim() == '') {
+                if(this.equipo.flagCostoEquipo && ( typeof this.prueba.Costo !== 'undefined' && parseFloat(this.prueba.Costo) !== 0) ){
+                    this.mostrarMensajeInformacion('Ya se ingreso un valor en el costo del equipo', 'warning');
+                    return false;
+                } else if (typeof this.prueba.Descripcion_Prueba === 'undefined' || this.prueba.Descripcion_Prueba.trim() == '') {
                     this.$refs.descripcion_prueba.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la descripción de la prueba!', 'warning');
                     return false;
@@ -609,23 +644,6 @@
                 } else if (this.equipo.pruebas.length > 0) {
                     if (tipoOperacion == 'actualiza' && this.equipo.pruebas.length == 1)
                         return true;
-
-                    if ($(this.equipo.pruebas).filter((i, prueba) => prueba.Costo !== undefined && parseFloat(prueba.Costo) != 0).length != 0 )
-                    {
-                        if (this.prueba.Costo === undefined || this.prueba.Costo === '' || parseFloat(this.prueba.Costo) == 0)
-                        {
-                            this.mostrarMensajeInformacion('¡Las pruebas agregadas tienen costo! Por favor, ingrese un costo para esta prueba!', 'warning');
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        if (this.prueba.Costo !== undefined && this.prueba.Costo !== '' && parseFloat(this.prueba.Costo) != 0)
-                        {
-                            this.mostrarMensajeInformacion('¡Las pruebas agregadas no tienen costo! Por favor, no ingrese un costo para esta prueba!', 'warning');
-                            return false;
-                        }
-                    }
                 }
                 return true;
             },
@@ -649,6 +667,8 @@
                     if(fileUploadedArray.length > 0){
                         fila.archivo = fileUploadedArray[0];
                         fila.Arch_Norma_Tecnica = fileUploadedArray[0].name;
+                        fila.nombre_archivo = fileUploadedArray[0].name,
+                        prueba.nuevoArchivo = true;
 
                         equipoActual.pruebas.push(fila);
                         this.$refs.descripcion_prueba.focus();
@@ -682,10 +702,13 @@
                     if(fileUploadedArray.length > 0){
                         prueba.archivo = fileUploadedArray[0];
                         prueba.Arch_Norma_Tecnica = fileUploadedArray[0].name;
+                        prueba.nombre_archivo = fileUploadedArray[0].name;
+                        prueba.nuevoArchivo = true;
 
                         $("#file").val('');
 
                         fileUploadedArray = [];
+                        prueba.nuevoArchivo = true;
                     }
                 }
             },
@@ -1042,9 +1065,76 @@
 
                 this.cotizacion.correo_contacto = contacto?.correo_contacto;
                 this.cotizacion.celular_contacto = contacto?.celular_contacto;
+            },
+            downloadFileEquipo: async function(){
+                if(this.equipo.nuevoArchivo){
+                    this.downloadBlob(this.equipo.archivo, this.equipo.archivo.name);
+                }else{
+                    var url = `/cotizacion/download/${this.equipo.CODEP_Codigo}`;
+                    const response = await axios({ url: url, method: 'GET', responseType: 'blob'});
+
+                    this.downloadFile(response, this.equipo.nombre_archivo);
+                }
+            },
+            downloadFilePruebas: async function(){
+                if(this.prueba.nuevoArchivo){
+                    this.downloadBlob(this.prueba.archivo, this.prueba.archivo.name);
+                }else{
+                    var url = `/prueba/download/${this.prueba.id_prueba_a_realizar}`;
+                    const response = await axios({ url: url, method: 'GET', responseType: 'blob'});
+
+                    this.downloadFile(response, this.prueba.nombre_archivo);
+                }
+            },
+            downloadFile(response, filename) {
+                var newBlob = new Blob([response.data], {type: response.headers['content-type']})
+
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(newBlob)
+                    return
+                }
+                this.downloadBlob(newBlob, filename);
+            },
+            downloadBlob(blob, name = 'object') {
+                const blobUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+
+                link.href = blobUrl;
+                link.download = name;
+
+                document.body.appendChild(link);
+
+                link.dispatchEvent(
+                    new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                    })
+                );
+
+                document.body.removeChild(link);
+            },
+            cambiarFlagCostoEquipo(index) {
+                let equipo = this.equipos[index];
+                if(equipo.CODEC_Costo === equipo.CODEC_Costo_anterior){
+                    return;
+                }
+                if (equipo.flagCostoPrueba) {
+                    equipo.CODEC_Costo = equipo.CODEC_Costo_anterior;
+                    this.mostrarMensajeInformacion('¡No se puede cambiar el costo del equipo si ya se ingreso costo a las pruebas!', 'warning');
+                    return;
+                }
+
+                if(Number(equipo.CODEC_Costo) === 0){
+                    equipo.flagCostoEquipo = false;
+                }else{
+                    equipo.flagCostoEquipo = true;
+                }
+            },
+            capturarCosto(index){
+                this.equipos[index].CODEC_Costo_anterior = this.equipos[index].CODEC_Costo;
             }
         }
     }
 </script>
-
-

@@ -18,10 +18,29 @@ class CotizacionDetalleController extends Controller
                         ->get();
         $objeto = array();
         foreach($equipos as $value){
-            // echo($value);
             $equipo = $value;
-            // $equipo->archivoCargado = [];
-            $equipo->pruebas = CotizacionDetalle::find($value->CODEP_Codigo)->pruebas;
+            // $equipo->pruebas = CotizacionDetalle::find($value->CODEP_Codigo)->pruebas;
+            $pruebas = CotizacionDetalle::find($value->CODEP_Codigo)->pruebas;
+
+            $pruebas_object = array();
+            foreach ($pruebas as $value2) {
+                $prueba = $value2;
+
+                if(file_exists($value2->Arch_Norma_Tecnica)){
+                    $prueba->nombre_archivo = basename($value2->Arch_Norma_Tecnica);
+                }else{
+                    $prueba->nombre_archivo = null;
+                }
+                array_push($pruebas_object, $prueba);
+            }
+
+            $equipo->pruebas = $pruebas_object;
+
+            if(file_exists($value->CODEC_Archivo_Descripcion_Equipo)){
+                $equipo->nombre_archivo = basename($value->CODEC_Archivo_Descripcion_Equipo);
+            }else{
+                $equipo->nombre_archivo = null;
+            }
 
             array_push($objeto,$equipo);
         }

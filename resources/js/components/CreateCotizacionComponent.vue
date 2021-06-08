@@ -150,8 +150,8 @@
                                         @click="openListPruebas(index)" title="Agregar prueba al equipo"><i class="fa fa-filter" aria-hidden="true"></i></button>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control-sm w-100 text-right" name="unitario[]"
-                                        v-model.number="equipo.CODEC_Costo" autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusout="realizarCalculosDeEnsayo(index)" />
+                                    <input type="text" class="form-control-sm w-100 text-right" name="unitario" ref="unitario"
+                                        v-model.number="equipo.CODEC_Costo" autocomplete="off" @keypress="restringirSoloNumerosDecimales($event)" @focusin="capturarCosto(index)" @focusout="cambiarFlagCostoEquipo(index); realizarCalculosDeEnsayo(index)" />
                                 </td>
                                 <td>
                                     <input type="text" class="form-control-sm w-100 text-right" name="cantidad[]"
@@ -264,8 +264,7 @@
                                 <div class="col-md-3">Archivo (Descripción de equipo)</div>
                                 <div class="col-md-9">
                                     <input type="file" class="form-control" id="archivoFichaTecnica" />
-                                    <!-- <p class="font-weight-bold" id="filePath">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p> -->
-                                    <p class="font-weight-bold">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p>
+                                    <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFileEquipo();">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</a></p>
                                 </div>
                             </div>
                         </div>
@@ -307,8 +306,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="file" id="file" ref="file" >
-                                    <!-- <p class="font-weight-bold" id="filePathPruebas">{{prueba.Arch_Norma_Tecnica}}</p> -->
-                                    <p class="font-weight-bold">{{prueba.Arch_Norma_Tecnica}}</p>
+                                    <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFilePruebas();">{{prueba.Arch_Norma_Tecnica}}</a> </p>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -322,7 +320,7 @@
                                     <label class="col-form-label col-form-label-sm">Costo:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input class="form-control costo-prueba" ref="costo_prueba" v-model="prueba.Costo" @keypress="restringirSoloNumerosDecimales($event)" @focusout="formatearDecimales($event, $event.target)" />
+                                    <input class="form-control costo-prueba" ref="costo_prueba" v-model="prueba.Costo" @keypress="restringirSoloNumerosDecimales($event)" @focusout="formatearDecimales($event, $event.target);" />
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -378,6 +376,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" @click="updateEquipo()">
                             Aceptar&nbsp;&nbsp;<i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" @click="cancelUpdateEquipo()">
+                            Cancelar&nbsp;&nbsp;<i class="fa fa-ban" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
@@ -453,15 +454,18 @@
                     CODEC_Descripcion_Equipo: "",
                     CODEC_Fabricante_Equipo: "",
                     CODEC_Cantidad: "",
-                    CODEC_Costo: "",
-                    CODEC_SubTotal: "",
+                    CODEC_Costo: "0.00",
+                    CODEC_SubTotal: "0.00",
                     CODEC_Descripcion_Ficha_Tecnica_Equipo: "",
                     CODEC_Url_Ficha_Tecnica_Equipo: "",
                     CODEC_Archivo_Descripcion_Equipo: "",
                     CODEC_dcto_porcentaje: "0.00",
                     CODEC_dcto_importe: "0.00",
                     CODEC_dcto_subtotal: "0.00",
-                    pruebas: []
+                    pruebas: [],
+                    flagCostoPrueba: false,
+                    flagCostoEquipo: false,
+                    CODEC_Costo_anterior: "0.00"
                 };
                 this.equipos.push(fila);
             },
@@ -484,28 +488,40 @@
                 $('#archivoFichaTecnica').val('');
             },
             updateEquipo() {
-                var pruebasConCosto = true;
-                var totalCostoPruebas = 0;
-                if (this.equipo.pruebas.length > 0)
+                let totalCostoPruebas = 0;
+                this.equipo.pruebas.forEach(e => {
+                    totalCostoPruebas += e.Costo !== undefined ? parseFloat(e.Costo) : '0.00';
+                });
+                this.equipo.flagCostoPrueba = false;
+
+                if (this.equipo.pruebas.length > 0 && !this.equipo.flagCostoEquipo)
                 {
-                    let i;
-                    for (i = 0; i< this.equipo.pruebas.length; i++)
-                    {
-                        if (this.equipo.pruebas[i].Costo !== undefined && parseFloat(this.equipo.pruebas[i].Costo) != 0)
-                            totalCostoPruebas += parseFloat(this.equipo.pruebas[i].Costo);
-                        else
-                        {
-                            pruebasConCosto = false;
-                            break;
-                        }
+                    if(!this.equipo.flagCostoEquipo && totalCostoPruebas !== 0){
+                        this.equipo.flagCostoPrueba = true;
+                    }else{
+                        this.equipo.flagCostoPrueba = false;
                     }
                 }
+
+                if(!this.equipo.flagCostoPrueba && Number(totalCostoPruebas) == 0 && !this.equipo.flagCostoEquipo){
+                    this.equipos[this.idxEquipo].CODEC_Costo = (totalCostoPruebas).toFixed(2);
+                }
+
+                this.equipos[this.idxEquipo].CODEC_Costo = this.equipo.flagCostoPrueba ? (totalCostoPruebas).toFixed(2) : this.equipos[this.idxEquipo].CODEC_Costo;
                 this.equipos[this.idxEquipo] = this.equipo;
-                this.equipos[this.idxEquipo].CODEC_Costo = (pruebasConCosto) ? (totalCostoPruebas).toFixed(2) : '0.00';
                 this.realizarCalculosDeEnsayo(this.idxEquipo);
                 this.equipo = {};
                 this.idxEquipo = null;
                 this.idxPrueba = null;
+                $('#modal-pruebas').modal('hide');
+            },
+            cancelUpdateEquipo() {
+                this.prueba = {};
+                this.pruebas = [];
+                this.equipo = {};
+                this.idxEquipo = null;
+                this.idxPrueba = null;
+                $('#file').val('');
                 $('#modal-pruebas').modal('hide');
             },
             updateFichaEquipo() {
@@ -568,7 +584,10 @@
                 this.$refs.descripcion_prueba.focus();
             },
             validatePrueba(tipoOperacion) {
-                if (typeof this.prueba.Descripcion_Prueba === 'undefined' || this.prueba.Descripcion_Prueba.trim() == '') {
+                if(this.equipo.flagCostoEquipo && ( typeof this.prueba.Costo !== 'undefined' && parseFloat(this.prueba.Costo) !== 0) ){
+                    this.mostrarMensajeInformacion('Ya se ingreso un valor en el costo del equipo', 'warning');
+                    return false;
+                } else if (typeof this.prueba.Descripcion_Prueba === 'undefined' || this.prueba.Descripcion_Prueba.trim() == '') {
                     this.$refs.descripcion_prueba.focus();
                     this.mostrarMensajeInformacion('¡Debe ingresar la descripción de la prueba!', 'warning');
                     return false;
@@ -579,23 +598,6 @@
                 } else if (this.equipo.pruebas.length > 0) {
                     if (tipoOperacion == 'actualiza' && this.equipo.pruebas.length == 1)
                         return true;
-
-                    if ($(this.equipo.pruebas).filter((i, prueba) => prueba.Costo !== undefined && parseFloat(prueba.Costo) != 0).length != 0 )
-                    {
-                        if (this.prueba.Costo === undefined || this.prueba.Costo === '' || parseFloat(this.prueba.Costo) == 0)
-                        {
-                            this.mostrarMensajeInformacion('¡Las pruebas agregadas tienen costo! Por favor, ingrese un costo para esta prueba!', 'warning');
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        if (this.prueba.Costo !== undefined && this.prueba.Costo !== '' && parseFloat(this.prueba.Costo) != 0)
-                        {
-                            this.mostrarMensajeInformacion('¡Las pruebas agregadas no tienen costo! Por favor, no ingrese un costo para esta prueba!', 'warning');
-                            return false;
-                        }
-                    }
                 }
                 return true;
             },
@@ -696,6 +698,9 @@
                 } else if ($(this.equipos).filter((i, equipo) => (equipo.CODEC_Cantidad == '' || equipo.CODEC_Cantidad == 0)).length != 0) {
 					this.mostrarMensajeInformacion('¡Debe ingresar la cantidad en todos los equipos!', 'warning');
                 } else {
+                    // this.equipos.forEach(equipo => {
+                    //     // if(equipo.flagCostoEquipo && )
+                    // });
                     this.mostrarMensajeConfirmacion('¿Está seguro de registrar la cotización?', 'Si, registrar', 'No, cancelar').then((result) => {
                         if (result.isConfirmed) {
                             this.cotizacion.UBIGP_Codigo = this.ubigeo.UBIGC_CodDpto + this.ubigeo.UBIGC_CodProv + this.ubigeo.UBIGC_CodDist;
@@ -985,6 +990,52 @@
 
                 this.cotizacion.correo_contacto = contacto?.correo_contacto;
                 this.cotizacion.celular_contacto = contacto?.celular_contacto;
+            },
+            downloadFileEquipo() {
+                this.downloadBlob(this.equipo.archivo, this.equipo.archivo.name);
+            },
+            downloadFilePruebas(){
+                this.downloadBlob(this.prueba.archivo, this.prueba.archivo.name);
+            },
+            downloadBlob(blob, name = 'object') {
+                const blobUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+
+                link.href = blobUrl;
+                link.download = name;
+
+                document.body.appendChild(link);
+
+                link.dispatchEvent(
+                    new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                    })
+                );
+
+                document.body.removeChild(link);
+            },
+            cambiarFlagCostoEquipo(index) {
+                let equipo = this.equipos[index];
+                if(equipo.CODEC_Costo === equipo.CODEC_Costo_anterior){
+                    return;
+                }
+                if (equipo.flagCostoPrueba) {
+                    equipo.CODEC_Costo = equipo.CODEC_Costo_anterior;
+                    this.mostrarMensajeInformacion('¡No se puede cambiar el costo del equipo si ya se ingreso costo a las pruebas!', 'warning');
+                    return;
+                }
+
+                if(Number(equipo.CODEC_Costo) === 0){
+                    equipo.flagCostoEquipo = false;
+                }else{
+                    equipo.flagCostoEquipo = true;
+                }
+            },
+            capturarCosto(index){
+                this.equipos[index].CODEC_Costo_anterior = this.equipos[index].CODEC_Costo;
             }
         }
     }

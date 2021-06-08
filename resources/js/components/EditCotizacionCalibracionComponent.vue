@@ -259,8 +259,7 @@
                                 <div class="col-md-3">Archivo (Descripción de equipo)</div>
                                 <div class="col-md-9">
                                     <input type="file" class="form-control" id="archivoFichaTecnica" />
-                                    <!-- <p class="font-weight-bold" id="filePath">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p> -->
-                                    <p class="font-weight-bold">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p>
+                                    <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFileEquipo()">{{equipo.nombre_archivo}}</a></p>
                                 </div>
                             </div>
                         </div>
@@ -391,6 +390,9 @@
                 if(fileUploadedArray.length > 0){
                     this.equipo.archivo = fileUploadedArray[0];
                     this.equipo.CODEC_Archivo_Descripcion_Equipo = fileUploadedArray[0].name;
+                    this.equipo.nombre_archivo = fileUploadedArray[0].name;
+                    this.equipo.nuevoArchivo = true;
+
                     this.equipos[this.idxEquipo] = this.equipo;
                     this.equipo = {};
                     this.idxEquipo = null;
@@ -762,7 +764,46 @@
 
                 this.cotizacion.correo_contacto = contacto?.correo_contacto;
                 this.cotizacion.celular_contacto = contacto?.celular_contacto;
-            }
+            },
+            downloadFileEquipo: async function(){
+                if(this.equipo.nuevoArchivo){
+                    this.downloadBlob(this.equipo.archivo, this.equipo.archivo.name);
+                }else{
+                    var url = `/cotizacion/download/${this.equipo.CODEP_Codigo}`;
+                    const response = await axios({ url: url, method: 'GET', responseType: 'blob'});
+
+                    this.downloadFile(response, this.equipo.nombre_archivo);
+                }
+            },
+            downloadFile(response, filename) {
+                var newBlob = new Blob([response.data], {type: response.headers['content-type']})
+
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(newBlob)
+                    return
+                }
+                this.downloadBlob(newBlob, filename);
+            },
+            downloadBlob(blob, name = 'object') {
+                const blobUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+
+                link.href = blobUrl;
+                link.download = name;
+
+                document.body.appendChild(link);
+
+                link.dispatchEvent(
+                    new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                    })
+                );
+
+                document.body.removeChild(link);
+            },
         }
     }
 </script>

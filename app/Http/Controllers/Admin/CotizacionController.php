@@ -5,15 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\UploadController as FileManager;
 use App\Cotizacion;
-use App\Contacto;
 use App\CotizacionDetalle;
 use App\User;
 use App\Solicitante;
 use App\Prueba;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
-use Redirect;
 
 class CotizacionController extends Controller
 {
@@ -48,16 +45,16 @@ class CotizacionController extends Controller
 
     public function listDatosDashboard()
     {
-        $ensayos = Cotizacion::where('TIPOCOP_Codigo',1)->get()->count();
-        $calibraciones = Cotizacion::where('TIPOCOP_Codigo',2)->get()->count();
-        $capacitaciones = Cotizacion::where('TIPOCOP_Codigo',3)->get()->count();
+        $ensayos = Cotizacion::where('TIPOCOP_Codigo', 1)->get()->count();
+        $calibraciones = Cotizacion::where('TIPOCOP_Codigo', 2)->get()->count();
+        $capacitaciones = Cotizacion::where('TIPOCOP_Codigo', 3)->get()->count();
 
         return response()->json([
             'ensayos' => $ensayos,
             'calibraciones' => $calibraciones,
             'capacitaciones' => $capacitaciones,
             'asesorias' => 0
-            ]);
+        ]);
     }
 
     public function create()
@@ -95,12 +92,12 @@ class CotizacionController extends Controller
 
         $cot = Cotizacion::create($objCotizacion);
 
-        if(isset($request->ubigeo)){
+        if (isset($request->ubigeo)) {
             //Actualizar el solicitante
             $solicitante = Solicitante
-                            ::join('contacto', 'contacto.SOLIP_Codigo', 'solicitante.SOLIP_Codigo')
-                            ->where('contacto.id_contacto', $request->contacto)
-                            ->firstOrFail();
+                ::join('contacto', 'contacto.SOLIP_Codigo', 'solicitante.SOLIP_Codigo')
+                ->where('contacto.id_contacto', $request->contacto)
+                ->firstOrFail();
             $solicitante->UBIGP_Codigo = $request->ubigeo;
             $solicitante->save();
         }
@@ -203,12 +200,12 @@ class CotizacionController extends Controller
 
         $cotizacion->save();
 
-        if(isset($request->ubigeo)){
+        if (isset($request->ubigeo)) {
             //Actualizar el solicitante
             $solicitante = Solicitante
-                            ::join('contacto', 'contacto.SOLIP_Codigo', 'solicitante.SOLIP_Codigo')
-                            ->where('contacto.id_contacto', $request->contacto)
-                            ->firstOrFail();
+                ::join('contacto', 'contacto.SOLIP_Codigo', 'solicitante.SOLIP_Codigo')
+                ->where('contacto.id_contacto', $request->contacto)
+                ->firstOrFail();
             $solicitante->UBIGP_Codigo = $request->ubigeo;
             $solicitante->save();
         }
@@ -281,6 +278,38 @@ class CotizacionController extends Controller
             return response()->json(['message' => '¡Cotización eliminada!']);
         } else {
             return response()->json(['message' => '¡Ocurrió un error!']);
+        }
+    }
+
+    public function downloadFileEquipo($id){
+        $equipos = CotizacionDetalle::findOrFail($id);
+
+        $filePath = $equipos->CODEC_Archivo_Descripcion_Equipo;
+
+        return $this->downloadFile($filePath);
+    }
+
+    public function downloadFilePrueba($id){
+        $prueba = Prueba::findOrFail($id);
+
+        $filePath = $prueba->Arch_Norma_Tecnica;
+
+        return $this->downloadFile($filePath);
+    }
+
+    private function downloadFile($filePath)
+    {
+        if (file_exists($filePath)) {
+            // $content = file_get_contents($filePath);
+            $fileName = basename($filePath);
+            $fileContentType = mime_content_type($filePath);
+
+            $headers = [
+                'Content-Type' => $fileContentType,
+            ];
+            return response()->download($filePath, $fileName, $headers);
+        } else {
+            return null;
         }
     }
 }

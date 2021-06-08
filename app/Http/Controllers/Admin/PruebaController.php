@@ -14,7 +14,8 @@ class PruebaController extends Controller
         $pruebas = Prueba::where(
                         ["CODEP_Codigo"=>$id])
                         ->orderBy("id_prueba_a_realizar")
-                        ->get();                 
+                        ->get();
+        
         return $pruebas;
     }
 
@@ -26,7 +27,7 @@ class PruebaController extends Controller
         //Upload_file
         $new_name = "";
         if(isset($request->Archivo)){
-            $loc_destino = public_path('archivos'); 
+            $loc_destino = public_path('archivos');
             $file_name = $request->Archivo->getClientOriginalName();
             $new_name = time().'.'. $request->Archivo->getClientOriginalExtension();
             $request->Archivo->move($loc_destino, $new_name);
@@ -39,9 +40,9 @@ class PruebaController extends Controller
             'Norma_Asoc_Prueba'  => $request->Norma_Asoc_Prueba,
             'Costo'              => $request->Costo,
             'Arch_Norma_Tecnica' => $new_name
-        ];        
+        ];
         Prueba::create($objeto);
-        return response()->json(['Se agrego una prueba']);  
+        return response()->json(['Se agrego una prueba']);
     }
 
     public function edit(){
@@ -50,7 +51,7 @@ class PruebaController extends Controller
 
     public function get($id){
         $prueba = Prueba::where(["id_prueba_a_realizar"=>$id])
-                        ->first();                 
+                        ->first();
         return $prueba;
     }
 
@@ -58,11 +59,11 @@ class PruebaController extends Controller
         //Upload_file
         $new_name = $request->ArchivoAnt;
         if(isset($request->Archivo)){
-            $loc_destino = public_path('archivos'); 
+            $loc_destino = public_path('archivos');
             $file_name = $request->Archivo->getClientOriginalName();
             $new_name = time().'.'. $request->Archivo->getClientOriginalExtension();
             $request->Archivo->move($loc_destino, $new_name);
-        }        
+        }
         //Update prueba
         $id = $request->id_prueba_a_realizar;
         $prueba = Prueba::findOrFail($id);
@@ -74,17 +75,17 @@ class PruebaController extends Controller
         //$request->all()
         /*$request->Archivo*/
         if($prueba->save()){
-            return response()->json(['Se actualizo el registro']); 
+            return response()->json(['Se actualizo el registro']);
         }
         else{
-            return response()->json(['Ocurrió un error']); 
+            return response()->json(['Ocurrió un error']);
         }
     }
 
     public function delete($id){
         $result = Prueba::find($id)->delete();
         if($result){
-            return response()->json(['message'=>'Prueba borrado']);   
+            return response()->json(['message'=>'Prueba borrado']);
         }
         else{
             return response()->json(['message'=>'Ocurrio un error']);   ;

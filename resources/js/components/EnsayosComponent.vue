@@ -224,7 +224,7 @@
                                 </div>
                                 <div class="col-md-9">
                                   <input type="file" class="form-control" id="archivoFichaTecnica" />
-                                  <!-- <p class="font-weight-bold" id="filePath">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p> -->
+
                                   <p class="font-weight-bold">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p>
                                 </div>
                             </div>
@@ -313,8 +313,7 @@
                                 </div>
                                 <div class="col-md-9">
                                   <input type="file" class="form-control" id="archivoFichaTecnicaUpdate" />
-                                  <!-- <p class="font-weight-bold" id="filePath">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p> -->
-                                  <p class="font-weight-bold">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</p>
+                                  <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFileEquipo();">{{equipo.CODEC_Archivo_Descripcion_Equipo}}</a></p>
                                 </div>
                             </div>
                         </div>
@@ -356,9 +355,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="file" id="file" ref="file"><span id="file_back" ref="file_back"></span>
-                                    <!-- <p class="font-weight-bold" id="filePathPruebas">{{prueba.Arch_Norma_Tecnica}}</p> -->
-                                    <p class="font-weight-bold">{{prueba.Arch_Norma_Tecnica}}</p>
-                                    <!-- <input type="file" id="ejemplo_archivo_1" /> -->
+                                    <p class="font-weight-bold"><a href="javascript:void(0);" @click="downloadFilePruebas();">{{prueba.Arch_Norma_Tecnica}}</a></p>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -1104,7 +1101,33 @@
             },
             setTotal() {
                 this.Total = (Number(this.SubTotal) + Number(this.Igv)).toFixed(2);
-            }
+            },
+            downloadFileEquipo() {
+                this.downloadBlob(this.equipo.archivo, this.equipo.archivo.name);
+            },
+            downloadFilePruebas(){
+                this.downloadBlob(this.prueba.archivo, this.prueba.archivo.name);
+            },
+            downloadBlob(blob, name = 'object') {
+                const blobUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+
+                link.href = blobUrl;
+                link.download = name;
+
+                document.body.appendChild(link);
+
+                link.dispatchEvent(
+                    new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                    })
+                );
+
+                document.body.removeChild(link);
+            },
         }
     }
 </script>
