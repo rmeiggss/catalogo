@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\CotizacionDetalle;
 use App\Prueba;
-use Illuminate\Http\Request;
 
 class CotizacionDetalleController extends Controller
 {
@@ -19,7 +18,6 @@ class CotizacionDetalleController extends Controller
         $objeto = array();
         foreach($equipos as $value){
             $equipo = $value;
-            // $equipo->pruebas = CotizacionDetalle::find($value->CODEP_Codigo)->pruebas;
             $pruebas = CotizacionDetalle::find($value->CODEP_Codigo)->pruebas;
 
             $pruebas_object = array();
@@ -28,6 +26,8 @@ class CotizacionDetalleController extends Controller
 
                 if(file_exists($value2->Arch_Norma_Tecnica)){
                     $prueba->nombre_archivo = basename($value2->Arch_Norma_Tecnica);
+                }else if(file_exists($_SERVER['DOCUMENT_ROOT'].$value2->Arch_Norma_Tecnica)){
+                    $prueba->nombre_archivo = basename($_SERVER['DOCUMENT_ROOT'].$value2->Arch_Norma_Tecnica);
                 }else{
                     $prueba->nombre_archivo = null;
                 }
@@ -38,6 +38,8 @@ class CotizacionDetalleController extends Controller
 
             if(file_exists($value->CODEC_Archivo_Descripcion_Equipo)){
                 $equipo->nombre_archivo = basename($value->CODEC_Archivo_Descripcion_Equipo);
+            }else if(file_exists($_SERVER['DOCUMENT_ROOT'].$value->CODEC_Archivo_Descripcion_Equipo)){
+                $prueba->nombre_archivo = basename($_SERVER['DOCUMENT_ROOT'].$value->CODEC_Archivo_Descripcion_Equipo);
             }else{
                 $equipo->nombre_archivo = null;
             }
@@ -46,10 +48,6 @@ class CotizacionDetalleController extends Controller
         }
 
         return $objeto;
-    }
-
-    public function create(){
-
     }
 
     public function delete($id)

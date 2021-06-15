@@ -281,7 +281,8 @@ class CotizacionController extends Controller
         }
     }
 
-    public function downloadFileEquipo($id){
+    public function downloadFileEquipo($id)
+    {
         $equipos = CotizacionDetalle::findOrFail($id);
 
         $filePath = $equipos->CODEC_Archivo_Descripcion_Equipo;
@@ -289,7 +290,8 @@ class CotizacionController extends Controller
         return $this->downloadFile($filePath);
     }
 
-    public function downloadFilePrueba($id){
+    public function downloadFilePrueba($id)
+    {
         $prueba = Prueba::findOrFail($id);
 
         $filePath = $prueba->Arch_Norma_Tecnica;
@@ -299,17 +301,27 @@ class CotizacionController extends Controller
 
     private function downloadFile($filePath)
     {
+        $fileName = null;
         if (file_exists($filePath)) {
             // $content = file_get_contents($filePath);
             $fileName = basename($filePath);
-            $fileContentType = mime_content_type($filePath);
 
-            $headers = [
-                'Content-Type' => $fileContentType,
-            ];
-            return response()->download($filePath, $fileName, $headers);
+            $this->setContentTypeAndDownload($fileName, $filePath);
+        } else if (file_exists($_SERVER['DOCUMENT_ROOT'] . $filePath)) {
+            $fileName = basename($_SERVER['DOCUMENT_ROOT'] . $filePath);
+
+            $this->setContentTypeAndDownload($fileName, $filePath);
         } else {
             return null;
         }
+    }
+    private function setContentTypeAndDownload($fileName, $filePath)
+    {
+        $fileContentType = mime_content_type($filePath);
+
+        $headers = [
+            'Content-Type' => $fileContentType,
+        ];
+        return response()->download($filePath, $fileName, $headers);
     }
 }
